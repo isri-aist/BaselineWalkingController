@@ -1,0 +1,24 @@
+<package format="2">
+  <name>baseline_walking_controller</name>
+  <version>0.1.0</version>
+  <description>
+    Humanoid walking controller with various baseline methods
+  </description>
+  <maintainer email="m-murooka@aist.go.jp">Masaki Murooka</maintainer>
+  <license>BSD</license>
+
+  <url>http://ros.org/wiki/baseline_walking_controller</url>
+  <author>Masaki Murooka</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>centroidal_control_collection</depend>
+
+  <build_depend>eigen</build_depend>
+
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>rospy</exec_depend>
+
+  <doc_depend>doxygen</doc_depend>
+</package>
