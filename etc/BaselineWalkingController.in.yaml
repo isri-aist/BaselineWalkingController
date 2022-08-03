@@ -53,27 +53,117 @@ ObserverPipelines:
         anchorFrame:
           maxAnchorFrameDiscontinuity: 0.05 # [m]
 
-MotionPlayer:
-  footstepDuration: 1.6 # [sec]
-  doubleSupportRatio: 0.4 # []
-  midToFootTransLeft:
-    translation: [0, 0.105, 0] # [m]
-  midToFootTransRight:
-    translation: [0, -0.105, 0] # [m]
-  ddpHorizonDuration: 2.0 # [sec]
-  ddpHorizonDt: 0.02 # [sec]
-  refComHeight: 0.95 # [m]
+CoMTask:
+  type: com
+  stiffness: [1000.0, 1000.0, 100.0]
+  weight: 1000.0
+  activeJoints: [
+  "Root",
+  "LCY", "LCR", "LCP", "LKP", "LAP", "LAR",
+  "RCY", "RCR", "RCP", "RKP", "RAP", "RAR"]
 
-FootstepManager:
-  horizon: 3.0 # [sec]
+BaseOrientationTask:
+  type: orientation
+  stiffness: 300.0
+  weight: 500.0
+  body: Chest_Link2
+
+FootTaskList:
+  - type: firstOrderImpedance
+    foot: Left
+    surface: LeftFootCenter
+    cutoffPeriod: 0.01
+    stiffness: 1000.0
+    weight: 1000.0
+  - type: firstOrderImpedance
+    foot: Right
+    surface: RightFootCenter
+    cutoffPeriod: 0.01
+    stiffness: 1000.0
+    weight: 1000.0
+
+FootManager:
+  name: FootManager
+  footstepDuration: 0.8 # [sec]
+  doubleSupportRatio: 0.125 # []
+  midToFootTranss:
+    Left:
+      translation: [0, 0.105, 0] # [m]
+    Right:
+      translation: [0, -0.105, 0] # [m]
   swingHeight: 0.05 # [m]
   swingInitialLiftHeight: 0.015 # [m]
-  swingInitialLiftDuration: 0.2 # [sec]
-  overwriteFootstance: true
-  supportFootZmpOffset: [0, -0.02, 0] # [m] (positive for x-forward, y-outside)
+  swingInitialLiftDurationRatio: 0.25
+  zmpHorizon: 2.0 # [sec]
+  zmpOffset: [0, -0.02, 0] # (positive for x-forward, y-outside, z-upward) [m]
+  stopSwingTrajForTouchDownFoot: true
+  keepSupportFootPoseForTouchDownFoot: false
+  enableWrenchDistForTouchDownFoot: true
+  fricCoeff: 0.5
   touchDownRemainingDuration: 0.2 # [sec]
   touchDownPosError: 0.02 # [m]
-  touchDownFz: 100 # [N]
+  touchDownForceZ: 100 # [N]
+  impedanceGains:
+    singleSupport:
+      damper:
+        linear: [300, 300, 300]
+        angular: [100, 100, 100]
+      spring:
+        linear: [2250, 2250, 2250]
+        angular: [0, 0, 2000]
+      wrench:
+        linear: [0, 0, 0]
+        angular: [1, 1, 0]
+    doubleSupport:
+      damper:
+        linear: [1e4, 1e4, 1e4]
+        angular: [100, 100, 100]
+      spring:
+        linear: [0, 0, 0]
+        angular: [0, 0, 2000]
+      wrench:
+        linear: [1, 1, 1]
+        angular: [1, 1, 0]
+    swing:
+      damper:
+        linear: [300, 300, 300]
+        angular: [40, 40, 40]
+      spring:
+        linear: [2250, 2250, 2250]
+        angular: [400, 400, 400]
+      wrench:
+        linear: [0, 0, 0]
+        angular: [0, 0, 0]
+
+CentroidalManager:
+  name: CentroidalManager
+  useActualStateForMpc: false
+  enableDcmFeedback: true
+  enableComZFeedback: true
+  dcmGain: 1.0
+  zmpVelGain: 0.02
+  comZGainP: 2000.0
+  comZGainD: 500.0
+  refComZ: 0.95 # [m]
+  useTargetPoseForControlRobotAnchorFrame: true
+  useActualCoMForWrenchDistribution: true
+  wrenchDistConfig:
+    wrenchWeight:
+      linear: [1.0, 1.0, 1.0]
+      angular: [1.0, 1.0, 1.0]
+    regularWeight: 1e-8
+    ridgeForceMinMax: [3, 1000] # [N]
+
+  # PreviewControlZmp
+  method: PreviewControlZmp
+  horizonDuration: 2.0 # [sec]
+  horizonDt: 0.002 # [sec]
+
+  # # DdpZmp
+  # method: DdpZmp
+  # horizonDuration: 2.0 # [sec]
+  # horizonDt: 0.02 # [sec]
+  # ddpMaxIter: 3
 
 # AdditionalConfigurationFiles:
 #  - "@PROJECT_SOURCE_DIR@/etc/additional"
