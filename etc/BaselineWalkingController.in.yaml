@@ -140,7 +140,7 @@ CentroidalManager:
   useActualStateForMpc: false
   enableDcmFeedback: true
   enableComZFeedback: true
-  dcmGain: 1.0
+  dcmGain: 2.0 # It must be greater than 1 to be stable
   zmpVelGain: 0.02
   comZGainP: 2000.0
   comZGainD: 500.0

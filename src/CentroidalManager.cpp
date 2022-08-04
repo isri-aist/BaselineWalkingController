@@ -84,7 +84,7 @@ void CentroidalManager::update()
       double actualComZ = ctl().realRobot().com().z();
       double plannedComVelZ = ctl().comTask_->refVel().z();
       double actualComVelZ = ctl().realRobot().comVelocity().z();
-      plannedForceZ_ -=
+      controlForceZ_ -=
           config().comZGainP * (actualComZ - plannedComZ) + config().comZGainD * (actualComVelZ - plannedComVelZ);
     }
 

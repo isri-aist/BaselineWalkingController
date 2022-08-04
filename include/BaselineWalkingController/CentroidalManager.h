@@ -35,8 +35,11 @@ public:
     //! Whether to enable CoM Z feedback
     bool enableComZFeedback = true;
 
-    //! Feedback gain of DCM
-    double dcmGain = 3.0;
+    /** \brief Feedback gain of DCM
+
+        It must be greater than 1 to be stable.
+    */
+    double dcmGain = 2.0;
 
     //! Feedforward gain of ZMP velocity
     double zmpVelGain = 0.1;
