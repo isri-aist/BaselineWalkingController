@@ -42,6 +42,12 @@ jobs:
           wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
           sudo apt-get update -qq
           sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base python-catkin-tools python-rosdep doxygen graphviz
+      - name: Install mc_rtc
+        run: |
+          set -e
+          set -x
+          curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/stable/setup.deb.sh' | sudo -E bash
+          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin mc-openrtm
       - name: Setup catkin workspace
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
