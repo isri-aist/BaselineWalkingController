@@ -13,6 +13,7 @@ Humanoid walking controller with various baseline methods
 ### Dependencies
 This package depends on
 - [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
+- [NMPC](https://github.com/isri-aist/NMPC)
 - [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection)
 
 ### Installation procedure
