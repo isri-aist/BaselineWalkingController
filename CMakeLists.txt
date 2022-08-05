@@ -39,3 +39,8 @@ configure_file(etc/BaselineWalkingController.in.yaml
   "${CATKIN_DEVEL_PREFIX}/lib/mc_controller/etc/BaselineWalkingController.yaml" @ONLY)
 
 add_subdirectory(src)
+
+OPTION(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
+if(INSTALL_DOCUMENTATION)
+  add_subdirectory(doc)
+endif()
