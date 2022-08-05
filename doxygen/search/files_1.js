@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['dcmtracking_2eh',['DcmTracking.h',['../DcmTracking_8h.html',1,'']]],
-  ['ddpcentroidal_2eh',['DdpCentroidal.h',['../DdpCentroidal_8h.html',1,'']]],
-  ['ddpzmp_2eh',['DdpZmp.h',['../DdpZmp_8h.html',1,'']]]
+  ['centroidalmanager_2eh',['CentroidalManager.h',['../CentroidalManager_8h.html',1,'']]],
+  ['centroidalmanagerddpzmp_2eh',['CentroidalManagerDdpZmp.h',['../CentroidalManagerDdpZmp_8h.html',1,'']]],
+  ['centroidalmanagerpreviewcontrolzmp_2eh',['CentroidalManagerPreviewControlZmp.h',['../CentroidalManagerPreviewControlZmp_8h.html',1,'']]],
+  ['commandstate_2eh',['CommandState.h',['../CommandState_8h.html',1,'']]],
+  ['contact_2eh',['Contact.h',['../Contact_8h.html',1,'']]],
+  ['cubichermitespline_2eh',['CubicHermiteSpline.h',['../CubicHermiteSpline_8h.html',1,'']]],
+  ['cubicinterpolator_2eh',['CubicInterpolator.h',['../CubicInterpolator_8h.html',1,'']]],
+  ['cubicspline_2eh',['CubicSpline.h',['../CubicSpline_8h.html',1,'']]]
 ];

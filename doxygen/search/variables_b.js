@@ -1,12 +1,5 @@
 var searchData=
 [
-  ['mass_5f',['mass_',['../classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a8f2f07515b63f63e115b5150d97a3385',1,'CCC::DdpCentroidal::DdpProblem::mass_()'],['../classCCC_1_1DdpCentroidal_1_1SimModel.html#a8ea07aec86fd696799a13ffdd63ea32f',1,'CCC::DdpCentroidal::SimModel::mass_()'],['../classCCC_1_1DdpZmp_1_1DdpProblem.html#a701300c491ed08f10ae5cca7480f5cb2',1,'CCC::DdpZmp::DdpProblem::mass_()'],['../classCCC_1_1LinearMpcXY.html#a4d741e4e81e3e621c0514a0314721c4a',1,'CCC::LinearMpcXY::mass_()'],['../classCCC_1_1LinearMpcZ.html#a40ee452c60ae4871e4db8d7f34198660',1,'CCC::LinearMpcZ::mass_()']]],
-  ['model_5f',['model_',['../classCCC_1_1InvariantSequentialExtension.html#a62cdbd4a786b6f5afda2a030bb15e5ab',1,'CCC::InvariantSequentialExtension::model_()'],['../classCCC_1_1LinearMpcZmp1d.html#ac05b256d86741992549725e8f10bab78',1,'CCC::LinearMpcZmp1d::model_()'],['../classCCC_1_1PreviewControl.html#a22066705ec24a97ed44a04b5c6610c11',1,'CCC::PreviewControl::model_()']]],
-  ['model_5fcontact_5f',['model_contact_',['../classCCC_1_1LinearMpcZ.html#a3edf622d41fe3c772974c8abba25fafc',1,'CCC::LinearMpcZ']]],
-  ['model_5flist_5f',['model_list_',['../classCCC_1_1VariantSequentialExtension.html#a518937fecc5b409e218191867eb7a134',1,'CCC::VariantSequentialExtension']]],
-  ['model_5fnoncontact_5f',['model_noncontact_',['../classCCC_1_1LinearMpcZ.html#aacf17b628f4dbd87d5003304957df05c',1,'CCC::LinearMpcZ']]],
-  ['motion_5fdata_5fseq_5f',['motion_data_seq_',['../classCCC_1_1DdpCentroidal.html#ab08f00fa490451b50f7fda7117f7285e',1,'CCC::DdpCentroidal::motion_data_seq_()'],['../classCCC_1_1LinearMpcXY.html#a12255177575f1d2ead420e6256745422',1,'CCC::LinearMpcXY::motion_data_seq_()'],['../classCCC_1_1LinearMpcZ.html#ab168295bc37d4a2b271870694e613f11',1,'CCC::LinearMpcZ::motion_data_seq_()']]],
-  ['motion_5fparam_5f',['motion_param_',['../classCCC_1_1LinearMpcXY_1_1Model.html#ab38e59c9ee6a8f9df45e2434cc5db499',1,'CCC::LinearMpcXY::Model']]],
-  ['motion_5fparam_5ffunc_5f',['motion_param_func_',['../classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a5335076b9dbed432727e195c445526fb',1,'CCC::DdpCentroidal::DdpProblem::motion_param_func_()'],['../classCCC_1_1DdpCentroidal_1_1SimModel.html#a5f6dafa81083ef3dbe2fc2386c962879',1,'CCC::DdpCentroidal::SimModel::motion_param_func_()']]],
-  ['mpc_5f1d_5f',['mpc_1d_',['../classCCC_1_1IntrinsicallyStableMpc.html#a4b777b44f9c584c2fa61e70d62844a99',1,'CCC::IntrinsicallyStableMpc::mpc_1d_()'],['../classCCC_1_1LinearMpcZmp.html#a8d92617b29daa46a4e5cfa5d0ed90711',1,'CCC::LinearMpcZmp::mpc_1d_()']]]
+  ['name',['name',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0',1,'BWC::CentroidalManager::Configuration::name()'],['../structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f',1,'BWC::FootManager::Configuration::name()']]],
+  ['name_5f',['name_',['../classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062',1,'BWC::Contact']]]
 ];

@@ -1,0 +1,4 @@
+<map id="BWC::State" name="BWC::State">
+<area shape="rect" id="node3" href="$structBWC_1_1CommandState.html" title="FSM state to send walking command from GUI. " alt="" coords="5,155,168,181"/>
+<area shape="rect" id="node4" href="$structBWC_1_1InitialState.html" title="FSM state to initialize. " alt="" coords="193,155,325,181"/>
+</map>

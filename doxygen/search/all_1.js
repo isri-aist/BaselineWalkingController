@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['a_5f',['A_',['../classCCC_1_1StateSpaceModel.html#ad5827e463592d2c2b5eb33677065825d',1,'CCC::StateSpaceModel']]],
-  ['a_5fseq_5f',['A_seq_',['../classCCC_1_1InvariantSequentialExtension.html#a88f30ffefbb7684d06a8a67d93249db7',1,'CCC::InvariantSequentialExtension::A_seq_()'],['../classCCC_1_1VariantSequentialExtension.html#a49882ee4cad7f67f8af051fd43345857',1,'CCC::VariantSequentialExtension::A_seq_()']]],
-  ['acc',['acc',['../structCCC_1_1LinearMpcZmp_1_1InitialParam.html#ae7d1eccf6521f55bffcf040a35ffd8a1',1,'CCC::LinearMpcZmp::InitialParam::acc()'],['../structCCC_1_1PreviewControlZmp_1_1InitialParam.html#a6fec970974a8cafcbe6ffe7d00684260',1,'CCC::PreviewControlZmp::InitialParam::acc()']]],
-  ['ad_5f',['Ad_',['../classCCC_1_1StateSpaceModel.html#a682af6ed5e0f7e60e863679c8510e3b0',1,'CCC::StateSpaceModel']]],
-  ['angular_5fmomentum',['angular_momentum',['../structCCC_1_1DdpCentroidal_1_1InitialParam.html#a284b3125c18103ad9861294d7a4ffd37',1,'CCC::DdpCentroidal::InitialParam::angular_momentum()'],['../structCCC_1_1LinearMpcXY_1_1InitialParam.html#ac7ddfc7c9932d33fb2e32c54cd13f46f',1,'CCC::LinearMpcXY::InitialParam::angular_momentum()'],['../structCCC_1_1LinearMpcXY_1_1RefData.html#a7de020570fdc0b04cf37c43ad9dfd067',1,'CCC::LinearMpcXY::RefData::angular_momentum()'],['../structCCC_1_1LinearMpcXY_1_1WeightParam.html#ada8ba6705905fdd4bdeda00f37abadaa',1,'CCC::LinearMpcXY::WeightParam::angular_momentum()']]]
+  ['baselinewalkingcontroller',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC::BaselineWalkingController'],['../structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff',1,'BWC::BaselineWalkingController::BaselineWalkingController()']]],
+  ['baselinewalkingcontroller_2eh',['BaselineWalkingController.h',['../BaselineWalkingController_8h.html',1,'']]],
+  ['baseoritask_5f',['baseOriTask_',['../structBWC_1_1BaselineWalkingController.html#a1e58a285ee82020809f0bcfa2de09957',1,'BWC::BaselineWalkingController']]],
+  ['bcend_5f',['bcEnd_',['../classBWC_1_1CubicSpline.html#a3f6d5af10967aad9ef3401e23b993a2b',1,'BWC::CubicSpline']]],
+  ['bcstart_5f',['bcStart_',['../classBWC_1_1CubicSpline.html#a3838234f21b9612997704a10a107f7c4',1,'BWC::CubicSpline']]],
+  ['both',['Both',['../namespaceBWC_1_1Feet.html#a7f71a2a8c7b014115f71aaf34509df1f',1,'BWC::Feet']]],
+  ['boundaryconstraint',['BoundaryConstraint',['../structBWC_1_1BoundaryConstraint.html',1,'BWC::BoundaryConstraint&lt; T &gt;'],['../structBWC_1_1BoundaryConstraint.html#ae6572ecc31b85cb88fc09680580643df',1,'BWC::BoundaryConstraint::BoundaryConstraint()']]],
+  ['boundaryconstrainttype',['BoundaryConstraintType',['../namespaceBWC.html#a650a366862dfae39ce46c5028e90b3be',1,'BWC']]],
+  ['bwc',['BWC',['../namespaceBWC.html',1,'']]],
+  ['feet',['Feet',['../namespaceBWC_1_1Feet.html',1,'BWC']]]
 ];

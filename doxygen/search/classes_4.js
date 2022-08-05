@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['linearmpcxy',['LinearMpcXY',['../classCCC_1_1LinearMpcXY.html',1,'CCC']]],
-  ['linearmpcz',['LinearMpcZ',['../classCCC_1_1LinearMpcZ.html',1,'CCC']]],
-  ['linearmpczmp',['LinearMpcZmp',['../classCCC_1_1LinearMpcZmp.html',1,'CCC']]],
-  ['linearmpczmp1d',['LinearMpcZmp1d',['../classCCC_1_1LinearMpcZmp1d.html',1,'CCC']]]
+  ['piecewisefunc',['PiecewiseFunc',['../classBWC_1_1PiecewiseFunc.html',1,'BWC']]],
+  ['polynomial',['Polynomial',['../classBWC_1_1Polynomial.html',1,'BWC']]],
+  ['polynomial_3c_20t_2c_200_20_3e',['Polynomial&lt; T, 0 &gt;',['../classBWC_1_1Polynomial.html',1,'BWC']]]
 ];

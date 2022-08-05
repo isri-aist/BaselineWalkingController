@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ccc',['CCC',['../namespaceCCC.html',1,'']]],
-  ['constants',['constants',['../namespaceCCC_1_1constants.html',1,'CCC']]]
+  ['bwc',['BWC',['../namespaceBWC.html',1,'']]],
+  ['feet',['Feet',['../namespaceBWC_1_1Feet.html',1,'BWC']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>centroidal_control_collection: Class Members</title>
+<title>baseline_walking_controller: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">centroidal_control_collection
+   <div id="projectname">baseline_walking_controller
    </div>
   </td>
  </tr>
@@ -67,58 +67,58 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_r"></a>- r -</h3><ul>
-<li>ref_acc
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a3efebb3d7ddc4db948f52079b392d04f">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>refComZ
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a7cd2c2d2bca99f7b679da4900501cbcd">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>ref_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionData.html#a1baf6aaad1c7ffd8b39158207700b73f">CCC::DdpCentroidal::MotionData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionData.html#afbe7564b1d37888f385880bee7385770">CCC::LinearMpcXY::MotionData</a>
+<li>regularWeight
+: <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#addb8c33e01f86d9738a9cb1aeb0fac52">BWC::WrenchDistribution::Configuration</a>
 </li>
-<li>ref_data_func_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a8f5efa4052f4ea4a98093da20db26a23">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a6931897ade2a2d934d04493856ae4d2f">CCC::DdpZmp::DdpProblem</a>
+<li>removeFromGUI()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a4e0c8e2badfdec63bb123dad5c460eb9">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a171e623e8a5708e9a4ca24da36a6f309">BWC::FootManager</a>
 </li>
-<li>ref_data_seq_x_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#ac76b49a4222586809822ddacd1e6fd1b">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#a6a0a306296be429e33db336b2cf9e3dd">CCC::LinearMpcZmp</a>
+<li>removeFromLogger()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ac81fa3a6a01d0655ca6bc22a312f73b0">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a0dc00f7a52b0d325838f4b4ac9a66748">BWC::FootManager</a>
 </li>
-<li>ref_data_seq_y_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#a897f7a83fe9ab275d980bc1cbd16aa9b">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#ac98b3d31a0d7dff7b232c5895f51545a">CCC::LinearMpcZmp</a>
+<li>requireImpGainUpdate_
+: <a class="el" href="classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e">BWC::FootManager</a>
 </li>
-<li>ref_pos
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a841ccfd94e2b99f8b9d0fea400635f37">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>reset()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ae9719b4c7cc1a09ded47e6e7cda71f19">BWC::BaselineWalkingController</a>
+, <a class="el" href="classBWC_1_1CentroidalManager.html#ace5876b35595ebab730437b6f1fae0a9">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a57d7d10cbe1e9bca78ae2c9d34fe737c">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a5c0098ed07a276276fd89f1c744fc79d">BWC::CentroidalManagerPreviewControlZmp</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a251dc3bc82c07dde4b69f20aa57b8889">BWC::FootManager</a>
 </li>
-<li>ref_vel
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a4b83dad7053e9359bcaced473f77f0dd">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>resultTotalWrench_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#af37bcb672acd23cb22624bbd466ce554">BWC::WrenchDistribution</a>
 </li>
-<li>riccati_error_
-: <a class="el" href="classCCC_1_1PreviewControl.html#abc3653bb5d02d3d13360f005f9439cff">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>resultWrenchRatio_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#accdf9022ce35ba938c33b3587ffe5c2e">BWC::WrenchDistribution</a>
 </li>
-<li>running_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#adcdeea2b8e28666b9dd17c9f60864416">CCC::DdpCentroidal::WeightParam</a>
+<li>ridgeForceMinMax
+: <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#a6d6ed77491b81806410805860a85ae45">BWC::WrenchDistribution::Configuration</a>
 </li>
-<li>running_com_pos_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a8e4a59690624371a5ffa5abe8c8b219c">CCC::DdpZmp::WeightParam</a>
+<li>ridgeList
+: <a class="el" href="structBWC_1_1Contact_1_1VertexWithRidge.html#abfaaa9dc8d1c4b0c92cf7715829c2c69">BWC::Contact::VertexWithRidge</a>
 </li>
-<li>running_force
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a1de6d82b11b82932c81b6707ff793d5f">CCC::DdpCentroidal::WeightParam</a>
+<li>ridgeNum()
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#afc8cc188b00a8a571c1e89e999487220">BWC::FrictionPyramid</a>
 </li>
-<li>running_force_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a660072cc3bb101b87ba8acaae9b9a5fc">CCC::DdpZmp::WeightParam</a>
+<li>robotMass_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a73798dded16013c2186d63a5b4591033">BWC::CentroidalManager</a>
 </li>
-<li>running_linear_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#ae145ccff54acb1ece42e8514eaa3b9e5">CCC::DdpCentroidal::WeightParam</a>
+<li>run()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ac9a66c6c0fde9944f6f5777b1e3112b0">BWC::BaselineWalkingController</a>
+, <a class="el" href="structBWC_1_1CommandState.html#a8f0c05297e8a2ebcfbc68508e39b27d0">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#a257cd85913024715ee518fb2b4a23291">BWC::InitialState</a>
+, <a class="el" href="classBWC_1_1WrenchDistribution.html#a551e25c6e551be757fa40349b64380e7">BWC::WrenchDistribution</a>
 </li>
-<li>running_pos
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a69e4136097b83c12d996b8d9598f5d86">CCC::DdpCentroidal::WeightParam</a>
-</li>
-<li>running_zmp
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a54da1822846c4161e2bb3c566e5196d5">CCC::DdpZmp::WeightParam</a>
-</li>
-<li>runningCost()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a67f85b744b01c5726c48c9d0bac13ab0">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a2b06753b0437d32be4c8d0caa2ff6070">CCC::DdpZmp::DdpProblem</a>
+<li>runMpc()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a5dea1d86da48c68967d786305a2d138e">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a40085138fc14d7af02c36401288249a1">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a064437760837d309673bde9e7ffa3681">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
 </ul>
 </div><!-- contents -->

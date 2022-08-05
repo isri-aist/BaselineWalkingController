@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>centroidal_control_collection: Class Members</title>
+<title>baseline_walking_controller: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">centroidal_control_collection
+   <div id="projectname">baseline_walking_controller
    </div>
   </td>
  </tr>
@@ -67,35 +67,50 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>F_
-: <a class="el" href="classCCC_1_1PreviewControl.html#a559ee95250775c0ec6e8b379154f6222">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#afe8001d15877209956e3edc6f23fc9c3">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>firstIter_
+: <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#abb2cede617c7e555ca7d0a14dc52a2eb">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
-<li>feedback_gain_
-: <a class="el" href="classCCC_1_1DcmTracking.html#a6775ecf810da6e0bb8aefa65e00d7ecd">CCC::DcmTracking</a>
+<li>FirstOrderImpedanceTask()
+: <a class="el" href="structBWC_1_1FirstOrderImpedanceTask.html#a30e685289b37e7c3af402e0e89d8fe48">BWC::FirstOrderImpedanceTask</a>
 </li>
-<li>fgc_1d_
-: <a class="el" href="classCCC_1_1FootGuidedControl.html#a18c6aed68db995ae5dea213e5b56ebaa">CCC::FootGuidedControl</a>
+<li>foot
+: <a class="el" href="structBWC_1_1Footstep.html#aec0947a2e26cec2e9dbc0a12b8628f35">BWC::Footstep</a>
 </li>
-<li>FootGuidedControl()
-: <a class="el" href="classCCC_1_1FootGuidedControl.html#adad07ced3da9ca714dcbade4c13ce29a">CCC::FootGuidedControl</a>
+<li>FootManager()
+: <a class="el" href="classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0">BWC::FootManager</a>
 </li>
-<li>FootGuidedControl1d()
-: <a class="el" href="classCCC_1_1FootGuidedControl1d.html#ae3178a92d72192b4e3601e4b6d824ebd">CCC::FootGuidedControl1d</a>
+<li>footManager_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a02906ddae6b920235d0e7534fa479892">BWC::BaselineWalkingController</a>
 </li>
-<li>force
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a0ba16a60c28ea47ec27719dfffa46b7c">CCC::LinearMpcXY::WeightParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcZ_1_1WeightParam.html#aba5f76e5bb58b3de360bc93e36eefd1b">CCC::LinearMpcZ::WeightParam</a>
+<li>Footstep()
+: <a class="el" href="structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f">BWC::Footstep</a>
 </li>
-<li>force_range_
-: <a class="el" href="classCCC_1_1LinearMpcXY.html#a79ef2923ed0f101c3761cdc18b927065">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a57582f7ddf06bfcda9db961b2b94027b">CCC::LinearMpcZ</a>
+<li>footstepDuration
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a5f80b28429c7c9e575331361eb613df5">BWC::FootManager::Configuration</a>
 </li>
-<li>force_scale_limits_
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a66091fc31b34c0cc7710c6170d5ba45d">CCC::DdpCentroidal</a>
+<li>footstepQueue()
+: <a class="el" href="classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637">BWC::FootManager</a>
 </li>
-<li>force_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1PlannedData.html#a238730a0bbf57e2e85e39855805b2378">CCC::DdpZmp::PlannedData</a>
+<li>footstepQueue_
+: <a class="el" href="classBWC_1_1FootManager.html#aa4d4aa44b6e582b70ed49c1c9d4d36b7">BWC::FootManager</a>
+</li>
+<li>footTasks_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a19b6714f70319f6ac9e59dd64a291bdd">BWC::BaselineWalkingController</a>
+</li>
+<li>fricCoeff
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#aa63aa08db45cd61674c1af9f0dd912b0">BWC::FootManager::Configuration</a>
+</li>
+<li>FrictionPyramid()
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#aeb1ae9d569b888f4f423b4a48c050802">BWC::FrictionPyramid</a>
+</li>
+<li>Func()
+: <a class="el" href="classBWC_1_1Func.html#a534ff23b0d156dcdd25054dec70ccf1a">BWC::Func&lt; T &gt;</a>
+</li>
+<li>func_
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#afbdd638c5b2fb41ccffc8c39998ef109">BWC::CubicInterpolator&lt; T, U &gt;</a>
+</li>
+<li>funcs_
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#afcb261dcea56f72b85d57d7af1897bc8">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

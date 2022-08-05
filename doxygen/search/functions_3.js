@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['initialparam',['InitialParam',['../structCCC_1_1DdpCentroidal_1_1InitialParam.html#aeccf45e62aa422db68d26bd0f9f7c04a',1,'CCC::DdpCentroidal::InitialParam::InitialParam()'],['../structCCC_1_1DdpCentroidal_1_1InitialParam.html#ad95e276b91e0d52d7a72cd5036f42ab2',1,'CCC::DdpCentroidal::InitialParam::InitialParam(const DdpProblem::StateDimVector &amp;state, double mass)']]],
-  ['inputdim',['inputDim',['../classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a95de1a75f6f2b6608f623fe0f1a0f2d6',1,'CCC::DdpCentroidal::DdpProblem::inputDim()'],['../classCCC_1_1StateSpaceModel.html#a7552903649bd3a2ac8fba5b19beb2be2',1,'CCC::StateSpaceModel::inputDim()']]],
-  ['inputweight',['inputWeight',['../structCCC_1_1LinearMpcXY_1_1WeightParam.html#a2960724ebfa7b0a92df0902d175050c5',1,'CCC::LinearMpcXY::WeightParam']]],
-  ['intrinsicallystablempc',['IntrinsicallyStableMpc',['../classCCC_1_1IntrinsicallyStableMpc.html#afb2f10d8f6ced25fccde25857c00bdb0',1,'CCC::IntrinsicallyStableMpc']]],
-  ['intrinsicallystablempc1d',['IntrinsicallyStableMpc1d',['../classCCC_1_1IntrinsicallyStableMpc1d.html#adbdbeedbe0380d812540ca36219fda77',1,'CCC::IntrinsicallyStableMpc1d']]],
-  ['invariantsequentialextension',['InvariantSequentialExtension',['../classCCC_1_1InvariantSequentialExtension.html#a384c5e400dbac6acce90e55c20c08fff',1,'CCC::InvariantSequentialExtension']]]
+  ['derivative',['derivative',['../classBWC_1_1CubicHermiteSpline.html#aadb7111f43cd89dc880c117c9c3e4be1',1,'BWC::CubicHermiteSpline::derivative()'],['../classBWC_1_1CubicInterpolator.html#a71108781d7d8f6ce6764986fb6f0dee5',1,'BWC::CubicInterpolator::derivative()'],['../classBWC_1_1Func.html#a6febbfcbf786ee513f708c130a86b799',1,'BWC::Func::derivative()'],['../classBWC_1_1PiecewiseFunc.html#aa304d21f6811fbe1e696ecfe8bb98985',1,'BWC::PiecewiseFunc::derivative()'],['../classBWC_1_1Polynomial.html#a01fa986e053e3cf7dd2694cbb17ada89',1,'BWC::Polynomial::derivative()']]],
+  ['detecttouchdown',['detectTouchDown',['../classBWC_1_1FootManager.html#a870158cd3a085c6a61aa4747ae8edea1',1,'BWC::FootManager']]],
+  ['domainlowerlimit',['domainLowerLimit',['../classBWC_1_1Func.html#a7d8803bf98c0d1865497df7710b4bf6e',1,'BWC::Func::domainLowerLimit()'],['../classBWC_1_1PiecewiseFunc.html#a4c57e6364ba897ef8e6089c19c5ed917',1,'BWC::PiecewiseFunc::domainLowerLimit()']]],
+  ['domainupperlimit',['domainUpperLimit',['../classBWC_1_1Func.html#acceb67027d9c0a4a749f14d21d76d238',1,'BWC::Func::domainUpperLimit()'],['../classBWC_1_1PiecewiseFunc.html#a17f28075b74636c0ed004e5407b4789f',1,'BWC::PiecewiseFunc::domainUpperLimit()']]],
+  ['dt',['dt',['../structBWC_1_1BaselineWalkingController.html#a02dcf69e2f1e45dc05f86510a244bb5c',1,'BWC::BaselineWalkingController']]]
 ];

@@ -1,13 +1,10 @@
 var searchData=
 [
-  ['lambda_5f',['lambda_',['../classCCC_1_1IntrinsicallyStableMpc1d.html#ad612329be3c075dcb595f3ec7ea0ba16',1,'CCC::IntrinsicallyStableMpc1d']]],
-  ['linear_5fmomentum',['linear_momentum',['../structCCC_1_1LinearMpcXY_1_1WeightParam.html#a6ed673e5c3fa32a313e7ba38ec059140',1,'CCC::LinearMpcXY::WeightParam']]],
-  ['linear_5fmomentum_5fintegral',['linear_momentum_integral',['../structCCC_1_1LinearMpcXY_1_1WeightParam.html#a50e46a64f7b628d1801c8b97bcc33ea0',1,'CCC::LinearMpcXY::WeightParam']]],
-  ['linearmpcxy',['LinearMpcXY',['../classCCC_1_1LinearMpcXY.html',1,'CCC::LinearMpcXY'],['../classCCC_1_1LinearMpcXY.html#a74a8273a8d741149a267a6f79426ffa3',1,'CCC::LinearMpcXY::LinearMpcXY()']]],
-  ['linearmpcxy_2eh',['LinearMpcXY.h',['../LinearMpcXY_8h.html',1,'']]],
-  ['linearmpcz',['LinearMpcZ',['../classCCC_1_1LinearMpcZ.html',1,'CCC::LinearMpcZ'],['../classCCC_1_1LinearMpcZ.html#a8c37538c55c9637adbb5792844a22a08',1,'CCC::LinearMpcZ::LinearMpcZ()']]],
-  ['linearmpcz_2eh',['LinearMpcZ.h',['../LinearMpcZ_8h.html',1,'']]],
-  ['linearmpczmp',['LinearMpcZmp',['../classCCC_1_1LinearMpcZmp.html',1,'CCC::LinearMpcZmp'],['../classCCC_1_1LinearMpcZmp1d.html#add9f2a7ec867ad27b2a748a97b2989fb',1,'CCC::LinearMpcZmp1d::LinearMpcZmp()'],['../classCCC_1_1LinearMpcZmp.html#a2dbed994b362acb91be4f4a4502dd720',1,'CCC::LinearMpcZmp::LinearMpcZmp()']]],
-  ['linearmpczmp_2eh',['LinearMpcZmp.h',['../LinearMpcZmp_8h.html',1,'']]],
-  ['linearmpczmp1d',['LinearMpcZmp1d',['../classCCC_1_1LinearMpcZmp1d.html',1,'CCC::LinearMpcZmp1d'],['../classCCC_1_1LinearMpcZmp1d.html#a95034d1583413378d74fd466c2732edc',1,'CCC::LinearMpcZmp1d::LinearMpcZmp1d()']]]
+  ['makefootstep',['makeFootstep',['../classBWC_1_1FootManager.html#a66c5b73c90d2f237a946b5e479759cb0',1,'BWC::FootManager']]],
+  ['mathutils_2eh',['MathUtils.h',['../MathUtils_8h.html',1,'']]],
+  ['mc_5ftasks',['mc_tasks',['../namespacemc__tasks.html',1,'']]],
+  ['method',['method',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a09788972104ce4dd911fb58580687ca8',1,'BWC::CentroidalManager::Configuration']]],
+  ['midtofoottranss',['midToFootTranss',['../structBWC_1_1FootManager_1_1Configuration.html#a9021ca2b4aec11898c6471db329cca49',1,'BWC::FootManager::Configuration']]],
+  ['mpccom_5f',['mpcCom_',['../classBWC_1_1CentroidalManager.html#a237706c5428660b4fbb31b48833c9f4d',1,'BWC::CentroidalManager']]],
+  ['mpccomvel_5f',['mpcComVel_',['../classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62',1,'BWC::CentroidalManager']]]
 ];

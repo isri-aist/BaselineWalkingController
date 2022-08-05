@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['c_5f',['C_',['../classCCC_1_1StateSpaceModel.html#aeae9c5ee147c753fcf6b28bf12c67085',1,'CCC::StateSpaceModel']]],
-  ['capture_5fpoint',['capture_point',['../structCCC_1_1IntrinsicallyStableMpc1d_1_1InitialParam.html#aab05173f77d0d4d3883d6d854b898710',1,'CCC::IntrinsicallyStableMpc1d::InitialParam::capture_point()'],['../structCCC_1_1IntrinsicallyStableMpc_1_1InitialParam.html#a7ef7f4e94863f4120111b5ee81a37b98',1,'CCC::IntrinsicallyStableMpc::InitialParam::capture_point()']]],
-  ['com_5fjerk',['com_jerk',['../structCCC_1_1PreviewControlZmp1d_1_1WeightParam.html#a34141be401bb9cda2f1504baf280d47a',1,'CCC::PreviewControlZmp1d::WeightParam']]],
-  ['com_5fz',['com_z',['../structCCC_1_1DdpZmp_1_1RefData.html#a898dc4279152c649a8e91360ca144baa',1,'CCC::DdpZmp::RefData::com_z()'],['../structCCC_1_1LinearMpcXY_1_1MotionParam.html#adc8fa47723dd81a795f567dbf25ebc70',1,'CCC::LinearMpcXY::MotionParam::com_z()']]],
-  ['contact',['contact',['../structCCC_1_1LinearMpcZ_1_1MotionData.html#a931ea735faadd354dd0e3f09bf57b5a2',1,'CCC::LinearMpcZ::MotionData']]],
-  ['current_5fzmp',['current_zmp',['../structCCC_1_1DcmTracking_1_1RefData.html#a1bac9e05508defbed237e58b34da2cf2',1,'CCC::DcmTracking::RefData']]]
+  ['dcmgainp',['dcmGainP',['../structBWC_1_1CentroidalManager_1_1Configuration.html#afaff6578ec1bed09dfea79393dcffe17',1,'BWC::CentroidalManager::Configuration']]],
+  ['ddp_5f',['ddp_',['../classBWC_1_1CentroidalManagerDdpZmp.html#a011e9380ac931d9ff2b0be4c557be4e4',1,'BWC::CentroidalManagerDdpZmp']]],
+  ['ddpmaxiter',['ddpMaxIter',['../structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#a1b997cf83ba11426fbc6c420f8f1554d',1,'BWC::CentroidalManagerDdpZmp::Configuration']]],
+  ['desiredtotalwrench_5f',['desiredTotalWrench_',['../classBWC_1_1WrenchDistribution.html#a6ce437c102efbb5eecb183a66a271012',1,'BWC::WrenchDistribution']]],
+  ['dim_5f',['dim_',['../classBWC_1_1CubicHermiteSpline.html#a5bdad37edb4fb6b9fb5e5be596ef1ca3',1,'BWC::CubicHermiteSpline::dim_()'],['../classBWC_1_1CubicSpline.html#a46290a60028b873a20292d28ac708d6c',1,'BWC::CubicSpline::dim_()']]],
+  ['doublesupportratio',['doubleSupportRatio',['../structBWC_1_1FootManager_1_1Configuration.html#a1be8aa545ab57cab70d3b62d0ea09453',1,'BWC::FootManager::Configuration']]]
 ];

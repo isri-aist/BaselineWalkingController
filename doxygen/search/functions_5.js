@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['model',['Model',['../classCCC_1_1LinearMpcXY_1_1Model.html#a06bb18c879d71b9caff71f41d2d95b87',1,'CCC::LinearMpcXY::Model']]],
-  ['modelcontactphase',['ModelContactPhase',['../classCCC_1_1LinearMpcZ_1_1ModelContactPhase.html#a91939e30233e8d2538847117ae92c3d5',1,'CCC::LinearMpcZ::ModelContactPhase']]],
-  ['modelnoncontactphase',['ModelNoncontactPhase',['../classCCC_1_1LinearMpcZ_1_1ModelNoncontactPhase.html#abcfb8167acbdbc0ce244997f2f473cec',1,'CCC::LinearMpcZ::ModelNoncontactPhase']]],
-  ['motiondataseq',['motionDataSeq',['../classCCC_1_1DdpCentroidal.html#ade3fa8bb3a600cda7e10c73e7528eaf5',1,'CCC::DdpCentroidal::motionDataSeq()'],['../classCCC_1_1LinearMpcXY.html#a924c0bed34c1704db2846924eb84c0eb',1,'CCC::LinearMpcXY::motionDataSeq()'],['../classCCC_1_1LinearMpcZ.html#a9c0820786fd8b2b3fd1d352fd7631a8f',1,'CCC::LinearMpcZ::motionDataSeq()']]]
+  ['firstorderimpedancetask',['FirstOrderImpedanceTask',['../structBWC_1_1FirstOrderImpedanceTask.html#a30e685289b37e7c3af402e0e89d8fe48',1,'BWC::FirstOrderImpedanceTask']]],
+  ['footmanager',['FootManager',['../classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0',1,'BWC::FootManager']]],
+  ['footstep',['Footstep',['../structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f',1,'BWC::Footstep']]],
+  ['footstepqueue',['footstepQueue',['../classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637',1,'BWC::FootManager::footstepQueue() const noexcept'],['../classBWC_1_1FootManager.html#a5aa0d1f9310defc7ccd73ad551bdec48',1,'BWC::FootManager::footstepQueue() noexcept']]],
+  ['frictionpyramid',['FrictionPyramid',['../classBWC_1_1FrictionPyramid.html#aeb1ae9d569b888f4f423b4a48c050802',1,'BWC::FrictionPyramid']]],
+  ['func',['Func',['../classBWC_1_1Func.html#a534ff23b0d156dcdd25054dec70ccf1a',1,'BWC::Func']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>centroidal_control_collection: Class Members</title>
+<title>baseline_walking_controller: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">centroidal_control_collection
+   <div id="projectname">baseline_walking_controller
    </div>
   </td>
  </tr>
@@ -67,63 +67,64 @@ $(function() {
 <div class="textblock">Here is a list of all class members with links to the classes they belong to:</div>
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>seq_ext_
-: <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a1123dbaf4f0c10ea2c17f28cdeed1ea3">CCC::LinearMpcZmp1d</a>
+<li>sendWalkingCommand()
+: <a class="el" href="structBWC_1_1CommandState.html#a3311f90b18642b913fff9dcecbcf2b2b">BWC::CommandState</a>
 </li>
-<li>seq_len_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a0b66ada328e323763b68c89569d95aef">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>setAnchorFrame()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a8655864c392b71ae7ef020435d5a8c3c">BWC::CentroidalManager</a>
 </li>
-<li>setMotionParamFunc()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#ad05ae906419cf0aef41063f218657fcb">CCC::DdpCentroidal::DdpProblem</a>
+<li>setDefaultAnchor()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ac798d1f05dcfdf8cd8ca131c22fae361">BWC::BaselineWalkingController</a>
 </li>
-<li>setRefDataFunc()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a9173767e15e6df92bdae5a0dd4eb527d">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a0955bfbe95930f1cee49a536d24d2024">CCC::DdpZmp::DdpProblem</a>
+<li>setDomainLowerLimit()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#a2c640bb759a38532a55980a6d90f8f43">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>setup()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#adec9217a012cd8a651278cb3cfa24e25">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a2ef61cee8cae63e2f8ef5f45c3a6c527">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>start()
+: <a class="el" href="structBWC_1_1CommandState.html#a3c2da5cd0787a64d70c7f6c87b4dceef">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#acda27e7e5352dc8b255d64bfb04d1dab">BWC::InitialState</a>
+, <a class="el" href="structBWC_1_1State.html#ad36346aecd0c247a3f4dab333081e399">BWC::State</a>
 </li>
-<li>SimModel()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a8ade8b1d3f5a1c48e441e9ad0340ebc0">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY_1_1SimModel.html#a48765c5ea3626df5df574403bd147945">CCC::LinearMpcXY::SimModel</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ_1_1SimModel.html#afbaac6e2173f3ef63779bb95a6ac2328">CCC::LinearMpcZ::SimModel</a>
+<li>startTime()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#a2aa6919c6075c32aeaea96fb7a229788">BWC::CubicInterpolator&lt; T, U &gt;</a>
 </li>
-<li>SingularPreviewControlZmp
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a3d4e10198ef56a6dbbe7dd405eed0738">CCC::SingularPreviewControlZmp1d</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp.html#ae5efa0a2baff5a8690c41a449a7fb473">CCC::SingularPreviewControlZmp</a>
+<li>stop()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f">BWC::BaselineWalkingController</a>
 </li>
-<li>SingularPreviewControlZmp1d()
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a24c9cdebdb07581aa388065bc8ee169f">CCC::SingularPreviewControlZmp1d</a>
+<li>stopSwingTrajForTouchDownFoot
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c">BWC::FootManager::Configuration</a>
 </li>
-<li>spc_1d_
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp.html#a6aa4307aff52b5cc2fc5970e603f1c54">CCC::SingularPreviewControlZmp</a>
+<li>supportPhase()
+: <a class="el" href="classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e">BWC::FootManager</a>
 </li>
-<li>state_dim_
-: <a class="el" href="classCCC_1_1LinearMpcXY.html#af69f480c29e9ee1df13083117e6a4e82">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a6d0a23963ff20d0dc57f47ac76211c49">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#ac1425b9a2d2ec61cacaf213ef9295ea1">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>supportPhase_
+: <a class="el" href="classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f">BWC::FootManager</a>
 </li>
-<li>stateDim()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a16d42a7c0db32850591924f0390d6269">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>surfaceName()
+: <a class="el" href="classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf">BWC::FootManager</a>
 </li>
-<li>StateDimVector
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a60399c6c5665c199824a56f9c4499c16">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a9556e152086bc55042ce3ce641894fb0">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#ad734fd1a1b32676261a65b7e1ad68fff">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1PreviewControl.html#a39bc2c6135fa5e4c98952fcab1127200">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a391066481de5abd35141ee992890ec60">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>swingEndTime
+: <a class="el" href="structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509">BWC::Footstep</a>
 </li>
-<li>stateEq()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a68178cefa3dadc35b209f7af6c2e6a81">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a6efb17fe8295d360a1ccd493e7809b17">CCC::DdpZmp::DdpProblem</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a0c61263a9a4e03c365cff636387951ff">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>swingFootstep_
+: <a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">BWC::FootManager</a>
 </li>
-<li>stateEqDisc()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a3d224a50808473e83b57220461398455">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>swingHeight
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a169b89705bb08bb0c624517b3fa6ce72">BWC::FootManager::Configuration</a>
 </li>
-<li>StateSpaceModel()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#aa024e33847e3ebe672bc28b74e18ff48">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>swingInitialLiftDurationRatio
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a99d1dbef5501a4118ca3a7c3a9387679">BWC::FootManager::Configuration</a>
+</li>
+<li>swingInitialLiftHeight
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a8f6a663d1395a16e9f3b69b7e868deca">BWC::FootManager::Configuration</a>
+</li>
+<li>swingPosFunc_
+: <a class="el" href="classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9">BWC::FootManager</a>
+</li>
+<li>swingRotFunc_
+: <a class="el" href="classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727">BWC::FootManager</a>
+</li>
+<li>swingStartTime
+: <a class="el" href="structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b">BWC::Footstep</a>
 </li>
 </ul>
 </div><!-- contents -->

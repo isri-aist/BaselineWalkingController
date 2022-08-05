@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['observeq',['observEq',['../classCCC_1_1StateSpaceModel.html#ae7d608f3c7126e2d3fbba1f2dc20e456',1,'CCC::StateSpaceModel::observEq(const StateDimVector &amp;x) const'],['../classCCC_1_1StateSpaceModel.html#aeccd68fbd9b90b27fbb31db79cb3a892',1,'CCC::StateSpaceModel::observEq(const StateDimVector &amp;x, const InputDimVector &amp;u) const']]],
-  ['outputdim',['outputDim',['../structCCC_1_1LinearMpcXY_1_1RefData.html#a39febad45fc8fe035851ad493784fb3e',1,'CCC::LinearMpcXY::RefData::outputDim()'],['../classCCC_1_1StateSpaceModel.html#a7a92b8168c4f99fd04d8d3371c35d575',1,'CCC::StateSpaceModel::outputDim()']]],
-  ['outputweight',['outputWeight',['../structCCC_1_1LinearMpcXY_1_1WeightParam.html#a0ff86d1b369445d09369d99105447613',1,'CCC::LinearMpcXY::WeightParam']]]
+  ['getcontactfeet',['getContactFeet',['../classBWC_1_1FootManager.html#acb04ac448ed704b11f016ae275feaa36',1,'BWC::FootManager']]],
+  ['getidx',['getIdx',['../classBWC_1_1CubicInterpolator.html#acb76a02718c066cb8702bc6746010870',1,'BWC::CubicInterpolator']]],
+  ['getratio',['getRatio',['../classBWC_1_1CubicInterpolator.html#a13d7654bdf179f3bf130bb558697f65a',1,'BWC::CubicInterpolator']]]
 ];

@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structCCC_1_1DdpZmp_1_1WeightParam.html" title="Weight parameter. " alt="" coords="5,5,215,32"/>
+<area shape="rect" id="node1" href="$structBWC_1_1InitialState.html" title="FSM state to initialize. " alt="" coords="5,5,137,32"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions. " alt="" coords="185,5,280,32"/>
+<area shape="rect" id="node3" href="$structBWC_1_1CommandState.html" title="FSM state to send walking command from GUI. " alt="" coords="328,5,491,32"/>
 </map>

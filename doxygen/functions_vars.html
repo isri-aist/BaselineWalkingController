@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>centroidal_control_collection: Class Members - Variables</title>
+<title>baseline_walking_controller: Class Members - Variables</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">centroidal_control_collection
+   <div id="projectname">baseline_walking_controller
    </div>
   </td>
  </tr>
@@ -66,474 +66,392 @@ $(function() {
 <div class="contents">
 &#160;
 
-<h3><a id="index_a"></a>- a -</h3><ul>
-<li>A_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#ad5827e463592d2c2b5eb33677065825d">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>A_seq_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a88f30ffefbb7684d06a8a67d93249db7">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a49882ee4cad7f67f8af051fd43345857">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
-</li>
-<li>acc
-: <a class="el" href="structCCC_1_1LinearMpcZmp_1_1InitialParam.html#ae7d1eccf6521f55bffcf040a35ffd8a1">CCC::LinearMpcZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1PreviewControlZmp_1_1InitialParam.html#a6fec970974a8cafcbe6ffe7d00684260">CCC::PreviewControlZmp::InitialParam</a>
-</li>
-<li>Ad_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a682af6ed5e0f7e60e863679c8510e3b0">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#a284b3125c18103ad9861294d7a4ffd37">CCC::DdpCentroidal::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1InitialParam.html#ac7ddfc7c9932d33fb2e32c54cd13f46f">CCC::LinearMpcXY::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1RefData.html#a7de020570fdc0b04cf37c43ad9dfd067">CCC::LinearMpcXY::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#ada8ba6705905fdd4bdeda00f37abadaa">CCC::LinearMpcXY::WeightParam</a>
-</li>
-</ul>
-
-
 <h3><a id="index_b"></a>- b -</h3><ul>
-<li>B_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a2fd58d86f80aabd387a0ca535565ac44">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>baseOriTask_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a1e58a285ee82020809f0bcfa2de09957">BWC::BaselineWalkingController</a>
 </li>
-<li>B_seq_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#ad35d92729b5fa7a66043a4ea4d9922e1">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#aeba285ba21b7043f07128661dc2ce6f9">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>bcEnd_
+: <a class="el" href="classBWC_1_1CubicSpline.html#a3f6d5af10967aad9ef3401e23b993a2b">BWC::CubicSpline&lt; T &gt;</a>
 </li>
-<li>Bd_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a61f5b9c4b0e642ff444202e3f27517a2">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>bcStart_
+: <a class="el" href="classBWC_1_1CubicSpline.html#a3838234f21b9612997704a10a107f7c4">BWC::CubicSpline&lt; T &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
-<li>C_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#aeae9c5ee147c753fcf6b28bf12c67085">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>centroidalManager_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#acfb9b53b1a9492ac4aaf0d7dad8a817d">BWC::BaselineWalkingController</a>
 </li>
-<li>capture_point
-: <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1InitialParam.html#aab05173f77d0d4d3883d6d854b898710">CCC::IntrinsicallyStableMpc1d::InitialParam</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc_1_1InitialParam.html#a7ef7f4e94863f4120111b5ee81a37b98">CCC::IntrinsicallyStableMpc::InitialParam</a>
+<li>coeff_
+: <a class="el" href="classBWC_1_1Polynomial.html#a31cc6d27bb30887ced3b35ec3b68bf1d">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
-<li>com_jerk
-: <a class="el" href="structCCC_1_1PreviewControlZmp1d_1_1WeightParam.html#a34141be401bb9cda2f1504baf280d47a">CCC::PreviewControlZmp1d::WeightParam</a>
+<li>comTask_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ae966ec81bc69e1168f11483e3986eca0">BWC::BaselineWalkingController</a>
 </li>
-<li>com_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1RefData.html#a898dc4279152c649a8e91360ca144baa">CCC::DdpZmp::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionParam.html#adc8fa47723dd81a795f567dbf25ebc70">CCC::LinearMpcXY::MotionParam</a>
+<li>comZGainD
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a75ef11a6bed8ac044e8435a6a0caa7b9">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>contact
-: <a class="el" href="structCCC_1_1LinearMpcZ_1_1MotionData.html#a931ea735faadd354dd0e3f09bf57b5a2">CCC::LinearMpcZ::MotionData</a>
+<li>comZGainP
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab939397cc9b53938ab9ae3892aa55244">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>current_zmp
-: <a class="el" href="structCCC_1_1DcmTracking_1_1RefData.html#a1bac9e05508defbed237e58b34da2cf2">CCC::DcmTracking::RefData</a>
+<li>config_
+: <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#abe1bceefd21b38a92c4bd9f93a982197">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#af23554cf500e3513982160701f4625ca">BWC::CentroidalManagerPreviewControlZmp</a>
+, <a class="el" href="classBWC_1_1FootManager.html#abad5017b4fa073bf5bde3bb6e42d7ce5">BWC::FootManager</a>
+, <a class="el" href="classBWC_1_1WrenchDistribution.html#a3f50e84a78978169a0c3821fa081faac">BWC::WrenchDistribution</a>
+</li>
+<li>contactList_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a95978a7b4817504966c3dbbf63f27a81">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1WrenchDistribution.html#a315bf8d13acae2cc15a04423ad0ef3d6">BWC::WrenchDistribution</a>
+</li>
+<li>controlForceZ_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ab8f6d8dc7c6fd8f086251683e1b428f0">BWC::CentroidalManager</a>
+</li>
+<li>controlZmp_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a5045ab4da1f6ece047cfc334e1edb636">BWC::CentroidalManager</a>
+</li>
+<li>ctlPtr_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a196e88e5f2fb4d978ce71069ccdbd10e">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#ae58efc99e640837165393d28974a616a">BWC::FootManager</a>
+, <a class="el" href="structBWC_1_1State.html#ab654b4115b1d8ceda1e69d6271165dc5">BWC::State</a>
 </li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>D_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#aebc89398f723c10b01a793832be8378b">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>dcmGainP
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#afaff6578ec1bed09dfea79393dcffe17">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>ddp_problem_
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a448d8c72f05fcecbe82f7e42644a21fe">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1DdpZmp.html#ac044038c22c53f36d800a77f98fd8043">CCC::DdpZmp</a>
+<li>ddp_
+: <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a011e9380ac931d9ff2b0be4c557be4e4">BWC::CentroidalManagerDdpZmp</a>
 </li>
-<li>ddp_solver_
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a1215150374fb1ec96af48a80eed3818f">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1DdpZmp.html#aa3b4f8973937e8e84b29005cc492b7dc">CCC::DdpZmp</a>
+<li>ddpMaxIter
+: <a class="el" href="structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#a1b997cf83ba11426fbc6c420f8f1554d">BWC::CentroidalManagerDdpZmp::Configuration</a>
 </li>
-<li>dt_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a21f122b972386cc74a6559a631bca1a0">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a81e87f7b5c2868f62735ab7525cbe37d">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>desiredTotalWrench_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#a6ce437c102efbb5eecb183a66a271012">BWC::WrenchDistribution</a>
+</li>
+<li>dim_
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a5bdad37edb4fb6b9fb5e5be596ef1ca3">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#a46290a60028b873a20292d28ac708d6c">BWC::CubicSpline&lt; T &gt;</a>
+</li>
+<li>doubleSupportRatio
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a1be8aa545ab57cab70d3b62d0ea09453">BWC::FootManager::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
-<li>E_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a555cd5d41ce8aabe66e3e3dc32ea279e">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>enableComZFeedback
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#adfc1b290b9de3d4fdffe9000c1b0fe5d">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>E_seq_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a53cbc94851184636e2d5fa7d1d15663f">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a592bbbdffd1b1abf51cb4fe52927ea82">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>enableManagerUpdate_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a4a75db7dbf5dcf18cf1734a0fa79325b">BWC::BaselineWalkingController</a>
 </li>
-<li>Ed_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a32fa0b85245bb09d3080a60dd1e19c83">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>enableWrenchDistForTouchDownFoot
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a26b3e6c99ec4f275cdfaa4bc0d37e7e4">BWC::FootManager::Configuration</a>
+</li>
+<li>enableZmpFeedback
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a94a5b6a0f6ee51c95a3563af14e0fed5">BWC::CentroidalManager::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>F_
-: <a class="el" href="classCCC_1_1PreviewControl.html#a559ee95250775c0ec6e8b379154f6222">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#afe8001d15877209956e3edc6f23fc9c3">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>firstIter_
+: <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#abb2cede617c7e555ca7d0a14dc52a2eb">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
-<li>feedback_gain_
-: <a class="el" href="classCCC_1_1DcmTracking.html#a6775ecf810da6e0bb8aefa65e00d7ecd">CCC::DcmTracking</a>
+<li>foot
+: <a class="el" href="structBWC_1_1Footstep.html#aec0947a2e26cec2e9dbc0a12b8628f35">BWC::Footstep</a>
 </li>
-<li>fgc_1d_
-: <a class="el" href="classCCC_1_1FootGuidedControl.html#a18c6aed68db995ae5dea213e5b56ebaa">CCC::FootGuidedControl</a>
+<li>footManager_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a02906ddae6b920235d0e7534fa479892">BWC::BaselineWalkingController</a>
 </li>
-<li>force
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a0ba16a60c28ea47ec27719dfffa46b7c">CCC::LinearMpcXY::WeightParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcZ_1_1WeightParam.html#aba5f76e5bb58b3de360bc93e36eefd1b">CCC::LinearMpcZ::WeightParam</a>
+<li>footstepDuration
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a5f80b28429c7c9e575331361eb613df5">BWC::FootManager::Configuration</a>
 </li>
-<li>force_range_
-: <a class="el" href="classCCC_1_1LinearMpcXY.html#a79ef2923ed0f101c3761cdc18b927065">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a57582f7ddf06bfcda9db961b2b94027b">CCC::LinearMpcZ</a>
+<li>footstepQueue_
+: <a class="el" href="classBWC_1_1FootManager.html#aa4d4aa44b6e582b70ed49c1c9d4d36b7">BWC::FootManager</a>
 </li>
-<li>force_scale_limits_
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a66091fc31b34c0cc7710c6170d5ba45d">CCC::DdpCentroidal</a>
+<li>footTasks_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a19b6714f70319f6ac9e59dd64a291bdd">BWC::BaselineWalkingController</a>
 </li>
-<li>force_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1PlannedData.html#a238730a0bbf57e2e85e39855805b2378">CCC::DdpZmp::PlannedData</a>
+<li>fricCoeff
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#aa63aa08db45cd61674c1af9f0dd912b0">BWC::FootManager::Configuration</a>
+</li>
+<li>func_
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#afbdd638c5b2fb41ccffc8c39998ef109">BWC::CubicInterpolator&lt; T, U &gt;</a>
+</li>
+<li>funcs_
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#afcb261dcea56f72b85d57d7af1897bc8">BWC::PiecewiseFunc&lt; T &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>graspMat_
+: <a class="el" href="classBWC_1_1Contact.html#af0dc624fc22936afa29f60e5c2eac1f7">BWC::Contact</a>
 </li>
 </ul>
 
 
 <h3><a id="index_h"></a>- h -</h3><ul>
-<li>horizon_dt_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#a7d45e2ce28ed250fefc75d951cc47226">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a7cc84ac347c778bb06dce384d589972c">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a3273650eca18072b1372f1d7bf66ef47">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a41a087f04bc13e7336e8e3d77647a55f">CCC::LinearMpcZmp1d</a>
-, <a class="el" href="classCCC_1_1PreviewControl.html#a45a3da4b86941925793e4248fb950325">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#aa2bdcd56b21ccb167d3b905fd7793c00">CCC::SingularPreviewControlZmp1d</a>
+<li>horizonDt
+: <a class="el" href="structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#acbe0eb0c816a4c78c8d61bf5b21e178b">BWC::CentroidalManagerDdpZmp::Configuration</a>
+, <a class="el" href="structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a012d4b9a1211c5cb8173f53d4768cd44">BWC::CentroidalManagerPreviewControlZmp::Configuration</a>
 </li>
-<li>horizon_steps_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#aba7f0e5f20de5d0847d678d1e03e878e">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a0bfb73aec2cd31b2f0eecb275aa6cb4e">CCC::LinearMpcZmp1d</a>
-, <a class="el" href="classCCC_1_1PreviewControl.html#ac3091a1835cc34bf2cdc3873550832f7">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a4047a1f70d0b25b1d8c21f007adb33e6">CCC::SingularPreviewControlZmp1d</a>
+<li>horizonDuration
+: <a class="el" href="structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#aa31a5dccfb877a9ee0a87a9483a72d7c">BWC::CentroidalManagerDdpZmp::Configuration</a>
+, <a class="el" href="structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a7277a05f6d0028f91d5829990f43faea">BWC::CentroidalManagerPreviewControlZmp::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
-<li>input
-: <a class="el" href="structCCC_1_1PreviewControl_1_1WeightParam.html#a6c8bec192ae1239e07395b05ad08abeb">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;::WeightParam</a>
+<li>impGains
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#ae97d85eb6df4cba328c029bcd9469675">BWC::FootManager::Configuration</a>
 </li>
-<li>input_dim_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#ab41244aa19854b37a2841b8e3efafe4d">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>impGainTypes_
+: <a class="el" href="classBWC_1_1FootManager.html#a04c72bf897db34284ea5e2e1fee11776">BWC::FootManager</a>
 </li>
 </ul>
 
 
 <h3><a id="index_k"></a>- k -</h3><ul>
-<li>K_
-: <a class="el" href="classCCC_1_1PreviewControl.html#a76dea094dabd0ff4a9b91faeab1f93d9">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>keepSupportFootPoseForTouchDownFoot
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a4c15e817835984294877a7396f7637e1">BWC::FootManager::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
-<li>lambda_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#ad612329be3c075dcb595f3ec7ea0ba16">CCC::IntrinsicallyStableMpc1d</a>
-</li>
-<li>linear_momentum
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a6ed673e5c3fa32a313e7ba38ec059140">CCC::LinearMpcXY::WeightParam</a>
-</li>
-<li>linear_momentum_integral
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a50e46a64f7b628d1801c8b97bcc33ea0">CCC::LinearMpcXY::WeightParam</a>
+<li>localRidgeList_
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#a5c356a0deb397c33c7355030e4ec2f97">BWC::FrictionPyramid</a>
 </li>
 </ul>
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
-<li>mass_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a8f2f07515b63f63e115b5150d97a3385">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a8ea07aec86fd696799a13ffdd63ea32f">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a701300c491ed08f10ae5cca7480f5cb2">CCC::DdpZmp::DdpProblem</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a4d741e4e81e3e621c0514a0314721c4a">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a40ee452c60ae4871e4db8d7f34198660">CCC::LinearMpcZ</a>
+<li>method
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a09788972104ce4dd911fb58580687ca8">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>model_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a62cdbd4a786b6f5afda2a030bb15e5ab">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#ac05b256d86741992549725e8f10bab78">CCC::LinearMpcZmp1d</a>
-, <a class="el" href="classCCC_1_1PreviewControl.html#a22066705ec24a97ed44a04b5c6610c11">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>midToFootTranss
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a9021ca2b4aec11898c6471db329cca49">BWC::FootManager::Configuration</a>
 </li>
-<li>model_contact_
-: <a class="el" href="classCCC_1_1LinearMpcZ.html#a3edf622d41fe3c772974c8abba25fafc">CCC::LinearMpcZ</a>
+<li>mpcCom_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a237706c5428660b4fbb31b48833c9f4d">BWC::CentroidalManager</a>
 </li>
-<li>model_list_
-: <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a518937fecc5b409e218191867eb7a134">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
-</li>
-<li>model_noncontact_
-: <a class="el" href="classCCC_1_1LinearMpcZ.html#aacf17b628f4dbd87d5003304957df05c">CCC::LinearMpcZ</a>
-</li>
-<li>motion_data_seq_
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#ab08f00fa490451b50f7fda7117f7285e">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a12255177575f1d2ead420e6256745422">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#ab168295bc37d4a2b271870694e613f11">CCC::LinearMpcZ</a>
-</li>
-<li>motion_param_
-: <a class="el" href="classCCC_1_1LinearMpcXY_1_1Model.html#ab38e59c9ee6a8f9df45e2434cc5db499">CCC::LinearMpcXY::Model</a>
-</li>
-<li>motion_param_func_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a5335076b9dbed432727e195c445526fb">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a5f6dafa81083ef3dbe2fc2386c962879">CCC::DdpCentroidal::SimModel</a>
-</li>
-<li>mpc_1d_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#a4b777b44f9c584c2fa61e70d62844a99">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#a8d92617b29daa46a4e5cfa5d0ed90711">CCC::LinearMpcZmp</a>
+<li>mpcComVel_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62">BWC::CentroidalManager</a>
 </li>
 </ul>
 
 
-<h3><a id="index_o"></a>- o -</h3><ul>
-<li>omega_
-: <a class="el" href="classCCC_1_1DcmTracking.html#ac14abc9374b96fceb4e8534d4c3a0233">CCC::DcmTracking</a>
-, <a class="el" href="classCCC_1_1FootGuidedControl1d.html#a0d5662237f763b27e5f5af5f899b7185">CCC::FootGuidedControl1d</a>
-, <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#a36de87aba4fe04940a373ec395df44d8">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a517ef5db85def1c6e14024ce2dfd46a0">CCC::SingularPreviewControlZmp1d</a>
+<h3><a id="index_n"></a>- n -</h3><ul>
+<li>name
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0">BWC::CentroidalManager::Configuration</a>
+, <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f">BWC::FootManager::Configuration</a>
 </li>
-<li>output
-: <a class="el" href="structCCC_1_1PreviewControl_1_1WeightParam.html#a2727ef4ad6a24bd5d2fa656ac3e7b27b">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;::WeightParam</a>
-</li>
-<li>output_dim_
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a61bfa281c008dae97bc3fc02619d3b02">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>name_
+: <a class="el" href="classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062">BWC::Contact</a>
 </li>
 </ul>
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>P_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#a67a1ff7d53d07fdfab557aa9ee694d39">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1PreviewControl.html#aba962a100c243b95aa33421e243c9f25">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>pc_
+: <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a4805150bc6a857ee2d517d5e0a6da95c">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
-<li>planned_acc
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a227f6a1a6c8795a253c9bb8df8b95c88">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>phase_
+: <a class="el" href="structBWC_1_1InitialState.html#ae8f4336e2be9b2b34e8e8c897b0c97f5">BWC::InitialState</a>
 </li>
-<li>planned_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionData.html#ae5d101dc6c5c5a5ecf51b44a44a863e3">CCC::DdpCentroidal::MotionData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionData.html#a41adac5304771888e188b926b080442f">CCC::LinearMpcXY::MotionData</a>
+<li>plannedForceZ_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a8c17d49838aacf2c7dd2da936d8bcd05">BWC::CentroidalManager</a>
 </li>
-<li>planned_force
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a1ce160dcabc382cb3e6ddd9fffc74117">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>plannedZmp_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a2aa77c0911a409a233367684f684a6e3">BWC::CentroidalManager</a>
 </li>
-<li>planned_pos
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a34ea819ffc4b5356b2b82804e264a8bb">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>points_
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a62185c2977b1969ec7ea6dc1479a2c5f">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#a85bd3fcbf3b48c8385e56869b20d1919">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#aab4ccbe9dc756f5d6be9791978c480ad">BWC::CubicSpline&lt; T &gt;</a>
 </li>
-<li>planned_vel
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a316b856d12a56570c333713eeae9b0f9">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
-</li>
-<li>planned_zmp
-: <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1InitialParam.html#a7a991ced7b697333183fe69b3b902c72">CCC::IntrinsicallyStableMpc1d::InitialParam</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc_1_1InitialParam.html#ac4a22bafc6155dc6c5ff21e488efa24a">CCC::IntrinsicallyStableMpc::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp1d_1_1InitialParam.html#ac1eac3e7d03b34a8701ba469842ed52f">CCC::SingularPreviewControlZmp1d::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp_1_1InitialParam.html#a4d806c2a1171e048fbcbfbf279e87e82">CCC::SingularPreviewControlZmp::InitialParam</a>
-</li>
-<li>pos
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#ad117d6681e22cbfddb67bf53252f8886">CCC::DdpCentroidal::InitialParam</a>
-, <a class="el" href="structCCC_1_1DdpCentroidal_1_1RefData.html#a4a6bb2a265eba8bac7a90b3b4dc07e17">CCC::DdpCentroidal::RefData</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1InitialParam.html#ac94140efcd1264092bf5e9159d16058c">CCC::DdpZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1InitialParam.html#a8bdb499fcc1a3212ee5c55c98991fd5c">CCC::LinearMpcXY::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1RefData.html#aa50ba1154bdeacd210c113b20b0bf458">CCC::LinearMpcXY::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcZ_1_1WeightParam.html#ad8cd113783c7148db353118b69774c0a">CCC::LinearMpcZ::WeightParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcZmp_1_1InitialParam.html#a777253adbf3201a6c6fbc41426796823">CCC::LinearMpcZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1PreviewControlZmp_1_1InitialParam.html#ab783fb674bb1028b51b8f189dd3a7820">CCC::PreviewControlZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp1d_1_1InitialParam.html#a238b01a9cf68d3e1af080af0c499c8e0">CCC::SingularPreviewControlZmp1d::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp_1_1InitialParam.html#a622657ee1c39a00e0896dd06c0ce4d23">CCC::SingularPreviewControlZmp::InitialParam</a>
-</li>
-<li>preview_control_1d_
-: <a class="el" href="classCCC_1_1PreviewControlZmp.html#ae0f26eb804456c05e5065ab0c731ddfb">CCC::PreviewControlZmp</a>
+<li>pose
+: <a class="el" href="structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541">BWC::Footstep</a>
 </li>
 </ul>
 
 
 <h3><a id="index_q"></a>- q -</h3><ul>
-<li>qp_coeff_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#aba93cbd6039e7edf6b802421a3ebf4ab">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a8e167359a6cd0ee6e0f22b17854a457a">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#afd361da2ae1cc5d76b8c8d1bda408fba">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a4a2be4f49bb5d54b30dd226a96303e83">CCC::LinearMpcZmp1d</a>
+<li>qpCoeff_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#a70f99228063dfd02242789c9d877811c">BWC::WrenchDistribution</a>
 </li>
-<li>qp_solver_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#ae3f3dd72e167756ee271a251e99514f9">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a41c5c1b8c91c71f3e10a28ebf699ea4a">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#acdc45328dce6bc9164c3691bad1c4b1c">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a5212f440b68a8d96c6074a3b69ca69b0">CCC::LinearMpcZmp1d</a>
+<li>qpSolver_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#aa88b4de6219a0a1a582eb3a0851be649">BWC::WrenchDistribution</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
-<li>ref_acc
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a3efebb3d7ddc4db948f52079b392d04f">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>refComZ
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a7cd2c2d2bca99f7b679da4900501cbcd">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>ref_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionData.html#a1baf6aaad1c7ffd8b39158207700b73f">CCC::DdpCentroidal::MotionData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionData.html#afbe7564b1d37888f385880bee7385770">CCC::LinearMpcXY::MotionData</a>
+<li>regularWeight
+: <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#addb8c33e01f86d9738a9cb1aeb0fac52">BWC::WrenchDistribution::Configuration</a>
 </li>
-<li>ref_data_func_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a8f5efa4052f4ea4a98093da20db26a23">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a6931897ade2a2d934d04493856ae4d2f">CCC::DdpZmp::DdpProblem</a>
+<li>requireImpGainUpdate_
+: <a class="el" href="classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e">BWC::FootManager</a>
 </li>
-<li>ref_data_seq_x_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#ac76b49a4222586809822ddacd1e6fd1b">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#a6a0a306296be429e33db336b2cf9e3dd">CCC::LinearMpcZmp</a>
+<li>resultTotalWrench_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#af37bcb672acd23cb22624bbd466ce554">BWC::WrenchDistribution</a>
 </li>
-<li>ref_data_seq_y_
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#a897f7a83fe9ab275d980bc1cbd16aa9b">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#ac98b3d31a0d7dff7b232c5895f51545a">CCC::LinearMpcZmp</a>
+<li>resultWrenchRatio_
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#accdf9022ce35ba938c33b3587ffe5c2e">BWC::WrenchDistribution</a>
 </li>
-<li>ref_pos
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a841ccfd94e2b99f8b9d0fea400635f37">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>ridgeForceMinMax
+: <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#a6d6ed77491b81806410805860a85ae45">BWC::WrenchDistribution::Configuration</a>
 </li>
-<li>ref_vel
-: <a class="el" href="structCCC_1_1MotionDataBase.html#a4b83dad7053e9359bcaced473f77f0dd">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>ridgeList
+: <a class="el" href="structBWC_1_1Contact_1_1VertexWithRidge.html#abfaaa9dc8d1c4b0c92cf7715829c2c69">BWC::Contact::VertexWithRidge</a>
 </li>
-<li>riccati_error_
-: <a class="el" href="classCCC_1_1PreviewControl.html#abc3653bb5d02d3d13360f005f9439cff">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>running_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#adcdeea2b8e28666b9dd17c9f60864416">CCC::DdpCentroidal::WeightParam</a>
-</li>
-<li>running_com_pos_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a8e4a59690624371a5ffa5abe8c8b219c">CCC::DdpZmp::WeightParam</a>
-</li>
-<li>running_force
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a1de6d82b11b82932c81b6707ff793d5f">CCC::DdpCentroidal::WeightParam</a>
-</li>
-<li>running_force_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a660072cc3bb101b87ba8acaae9b9a5fc">CCC::DdpZmp::WeightParam</a>
-</li>
-<li>running_linear_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#ae145ccff54acb1ece42e8514eaa3b9e5">CCC::DdpCentroidal::WeightParam</a>
-</li>
-<li>running_pos
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a69e4136097b83c12d996b8d9598f5d86">CCC::DdpCentroidal::WeightParam</a>
-</li>
-<li>running_zmp
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a54da1822846c4161e2bb3c566e5196d5">CCC::DdpZmp::WeightParam</a>
+<li>robotMass_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a73798dded16013c2186d63a5b4591033">BWC::CentroidalManager</a>
 </li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>seq_ext_
-: <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a1123dbaf4f0c10ea2c17f28cdeed1ea3">CCC::LinearMpcZmp1d</a>
+<li>stopSwingTrajForTouchDownFoot
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c">BWC::FootManager::Configuration</a>
 </li>
-<li>seq_len_
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a0b66ada328e323763b68c89569d95aef">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>supportPhase_
+: <a class="el" href="classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f">BWC::FootManager</a>
 </li>
-<li>spc_1d_
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp.html#a6aa4307aff52b5cc2fc5970e603f1c54">CCC::SingularPreviewControlZmp</a>
+<li>swingEndTime
+: <a class="el" href="structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509">BWC::Footstep</a>
 </li>
-<li>state_dim_
-: <a class="el" href="classCCC_1_1LinearMpcXY.html#af69f480c29e9ee1df13083117e6a4e82">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a6d0a23963ff20d0dc57f47ac76211c49">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#ac1425b9a2d2ec61cacaf213ef9295ea1">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>swingFootstep_
+: <a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">BWC::FootManager</a>
+</li>
+<li>swingHeight
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a169b89705bb08bb0c624517b3fa6ce72">BWC::FootManager::Configuration</a>
+</li>
+<li>swingInitialLiftDurationRatio
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a99d1dbef5501a4118ca3a7c3a9387679">BWC::FootManager::Configuration</a>
+</li>
+<li>swingInitialLiftHeight
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a8f6a663d1395a16e9f3b69b7e868deca">BWC::FootManager::Configuration</a>
+</li>
+<li>swingPosFunc_
+: <a class="el" href="classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9">BWC::FootManager</a>
+</li>
+<li>swingRotFunc_
+: <a class="el" href="classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727">BWC::FootManager</a>
+</li>
+<li>swingStartTime
+: <a class="el" href="structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b">BWC::Footstep</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
-<li>terminal_angular_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#aa6ee58dc8f778bf9eb0f908bad2a95c2">CCC::DdpCentroidal::WeightParam</a>
+<li>t0_
+: <a class="el" href="classBWC_1_1Polynomial.html#af4e39ce8c9fb4ea3f7366925e2ed906b">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
-<li>terminal_com_pos_xy
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a0192738e4cedd91990bd418b5dc77e57">CCC::DdpZmp::WeightParam</a>
+<li>t_
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#aa49be5f3b004c2d35d353c86e2d284b7">BWC::BaselineWalkingController</a>
 </li>
-<li>terminal_com_pos_z
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a959a5af7b1b7b487efe153c6f69e7bff">CCC::DdpZmp::WeightParam</a>
+<li>targetFootAccels_
+: <a class="el" href="classBWC_1_1FootManager.html#aacfc2012614d690968187579147e63e1">BWC::FootManager</a>
 </li>
-<li>terminal_com_vel
-: <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#a323ac9c5ae743cc956eedc0e0247ef7a">CCC::DdpZmp::WeightParam</a>
+<li>targetFootPoses_
+: <a class="el" href="classBWC_1_1FootManager.html#a2152d54064fce70638371c19cee1d77b">BWC::FootManager</a>
 </li>
-<li>terminal_linear_momentum
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a13613c49629c519b2daaa2f7a2e3be7c">CCC::DdpCentroidal::WeightParam</a>
+<li>targetFootVels_
+: <a class="el" href="classBWC_1_1FootManager.html#af01870b998fc3c4b3a620b19e640dc00">BWC::FootManager</a>
 </li>
-<li>terminal_pos
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a8774f6219b8ecca17911244b726f5fcb">CCC::DdpCentroidal::WeightParam</a>
+<li>tLowerLimit_
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#acaa49f064b50fce751ce7f3131d31f9a">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>time
-: <a class="el" href="structCCC_1_1MotionDataBase.html#aa613bb94827a7b8c8d5a8d38e89facfd">CCC::MotionDataBase&lt; PosType, VelType, ForceType &gt;</a>
+<li>touchDown_
+: <a class="el" href="classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb">BWC::FootManager</a>
 </li>
-<li>time_zmp_list
-: <a class="el" href="structCCC_1_1DcmTracking_1_1RefData.html#a1371b7691778c3c7cc8670f1f368f4c1">CCC::DcmTracking::RefData</a>
+<li>touchDownForceZ
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a0b9b79c4add3356d4f2cb80effeec584">BWC::FootManager::Configuration</a>
 </li>
-<li>total_force_z
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionParam.html#afb4b13d80a3ba380bced1cb22ee92866">CCC::LinearMpcXY::MotionParam</a>
+<li>touchDownPosError
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a93df2e499c17e9ec0238dccd1c58cb10">BWC::FootManager::Configuration</a>
 </li>
-<li>total_input_dim_
-: <a class="el" href="classCCC_1_1VariantSequentialExtension.html#ac34f64338cfa35a35474055e00da6545">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>touchDownRemainingDuration
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a5739f7d815815acfe4b3f3c144b93220">BWC::FootManager::Configuration</a>
 </li>
-<li>total_output_dim_
-: <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a5850df059cbc83a473c41b536ea86ac1">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>transitEndTime
+: <a class="el" href="structBWC_1_1Footstep.html#aee102d7d6bc2d90c643512fb79372e8c">BWC::Footstep</a>
 </li>
-<li>total_state_dim_
-: <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a931025e3d7691ac4d012fd3a8614fc3f">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>transitStartTime
+: <a class="el" href="structBWC_1_1Footstep.html#a3477ebdc0f95668a3a93cbcaef1f3777">BWC::Footstep</a>
 </li>
-<li>transit_duration
-: <a class="el" href="structCCC_1_1FootGuidedControl1d_1_1RefData.html#a7c3b7e9d48fa63a58249b9b73ef5f067">CCC::FootGuidedControl1d::RefData</a>
-, <a class="el" href="structCCC_1_1FootGuidedControl_1_1RefData.html#a1ad7929f9069f5006e8e71a2b19ac41f">CCC::FootGuidedControl::RefData</a>
-</li>
-<li>transit_end_zmp
-: <a class="el" href="structCCC_1_1FootGuidedControl1d_1_1RefData.html#ae8bb9dfe42a3001ec4ff28332b2f0934">CCC::FootGuidedControl1d::RefData</a>
-, <a class="el" href="structCCC_1_1FootGuidedControl_1_1RefData.html#a58d56a70a30609f364137f34facd4fa1">CCC::FootGuidedControl::RefData</a>
-</li>
-<li>transit_start_time
-: <a class="el" href="structCCC_1_1FootGuidedControl1d_1_1RefData.html#a59448e6acbb3dc04f118e30fbd972b2f">CCC::FootGuidedControl1d::RefData</a>
-, <a class="el" href="structCCC_1_1FootGuidedControl_1_1RefData.html#a9816e6487249e35c9a0eb1af748adc79">CCC::FootGuidedControl::RefData</a>
-</li>
-<li>transit_start_zmp
-: <a class="el" href="structCCC_1_1FootGuidedControl1d_1_1RefData.html#ae553ffd97c5e4be761576e7e1623893e">CCC::FootGuidedControl1d::RefData</a>
-, <a class="el" href="structCCC_1_1FootGuidedControl_1_1RefData.html#a553c41baae0e43a6438804a71c4f7b8e">CCC::FootGuidedControl::RefData</a>
+<li>type
+: <a class="el" href="structBWC_1_1BoundaryConstraint.html#ab810897a652a925bf81e540fe8668056">BWC::BoundaryConstraint&lt; T &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
-<li>u_list
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#ae7e91f091c6bf9acae989e5c9f1ff3d0">CCC::DdpCentroidal::InitialParam</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1InitialParam.html#a77935d7e76906998b6907d7429e21c1d">CCC::DdpZmp::InitialParam</a>
+<li>useActualComForWrenchDist
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb">BWC::CentroidalManager::Configuration</a>
+</li>
+<li>useActualStateForMpc
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a2ca257faee34e51bbd5145eb0d82875a">BWC::CentroidalManager::Configuration</a>
+</li>
+<li>useTargetPoseForControlRobotAnchorFrame
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316">BWC::CentroidalManager::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_v"></a>- v -</h3><ul>
-<li>vel
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#a20920f80bd1d4cea8d6fad49775c5548">CCC::DdpCentroidal::InitialParam</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1InitialParam.html#a30c67e36df047239b290f9a6a9e4d346">CCC::DdpZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1InitialParam.html#af30c70f47136a4ae4ad854701b9cc8e9">CCC::LinearMpcXY::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1RefData.html#ab538d4d349718554599790e940d6f234">CCC::LinearMpcXY::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcZmp_1_1InitialParam.html#a4b59518f8ae5f9c0017f1c0f0df48e95">CCC::LinearMpcZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1PreviewControlZmp_1_1InitialParam.html#aa00067514e0924efd4805796d6332417">CCC::PreviewControlZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp1d_1_1InitialParam.html#a7fb430df3e17163feade28ca3b89a82e">CCC::SingularPreviewControlZmp1d::InitialParam</a>
-, <a class="el" href="structCCC_1_1SingularPreviewControlZmp_1_1InitialParam.html#aa70f4ca911c31d9770771f42682b865c">CCC::SingularPreviewControlZmp::InitialParam</a>
+<li>value
+: <a class="el" href="structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3">BWC::BoundaryConstraint&lt; T &gt;</a>
 </li>
-<li>vertex_ridge_list
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionParam.html#aa0cfae73c15e9b565d695a73688dc52b">CCC::DdpCentroidal::MotionParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionParam.html#a62729ebe13433fcea57bd9c695b5a6f9">CCC::LinearMpcXY::MotionParam</a>
+<li>vertex
+: <a class="el" href="structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9">BWC::Contact::VertexWithRidge</a>
+</li>
+<li>vertexWithRidgeList_
+: <a class="el" href="classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247">BWC::Contact</a>
 </li>
 </ul>
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
-<li>weight_param_
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a6daa70f40904131971694c251ea82a37">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#acc2c126e88a509fbb028125d40f9a484">CCC::DdpZmp::DdpProblem</a>
-, <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#aa17dad14491e7bd517ba082af9c1d5c0">CCC::IntrinsicallyStableMpc1d</a>
+<li>walkConfigKeys_
+: <a class="el" href="structBWC_1_1CommandState.html#a827f5009887b533c053562645e227670">BWC::CommandState</a>
+</li>
+<li>wrenchDist_
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a541d5d02c6977bd755aa7cd592aa6e56">BWC::CentroidalManager</a>
+</li>
+<li>wrenchDistConfig
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc">BWC::CentroidalManager::Configuration</a>
+</li>
+<li>wrenchWeight
+: <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#ab4c70191fd878560cf0b0514b2937637">BWC::WrenchDistribution::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_z"></a>- z -</h3><ul>
-<li>zmp
-: <a class="el" href="structCCC_1_1DdpZmp_1_1PlannedData.html#a20df0e487379143f0337df814dc6e1b5">CCC::DdpZmp::PlannedData</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1RefData.html#ad50936762ba5ce6a3c4d5fe60cbb39d0">CCC::DdpZmp::RefData</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1RefData.html#a534abc30d16df6c8f887aa4017880c02">CCC::IntrinsicallyStableMpc1d::RefData</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1WeightParam.html#aa226af102827fac44392c33e6c0cb52c">CCC::IntrinsicallyStableMpc1d::WeightParam</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc_1_1RefData.html#a2848e4dc37a050edd7a89a4185535476">CCC::IntrinsicallyStableMpc::RefData</a>
-, <a class="el" href="structCCC_1_1PreviewControlZmp1d_1_1WeightParam.html#af4f208c1ded1235bae6e8215520e5a87">CCC::PreviewControlZmp1d::WeightParam</a>
+<li>zmpHorizon
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a8901f9aa68421af7e9f446c483c0e42a">BWC::FootManager::Configuration</a>
 </li>
-<li>zmp_limits
-: <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1RefData.html#a2de109887b62d47103f446910e5d97cc">CCC::IntrinsicallyStableMpc1d::RefData</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc_1_1RefData.html#a80f2fa77dbc237328cc889ad934e766a">CCC::IntrinsicallyStableMpc::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcZmp1d_1_1RefData.html#a2dd9f8cf65e106a6fb8f4096623b26a5">CCC::LinearMpcZmp1d::RefData</a>
-, <a class="el" href="structCCC_1_1LinearMpcZmp_1_1RefData.html#a8e55d54563391fbddad48143c8f4a4f4">CCC::LinearMpcZmp::RefData</a>
+<li>zmpOffset
+: <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a7927c0132a76234315a71538ee6a3910">BWC::FootManager::Configuration</a>
 </li>
-<li>zmp_vel
-: <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1WeightParam.html#a5fb21268b5253c70b3037289503665ed">CCC::IntrinsicallyStableMpc1d::WeightParam</a>
+<li>zmpTrajFunc_
+: <a class="el" href="classBWC_1_1FootManager.html#adc227123c5c91cf6907efb0253ff5b30">BWC::FootManager</a>
+</li>
+<li>zmpVelGain
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ac490d67fabd980c891a0b04eac5de2c8">BWC::CentroidalManager::Configuration</a>
 </li>
 </ul>
 </div><!-- contents -->

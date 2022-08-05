@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['omega_5f',['omega_',['../classCCC_1_1DcmTracking.html#ac14abc9374b96fceb4e8534d4c3a0233',1,'CCC::DcmTracking::omega_()'],['../classCCC_1_1FootGuidedControl1d.html#a0d5662237f763b27e5f5af5f899b7185',1,'CCC::FootGuidedControl1d::omega_()'],['../classCCC_1_1IntrinsicallyStableMpc1d.html#a36de87aba4fe04940a373ec395df44d8',1,'CCC::IntrinsicallyStableMpc1d::omega_()'],['../classCCC_1_1SingularPreviewControlZmp1d.html#a517ef5db85def1c6e14024ce2dfd46a0',1,'CCC::SingularPreviewControlZmp1d::omega_()']]],
-  ['output',['output',['../structCCC_1_1PreviewControl_1_1WeightParam.html#a2727ef4ad6a24bd5d2fa656ac3e7b27b',1,'CCC::PreviewControl::WeightParam']]],
-  ['output_5fdim_5f',['output_dim_',['../classCCC_1_1StateSpaceModel.html#a61bfa281c008dae97bc3fc02619d3b02',1,'CCC::StateSpaceModel']]]
+  ['pc_5f',['pc_',['../classBWC_1_1CentroidalManagerPreviewControlZmp.html#a4805150bc6a857ee2d517d5e0a6da95c',1,'BWC::CentroidalManagerPreviewControlZmp']]],
+  ['phase_5f',['phase_',['../structBWC_1_1InitialState.html#ae8f4336e2be9b2b34e8e8c897b0c97f5',1,'BWC::InitialState']]],
+  ['plannedforcez_5f',['plannedForceZ_',['../classBWC_1_1CentroidalManager.html#a8c17d49838aacf2c7dd2da936d8bcd05',1,'BWC::CentroidalManager']]],
+  ['plannedzmp_5f',['plannedZmp_',['../classBWC_1_1CentroidalManager.html#a2aa77c0911a409a233367684f684a6e3',1,'BWC::CentroidalManager']]],
+  ['points_5f',['points_',['../classBWC_1_1CubicHermiteSpline.html#a62185c2977b1969ec7ea6dc1479a2c5f',1,'BWC::CubicHermiteSpline::points_()'],['../classBWC_1_1CubicInterpolator.html#a85bd3fcbf3b48c8385e56869b20d1919',1,'BWC::CubicInterpolator::points_()'],['../classBWC_1_1CubicSpline.html#aab4ccbe9dc756f5d6be9791978c480ad',1,'BWC::CubicSpline::points_()']]],
+  ['pose',['pose',['../structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541',1,'BWC::Footstep']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>centroidal_control_collection: Class Members - Functions</title>
+<title>baseline_walking_controller: Class Members - Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -27,7 +27,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">centroidal_control_collection
+   <div id="projectname">baseline_walking_controller
    </div>
   </td>
  </tr>
@@ -66,291 +66,375 @@ $(function() {
 <div class="contents">
 &#160;
 
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>addToGUI()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a8b402e35268d453d57ea38475e946dd9">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#ad8f4798b1a821809e07949bae90a34e7">BWC::FootManager</a>
+</li>
+<li>addToLogger()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a7db436809b1228313423069ce0f41f77">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#ae4100255a56e9c0b2954277d9d6cf925">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1FootManager.html#aaadc8113420d591751f5649d96be6226">BWC::FootManager</a>
+</li>
+<li>appendFootstep()
+: <a class="el" href="classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92">BWC::FootManager</a>
+</li>
+<li>appendFunc()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#a99ef1b6ec7ddac2e1371320645f0d113">BWC::PiecewiseFunc&lt; T &gt;</a>
+</li>
+<li>appendPoint()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#aa71b02d1714d4839c756743c2da7d707">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#a4556d78bcc7c6cb9080cf2c578b439c4">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#aaa9f7386a1f242444714a06bcaa7794b">BWC::CubicSpline&lt; T &gt;</a>
+</li>
+<li>argSegment()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a9d17f20dc121a5118b7a408aa35bc303">BWC::CubicHermiteSpline&lt; T &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_b"></a>- b -</h3><ul>
+<li>BaselineWalkingController()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff">BWC::BaselineWalkingController</a>
+</li>
+<li>BoundaryConstraint()
+: <a class="el" href="structBWC_1_1BoundaryConstraint.html#ae6572ecc31b85cb88fc09680580643df">BWC::BoundaryConstraint&lt; T &gt;</a>
+</li>
+</ul>
+
+
 <h3><a id="index_c"></a>- c -</h3><ul>
-<li>calcDiscMatrix()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a7e1064166faa7edbab396a66ccc79564">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>calcAnchorFrame()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a7de19c431164bdebed4143d264f38ab9">BWC::CentroidalManager</a>
 </li>
-<li>calcGain()
-: <a class="el" href="classCCC_1_1PreviewControl.html#a6fb0138bf23d4daef5a57fb9e2e66c6c">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>calcCoeff()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a30bb79764fc13211e97b3ee358a42b42">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#ac643aa7dba2e59951d0d6cf5bdb0a7e5">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#a23ac415b91524a5969e2cde5502098f8">BWC::CubicSpline&lt; T &gt;</a>
 </li>
-<li>calcOptimalInput()
-: <a class="el" href="classCCC_1_1PreviewControl.html#aca003780b5f9b7f2b44cc47a217355ef">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>calcContactList()
+: <a class="el" href="classBWC_1_1FootManager.html#ac7b747f6e6e663196c0b11c54379c9d8">BWC::FootManager</a>
 </li>
-<li>calcRunningCostDeriv()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#ab91194a4c78ae89622d10d3421b1cc99">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a206eb6672d8d0bd6b68d4f5036008d2f">CCC::DdpZmp::DdpProblem</a>
+<li>calcGlobalRidgeList()
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#a1ce49acbda8af8a89ca6d55e931ff289">BWC::FrictionPyramid</a>
 </li>
-<li>calcStateEqDeriv()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a42771cb9a802c653e6c56300b8cb6d9f">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#aa41bf0f198f29a99c314aa0fb101acfc">CCC::DdpZmp::DdpProblem</a>
+<li>calcMonotoneVelocity()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a01c04597e08cd29a98348ab2797d5f03">BWC::CubicHermiteSpline&lt; T &gt;</a>
 </li>
-<li>calcTerminalCostDeriv()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a14a3c93d79ed3ff82412d5614838c88c">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a5912c17c8b54b1bd9ac9fab88bb2a228">CCC::DdpZmp::DdpProblem</a>
+<li>calcRefData()
+: <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a1358597facfac7873c9454f0bae40a4f">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#ab9872763403041676fef75a3d7962341">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
-<li>calcTotalWrench()
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionParam.html#a41e93c15bf5b8cc3b116eb2701d905b1">CCC::DdpCentroidal::MotionParam</a>
+<li>calcRefZmp()
+: <a class="el" href="classBWC_1_1FootManager.html#a1a08a3c67f49f4965e591f2604ce4414">BWC::FootManager</a>
 </li>
-<li>ComZmpModelJerkInput()
-: <a class="el" href="classCCC_1_1ComZmpModelJerkInput.html#a1065720d8ecb366e66714739e04ac292">CCC::ComZmpModelJerkInput</a>
+<li>calcWrench()
+: <a class="el" href="classBWC_1_1Contact.html#a6d5745c7ca90e8b7336472bb74781e2b">BWC::Contact</a>
+</li>
+<li>calcWrenchList()
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#abda8ccc86323b519b9b031485267a884">BWC::WrenchDistribution</a>
+</li>
+<li>calcZmp()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a9327e8982d8aa10645c90a1f7f7698c9">BWC::CentroidalManager</a>
+</li>
+<li>calcZmpWithOffset()
+: <a class="el" href="classBWC_1_1FootManager.html#a580d10a1c73a7a5948c18cc7dd6e20b5">BWC::FootManager</a>
+</li>
+<li>CentroidalManager()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a2502ef420b4176a1fe024fed24cc2958">BWC::CentroidalManager</a>
+</li>
+<li>CentroidalManagerDdpZmp()
+: <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a434a34c58494a765a0dd03ef4bae57e7">BWC::CentroidalManagerDdpZmp</a>
+</li>
+<li>CentroidalManagerPreviewControlZmp()
+: <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a50ef73e852a201a6fce5ae6bd763f8af">BWC::CentroidalManagerPreviewControlZmp</a>
+</li>
+<li>checkArg()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#ab014d8056d50ae5ed77e1068207f7105">BWC::PiecewiseFunc&lt; T &gt;</a>
+</li>
+<li>clearFuncs()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#a3bcd4f1ee6ce65dbaf70f5650ce2a320">BWC::PiecewiseFunc&lt; T &gt;</a>
+</li>
+<li>clearPoints()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#ae45e5486fd3adcc422f76b0fc3df2fc3">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#a65ba78c5cb74b9a193cde679f5cb0f69">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#ab4830f1f8903ea458775622afa32ae05">BWC::CubicSpline&lt; T &gt;</a>
+</li>
+<li>config()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ae344808ee5a1de4a2dcd704c9ad4c717">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a42c937a49057b56bb8ce3f2093569783">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a958a495065193ae0f63b431ff72ce682">BWC::CentroidalManagerPreviewControlZmp</a>
+, <a class="el" href="classBWC_1_1FootManager.html#aa230df591fb7513163db875dd9f29439">BWC::FootManager</a>
+, <a class="el" href="classBWC_1_1WrenchDistribution.html#afc3a2eaa09ae3048ef5d2fcdf8aec7af">BWC::WrenchDistribution</a>
+</li>
+<li>configure()
+: <a class="el" href="structBWC_1_1CommandState.html#a6f4efe423c8a26c78027566d432150e6">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#ae246daf0b2e687fa027088fe65db6e21">BWC::InitialState</a>
+</li>
+<li>Constant()
+: <a class="el" href="classBWC_1_1Constant.html#abbc20d644a46a4e8d56a3663a0625c4b">BWC::Constant&lt; T &gt;</a>
+</li>
+<li>Contact()
+: <a class="el" href="classBWC_1_1Contact.html#a066e025e08e730e0c66b768ac0e1992b">BWC::Contact</a>
+</li>
+<li>ctl()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ab3a031f977b67446150d884ee326696f">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a519919c99a09cb64e67c9003b14a023c">BWC::FootManager</a>
+, <a class="el" href="structBWC_1_1State.html#a37cd588f192bd743833e006ae483a204">BWC::State</a>
+</li>
+<li>CubicHermiteSpline()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#aca5938a2053aa5f40a2488f318c8ca6e">BWC::CubicHermiteSpline&lt; T &gt;</a>
+</li>
+<li>CubicInterpolator()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#a510db61fe0c098c36cddee2f753d684b">BWC::CubicInterpolator&lt; T, U &gt;</a>
+</li>
+<li>CubicSpline()
+: <a class="el" href="classBWC_1_1CubicSpline.html#aeaf2d72e3847d22aa5a295a2532d55d8">BWC::CubicSpline&lt; T &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
-<li>DcmTracking()
-: <a class="el" href="classCCC_1_1DcmTracking.html#a27d407baea8567acd1e3699433fa6758">CCC::DcmTracking</a>
+<li>derivative()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#aadb7111f43cd89dc880c117c9c3e4be1">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#a71108781d7d8f6ce6764986fb6f0dee5">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1Func.html#a6febbfcbf786ee513f708c130a86b799">BWC::Func&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1PiecewiseFunc.html#aa304d21f6811fbe1e696ecfe8bb98985">BWC::PiecewiseFunc&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1Polynomial.html#a01fa986e053e3cf7dd2694cbb17ada89">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
-<li>DdpCentroidal()
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a9261594307336ea41774e454a79bcdb2">CCC::DdpCentroidal</a>
+<li>detectTouchDown()
+: <a class="el" href="classBWC_1_1FootManager.html#a870158cd3a085c6a61aa4747ae8edea1">BWC::FootManager</a>
 </li>
-<li>DdpProblem()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a1f58531b6fed43a9a1d2711b9b972b09">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a6cb7ee515f8866f443853cf66cdc900c">CCC::DdpZmp::DdpProblem</a>
+<li>domainLowerLimit()
+: <a class="el" href="classBWC_1_1Func.html#a7d8803bf98c0d1865497df7710b4bf6e">BWC::Func&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1PiecewiseFunc.html#a4c57e6364ba897ef8e6089c19c5ed917">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>DdpZmp()
-: <a class="el" href="classCCC_1_1DdpZmp.html#ad421a3719bda90edadfb382c3d62dc5e">CCC::DdpZmp</a>
+<li>domainUpperLimit()
+: <a class="el" href="classBWC_1_1Func.html#acceb67027d9c0a4a749f14d21d76d238">BWC::Func&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1PiecewiseFunc.html#a17f28075b74636c0ed004e5407b4789f">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>dump()
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1MotionData.html#a92c598c452da8391ce236149890b5437">CCC::DdpCentroidal::MotionData</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1MotionData.html#adc72595a829ce8e8595669592dd965e2">CCC::LinearMpcXY::MotionData</a>
-, <a class="el" href="structCCC_1_1LinearMpcZ_1_1MotionData.html#ada6be3783b645e8e32754daa8d6a584d">CCC::LinearMpcZ::MotionData</a>
+<li>dt()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a02dcf69e2f1e45dc05f86510a244bb5c">BWC::BaselineWalkingController</a>
 </li>
-<li>dumpMotionDataSeq()
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a391a9af41703fca5280a928dc9e1458f">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a54a94ece04bbf69fc7c9cc93a35906a6">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a1d41949fff4ffa60987e51a99bc4c774">CCC::LinearMpcZ</a>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>endTime()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#a93f9130771f8ce433ea6ecdab912b6c9">BWC::CubicInterpolator&lt; T, U &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>FootGuidedControl()
-: <a class="el" href="classCCC_1_1FootGuidedControl.html#adad07ced3da9ca714dcbade4c13ce29a">CCC::FootGuidedControl</a>
+<li>FirstOrderImpedanceTask()
+: <a class="el" href="structBWC_1_1FirstOrderImpedanceTask.html#a30e685289b37e7c3af402e0e89d8fe48">BWC::FirstOrderImpedanceTask</a>
 </li>
-<li>FootGuidedControl1d()
-: <a class="el" href="classCCC_1_1FootGuidedControl1d.html#ae3178a92d72192b4e3601e4b6d824ebd">CCC::FootGuidedControl1d</a>
+<li>FootManager()
+: <a class="el" href="classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0">BWC::FootManager</a>
+</li>
+<li>Footstep()
+: <a class="el" href="structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f">BWC::Footstep</a>
+</li>
+<li>footstepQueue()
+: <a class="el" href="classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637">BWC::FootManager</a>
+</li>
+<li>FrictionPyramid()
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#aeb1ae9d569b888f4f423b4a48c050802">BWC::FrictionPyramid</a>
+</li>
+<li>Func()
+: <a class="el" href="classBWC_1_1Func.html#a534ff23b0d156dcdd25054dec70ccf1a">BWC::Func&lt; T &gt;</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>getContactFeet()
+: <a class="el" href="classBWC_1_1FootManager.html#acb04ac448ed704b11f016ae275feaa36">BWC::FootManager</a>
+</li>
+<li>getIdx()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#acb76a02718c066cb8702bc6746010870">BWC::CubicInterpolator&lt; T, U &gt;</a>
+</li>
+<li>getRatio()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#a13d7654bdf179f3bf130bb558697f65a">BWC::CubicInterpolator&lt; T, U &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
-<li>InitialParam()
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#aeccf45e62aa422db68d26bd0f9f7c04a">CCC::DdpCentroidal::InitialParam</a>
-</li>
-<li>inputDim()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a95de1a75f6f2b6608f623fe0f1a0f2d6">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a7552903649bd3a2ac8fba5b19beb2be2">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>inputWeight()
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a2960724ebfa7b0a92df0902d175050c5">CCC::LinearMpcXY::WeightParam</a>
-</li>
-<li>IntrinsicallyStableMpc()
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#afb2f10d8f6ced25fccde25857c00bdb0">CCC::IntrinsicallyStableMpc</a>
-</li>
-<li>IntrinsicallyStableMpc1d()
-: <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#adbdbeedbe0380d812540ca36219fda77">CCC::IntrinsicallyStableMpc1d</a>
-</li>
-<li>InvariantSequentialExtension()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a384c5e400dbac6acce90e55c20c08fff">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>isConstantComZ()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ac7e6831aad799b18ffc21bb6abc6918c">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a78f1a19c2018dcd9ee4bff860486fb29">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#afc4855f5d5d622a5c0946085e8b4a271">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
 </ul>
 
 
 <h3><a id="index_l"></a>- l -</h3><ul>
-<li>LinearMpcXY()
-: <a class="el" href="classCCC_1_1LinearMpcXY.html#a74a8273a8d741149a267a6f79426ffa3">CCC::LinearMpcXY</a>
+<li>leftFootSupportRatio()
+: <a class="el" href="classBWC_1_1FootManager.html#a28c6861fdda40e99e54098d80799e4b2">BWC::FootManager</a>
 </li>
-<li>LinearMpcZ()
-: <a class="el" href="classCCC_1_1LinearMpcZ.html#a8c37538c55c9637adbb5792844a22a08">CCC::LinearMpcZ</a>
-</li>
-<li>LinearMpcZmp()
-: <a class="el" href="classCCC_1_1LinearMpcZmp.html#a2dbed994b362acb91be4f4a4502dd720">CCC::LinearMpcZmp</a>
-</li>
-<li>LinearMpcZmp1d()
-: <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a95034d1583413378d74fd466c2732edc">CCC::LinearMpcZmp1d</a>
+<li>load()
+: <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#aa4a7e0d4aa616f1a64d78860515b6058">BWC::CentroidalManager::Configuration</a>
+, <a class="el" href="structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#a8d43188ee1d2e9e76fbb755d1541bd96">BWC::CentroidalManagerDdpZmp::Configuration</a>
+, <a class="el" href="structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a0037fee8aa433ba890543abbf0f45253">BWC::CentroidalManagerPreviewControlZmp::Configuration</a>
+, <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a0829cae7554f578367b829dbd51390ee">BWC::FootManager::Configuration</a>
+, <a class="el" href="structBWC_1_1WrenchDistribution_1_1Configuration.html#a00ec7830acaa737660656452f5f7c9fd">BWC::WrenchDistribution::Configuration</a>
 </li>
 </ul>
 
 
 <h3><a id="index_m"></a>- m -</h3><ul>
-<li>Model()
-: <a class="el" href="classCCC_1_1LinearMpcXY_1_1Model.html#a06bb18c879d71b9caff71f41d2d95b87">CCC::LinearMpcXY::Model</a>
-</li>
-<li>ModelContactPhase()
-: <a class="el" href="classCCC_1_1LinearMpcZ_1_1ModelContactPhase.html#a91939e30233e8d2538847117ae92c3d5">CCC::LinearMpcZ::ModelContactPhase</a>
-</li>
-<li>ModelNoncontactPhase()
-: <a class="el" href="classCCC_1_1LinearMpcZ_1_1ModelNoncontactPhase.html#abcfb8167acbdbc0ce244997f2f473cec">CCC::LinearMpcZ::ModelNoncontactPhase</a>
-</li>
-<li>motionDataSeq()
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#ade3fa8bb3a600cda7e10c73e7528eaf5">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a924c0bed34c1704db2846924eb84c0eb">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a9c0820786fd8b2b3fd1d352fd7631a8f">CCC::LinearMpcZ</a>
+<li>makeFootstep()
+: <a class="el" href="classBWC_1_1FootManager.html#a66c5b73c90d2f237a946b5e479759cb0">BWC::FootManager</a>
 </li>
 </ul>
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
-<li>observEq()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#ae7d608f3c7126e2d3fbba1f2dc20e456">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>operator()()
+: <a class="el" href="classBWC_1_1Constant.html#accf72bf8da15bef2663dc9bb4a15df11">BWC::Constant&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicHermiteSpline.html#a5dbd438a9887ff5ccde26d25ef636214">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#abe588829d84bff2505a4e3c301d431c6">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1Func.html#aa6eb8e5f95ca7defb276a70b3bde818b">BWC::Func&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1PiecewiseFunc.html#a83c55eaeca7ed8b804bbdcf5cf905534">BWC::PiecewiseFunc&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1Polynomial.html#a72ae15cd451d8de42492d0f0103eb3d6">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
-<li>outputDim()
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1RefData.html#a39febad45fc8fe035851ad493784fb3e">CCC::LinearMpcXY::RefData</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a7a92b8168c4f99fd04d8d3371c35d575">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>outputWeight()
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#a0ff86d1b369445d09369d99105447613">CCC::LinearMpcXY::WeightParam</a>
+<li>order()
+: <a class="el" href="classBWC_1_1Polynomial.html#a13da663fb883bf75937e82bd955a6a32">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
-<li>planLoop()
-: <a class="el" href="classCCC_1_1DdpCentroidal.html#a0f64a9cf4a5b5fe791e9eb287948801e">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#aecf58fb3c1f7fd9a585255261b2b55d4">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a892c86534f97a5bd06b1bbc6ff8bc3e9">CCC::LinearMpcZ</a>
+<li>PiecewiseFunc()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#ae536c4e6afa3087525236db64f748c79">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>planOnce()
-: <a class="el" href="classCCC_1_1DcmTracking.html#a0c125f8db134dbe117a246b7a49731c4">CCC::DcmTracking</a>
-, <a class="el" href="classCCC_1_1DdpCentroidal.html#a146999bd1971acb856e24b4e1d255a62">CCC::DdpCentroidal</a>
-, <a class="el" href="classCCC_1_1DdpZmp.html#af3ca1d92d3e274a527521081d533f4a6">CCC::DdpZmp</a>
-, <a class="el" href="classCCC_1_1FootGuidedControl1d.html#a33beec4d3d910998e84f565e03f27b9b">CCC::FootGuidedControl1d</a>
-, <a class="el" href="classCCC_1_1FootGuidedControl.html#aa151f28c8f60b871434156e3a5808bba">CCC::FootGuidedControl</a>
-, <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#a6b916ca2424ff88fff28ca094b47f7df">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1IntrinsicallyStableMpc.html#a568f4899feed94cacb2d024fc9b03a2e">CCC::IntrinsicallyStableMpc</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#a71f88acf7251362c2b9d847d0170e5ee">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a14031ea37d65c79f8c35243a38fbcead">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#aa13b35fa76fc51dd661c17830252de05">CCC::LinearMpcZmp1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp.html#a40ebbfe83a05f42215b0b6696207addb">CCC::LinearMpcZmp</a>
-, <a class="el" href="classCCC_1_1PreviewControlZmp1d.html#a674075d15fa0fb165f830eb014a4dcfc">CCC::PreviewControlZmp1d</a>
-, <a class="el" href="classCCC_1_1PreviewControlZmp.html#a4bb04b5ad9784454e69e80255e8fec12">CCC::PreviewControlZmp</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#adb53a92fc9a92c8400d40ea213dcbfdd">CCC::SingularPreviewControlZmp1d</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp.html#a8cdc47c9b1956eb3df5e21c80ef851f5">CCC::SingularPreviewControlZmp</a>
+<li>points()
+: <a class="el" href="classBWC_1_1CubicHermiteSpline.html#ad6f5946f6eb58d24d4d0dc65a9d7bca0">BWC::CubicHermiteSpline&lt; T &gt;</a>
+, <a class="el" href="classBWC_1_1CubicInterpolator.html#a2ec06c4680fbb255de54e23361c09abf">BWC::CubicInterpolator&lt; T, U &gt;</a>
+, <a class="el" href="classBWC_1_1CubicSpline.html#ae097324c67d4723652a71d7ba876f1e9">BWC::CubicSpline&lt; T &gt;</a>
 </li>
-<li>PreviewControl()
-: <a class="el" href="classCCC_1_1PreviewControl.html#ab47d87c8ec09c3808ef1e20f1d902601">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>PreviewControlZmp()
-: <a class="el" href="classCCC_1_1PreviewControlZmp.html#aab94d6f53f2746554394ad11cbc5d9a4">CCC::PreviewControlZmp</a>
-</li>
-<li>PreviewControlZmp1d()
-: <a class="el" href="classCCC_1_1PreviewControlZmp1d.html#a7c7ee6621b0ecce9d3edaab01ca653d3">CCC::PreviewControlZmp1d</a>
-</li>
-<li>procOnce()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#ae44e884aab963b8ac9e686c8f48f89e7">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1IntrinsicallyStableMpc1d.html#af9ad8ef737ac6abc939b0d4df5caf5fc">CCC::IntrinsicallyStableMpc1d</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY.html#aa70765a8ccce3398ef0a9c5adab084a8">CCC::LinearMpcXY</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ.html#a328cf92c713f5bb8d9f3f87690b7562e">CCC::LinearMpcZ</a>
-, <a class="el" href="classCCC_1_1LinearMpcZmp1d.html#a479ca5dab6ad1dc2edf2b83d8339c63d">CCC::LinearMpcZmp1d</a>
-, <a class="el" href="classCCC_1_1PreviewControlZmp1d.html#a98af93759bf49a15d4c440949ed97754">CCC::PreviewControlZmp1d</a>
-, <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a22bcbc095f23ad08a9015f278cf6555e">CCC::SingularPreviewControlZmp1d</a>
+<li>Polynomial()
+: <a class="el" href="classBWC_1_1Polynomial.html#a276b67c492d9e3a718f1b683e0103e6b">BWC::Polynomial&lt; T, Order &gt;</a>
 </li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
-<li>runningCost()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a67f85b744b01c5726c48c9d0bac13ab0">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a2b06753b0437d32be4c8d0caa2ff6070">CCC::DdpZmp::DdpProblem</a>
+<li>removeFromGUI()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a4e0c8e2badfdec63bb123dad5c460eb9">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a171e623e8a5708e9a4ca24da36a6f309">BWC::FootManager</a>
+</li>
+<li>removeFromLogger()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#ac81fa3a6a01d0655ca6bc22a312f73b0">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a0dc00f7a52b0d325838f4b4ac9a66748">BWC::FootManager</a>
+</li>
+<li>reset()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ae9719b4c7cc1a09ded47e6e7cda71f19">BWC::BaselineWalkingController</a>
+, <a class="el" href="classBWC_1_1CentroidalManager.html#ace5876b35595ebab730437b6f1fae0a9">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a57d7d10cbe1e9bca78ae2c9d34fe737c">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a5c0098ed07a276276fd89f1c744fc79d">BWC::CentroidalManagerPreviewControlZmp</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a251dc3bc82c07dde4b69f20aa57b8889">BWC::FootManager</a>
+</li>
+<li>ridgeNum()
+: <a class="el" href="classBWC_1_1FrictionPyramid.html#afc8cc188b00a8a571c1e89e999487220">BWC::FrictionPyramid</a>
+</li>
+<li>run()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ac9a66c6c0fde9944f6f5777b1e3112b0">BWC::BaselineWalkingController</a>
+, <a class="el" href="structBWC_1_1CommandState.html#a8f0c05297e8a2ebcfbc68508e39b27d0">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#a257cd85913024715ee518fb2b4a23291">BWC::InitialState</a>
+, <a class="el" href="classBWC_1_1WrenchDistribution.html#a551e25c6e551be757fa40349b64380e7">BWC::WrenchDistribution</a>
+</li>
+<li>runMpc()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a5dea1d86da48c68967d786305a2d138e">BWC::CentroidalManager</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#a40085138fc14d7af02c36401288249a1">BWC::CentroidalManagerDdpZmp</a>
+, <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#a064437760837d309673bde9e7ffa3681">BWC::CentroidalManagerPreviewControlZmp</a>
 </li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>setMotionParamFunc()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#ad05ae906419cf0aef41063f218657fcb">CCC::DdpCentroidal::DdpProblem</a>
+<li>sendWalkingCommand()
+: <a class="el" href="structBWC_1_1CommandState.html#a3311f90b18642b913fff9dcecbcf2b2b">BWC::CommandState</a>
 </li>
-<li>setRefDataFunc()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a9173767e15e6df92bdae5a0dd4eb527d">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a0955bfbe95930f1cee49a536d24d2024">CCC::DdpZmp::DdpProblem</a>
+<li>setAnchorFrame()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a8655864c392b71ae7ef020435d5a8c3c">BWC::CentroidalManager</a>
 </li>
-<li>setup()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#adec9217a012cd8a651278cb3cfa24e25">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a2ef61cee8cae63e2f8ef5f45c3a6c527">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>setDefaultAnchor()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#ac798d1f05dcfdf8cd8ca131c22fae361">BWC::BaselineWalkingController</a>
 </li>
-<li>SimModel()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1SimModel.html#a8ade8b1d3f5a1c48e441e9ad0340ebc0">CCC::DdpCentroidal::SimModel</a>
-, <a class="el" href="classCCC_1_1LinearMpcXY_1_1SimModel.html#a48765c5ea3626df5df574403bd147945">CCC::LinearMpcXY::SimModel</a>
-, <a class="el" href="classCCC_1_1LinearMpcZ_1_1SimModel.html#afbaac6e2173f3ef63779bb95a6ac2328">CCC::LinearMpcZ::SimModel</a>
+<li>setDomainLowerLimit()
+: <a class="el" href="classBWC_1_1PiecewiseFunc.html#a2c640bb759a38532a55980a6d90f8f43">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
-<li>SingularPreviewControlZmp()
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp.html#ae5efa0a2baff5a8690c41a449a7fb473">CCC::SingularPreviewControlZmp</a>
+<li>start()
+: <a class="el" href="structBWC_1_1CommandState.html#a3c2da5cd0787a64d70c7f6c87b4dceef">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#acda27e7e5352dc8b255d64bfb04d1dab">BWC::InitialState</a>
+, <a class="el" href="structBWC_1_1State.html#ad36346aecd0c247a3f4dab333081e399">BWC::State</a>
 </li>
-<li>SingularPreviewControlZmp1d()
-: <a class="el" href="classCCC_1_1SingularPreviewControlZmp1d.html#a24c9cdebdb07581aa388065bc8ee169f">CCC::SingularPreviewControlZmp1d</a>
+<li>startTime()
+: <a class="el" href="classBWC_1_1CubicInterpolator.html#a2aa6919c6075c32aeaea96fb7a229788">BWC::CubicInterpolator&lt; T, U &gt;</a>
 </li>
-<li>stateDim()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a16d42a7c0db32850591924f0390d6269">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>stop()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f">BWC::BaselineWalkingController</a>
 </li>
-<li>stateEq()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a68178cefa3dadc35b209f7af6c2e6a81">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a6efb17fe8295d360a1ccd493e7809b17">CCC::DdpZmp::DdpProblem</a>
-, <a class="el" href="classCCC_1_1StateSpaceModel.html#a0c61263a9a4e03c365cff636387951ff">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>supportPhase()
+: <a class="el" href="classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e">BWC::FootManager</a>
 </li>
-<li>stateEqDisc()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#a3d224a50808473e83b57220461398455">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
-</li>
-<li>StateSpaceModel()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#aa024e33847e3ebe672bc28b74e18ff48">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>surfaceName()
+: <a class="el" href="classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf">BWC::FootManager</a>
 </li>
 </ul>
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
-<li>terminalCost()
-: <a class="el" href="classCCC_1_1DdpCentroidal_1_1DdpProblem.html#ac85c82c1e62d27eedfc2c050e05c0e38">CCC::DdpCentroidal::DdpProblem</a>
-, <a class="el" href="classCCC_1_1DdpZmp_1_1DdpProblem.html#a67b8896bb44de95edce0533038b85250">CCC::DdpZmp::DdpProblem</a>
+<li>t()
+: <a class="el" href="structBWC_1_1BaselineWalkingController.html#a2ae29fe3e474e20b80dca28f92203a25">BWC::BaselineWalkingController</a>
 </li>
-<li>toOutput()
-: <a class="el" href="structCCC_1_1LinearMpcXY_1_1RefData.html#ab03b28a20d276f66869e34624d30735c">CCC::LinearMpcXY::RefData</a>
+<li>targetFootAccel()
+: <a class="el" href="classBWC_1_1FootManager.html#aaa3afff927bccc8993fbc48bc6ad17aa">BWC::FootManager</a>
 </li>
-<li>toPreviewControlWeightParam()
-: <a class="el" href="structCCC_1_1PreviewControlZmp1d_1_1WeightParam.html#a93c6060d12b267b7cd7d0a16c50458fd">CCC::PreviewControlZmp1d::WeightParam</a>
+<li>targetFootPose()
+: <a class="el" href="classBWC_1_1FootManager.html#aa9be87a40db9f42fd73c35c10fcc4a2c">BWC::FootManager</a>
 </li>
-<li>toState()
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1InitialParam.html#a5815efd2977646c6ee69ccad4432ee72">CCC::DdpCentroidal::InitialParam</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1InitialParam.html#ae9bd070e2f6fb10e18fa587f9eb0d0dd">CCC::DdpZmp::InitialParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1InitialParam.html#abaaaba9df1ce4d59c520ef0aa23c0bf2">CCC::LinearMpcXY::InitialParam</a>
+<li>targetFootVel()
+: <a class="el" href="classBWC_1_1FootManager.html#aefb341a9e36facc7136e997b883d76e1">BWC::FootManager</a>
 </li>
-<li>totalInputDim()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a0f995f4c5bf53b3ede9207d600f0d1dd">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a369d76f1047c3f69a1838a500fbeb216">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>teardown()
+: <a class="el" href="structBWC_1_1CommandState.html#a4b2322d6474d2e374c5edd23affc838b">BWC::CommandState</a>
+, <a class="el" href="structBWC_1_1InitialState.html#a062fdd17c9bba1075c4208da37bc477e">BWC::InitialState</a>
 </li>
-<li>totalOutputDim()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#a4f35aa1575f11e88fac69a49bb7d39ca">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a47b6a237f8ca338d57184915267d863d">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>touchDownRemainingDuration()
+: <a class="el" href="classBWC_1_1FootManager.html#ab9e24e9f9cc1fea5ff3033b67d8e2a5b">BWC::FootManager</a>
 </li>
-<li>totalStateDim()
-: <a class="el" href="classCCC_1_1InvariantSequentialExtension.html#af33045ef2e527fcbff51eef70f893884">CCC::InvariantSequentialExtension&lt; StateDim, InputDim, OutputDim &gt;</a>
-, <a class="el" href="classCCC_1_1VariantSequentialExtension.html#a19e38515a20d106119cb65014988f92f">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+</ul>
+
+
+<h3><a id="index_u"></a>- u -</h3><ul>
+<li>update()
+: <a class="el" href="classBWC_1_1CentroidalManager.html#a8eefd50182e767657d47018d85ffe870">BWC::CentroidalManager</a>
+, <a class="el" href="structBWC_1_1FirstOrderImpedanceTask.html#ada301f576b5e5a2364914c16d71292e2">BWC::FirstOrderImpedanceTask</a>
+, <a class="el" href="classBWC_1_1FootManager.html#a6d3cb048a7fbc053a08cffd46f84464f">BWC::FootManager</a>
+</li>
+<li>updateFootTasks()
+: <a class="el" href="classBWC_1_1FootManager.html#a84896bec67d7731185042057aeaeac32">BWC::FootManager</a>
+</li>
+<li>updateZmpTraj()
+: <a class="el" href="classBWC_1_1FootManager.html#ac28ebe174aed6993d844bad541bb8363">BWC::FootManager</a>
 </li>
 </ul>
 
 
 <h3><a id="index_v"></a>- v -</h3><ul>
-<li>VariantSequentialExtension()
-: <a class="el" href="classCCC_1_1VariantSequentialExtension.html#aa7aecff7cd57952c9c4fd05f791371cf">CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;</a>
+<li>VertexWithRidge()
+: <a class="el" href="structBWC_1_1Contact_1_1VertexWithRidge.html#a67b41dec5669fb70a179fcb3d976aaf6">BWC::Contact::VertexWithRidge</a>
 </li>
 </ul>
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
-<li>WeightParam()
-: <a class="el" href="structCCC_1_1DdpCentroidal_1_1WeightParam.html#a057a116a49d247ea03ae073ad3d62003">CCC::DdpCentroidal::WeightParam</a>
-, <a class="el" href="structCCC_1_1DdpZmp_1_1WeightParam.html#ae0dac7cb470dc75ccf3e556991f1e625">CCC::DdpZmp::WeightParam</a>
-, <a class="el" href="structCCC_1_1IntrinsicallyStableMpc1d_1_1WeightParam.html#a30b3820f520ddf2e96fae671fe863e4c">CCC::IntrinsicallyStableMpc1d::WeightParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcXY_1_1WeightParam.html#ac3c3566c0d5814c31cde19061eff96d5">CCC::LinearMpcXY::WeightParam</a>
-, <a class="el" href="structCCC_1_1LinearMpcZ_1_1WeightParam.html#a17d961c271608a43bafd26078642ac10">CCC::LinearMpcZ::WeightParam</a>
-, <a class="el" href="structCCC_1_1PreviewControl_1_1WeightParam.html#ab059e081066177d190256a058ee5b5d5">CCC::PreviewControl&lt; StateDim, InputDim, OutputDim &gt;::WeightParam</a>
-, <a class="el" href="structCCC_1_1PreviewControlZmp1d_1_1WeightParam.html#a4c01c6e715be5f490e7c32cb61cbd032">CCC::PreviewControlZmp1d::WeightParam</a>
-</li>
-</ul>
-
-
-<h3><a id="index_0x7e"></a>- ~ -</h3><ul>
-<li>~StateSpaceModel()
-: <a class="el" href="classCCC_1_1StateSpaceModel.html#ad0c15d95e427b28b86459968b709bdc1">CCC::StateSpaceModel&lt; StateDim, InputDim, OutputDim &gt;</a>
+<li>WrenchDistribution()
+: <a class="el" href="classBWC_1_1WrenchDistribution.html#a4953951a591f0a915ab6518b9b7cd06f">BWC::WrenchDistribution</a>
 </li>
 </ul>
 </div><!-- contents -->

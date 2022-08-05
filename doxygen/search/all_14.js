@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['variantsequentialextension',['VariantSequentialExtension',['../classCCC_1_1VariantSequentialExtension.html',1,'CCC::VariantSequentialExtension&lt; StateDim, ListType &gt;'],['../classCCC_1_1VariantSequentialExtension.html#aa7aecff7cd57952c9c4fd05f791371cf',1,'CCC::VariantSequentialExtension::VariantSequentialExtension()']]],
-  ['variantsequentialextension_2eh',['VariantSequentialExtension.h',['../VariantSequentialExtension_8h.html',1,'']]],
-  ['vector1',['Vector1',['../namespaceEigen.html#aebcc4f5978eaaf876880d325c6bed843',1,'Eigen']]],
-  ['vector1d',['Vector1d',['../namespaceEigen.html#abd348574d14d16ac86d6eeca9419bd85',1,'Eigen']]],
-  ['vector6',['Vector6',['../namespaceEigen.html#a664778266262bbdb1d1b2776bef25c7d',1,'Eigen']]],
-  ['vector6d',['Vector6d',['../namespaceEigen.html#acdb6a5c038a9c26a61b0187b696b2630',1,'Eigen']]],
-  ['vel',['vel',['../structCCC_1_1DdpCentroidal_1_1InitialParam.html#a20920f80bd1d4cea8d6fad49775c5548',1,'CCC::DdpCentroidal::InitialParam::vel()'],['../structCCC_1_1DdpZmp_1_1InitialParam.html#a30c67e36df047239b290f9a6a9e4d346',1,'CCC::DdpZmp::InitialParam::vel()'],['../structCCC_1_1LinearMpcXY_1_1InitialParam.html#af30c70f47136a4ae4ad854701b9cc8e9',1,'CCC::LinearMpcXY::InitialParam::vel()'],['../structCCC_1_1LinearMpcXY_1_1RefData.html#ab538d4d349718554599790e940d6f234',1,'CCC::LinearMpcXY::RefData::vel()'],['../structCCC_1_1LinearMpcZmp_1_1InitialParam.html#a4b59518f8ae5f9c0017f1c0f0df48e95',1,'CCC::LinearMpcZmp::InitialParam::vel()'],['../structCCC_1_1PreviewControlZmp_1_1InitialParam.html#aa00067514e0924efd4805796d6332417',1,'CCC::PreviewControlZmp::InitialParam::vel()'],['../structCCC_1_1SingularPreviewControlZmp1d_1_1InitialParam.html#a7fb430df3e17163feade28ca3b89a82e',1,'CCC::SingularPreviewControlZmp1d::InitialParam::vel()'],['../structCCC_1_1SingularPreviewControlZmp_1_1InitialParam.html#aa70f4ca911c31d9770771f42682b865c',1,'CCC::SingularPreviewControlZmp::InitialParam::vel()']]],
-  ['vertex_5fridge_5flist',['vertex_ridge_list',['../structCCC_1_1DdpCentroidal_1_1MotionParam.html#aa0cfae73c15e9b565d695a73688dc52b',1,'CCC::DdpCentroidal::MotionParam::vertex_ridge_list()'],['../structCCC_1_1LinearMpcXY_1_1MotionParam.html#a62729ebe13433fcea57bd9c695b5a6f9',1,'CCC::LinearMpcXY::MotionParam::vertex_ridge_list()']]]
+  ['value',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
+  ['vector1d',['Vector1d',['../classBWC_1_1CubicInterpolator.html#a71ad9662f442446f47dae5715adf1967',1,'BWC::CubicInterpolator']]],
+  ['velocity',['Velocity',['../namespaceBWC.html#a650a366862dfae39ce46c5028e90b3bea88156d46910a2d733443c339a9231d12',1,'BWC']]],
+  ['vertex',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
+  ['vertexwithridge',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact::VertexWithRidge'],['../structBWC_1_1Contact_1_1VertexWithRidge.html#a67b41dec5669fb70a179fcb3d976aaf6',1,'BWC::Contact::VertexWithRidge::VertexWithRidge()']]],
+  ['vertexwithridgelist_5f',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]]
 ];

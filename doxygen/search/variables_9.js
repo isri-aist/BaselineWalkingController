@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['k_5f',['K_',['../classCCC_1_1PreviewControl.html#a76dea094dabd0ff4a9b91faeab1f93d9',1,'CCC::PreviewControl']]]
+  ['localridgelist_5f',['localRidgeList_',['../classBWC_1_1FrictionPyramid.html#a5c356a0deb397c33c7355030e4ec2f97',1,'BWC::FrictionPyramid']]]
 ];

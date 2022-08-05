@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['weight_5fparam_5f',['weight_param_',['../classCCC_1_1DdpCentroidal_1_1DdpProblem.html#a6daa70f40904131971694c251ea82a37',1,'CCC::DdpCentroidal::DdpProblem::weight_param_()'],['../classCCC_1_1DdpZmp_1_1DdpProblem.html#acc2c126e88a509fbb028125d40f9a484',1,'CCC::DdpZmp::DdpProblem::weight_param_()'],['../classCCC_1_1IntrinsicallyStableMpc1d.html#aa17dad14491e7bd517ba082af9c1d5c0',1,'CCC::IntrinsicallyStableMpc1d::weight_param_()']]]
+  ['zmphorizon',['zmpHorizon',['../structBWC_1_1FootManager_1_1Configuration.html#a8901f9aa68421af7e9f446c483c0e42a',1,'BWC::FootManager::Configuration']]],
+  ['zmpoffset',['zmpOffset',['../structBWC_1_1FootManager_1_1Configuration.html#a7927c0132a76234315a71538ee6a3910',1,'BWC::FootManager::Configuration']]],
+  ['zmptrajfunc_5f',['zmpTrajFunc_',['../classBWC_1_1FootManager.html#adc227123c5c91cf6907efb0253ff5b30',1,'BWC::FootManager']]],
+  ['zmpvelgain',['zmpVelGain',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ac490d67fabd980c891a0b04eac5de2c8',1,'BWC::CentroidalManager::Configuration']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['comzmpmodeljerkinput',['ComZmpModelJerkInput',['../classCCC_1_1ComZmpModelJerkInput.html',1,'CCC']]]
+  ['baselinewalkingcontroller',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC']]],
+  ['boundaryconstraint',['BoundaryConstraint',['../structBWC_1_1BoundaryConstraint.html',1,'BWC']]]
 ];
