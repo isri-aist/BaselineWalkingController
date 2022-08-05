@@ -21,7 +21,7 @@ void FirstOrderImpedanceTask::update(mc_solver::QPSolver & solver)
   double dt = solver.dt();
 
   // 1. Filter the measured wrench
-  measuredWrench_ = robots.robot(rIndex).surfaceWrench(surfaceName);
+  measuredWrench_ = robots.robot(rIndex).surfaceWrench(surface());
   lowPass_.update(measuredWrench_);
   filteredMeasuredWrench_ = lowPass_.eval();
 
@@ -114,14 +114,15 @@ void FirstOrderImpedanceTask::update(mc_solver::QPSolver & solver)
   {
     // Transform to target pose frame (see compliancePose implementation)
     sva::PTransformd T_0_d(targetPoseW_.rotation());
-    // The previous compliancePose() is stored in SurfaceTransformTask::target()
-    deltaCompPoseW_ = T_0_d.inv() * SurfaceTransformTask::target() * targetPoseW_.inv() * T_0_d;
+    // The previous compliancePose() is stored in mc_tasks::SurfaceTransformTask::target()
+    deltaCompPoseW_ = T_0_d.inv() * mc_tasks::SurfaceTransformTask::target() * targetPoseW_.inv() * T_0_d;
   }
 
-  // 5. Set compliance values to the targets of SurfaceTransformTask
-  SurfaceTransformTask::refAccel(T_0_s * (targetAccelW_ + deltaCompAccelW_)); // represented in the surface frame
-  SurfaceTransformTask::refVelB(T_0_s * (targetVelW_ + deltaCompVelW_)); // represented in the surface frame
-  SurfaceTransformTask::target(compliancePose()); // represented in the world frame
+  // 5. Set compliance values to the targets of mc_tasks::SurfaceTransformTask
+  mc_tasks::SurfaceTransformTask::refAccel(T_0_s
+                                           * (targetAccelW_ + deltaCompAccelW_)); // represented in the surface frame
+  mc_tasks::SurfaceTransformTask::refVelB(T_0_s * (targetVelW_ + deltaCompVelW_)); // represented in the surface frame
+  mc_tasks::SurfaceTransformTask::target(compliancePose()); // represented in the world frame
 }
 
 namespace
