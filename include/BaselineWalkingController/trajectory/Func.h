@@ -173,11 +173,11 @@ public:
 
   /** \brief Evaluate function derivative value.
       \param t arugment of function
-      \param order derivative order
+      \param derivativeOrder derivative order
   */
-  virtual T derivative(double t, int derivative_order = 1) const override
+  virtual T derivative(double t, int derivativeOrder = 1) const override
   {
-    if(derivative_order > Order)
+    if(derivativeOrder > Order)
     {
       // \todo does not work for Eigen::VectorXd
       T ret;
@@ -185,18 +185,18 @@ public:
       return ret;
     }
 
-    T ret = coeff_[derivative_order];
-    for(int j = 0; j < derivative_order - 1; j++)
+    T ret = coeff_[derivativeOrder];
+    for(int j = 0; j < derivativeOrder - 1; j++)
     {
-      ret *= (derivative_order - j);
+      ret *= (derivativeOrder - j);
     }
 
-    for(int i = 0; i < Order - derivative_order; i++)
+    for(int i = 0; i < Order - derivativeOrder; i++)
     {
-      T term = coeff_[i + 1 + derivative_order] * std::pow(t - t0_, i + 1);
-      for(int j = 0; j < derivative_order; j++)
+      T term = coeff_[i + 1 + derivativeOrder] * std::pow(t - t0_, i + 1);
+      for(int j = 0; j < derivativeOrder; j++)
       {
-        term *= (i + 1 + derivative_order - j);
+        term *= (i + 1 + derivativeOrder - j);
       }
       ret += term;
     }

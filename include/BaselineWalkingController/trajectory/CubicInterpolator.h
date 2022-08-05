@@ -75,7 +75,7 @@ inline U interpolateDerivative(const T & start, const T & end, double ratio, int
 template<>
 inline Eigen::Vector3d interpolateDerivative(const Eigen::Vector3d & start,
                                              const Eigen::Vector3d & end,
-                                             double, // ratio,
+                                             double ratio,
                                              int order)
 {
   if(order == 1)
@@ -97,7 +97,7 @@ inline Eigen::Vector3d interpolateDerivative(const Eigen::Vector3d & start,
 template<>
 inline Eigen::Vector3d interpolateDerivative(const Eigen::Quaterniond & start,
                                              const Eigen::Quaterniond & end,
-                                             double, // ratio,
+                                             double ratio,
                                              int order)
 {
   if(order == 1)
@@ -120,7 +120,7 @@ inline Eigen::Vector3d interpolateDerivative(const Eigen::Quaterniond & start,
 template<>
 inline Eigen::Vector3d interpolateDerivative(const Eigen::Matrix3d & start,
                                              const Eigen::Matrix3d & end,
-                                             double, // ratio,
+                                             double ratio,
                                              int order)
 {
   if(order == 1)
