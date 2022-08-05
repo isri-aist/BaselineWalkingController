@@ -86,6 +86,10 @@ public:
     void load(const mc_rtc::Configuration & mcRtcConfig);
   };
 
+protected:
+  //! 1D vector
+  using Vector1d = Eigen::Matrix<double, 1, 1>;
+
 public:
   /** \brief Constructor.
       \param ctlPtr pointer to controller
@@ -272,6 +276,9 @@ protected:
   std::shared_ptr<PiecewiseFunc<Eigen::Vector3d>> swingPosFunc_;
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> swingRotFunc_;
   //! @}
+
+  //! Base link Yaw trajectory
+  std::shared_ptr<CubicInterpolator<Vector1d>> baseYawFunc_;
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;

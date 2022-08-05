@@ -2,7 +2,6 @@
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_tasks/CoMTask.h>
-#include <mc_tasks/OrientationTask.h>
 
 #include <CCC/Constants.h>
 
@@ -125,13 +124,6 @@ void CentroidalManager::update()
     ctl().comTask_->com(nextPlannedCom);
     ctl().comTask_->refVel(nextPlannedComVel);
     ctl().comTask_->refAccel(plannedComAccel);
-
-    // Set target of base link orientation task
-    const sva::PTransformd & footMidpose = sva::interpolate(ctl().footManager_->targetFootPose(Foot::Left),
-                                                            ctl().footManager_->targetFootPose(Foot::Right), 0.5);
-    ctl().baseOriTask_->orientation(sva::RotZ(mc_rbdyn::rpyFromMat(footMidpose.rotation()).z()));
-    ctl().baseOriTask_->refVel(Eigen::Vector3d::Zero());
-    ctl().baseOriTask_->refAccel(Eigen::Vector3d::Zero());
 
     // Set target wrench of foot tasks
     const auto & targetWrenchList = wrenchDist_->calcWrenchList();

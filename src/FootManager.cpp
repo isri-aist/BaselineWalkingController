@@ -5,6 +5,7 @@
 #include <mc_rtc/gui/Checkbox.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
+#include <mc_tasks/OrientationTask.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
@@ -49,7 +50,8 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
 : ctlPtr_(ctlPtr), zmpTrajFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
   swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
-  swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
+  swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
+  baseYawFunc_(std::make_shared<CubicInterpolator<Vector1d>>())
 {
   config_.load(mcRtcConfig);
 }
@@ -77,6 +79,8 @@ void FootManager::reset()
 
   swingPosFunc_->clearFuncs();
   swingRotFunc_->clearPoints();
+
+  baseYawFunc_->clearPoints();
 
   touchDown_ = false;
 
@@ -399,9 +403,10 @@ void FootManager::updateFootTasks()
         liftUpPosSpline->calcCoeff();
         swingPosFunc_->appendFunc(swingFootstep_->swingStartTime + swingInitialLiftDuration, liftUpPosSpline);
         // Rot
-        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartPose.rotation()));
         swingRotFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingStartTime + swingInitialLiftDuration, swingStartPose.rotation()));
+            std::make_pair(swingFootstep_->swingStartTime, swingStartPose.rotation().transpose()));
+        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime + swingInitialLiftDuration,
+                                                  swingStartPose.rotation().transpose()));
 
         // Spline for final lift down
         // Pos
@@ -414,9 +419,10 @@ void FootManager::updateFootTasks()
         liftDownPosSpline->calcCoeff();
         swingPosFunc_->appendFunc(swingFootstep_->swingEndTime, liftDownPosSpline);
         // Rot
+        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime - swingInitialLiftDuration,
+                                                  swingFootstep_->pose.rotation().transpose()));
         swingRotFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingEndTime - swingInitialLiftDuration, swingFootstep_->pose.rotation()));
-        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingFootstep_->pose.rotation()));
+            std::make_pair(swingFootstep_->swingEndTime, swingFootstep_->pose.rotation().transpose()));
 
         // Spline for swing
         // Pos
@@ -441,12 +447,29 @@ void FootManager::updateFootTasks()
         swingRotFunc_->calcCoeff();
       }
 
+      // Set baseYawFunc_
+      {
+        Vector1d swingStartBaseYaw;
+        swingStartBaseYaw << (mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Left).rotation()).z()
+                              + mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Right).rotation()).z())
+                                 / 2;
+        baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartBaseYaw));
+
+        Vector1d swingEndBaseYaw;
+        swingEndBaseYaw << (mc_rbdyn::rpyFromMat(swingFootstep_->pose.rotation()).z()
+                            + mc_rbdyn::rpyFromMat(targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation()).z())
+                               / 2;
+        baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingEndBaseYaw));
+
+        baseYawFunc_->calcCoeff();
+      }
+
       // Set supportPhase_
       if(swingFootstep_->foot == Foot::Left)
       {
         supportPhase_ = SupportPhase::RightSupport;
       }
-      else
+      else // if(swingFootstep_->foot == Foot::Right)
       {
         supportPhase_ = SupportPhase::LeftSupport;
       }
@@ -456,7 +479,7 @@ void FootManager::updateFootTasks()
     if(!(config_.stopSwingTrajForTouchDownFoot && touchDown_))
     {
       targetFootPoses_.at(swingFootstep_->foot) =
-          sva::PTransformd((*swingRotFunc_)(ctl().t()), (*swingPosFunc_)(ctl().t()));
+          sva::PTransformd((*swingRotFunc_)(ctl().t()).transpose(), (*swingPosFunc_)(ctl().t()));
       targetFootVels_.at(swingFootstep_->foot) =
           sva::MotionVecd(swingRotFunc_->derivative(ctl().t(), 1), swingPosFunc_->derivative(ctl().t(), 1));
       targetFootAccels_.at(swingFootstep_->foot) =
@@ -483,8 +506,8 @@ void FootManager::updateFootTasks()
       // Update target
       if(!(config_.keepSupportFootPoseForTouchDownFoot && touchDown_))
       {
-        targetFootPoses_.at(swingFootstep_->foot) = sva::PTransformd((*swingRotFunc_)(swingFootstep_->swingEndTime),
-                                                                     (*swingPosFunc_)(swingFootstep_->swingEndTime));
+        targetFootPoses_.at(swingFootstep_->foot) = sva::PTransformd(
+            (*swingRotFunc_)(swingFootstep_->swingEndTime).transpose(), (*swingPosFunc_)(swingFootstep_->swingEndTime));
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
@@ -496,6 +519,9 @@ void FootManager::updateFootTasks()
       swingPosFunc_->clearFuncs();
       swingRotFunc_->clearPoints();
 
+      // Clear baseYawFunc_
+      baseYawFunc_->clearPoints();
+
       // Clear touchDown_
       touchDown_ = false;
 
@@ -504,7 +530,7 @@ void FootManager::updateFootTasks()
     }
   }
 
-  // Update task target
+  // Set target of foot tasks
   for(const auto & foot : Feet::Both)
   {
     ctl().footTasks_.at(foot)->targetPose(targetFootPoses_.at(foot));
@@ -542,7 +568,7 @@ void FootManager::updateFootTasks()
   }
   impGainTypes_ = newImpGainTypes;
 
-  // Update task impedance gains
+  // Set impedance gains of foot tasks
   if(requireImpGainUpdate_)
   {
     requireImpGainUpdate_ = false;
@@ -551,6 +577,22 @@ void FootManager::updateFootTasks()
     {
       ctl().footTasks_.at(foot)->gains() = config_.impGains.at(impGainTypes_.at(foot));
     }
+  }
+
+  // Set target of base link orientation task
+  if(supportPhase_ == SupportPhase::DoubleSupport)
+  {
+    const sva::PTransformd & footMidpose =
+        sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5);
+    ctl().baseOriTask_->orientation(sva::RotZ(mc_rbdyn::rpyFromMat(footMidpose.rotation()).z()));
+    ctl().baseOriTask_->refVel(Eigen::Vector3d::Zero());
+    ctl().baseOriTask_->refAccel(Eigen::Vector3d::Zero());
+  }
+  else
+  {
+    ctl().baseOriTask_->orientation(sva::RotZ((*baseYawFunc_)(ctl().t())[0]));
+    ctl().baseOriTask_->refVel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 1)[0]));
+    ctl().baseOriTask_->refAccel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 2)[0]));
   }
 
   // Update footstep visualization
