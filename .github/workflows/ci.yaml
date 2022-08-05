@@ -124,7 +124,7 @@ jobs:
       #     set +x
       #     . devel/setup.bash
       #     set -x
-      #     catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- centroidal_control_collection --no-deps
+      #     catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- baseline_walking_controller --no-deps
       #     catkin_test_results --verbose --all build
       - name: Upload documentation
         # Only run on master branch and for one configuration
@@ -139,7 +139,7 @@ jobs:
           git fetch --depth=1 origin gh-pages:gh-pages
           git checkout --quiet gh-pages
           rm -rf doxygen/
-          cp -r ${GITHUB_WORKSPACE}/catkin_ws/build/centroidal_control_collection/doc/html/ doxygen
+          cp -r ${GITHUB_WORKSPACE}/catkin_ws/build/baseline_walking_controller/doc/html/ doxygen
           git add doxygen
           git_status=`git status -s`
           if test -n "$git_status"; then
