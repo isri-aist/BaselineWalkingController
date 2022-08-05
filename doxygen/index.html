@@ -68,7 +68,26 @@ $(function() {
 <div class="title">[BaselineWalkingController](<a href="https://github.com/isri-aist/BaselineWalkingController">https://github.com/isri-aist/BaselineWalkingController</a>) </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Humanoid walking controller with various baseline methods </p>
+<div class="textblock"><p>Humanoid walking controller with various baseline methods</p>
+<p><a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml"></a> <a href="https://isri-aist.github.io/BaselineWalkingController/"></a></p>
+<h2>Install</h2>
+<h3>Requirements</h3>
+<ul>
+<li>Compiler supporting C++17</li>
+<li>Tested with Ubuntu 18.04 / ROS Melodic</li>
+</ul>
+<h3>Dependencies</h3>
+<p>This package depends on</p><ul>
+<li><a href="https://github.com/isri-aist/QpSolverCollection">QpSolverCollection</a></li>
+<li><a href="https://github.com/isri-aist/CentroidalControlCollection">CentroidalControlCollection</a></li>
+</ul>
+<h3>Installation procedure</h3>
+<p>It is assumed that <a href="http://wiki.ros.org/ROS/Installation">ROS</a> and <a href="https://jrl-umi3218.github.io/mc_rtc/tutorials/introduction/installation-guide.html">mc_rtc</a> is installed.</p>
+<ol type="1">
+<li>Setup catkin workspace. <div class="fragment"><div class="line">$ mkdir -p ~/ros/ws_bwc/src</div><div class="line">$ cd ~/ros/ws_bwc</div><div class="line">$ wstool init src</div><div class="line">$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y</div><div class="line">$ wstool set -t src isri-aist/NMPC git@github.com:isri-aist/NMPC.git --git -y</div><div class="line">$ wstool set -t src isri-aist/CentroidalControlCollection git@github.com:isri-aist/CentroidalControlCollection.git --git -y</div><div class="line">$ wstool set -t src isri-aist/BaselineWalkingController git@github.com:isri-aist/BaselineWalkingController.git --git -y</div><div class="line">$ wstool update -t src</div></div><!-- fragment --></li>
+<li>Install dependent packages. <div class="fragment"><div class="line">$ source /opt/ros/${ROS_DISTRO}/setup.bash</div><div class="line">$ rosdep install -y -r --from-paths src --ignore-src</div></div><!-- fragment --></li>
+<li>Build a package. <div class="fragment"><div class="line">$ catkin build baseline_walking_controller -DCMAKE_BUILD_TYPE=RelWithDebInfo --catkin-make-args all tests</div></div><!-- fragment --> </li>
+</ol>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
