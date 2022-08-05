@@ -68,8 +68,10 @@ inline U interpolateDerivative(const T & start, const T & end, double ratio, int
   }
   else
   {
+    T ret;
     // \todo Rows and cols are necessary for matrix with dynamic size.
-    return T::Zero();
+    ret.setZero();
+    return ret;
   }
 }
 
