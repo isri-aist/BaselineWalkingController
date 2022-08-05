@@ -30,6 +30,10 @@ jobs:
       fail-fast: false
       matrix:
         build-type: [Debug, RelWithDebInfo]
+        mc-rtc-version: [head, stable]
+        exclude:
+          - build-type: Debug
+            mc-rtc-version: head
     runs-on: ubuntu-18.04
     env:
       ROS_DISTRO: melodic
@@ -46,7 +50,7 @@ jobs:
         run: |
           set -e
           set -x
-          curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/head/setup.deb.sh' | sudo -E bash
+          curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/${{ matrix.mc-rtc-version }}/setup.deb.sh' | sudo -E bash
           sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin mc-openrtm
       - name: Setup catkin workspace
         run: |
