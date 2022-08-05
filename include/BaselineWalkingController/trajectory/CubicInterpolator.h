@@ -62,29 +62,14 @@ inline sva::PTransformd interpolate(const sva::PTransformd & start, const sva::P
 template<class T, class U = T>
 inline U interpolateDerivative(const T & start, const T & end, double ratio, int order = 1)
 {
-  mc_rtc::log::error_and_throw("[interpolateDerivative] Not implemented.");
-  return U();
-}
-
-/** \brief Calculate the derivative of 3D vector interpolating from start to end.
-    \param start start value
-    \param end end value
-    \param ratio interpolation ratio
-    \param order derivative order
-*/
-template<>
-inline Eigen::Vector3d interpolateDerivative(const Eigen::Vector3d & start,
-                                             const Eigen::Vector3d & end,
-                                             double ratio,
-                                             int order)
-{
   if(order == 1)
   {
     return end - start;
   }
   else
   {
-    return Eigen::Vector3d::Zero();
+    // \todo Rows and cols are necessary for matrix with dynamic size.
+    return T::Zero();
   }
 }
 
@@ -125,13 +110,34 @@ inline Eigen::Vector3d interpolateDerivative(const Eigen::Matrix3d & start,
 {
   if(order == 1)
   {
-    // \todo why inverse?
-    Eigen::AngleAxisd aa(end.transpose() * start);
+    Eigen::AngleAxisd aa(start.transpose() * end);
     return aa.angle() * aa.axis();
   }
   else
   {
     return Eigen::Vector3d::Zero();
+  }
+}
+
+/** \brief Calculate the derivative of pose interpolating from start to end.
+    \param start start value
+    \param end end value
+    \param ratio interpolation ratio
+    \param order derivative order
+*/
+template<>
+inline sva::MotionVecd interpolateDerivative(const sva::PTransformd & start,
+                                             const sva::PTransformd & end,
+                                             double ratio,
+                                             int order)
+{
+  if(order == 1)
+  {
+    return sva::transformError(start, end);
+  }
+  else
+  {
+    return sva::MotionVecd::Zero();
   }
 }
 

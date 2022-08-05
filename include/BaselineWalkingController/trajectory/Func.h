@@ -179,10 +179,8 @@ public:
   {
     if(derivativeOrder > Order)
     {
-      // \todo does not work for Eigen::VectorXd
-      T ret;
-      ret.setZero();
-      return ret;
+      // \todo Rows and cols are necessary for matrix with dynamic size.
+      return T::Zero();
     }
 
     T ret = coeff_[derivativeOrder];
