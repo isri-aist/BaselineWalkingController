@@ -2,6 +2,7 @@ set(CONTROLLER_NAME BaselineWalkingController)
 
 add_library(${CONTROLLER_NAME} SHARED
   BaselineWalkingController.cpp
+  FootTypes.cpp
   FootManager.cpp
   CentroidalManager.cpp
   centroidal/CentroidalManagerPreviewControlZmp.cpp

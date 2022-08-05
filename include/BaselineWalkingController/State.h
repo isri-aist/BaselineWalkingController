@@ -6,7 +6,7 @@ namespace BWC
 {
 class BaselineWalkingController;
 
-/** \brief State with utility functions. */
+/** \brief FSM State with utility functions. */
 struct State : mc_control::fsm::State
 {
 public:

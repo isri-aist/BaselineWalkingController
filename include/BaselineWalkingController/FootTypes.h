@@ -76,3 +76,12 @@ struct Footstep
   double transitEndTime;
 };
 } // namespace BWC
+
+namespace std
+{
+/** \brief Convert foot to string. */
+std::string to_string(const BWC::Foot & foot);
+
+/** \brief Convert support phase to string. */
+std::string to_string(const BWC::SupportPhase & phase);
+} // namespace std

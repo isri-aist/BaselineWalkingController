@@ -138,15 +138,15 @@ FootManager:
 CentroidalManager:
   name: CentroidalManager
   useActualStateForMpc: false
-  enableDcmFeedback: true
+  enableZmpFeedback: true
   enableComZFeedback: true
-  dcmGain: 2.0 # It must be greater than 1 to be stable
+  dcmGainP: 2.0 # It must be greater than 1 to be stable
   zmpVelGain: 0.02
   comZGainP: 2000.0
   comZGainD: 500.0
   refComZ: 0.95 # [m]
   useTargetPoseForControlRobotAnchorFrame: true
-  useActualCoMForWrenchDistribution: true
+  useActualComForWrenchDist: true
   wrenchDistConfig:
     wrenchWeight:
       linear: [1.0, 1.0, 1.0]

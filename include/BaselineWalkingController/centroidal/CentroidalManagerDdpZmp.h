@@ -6,19 +6,24 @@
 
 namespace BWC
 {
+/** \brief Centroidal manager with DDP.
+
+    Centroidal manager calculates the centroidal targets from the specified reference ZMP trajectory and sensor
+   measurements.
+*/
 class CentroidalManagerDdpZmp : public CentroidalManager
 {
 public:
   /** \brief Configuration. */
   struct Configuration : public CentroidalManager::Configuration
   {
-    //! Horizon duration of DDP [sec]
+    //! Horizon duration [sec]
     double horizonDuration = 2.0;
 
-    //! Horizon dt of DDP [sec]
+    //! Horizon dt [sec]
     double horizonDt = 0.02;
 
-    //! Max iteration of DDP
+    //! DDP maximum iteration
     int ddpMaxIter = 1;
 
     /** \brief Load mc_rtc configuration. */
@@ -73,7 +78,7 @@ protected:
   //! Configuration
   Configuration config_;
 
-  //! DDP for CoM trajectory generation
+  //! DDP
   std::shared_ptr<CCC::DdpZmp> ddp_;
 };
 } // namespace BWC

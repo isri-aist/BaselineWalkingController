@@ -22,8 +22,8 @@ void CommandState::start(mc_control::fsm::Controller & _ctl)
           [this](const mc_rtc::Configuration & config) {
             if(ctl().footManager_->supportPhase() != SupportPhase::DoubleSupport)
             {
-              mc_rtc::log::warning("[CommandState] Command can only be sent in the double support phase: {}",
-                                   std::to_string(ctl().footManager_->supportPhase()));
+              mc_rtc::log::error("[CommandState] Command can only be sent in the double support phase: {}",
+                                 std::to_string(ctl().footManager_->supportPhase()));
               return;
             }
             sendWalkingCommand(Eigen::Vector3d(config(walkConfigKeys_.at("x")), config(walkConfigKeys_.at("y")),
@@ -59,13 +59,13 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
     return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
   };
 
-  // The 2D variables (i.e., goalTrans, delta_trans) represent the transformation relative to the initial pose,
-  // while the 3D variables (i.e., initial_foot_midpose, goal_foot_midpose, current_foot_midpose) represent the
+  // The 2D variables (i.e., goalTrans, deltaTrans) represent the transformation relative to the initial pose,
+  // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, currentFootMidpose) represent the
   // transformation in the world frame.
   const Eigen::Vector3d deltaTransLimit(0.15, 0.1, mc_rtc::constants::toRad(15));
-  const sva::PTransformd initialFootMidpose = projGround(sva::interpolate(
+  const sva::PTransformd & initialFootMidpose = projGround(sva::interpolate(
       ctl().footManager_->targetFootPose(Foot::Left), ctl().footManager_->targetFootPose(Foot::Right), 0.5));
-  const sva::PTransformd goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
+  const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
 
   Foot foot = goalTrans.y() >= 0 ? Foot::Left : Foot::Right;
   sva::PTransformd currentFootMidpose = initialFootMidpose;
@@ -98,6 +98,7 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
   {
     const auto & footstep = ctl().footManager_->makeFootstep(foot, currentFootMidpose, startTime);
     ctl().footManager_->appendFootstep(footstep);
+
     foot = opposite(foot);
     startTime = footstep.transitEndTime;
   }

@@ -20,15 +20,15 @@ void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcC
   mcRtcConfig("name", name);
   mcRtcConfig("method", method);
   mcRtcConfig("useActualStateForMpc", useActualStateForMpc);
-  mcRtcConfig("enableDcmFeedback", enableDcmFeedback);
+  mcRtcConfig("enableZmpFeedback", enableZmpFeedback);
   mcRtcConfig("enableComZFeedback", enableComZFeedback);
-  mcRtcConfig("dcmGain", dcmGain);
+  mcRtcConfig("dcmGainP", dcmGainP);
   mcRtcConfig("zmpVelGain", zmpVelGain);
   mcRtcConfig("comZGainP", comZGainP);
   mcRtcConfig("comZGainD", comZGainD);
   mcRtcConfig("refComZ", refComZ);
   mcRtcConfig("useTargetPoseForControlRobotAnchorFrame", useTargetPoseForControlRobotAnchorFrame);
-  mcRtcConfig("useActualCoMForWrenchDistribution", useActualCoMForWrenchDistribution);
+  mcRtcConfig("useActualComForWrenchDist", useActualComForWrenchDist);
   mcRtcConfig("wrenchDistConfig", wrenchDistConfig);
 }
 
@@ -60,24 +60,26 @@ void CentroidalManager::update()
   // Run MPC
   runMpc();
 
-  // Calculate command wrench
+  // Calculate target wrench
   {
+    controlZmp_ = plannedZmp_;
+    controlForceZ_ = plannedForceZ_;
+
     // Compensate ZMP delay
     // See equation (10) of https://ieeexplore.ieee.org/abstract/document/6094838
     Eigen::Vector3d refZmpVel = ctl().footManager_->calcRefZmp(ctl().t(), 1);
-    controlZmp_ << plannedZmp_.head<2>() + config().zmpVelGain * refZmpVel.head<2>(), plannedZmp_.z();
+    controlZmp_.head<2>() += config().zmpVelGain * refZmpVel.head<2>();
 
     // Apply DCM feedback
-    double omega = std::sqrt(plannedForceZ_ / (robotMass_ * mpcCom_.z()));
-    Eigen::Vector3d plannedDcm = ctl().comTask_->com() + ctl().comTask_->refVel() / omega;
-    Eigen::Vector3d actualDcm = ctl().realRobot().com() + ctl().realRobot().comVelocity() / omega;
-    if(config().enableDcmFeedback)
+    if(config().enableZmpFeedback)
     {
-      controlZmp_.head<2>() += config().dcmGain * (actualDcm - plannedDcm).head<2>();
+      double omega = std::sqrt(plannedForceZ_ / (robotMass_ * mpcCom_.z()));
+      Eigen::Vector3d plannedDcm = ctl().comTask_->com() + ctl().comTask_->refVel() / omega;
+      Eigen::Vector3d actualDcm = ctl().realRobot().com() + ctl().realRobot().comVelocity() / omega;
+      controlZmp_.head<2>() += config().dcmGainP * (actualDcm - plannedDcm).head<2>();
     }
 
     // Apply ForceZ feedback
-    controlForceZ_ = plannedForceZ_;
     if(config().enableComZFeedback)
     {
       double plannedComZ = ctl().comTask_->com().z();
@@ -88,10 +90,6 @@ void CentroidalManager::update()
           config().comZGainP * (actualComZ - plannedComZ) + config().comZGainD * (actualComVelZ - plannedComVelZ);
     }
 
-    // Project ZMP
-    // TODO
-    controlZmp_;
-
     // Convert ZMP to wrench and distribute
     contactList_ = ctl().footManager_->calcContactList();
     if(!wrenchDist_ || wrenchDist_->contactList_ != contactList_)
@@ -99,12 +97,12 @@ void CentroidalManager::update()
       wrenchDist_ = std::make_shared<WrenchDistribution>(contactList_, config().wrenchDistConfig);
     }
     Eigen::Vector3d comForWrenchDist =
-        (config().useActualCoMForWrenchDistribution ? ctl().realRobot().com() : ctl().comTask_->com());
+        (config().useActualComForWrenchDist ? ctl().realRobot().com() : ctl().comTask_->com());
     sva::ForceVecd controlWrench;
     controlWrench.force() << controlForceZ_ / comForWrenchDist.z()
                                  * (comForWrenchDist.head<2>() - controlZmp_.head<2>()),
         controlForceZ_;
-    controlWrench.moment().setZero();
+    controlWrench.moment().setZero(); // Moment is represented around CoM
     wrenchDist_->run(controlWrench, comForWrenchDist);
   }
 
@@ -157,13 +155,13 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "useActualStateForMpc", [this]() { return config().useActualStateForMpc; },
           [this]() { config().useActualStateForMpc = !config().useActualStateForMpc; }),
       mc_rtc::gui::Checkbox(
-          "enableDcmFeedback", [this]() { return config().enableDcmFeedback; },
-          [this]() { config().enableDcmFeedback = !config().enableDcmFeedback; }),
+          "enableZmpFeedback", [this]() { return config().enableZmpFeedback; },
+          [this]() { config().enableZmpFeedback = !config().enableZmpFeedback; }),
       mc_rtc::gui::Checkbox(
           "enableComZFeedback", [this]() { return config().enableComZFeedback; },
           [this]() { config().enableComZFeedback = !config().enableComZFeedback; }),
       mc_rtc::gui::NumberInput(
-          "dcmGain", [this]() { return config().dcmGain; }, [this](double v) { config().dcmGain = v; }),
+          "dcmGainP", [this]() { return config().dcmGainP; }, [this](double v) { config().dcmGainP = v; }),
       mc_rtc::gui::NumberInput(
           "zmpVelGain", [this]() { return config().zmpVelGain; }, [this](double v) { config().zmpVelGain = v; }),
       mc_rtc::gui::NumberInput(
@@ -179,8 +177,8 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
             config().useTargetPoseForControlRobotAnchorFrame = !config().useTargetPoseForControlRobotAnchorFrame;
           }),
       mc_rtc::gui::Checkbox(
-          "useActualCoMForWrenchDistribution", [this]() { return config().useActualCoMForWrenchDistribution; },
-          [this]() { config().useActualCoMForWrenchDistribution = !config().useActualCoMForWrenchDistribution; }));
+          "useActualComForWrenchDist", [this]() { return config().useActualComForWrenchDist; },
+          [this]() { config().useActualComForWrenchDist = !config().useActualComForWrenchDist; }));
 }
 
 void CentroidalManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -190,10 +188,30 @@ void CentroidalManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 
 void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
 {
+  logger.addLogEntry(config().name + "_Config_method", this, [this]() { return config().method; });
+  logger.addLogEntry(config().name + "_Config_useActualStateForMpc", this,
+                     [this]() { return config().useActualStateForMpc; });
+  logger.addLogEntry(config().name + "_Config_enableZmpFeedback", this,
+                     [this]() { return config().enableZmpFeedback; });
+  logger.addLogEntry(config().name + "_Config_enableComZFeedback", this,
+                     [this]() { return config().enableComZFeedback; });
+  logger.addLogEntry(config().name + "_Config_dcmGainP", this, [this]() { return config().dcmGainP; });
+  logger.addLogEntry(config().name + "_Config_zmpVelGain", this, [this]() { return config().zmpVelGain; });
+  logger.addLogEntry(config().name + "_Config_comZGainP", this, [this]() { return config().comZGainP; });
+  logger.addLogEntry(config().name + "_Config_comZGainD", this, [this]() { return config().comZGainD; });
+  logger.addLogEntry(config().name + "_Config_refComZ", this, [this]() { return config().refComZ; });
+  logger.addLogEntry(config().name + "_Config_useTargetPoseForControlRobotAnchorFrame", this,
+                     [this]() { return config().useTargetPoseForControlRobotAnchorFrame; });
+  logger.addLogEntry(config().name + "_Config_useActualComForWrenchDist", this,
+                     [this]() { return config().useActualComForWrenchDist; });
+
   MC_RTC_LOG_HELPER(config().name + "_CoM_MPC", mpcCom_);
-  logger.addLogEntry(config().name + "_CoM_target", this, [this]() { return ctl().comTask_->com(); });
-  logger.addLogEntry(config().name + "_CoM_control", this, [this]() { return ctl().robot().com(); });
-  logger.addLogEntry(config().name + "_CoM_real", this, [this]() { return ctl().realRobot().com(); });
+  logger.addLogEntry(config().name + "_CoM_planned", this, [this]() { return ctl().comTask_->com(); });
+  logger.addLogEntry(config().name + "_CoM_controlRobot", this, [this]() { return ctl().robot().com(); });
+  logger.addLogEntry(config().name + "_CoM_realRobot", this, [this]() { return ctl().realRobot().com(); });
+
+  MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
+  MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
 
   logger.addLogEntry(config().name + "_ZMP_ref", this, [this]() { return ctl().footManager_->calcRefZmp(ctl().t()); });
   MC_RTC_LOG_HELPER(config().name + "_ZMP_planned", plannedZmp_);
@@ -235,9 +253,6 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
     }
     return maxPos;
   });
-
-  MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
-  MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
 }
 
 void CentroidalManager::removeFromLogger(mc_rtc::Logger & logger)
@@ -287,8 +302,8 @@ Eigen::Vector3d CentroidalManager::calcZmp(const std::unordered_map<Foot, sva::F
 
   if(totalWrench.force().z() > 0)
   {
-    Eigen::Vector3d momentInZMPPlane = totalWrench.moment() - zmpPlaneOrigin.cross(totalWrench.force());
-    zmp += zmpPlaneNormal.cross(momentInZMPPlane) / totalWrench.force().z();
+    Eigen::Vector3d momentInZmpPlane = totalWrench.moment() - zmpPlaneOrigin.cross(totalWrench.force());
+    zmp += zmpPlaneNormal.cross(momentInZmpPlane) / totalWrench.force().z();
   }
 
   return zmp;

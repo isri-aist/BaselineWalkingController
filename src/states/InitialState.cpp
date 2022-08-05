@@ -60,7 +60,7 @@ bool InitialState::run(mc_control::fsm::Controller &)
 
     // Add GUI and logger of managers
     // Considering the possibility that GUI and logger entries assume that variables are set in the manager's update
-    // method, it is safer to call the update method once and then add the GUI and logger
+    // method, it is safe to call the update method once and then add the GUI and logger
     ctl().footManager_->addToGUI(*ctl().gui());
     ctl().footManager_->addToLogger(ctl().logger());
     ctl().centroidalManager_->addToGUI(*ctl().gui());

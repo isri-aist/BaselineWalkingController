@@ -6,12 +6,12 @@
 namespace BWC
 {
 class BaselineWalkingController;
-class WrenchDistribution;
 class Contact;
+class WrenchDistribution;
 
 /** \brief Centroidal manager.
 
-    Centroidal manager calculates the centroidal command from the specified reference ZMP trajectory and sensor
+    Centroidal manager calculates the centroidal targets from the specified reference ZMP trajectory and sensor
    measurements.
  */
 class CentroidalManager
@@ -30,7 +30,7 @@ public:
     bool useActualStateForMpc = false;
 
     //! Whether to enable DCM feedback
-    bool enableDcmFeedback = true;
+    bool enableZmpFeedback = true;
 
     //! Whether to enable CoM Z feedback
     bool enableComZFeedback = true;
@@ -39,7 +39,7 @@ public:
 
         It must be greater than 1 to be stable.
     */
-    double dcmGain = 2.0;
+    double dcmGainP = 2.0;
 
     //! Feedforward gain of ZMP velocity
     double zmpVelGain = 0.1;
@@ -57,7 +57,7 @@ public:
     bool useTargetPoseForControlRobotAnchorFrame = true;
 
     //! Whether to use actual CoM for wrench distribution
-    bool useActualCoMForWrenchDistribution = true;
+    bool useActualComForWrenchDist = true;
 
     //! Configuration for wrench distribution
     mc_rtc::Configuration wrenchDistConfig;
@@ -129,12 +129,14 @@ protected:
   virtual bool isConstantComZ() const = 0;
 
   /** \brief Calculate anchor frame.
-      \param robot (control robot or real robot)
+      \param robot robot
    */
   sva::PTransformd calcAnchorFrame(const mc_rbdyn::Robot & robot) const;
 
   /** \brief Calculate ZMP from wrench list.
       \param wrenchList wrench list
+      \param zmpPlaneHeight height of ZMP plane
+      \param zmpPlaneNormal normal of ZMP plane
   */
   Eigen::Vector3d calcZmp(const std::unordered_map<Foot, sva::ForceVecd> & wrenchList,
                           double zmpPlaneHeight = 0,

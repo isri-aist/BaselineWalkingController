@@ -6,16 +6,21 @@
 
 namespace BWC
 {
+/** \brief Centroidal manager with preview control.
+
+    Centroidal manager calculates the centroidal targets from the specified reference ZMP trajectory and sensor
+   measurements.
+*/
 class CentroidalManagerPreviewControlZmp : public CentroidalManager
 {
 public:
   /** \brief Configuration. */
   struct Configuration : public CentroidalManager::Configuration
   {
-    //! Horizon duration of DDP [sec]
+    //! Horizon duration [sec]
     double horizonDuration = 2.0;
 
-    //! Horizon dt of DDP [sec]
+    //! Horizon dt [sec]
     double horizonDt = 0.02;
 
     /** \brief Load mc_rtc configuration. */
@@ -68,7 +73,7 @@ protected:
   //! Configuration
   Configuration config_;
 
-  //! Preview control for CoM trajectory generation
+  //! Preview control
   std::shared_ptr<CCC::PreviewControlZmp> pc_;
 
   //! Whether it is the first iteration

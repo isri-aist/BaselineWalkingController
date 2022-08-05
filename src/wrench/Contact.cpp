@@ -5,11 +5,11 @@
 
 using namespace BWC;
 
-FrictionPyramid::FrictionPyramid(double fricCoeff, int divideNum)
+FrictionPyramid::FrictionPyramid(double fricCoeff, int ridgeNum)
 {
-  for(int i = 0; i < divideNum; i++)
+  for(int i = 0; i < ridgeNum; i++)
   {
-    double theta = 2 * mc_rtc::constants::PI * (static_cast<double>(i) / divideNum);
+    double theta = 2 * mc_rtc::constants::PI * (static_cast<double>(i) / ridgeNum);
     localRidgeList_.push_back(
         Eigen::Vector3d(fricCoeff * std::cos(theta), fricCoeff * std::sin(theta), 1).normalized());
   }
@@ -31,10 +31,10 @@ Contact::Contact(const std::string & name,
                  const sva::PTransformd & pose)
 : name_(name)
 {
-  // Set graspMat_
+  // Set graspMat_ and vertexWithRidgeList_
   FrictionPyramid fricPyramid(fricCoeff);
 
-  graspMat_.resize(6, localVertexList.size() * fricPyramid.divideNum());
+  graspMat_.resize(6, localVertexList.size() * fricPyramid.ridgeNum());
 
   const auto & globalRidgeList = fricPyramid.calcGlobalRidgeList(pose.rotation().transpose());
 
@@ -46,24 +46,17 @@ Contact::Contact(const std::string & name,
     {
       const auto & globalRidge = globalRidgeList[ridgeIdx];
       // The top 3 rows are moment, the bottom 3 rows are force.
-      graspMat_.col(vertexIdx * fricPyramid.divideNum() + ridgeIdx) << globalVertex.cross(globalRidge), globalRidge;
+      graspMat_.col(vertexIdx * fricPyramid.ridgeNum() + ridgeIdx) << globalVertex.cross(globalRidge), globalRidge;
     }
 
     vertexWithRidgeList_.push_back(VertexWithRidge(globalVertex, globalRidgeList));
   }
-
-  Eigen::Matrix<double, 3, Eigen::Dynamic> localGraspMat(3, fricPyramid.divideNum());
-  for(int ridgeIdx = 0; ridgeIdx < fricPyramid.divideNum(); ridgeIdx++)
-  {
-    localGraspMat.col(ridgeIdx) = fricPyramid.localRidgeList_[ridgeIdx];
-  }
-  localGraspMatList_.assign(localVertexList.size(), localGraspMat);
 }
 
 sva::ForceVecd Contact::calcWrench(const Eigen::VectorXd & wrenchRatio, const Eigen::Vector3d & momentOrigin) const
 {
   sva::ForceVecd totalWrench = sva::ForceVecd::Zero();
-  int totalIdx = 0;
+  int wrenchRatioIdx = 0;
 
   for(const auto & vertexWithRidge : vertexWithRidgeList_)
   {
@@ -72,26 +65,14 @@ sva::ForceVecd Contact::calcWrench(const Eigen::VectorXd & wrenchRatio, const Ei
 
     for(const auto & ridge : ridgeList)
     {
-      Eigen::Vector3d force = wrenchRatio(totalIdx) * ridge;
+      Eigen::Vector3d force = wrenchRatio(wrenchRatioIdx) * ridge;
       totalWrench.force() += force;
       totalWrench.moment() += (vertex - momentOrigin).cross(force);
-      totalIdx++;
+      wrenchRatioIdx++;
     }
   }
 
-  assert(wrenchRatio.size() == totalIdx);
+  assert(wrenchRatio.size() == wrenchRatioIdx);
 
   return totalWrench;
-}
-
-std::vector<Eigen::Vector3d> Contact::calcLocalVertexForceList(const Eigen::VectorXd & wrenchRatio) const
-{
-  std::vector<Eigen::Vector3d> localForceList;
-  int colNum = 0;
-  for(const auto & localGraspMat : localGraspMatList_)
-  {
-    localForceList.push_back(localGraspMat * wrenchRatio.segment(colNum, localGraspMat.cols()));
-    colNum += localGraspMat.cols();
-  }
-  return localForceList;
 }

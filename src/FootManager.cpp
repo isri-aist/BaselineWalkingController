@@ -14,46 +14,6 @@
 
 using namespace BWC;
 
-Foot BWC::strToFoot(const std::string & footStr)
-{
-  if(footStr == "Left")
-  {
-    return Foot::Left;
-  }
-  else if(footStr == "Right")
-  {
-    return Foot::Right;
-  }
-  else
-  {
-    mc_rtc::log::error_and_throw("[strToFoot] Unsupported Foot name: {}", footStr);
-  }
-}
-
-Foot BWC::opposite(const Foot & foot)
-{
-  if(foot == Foot::Left)
-  {
-    return Foot::Right;
-  }
-  else // if(footStr == "Right")
-  {
-    return Foot::Left;
-  }
-}
-
-int BWC::sign(const Foot & foot)
-{
-  if(foot == Foot::Left)
-  {
-    return 1;
-  }
-  else // if(footStr == "Right")
-  {
-    return -1;
-  }
-}
-
 void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
   mcRtcConfig("name", name);
@@ -147,7 +107,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                  mc_rtc::gui::Label("RightImpGainType", [this]() { return impGainTypes_.at(Foot::Right); }));
 
   gui.addElement(
-      {"BWC", config_.name, "Configuration"},
+      {"BWC", config_.name, "Config"},
       mc_rtc::gui::NumberInput(
           "footstepDuration", [this]() { return config_.footstepDuration; },
           [this](double v) { config_.footstepDuration = v; }),
@@ -734,40 +694,4 @@ bool FootManager::detectTouchDown() const
   }
 
   return true;
-}
-
-std::string std::to_string(const Foot & foot)
-{
-  if(foot == Foot::Left)
-  {
-    return std::string("Left");
-  }
-  else if(foot == Foot::Right)
-  {
-    return std::string("Right");
-  }
-  else
-  {
-    mc_rtc::log::error_and_throw("[to_string] Unsupported foot: {}", std::to_string(static_cast<int>(foot)));
-  }
-}
-
-std::string std::to_string(const SupportPhase & phase)
-{
-  if(phase == SupportPhase::DoubleSupport)
-  {
-    return std::string("DoubleSupport");
-  }
-  else if(phase == SupportPhase::LeftSupport)
-  {
-    return std::string("LeftSupport");
-  }
-  else if(phase == SupportPhase::RightSupport)
-  {
-    return std::string("RightSupport");
-  }
-  else
-  {
-    mc_rtc::log::error_and_throw("[to_string] Unsupported support phase: {}", std::to_string(static_cast<int>(phase)));
-  }
 }

@@ -15,15 +15,15 @@ public:
 
   /** \brief Constructor.
       \param fricCoeff friction coefficient
-      \param divideNum number of vertices on the base of the polygonal pyramid
+      \param ridgeNum number of ridges of friction pyramid
    */
-  FrictionPyramid(double fricCoeff, int divideNum = 4);
+  FrictionPyramid(double fricCoeff, int ridgeNum = 4);
 
   /** \brief Calculate ridge vector list in global coordinates. */
   std::vector<Eigen::Vector3d> calcGlobalRidgeList(const Eigen::Matrix3d & rot) const;
 
   /** \brief Number of ridges. */
-  inline int divideNum() const
+  inline int ridgeNum() const
   {
     return localRidgeList_.size();
   }
@@ -78,21 +78,12 @@ public:
   sva::ForceVecd calcWrench(const Eigen::VectorXd & wrenchRatio,
                             const Eigen::Vector3d & momentOrigin = Eigen::Vector3d::Zero()) const;
 
-  /** \brief Calculate vertex forces represented in local coordinates.
-      \param wrenchRatio wrench ratio of each ridge
-      \returns vertex forces represented in local coordinates
-   */
-  std::vector<Eigen::Vector3d> calcLocalVertexForceList(const Eigen::VectorXd & wrenchRatio) const;
-
 public:
   //! Name of contact
   std::string name_;
 
   //! Grasp matrix
   Eigen::Matrix<double, 6, Eigen::Dynamic> graspMat_;
-
-  //! Grasp matrix list of vertex forces represented in local coordinates
-  std::vector<Eigen::Matrix<double, 3, Eigen::Dynamic>> localGraspMatList_;
 
   //! List of vertex with ridges
   std::vector<VertexWithRidge> vertexWithRidgeList_;
