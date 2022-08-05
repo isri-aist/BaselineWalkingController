@@ -1,0 +1,4 @@
+name: BaselineWalkingController documentation
+gems:
+  - jekyll-redirect-from
+  - jekyll-sitemap
