@@ -213,10 +213,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a64f144014b04b4b5f81e20dab3cda3d5"><td class="memTemplItemLeft" align="right" valign="top">U&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a64f144014b04b4b5f81e20dab3cda3d5">interpolateDerivative</a> (const T &amp;start, const T &amp;end, double ratio, int order=1)</td></tr>
 <tr class="memdesc:a64f144014b04b4b5f81e20dab3cda3d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative value interpolating from start to end.  <a href="#a64f144014b04b4b5f81e20dab3cda3d5">More...</a><br /></td></tr>
 <tr class="separator:a64f144014b04b4b5f81e20dab3cda3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc8ed929f0c08d70bfa53973e8dae8a0"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
-<tr class="memitem:abc8ed929f0c08d70bfa53973e8dae8a0"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#abc8ed929f0c08d70bfa53973e8dae8a0">interpolateDerivative</a> (const Eigen::Vector3d &amp;start, const Eigen::Vector3d &amp;end, double ratio, int order)</td></tr>
-<tr class="memdesc:abc8ed929f0c08d70bfa53973e8dae8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of 3D vector interpolating from start to end.  <a href="#abc8ed929f0c08d70bfa53973e8dae8a0">More...</a><br /></td></tr>
-<tr class="separator:abc8ed929f0c08d70bfa53973e8dae8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85579dca895a9cb31be74e845ed468ab"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
 <tr class="memitem:a85579dca895a9cb31be74e845ed468ab"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a85579dca895a9cb31be74e845ed468ab">interpolateDerivative</a> (const Eigen::Quaterniond &amp;start, const Eigen::Quaterniond &amp;end, double ratio, int order)</td></tr>
 <tr class="memdesc:a85579dca895a9cb31be74e845ed468ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of Quaternion interpolating from start to end.  <a href="#a85579dca895a9cb31be74e845ed468ab">More...</a><br /></td></tr>
@@ -225,6 +221,10 @@ Functions</h2></td></tr>
 <tr class="memitem:aa8be7e4b9d50c9b7305cfb043fb25d00"><td class="memTemplItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#aa8be7e4b9d50c9b7305cfb043fb25d00">interpolateDerivative</a> (const Eigen::Matrix3d &amp;start, const Eigen::Matrix3d &amp;end, double ratio, int order)</td></tr>
 <tr class="memdesc:aa8be7e4b9d50c9b7305cfb043fb25d00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of 3D matrix interpolating from start to end.  <a href="#aa8be7e4b9d50c9b7305cfb043fb25d00">More...</a><br /></td></tr>
 <tr class="separator:aa8be7e4b9d50c9b7305cfb043fb25d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368efc26aa8dd8d0897af2ef00342688"><td class="memTemplParams" colspan="2">template&lt;&gt; </td></tr>
+<tr class="memitem:a368efc26aa8dd8d0897af2ef00342688"><td class="memTemplItemLeft" align="right" valign="top">sva::MotionVecd&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a368efc26aa8dd8d0897af2ef00342688">interpolateDerivative</a> (const sva::PTransformd &amp;start, const sva::PTransformd &amp;end, double ratio, int order)</td></tr>
+<tr class="memdesc:a368efc26aa8dd8d0897af2ef00342688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of pose interpolating from start to end.  <a href="#a368efc26aa8dd8d0897af2ef00342688">More...</a><br /></td></tr>
+<tr class="separator:a368efc26aa8dd8d0897af2ef00342688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="aafe00c4e60c440c036f5ab37a474eba0"></a>
@@ -680,71 +680,8 @@ template&lt;class T , class U  = T&gt; </div>
 
 </div>
 </div>
-<a id="abc8ed929f0c08d70bfa53973e8dae8a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc8ed929f0c08d70bfa53973e8dae8a0">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::Vector3d BWC::interpolateDerivative </td>
-          <td>(</td>
-          <td class="paramtype">const Eigen::Vector3d &amp;&#160;</td>
-          <td class="paramname"><em>start</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Eigen::Vector3d &amp;&#160;</td>
-          <td class="paramname"><em>end</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ratio</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>order</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculate the derivative of 3D vector interpolating from start to end. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">start</td><td>start value </td></tr>
-    <tr><td class="paramname">end</td><td>end value </td></tr>
-    <tr><td class="paramname">ratio</td><td>interpolation ratio </td></tr>
-    <tr><td class="paramname">order</td><td>derivative order </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00076">76</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
-
-</div>
-</div>
 <a id="a85579dca895a9cb31be74e845ed468ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85579dca895a9cb31be74e845ed468ab">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a85579dca895a9cb31be74e845ed468ab">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -802,12 +739,12 @@ template&lt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00098">98</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00085">85</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
 <a id="aa8be7e4b9d50c9b7305cfb043fb25d00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8be7e4b9d50c9b7305cfb043fb25d00">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8be7e4b9d50c9b7305cfb043fb25d00">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -865,7 +802,70 @@ template&lt;&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00121">121</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00108">108</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+
+</div>
+</div>
+<a id="a368efc26aa8dd8d0897af2ef00342688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a368efc26aa8dd8d0897af2ef00342688">&#9670;&nbsp;</a></span>interpolateDerivative() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sva::MotionVecd BWC::interpolateDerivative </td>
+          <td>(</td>
+          <td class="paramtype">const sva::PTransformd &amp;&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sva::PTransformd &amp;&#160;</td>
+          <td class="paramname"><em>end</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>ratio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>order</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the derivative of pose interpolating from start to end. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>start value </td></tr>
+    <tr><td class="paramname">end</td><td>end value </td></tr>
+    <tr><td class="paramname">ratio</td><td>interpolation ratio </td></tr>
+    <tr><td class="paramname">order</td><td>derivative order </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00131">131</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
