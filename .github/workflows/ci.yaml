@@ -116,7 +116,7 @@ jobs:
       #     catkin_test_results --verbose --all build
       - name: Upload documentation
         # Only run on master branch and for one configuration
-        if: matrix.build-type == 'RelWithDebInfo' && github.ref == 'refs/heads/master'
+        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
@@ -125,6 +125,7 @@ jobs:
           git config --global user.email "m-murooka@aist.go.jp"
           git remote set-url origin "https://mmurooka:${{ secrets.CI_TOKEN }}@github.com/isri-aist/BaselineWalkingController"
           git fetch --depth=1 origin gh-pages:gh-pages
+          git clean -dfx
           git checkout --quiet gh-pages
           rm -rf doxygen/
           cp -r ${GITHUB_WORKSPACE}/catkin_ws/build/baseline_walking_controller/doc/html/ doxygen
