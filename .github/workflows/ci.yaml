@@ -51,7 +51,7 @@ jobs:
           set -e
           set -x
           curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/${{ matrix.mc-rtc-version }}/setup.deb.sh' | sudo -E bash
-          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin mc-openrtm
+          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin mc-openrtm libeigen-qld-dev
       - name: Setup catkin workspace
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
@@ -95,22 +95,6 @@ jobs:
           sudo rosdep init
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
-      #### [Start] Install QP solvers ####
-      - name: Checkout eigen-qld
-        uses: actions/checkout@v2
-        with:
-          repository: jrl-umi3218/eigen-qld
-          submodules: recursive
-          path: eigen-qld
-      - name: Install eigen-qld
-        run: |
-          set -x
-          set -e
-          cd ${GITHUB_WORKSPACE}/eigen-qld
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
-          make && sudo make install
-      #### [End] Install QP solvers ####
       - name: Catkin build
         run: |
           set -e
