@@ -1,0 +1,6 @@
+MainRobot: JVRC1
+
+Enabled: BaselineWalkingController
+ControllerModulePaths: ["@CATKIN_DEVEL_PREFIX@/lib/mc_controller/"]
+
+Timestep: 0.005

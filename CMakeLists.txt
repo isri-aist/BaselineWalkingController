@@ -41,6 +41,8 @@ link_directories(${catkin_LIBRARY_DIRS})
 configure_file(etc/BaselineWalkingController.in.yaml
   "${CATKIN_DEVEL_PREFIX}/lib/mc_controller/etc/BaselineWalkingController.yaml" @ONLY)
 
+configure_file(etc/mc_rtc.in.yaml ${PROJECT_SOURCE_DIR}/etc/mc_rtc.yaml @ONLY)
+
 add_subdirectory(src)
 
 OPTION(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
