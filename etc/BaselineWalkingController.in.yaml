@@ -31,7 +31,7 @@ collisions:
   - type: collision
     useMinimal: true
 # Initial set of contacts
-contacts: [] # Add contacts in controller to retrieve the surface name automatically
+contacts: []
 
 # Implement some additional text states
 # states:
@@ -41,8 +41,6 @@ transitions:
 # Initial state
 init: BWC::Initial
 
-# ObserverPipelines are configured in parallel with the controller,
-# so the configuration cannot be overridden in the controller constructor.
 ObserverPipelines:
   name: MainObserverPipeline
   gui: false
@@ -164,12 +162,3 @@ CentroidalManager:
   # horizonDuration: 2.0 # [sec]
   # horizonDt: 0.02 # [sec]
   # ddpMaxIter: 3
-
-# AdditionalConfigurationFiles:
-#  - "@PROJECT_SOURCE_DIR@/etc/additional"
-
-# OverwriteConfigKeys: []
-
-# OverwriteConfigList:
-#   hrp5_p:
-#   hrp2_drc:
