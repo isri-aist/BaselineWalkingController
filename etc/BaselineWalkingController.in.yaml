@@ -59,14 +59,14 @@ CoMTask:
   weight: 1000.0
   activeJoints: [
   "Root",
-  "LCY", "LCR", "LCP", "LKP", "LAP", "LAR",
-  "RCY", "RCR", "RCP", "RKP", "RAP", "RAR"]
+  "R_HIP_Y", "R_HIP_R", "R_HIP_P", "R_KNEE", "R_ANKLE_P", "R_ANKLE_R",
+  "L_HIP_Y", "L_HIP_R", "L_HIP_P", "L_KNEE", "L_ANKLE_P", "L_ANKLE_R"]
 
 BaseOrientationTask:
   type: orientation
   stiffness: 300.0
   weight: 500.0
-  body: Chest_Link2
+  body: WAIST_R_S
 
 FootTaskList:
   - type: firstOrderImpedance
@@ -144,7 +144,7 @@ CentroidalManager:
   zmpVelGain: 0.02
   comZGainP: 2000.0
   comZGainD: 500.0
-  refComZ: 0.95 # [m]
+  refComZ: 0.825 # [m]
   useTargetPoseForControlRobotAnchorFrame: true
   useActualComForWrenchDist: true
   wrenchDistConfig:
@@ -157,7 +157,7 @@ CentroidalManager:
   # PreviewControlZmp
   method: PreviewControlZmp
   horizonDuration: 2.0 # [sec]
-  horizonDt: 0.002 # [sec]
+  horizonDt: 0.005 # [sec]
 
   # # DdpZmp
   # method: DdpZmp
