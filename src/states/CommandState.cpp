@@ -20,10 +20,10 @@ void CommandState::start(mc_control::fsm::Controller & _ctl)
       mc_rtc::gui::Form(
           "Walk",
           [this](const mc_rtc::Configuration & config) {
-            if(ctl().footManager_->supportPhase() != SupportPhase::DoubleSupport)
+            if(ctl().footManager_->footstepQueue().size() > 0)
             {
-              mc_rtc::log::error("[CommandState] Command can only be sent in the double support phase: {}",
-                                 std::to_string(ctl().footManager_->supportPhase()));
+              mc_rtc::log::error("[CommandState] The command can be sent only when the footstep queue is empty: {}",
+                                 ctl().footManager_->footstepQueue().size());
               return;
             }
             sendWalkingCommand(Eigen::Vector3d(config(walkConfigKeys_.at("x")), config(walkConfigKeys_.at("y")),
