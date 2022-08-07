@@ -24,6 +24,17 @@ void InitialState::start(mc_control::fsm::Controller & _ctl)
 
 bool InitialState::run(mc_control::fsm::Controller &)
 {
+  if(phase_ == 0)
+  {
+    // Auto start
+    if(config_.has("configs") && config_("configs").has("autoStartTime")
+       && ctl().t() > static_cast<double>(config_("configs")("autoStartTime")))
+    {
+      phase_ = 1;
+    }
+
+    return false;
+  }
   if(phase_ == 1)
   {
     phase_ = 2;
@@ -56,7 +67,7 @@ bool InitialState::run(mc_control::fsm::Controller &)
 
     return false;
   }
-  else if(phase_ == 2)
+  else // if(phase_ == 2)
   {
     phase_ = 3;
 
@@ -66,10 +77,20 @@ bool InitialState::run(mc_control::fsm::Controller &)
     ctl().footManager_->addToLogger(ctl().logger());
     ctl().centroidalManager_->addToLogger(ctl().logger());
 
+    // Send initial footstep
+    if(config_.has("configs") && config_("configs").has("initialFootstepList"))
+    {
+      for(const auto & footstepConfig : config_("configs")("initialFootstepList"))
+      {
+        const auto & footstep =
+            ctl().footManager_->makeFootstep(strToFoot(footstepConfig("foot")), footstepConfig("footMidpose"),
+                                             ctl().t() + static_cast<double>(footstepConfig("startTime")));
+        ctl().footManager_->appendFootstep(footstep);
+      }
+    }
+
     return true;
   }
-
-  return false;
 }
 
 void InitialState::teardown(mc_control::fsm::Controller &) {}

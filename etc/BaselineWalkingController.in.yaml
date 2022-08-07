@@ -35,6 +35,9 @@ contacts: []
 
 # Implement some additional text states
 states:
+  BWC::Initial_:
+    base: BWC::Initial
+
   BWC::Command_:
     base: BWC::Command
     configs:
@@ -42,7 +45,7 @@ states:
 
 # Transitions map
 transitions:
-  - [BWC::Initial, OK, BWC::Command_, Auto]
+  - [BWC::Initial_, OK, BWC::Command_, Auto]
 # Initial state
 init: BWC::Initial
 
