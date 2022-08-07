@@ -144,16 +144,16 @@ jobs:
           kill -2 $CNOID_PID
           kill -2 $FFMPEG_PID
           sleep 10s
-          mkdir -p /tmp/results
-          ffmpeg -i video.avi /tmp/results/video.mp4
-          tar czf /tmp/results/log.tar.gz `readlink -f /tmp/mc-control-LIPMWalking-latest.bin`
+          mkdir -p /tmp/simulation_results
+          ffmpeg -i video.avi /tmp/simulation_results/video.mp4
+          tar czf /tmp/simulation_results/log.tar.gz `readlink -f /tmp/mc-control-LIPMWalking-latest.bin`
       - name: Upload simulation data
         # Only run for one configuration
         if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
-          name: results
-          path: /tmp/results
+          name: simulation_results
+          path: /tmp/simulation_results
       - name: Upload documentation
         # Only run on master branch and for one configuration
         if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
