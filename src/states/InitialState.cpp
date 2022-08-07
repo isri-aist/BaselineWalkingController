@@ -80,12 +80,24 @@ bool InitialState::run(mc_control::fsm::Controller &)
     // Send initial footstep
     if(config_.has("configs") && config_("configs").has("initialFootstepList"))
     {
+      Foot foot = Foot::Left;
+      double startTime = ctl().t();
+
       for(const auto & footstepConfig : config_("configs")("initialFootstepList"))
       {
-        const auto & footstep =
-            ctl().footManager_->makeFootstep(strToFoot(footstepConfig("foot")), footstepConfig("footMidpose"),
-                                             ctl().t() + static_cast<double>(footstepConfig("startTime")));
+        if(footstepConfig.has("foot"))
+        {
+          foot = strToFoot(footstepConfig("foot"));
+        }
+        if(footstepConfig.has("startTime"))
+        {
+          startTime = ctl().t() + static_cast<double>(footstepConfig("startTime"));
+        }
+        const auto & footstep = ctl().footManager_->makeFootstep(foot, footstepConfig("footMidpose"), startTime);
         ctl().footManager_->appendFootstep(footstep);
+
+        foot = opposite(foot);
+        startTime = footstep.transitEndTime;
       }
     }
 
