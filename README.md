@@ -12,13 +12,28 @@ Humanoid walking controller with various baseline methods
 
 ### Dependencies
 This package depends on
+- [mc_rtc](https://jrl-umi3218.github.io/mc_rtc)
 - [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 - [NMPC](https://github.com/isri-aist/NMPC)
 - [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection)
 
-### Installation procedure
-It is assumed that [ROS](http://wiki.ros.org/ROS/Installation) and [mc_rtc](https://jrl-umi3218.github.io/mc_rtc/tutorials/introduction/installation-guide.html) is installed.
+### Preparation
+1. Install ROS. See [here](http://wiki.ros.org/ROS/Installation) for details.
+```bash
+$ export ROS_DISTRO=melodic
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+$ wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install ros-${ROS_DISTRO}-ros-base python-catkin-tools python-rosdep
+```
 
+2. Install mc_rtc. See [here](https://jrl-umi3218.github.io/mc_rtc/tutorials/introduction/installation-guide.html) for details.
+```bash
+$ curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/stable/setup.deb.sh' | sudo -E bash
+$ sudo apt-get install libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-rviz-panel libeigen-qld-dev
+```
+
+### Controller installation
 1. Setup catkin workspace.
 ```bash
 $ mkdir -p ~/ros/ws_bwc/src
@@ -40,4 +55,29 @@ $ rosdep install -y -r --from-paths src --ignore-src
 3. Build a package.
 ```bash
 $ catkin build baseline_walking_controller -DCMAKE_BUILD_TYPE=RelWithDebInfo --catkin-make-args all tests
+
+4. Setup controller
+```bash
+$ mkdir -p ~/.config/mc_rtc/controllers
+$ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.config/mc_rtc/mc_rtc.yaml
+```
+
+### Simulator installation
+```bash
+$ sudo apt-get install mc-openrtm jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+```
+
+### Simulator execution
+```bash
+# Terminal 1
+$ source ~/ros/ws_bwc/devel/setup.bash
+$ roscore
+# Terminal 2
+$ source ~/ros/ws_bwc/devel/setup.bash
+$ cd /usr/share/hrpsys/samples/JVRC1
+$ ./clear-omninames.sh
+$ choreonoid sim_mc.cnoid --start-simulation
+# Terminal 3
+$ source ~/ros/ws_bwc/devel/setup.bash
+$ roslaunch baseline_walking_controller display.launch
 ```
