@@ -55,6 +55,7 @@ $ rosdep install -y -r --from-paths src --ignore-src
 3. Build a package.
 ```bash
 $ catkin build baseline_walking_controller -DCMAKE_BUILD_TYPE=RelWithDebInfo --catkin-make-args all tests
+```
 
 4. Setup controller
 ```bash
