@@ -69,12 +69,11 @@ void BaselineWalkingController::reset(const mc_control::ControllerResetData & re
 
   // Print message to set priority
   long tid = static_cast<long>(syscall(SYS_gettid));
-  mc_rtc::log::success("[BaselineWalkingController] TID is {}. Run the following command to set high priority:\n  sudo "
-                       "renice -n -20 -p {}",
-                       tid, tid);
-  mc_rtc::log::success(
-      "[BaselineWalkingController] You can check the current priority by the following command:\n  ps -p "
-      "`pgrep choreonoid` -o pid,tid,args,ni,pri,wchan m");
+  mc_rtc::log::info("[BaselineWalkingController] TID is {}. Run the following command to set high priority:\n  sudo "
+                    "renice -n -20 -p {}",
+                    tid, tid);
+  mc_rtc::log::info("[BaselineWalkingController] You can check the current priority by the following command:\n  ps -p "
+                    "`pgrep choreonoid` -o pid,tid,args,ni,pri,wchan m");
 
   mc_rtc::log::success("[BaselineWalkingController] Reset.");
 }
