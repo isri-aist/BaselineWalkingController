@@ -64,7 +64,7 @@ $ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.con
 
 ### Simulator installation
 ```bash
-$ sudo apt-get install mc-openrtm jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+$ sudo apt-get install mc-openrtm jvrc-choreonoid
 ```
 
 ### Simulator execution
