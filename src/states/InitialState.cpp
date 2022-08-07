@@ -50,18 +50,20 @@ bool InitialState::run(mc_control::fsm::Controller &)
     // Setup anchor frame
     ctl().centroidalManager_->setAnchorFrame();
 
+    // Add GUI of managers
+    ctl().footManager_->addToGUI(*ctl().gui());
+    ctl().centroidalManager_->addToGUI(*ctl().gui());
+
     return false;
   }
   else if(phase_ == 2)
   {
     phase_ = 3;
 
-    // Add GUI and logger of managers
-    // Considering the possibility that GUI and logger entries assume that variables are set in the manager's update
-    // method, it is safe to call the update method once and then add the GUI and logger
-    ctl().footManager_->addToGUI(*ctl().gui());
+    // Add logger of managers
+    // Considering the possibility that logger entries assume that variables are set in the manager's update method,
+    // it is safe to call the update method once and then add the logger
     ctl().footManager_->addToLogger(ctl().logger());
-    ctl().centroidalManager_->addToGUI(*ctl().gui());
     ctl().centroidalManager_->addToLogger(ctl().logger());
 
     return true;
