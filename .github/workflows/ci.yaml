@@ -146,7 +146,7 @@ jobs:
           sleep 10s
           mkdir -p /tmp/simulation_results
           ffmpeg -i video.avi /tmp/simulation_results/video.mp4
-          tar czf /tmp/simulation_results/log.tar.gz `readlink -f /tmp/mc-control-LIPMWalking-latest.bin`
+          tar czf /tmp/simulation_results/log.tar.gz `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
       - name: Upload simulation data
         # Only run for one configuration
         if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
