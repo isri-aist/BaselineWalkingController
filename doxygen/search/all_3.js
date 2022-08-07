@@ -3,6 +3,7 @@ var searchData=
   ['dcmgainp',['dcmGainP',['../structBWC_1_1CentroidalManager_1_1Configuration.html#afaff6578ec1bed09dfea79393dcffe17',1,'BWC::CentroidalManager::Configuration']]],
   ['ddp_5f',['ddp_',['../classBWC_1_1CentroidalManagerDdpZmp.html#a011e9380ac931d9ff2b0be4c557be4e4',1,'BWC::CentroidalManagerDdpZmp']]],
   ['ddpmaxiter',['ddpMaxIter',['../structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#a1b997cf83ba11426fbc6c420f8f1554d',1,'BWC::CentroidalManagerDdpZmp::Configuration']]],
+  ['deltatranslimit_5f',['deltaTransLimit_',['../structBWC_1_1CommandState.html#ae64a1d6eed7aa5681b44e69551c4e412',1,'BWC::CommandState']]],
   ['derivative',['derivative',['../classBWC_1_1CubicHermiteSpline.html#aadb7111f43cd89dc880c117c9c3e4be1',1,'BWC::CubicHermiteSpline::derivative()'],['../classBWC_1_1CubicInterpolator.html#a71108781d7d8f6ce6764986fb6f0dee5',1,'BWC::CubicInterpolator::derivative()'],['../classBWC_1_1Func.html#a6febbfcbf786ee513f708c130a86b799',1,'BWC::Func::derivative()'],['../classBWC_1_1PiecewiseFunc.html#aa304d21f6811fbe1e696ecfe8bb98985',1,'BWC::PiecewiseFunc::derivative()'],['../classBWC_1_1Polynomial.html#a01fa986e053e3cf7dd2694cbb17ada89',1,'BWC::Polynomial::derivative()']]],
   ['desiredtotalwrench_5f',['desiredTotalWrench_',['../classBWC_1_1WrenchDistribution.html#a6ce437c102efbb5eecb183a66a271012',1,'BWC::WrenchDistribution']]],
   ['detecttouchdown',['detectTouchDown',['../classBWC_1_1FootManager.html#a870158cd3a085c6a61aa4747ae8edea1',1,'BWC::FootManager']]],
