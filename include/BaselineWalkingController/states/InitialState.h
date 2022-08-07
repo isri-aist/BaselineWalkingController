@@ -8,9 +8,6 @@ namespace BWC
 struct InitialState : State
 {
 public:
-  /** \brief Configure. */
-  void configure(const mc_rtc::Configuration & config) override;
-
   /** \brief Start. */
   void start(mc_control::fsm::Controller & ctl) override;
 

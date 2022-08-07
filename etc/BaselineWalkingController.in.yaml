@@ -34,10 +34,15 @@ collisions:
 contacts: []
 
 # Implement some additional text states
-# states:
+states:
+  BWC::Command_:
+    base: BWC::Command
+    configs:
+      deltaTransLimit: [0.125, 0.1, 12.5] #  (x [m], y [m], theta [deg])
+
 # Transitions map
 transitions:
-  - [BWC::Initial, OK, BWC::Command, Auto]
+  - [BWC::Initial, OK, BWC::Command_, Auto]
 # Initial state
 init: BWC::Initial
 

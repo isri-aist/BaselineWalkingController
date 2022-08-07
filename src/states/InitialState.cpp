@@ -10,8 +10,6 @@
 
 using namespace BWC;
 
-void InitialState::configure(const mc_rtc::Configuration &) {}
-
 void InitialState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);

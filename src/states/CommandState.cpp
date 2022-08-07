@@ -8,11 +8,19 @@
 
 using namespace BWC;
 
-void CommandState::configure(const mc_rtc::Configuration &) {}
-
 void CommandState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);
+
+  // Load configuration
+  if(config_.has("configs"))
+  {
+    if(config_("configs").has("deltaTransLimit"))
+    {
+      deltaTransLimit_ = config_("configs")("deltaTransLimit");
+      deltaTransLimit_[2] = mc_rtc::constants::toRad(deltaTransLimit_[2]);
+    }
+  }
 
   // Setup GUI
   ctl().gui()->addElement(
@@ -62,7 +70,6 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
   // The 2D variables (i.e., goalTrans, deltaTrans) represent the transformation relative to the initial pose,
   // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, currentFootMidpose) represent the
   // transformation in the world frame.
-  const Eigen::Vector3d deltaTransLimit(0.15, 0.1, mc_rtc::constants::toRad(15));
   const sva::PTransformd & initialFootMidpose = projGround(sva::interpolate(
       ctl().footManager_->targetFootPose(Foot::Left), ctl().footManager_->targetFootPose(Foot::Right), 0.5));
   const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
@@ -73,8 +80,8 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
 
   while(convertTo2d(goalFootMidpose * currentFootMidpose.inv()).norm() > 1e-6)
   {
-    Eigen::Vector3d deltaTransMax = deltaTransLimit;
-    Eigen::Vector3d deltaTransMin = -deltaTransLimit;
+    Eigen::Vector3d deltaTransMax = deltaTransLimit_;
+    Eigen::Vector3d deltaTransMin = -deltaTransLimit_;
     if(foot == Foot::Left)
     {
       deltaTransMin.y() = 0;

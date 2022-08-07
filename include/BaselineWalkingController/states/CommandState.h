@@ -8,9 +8,6 @@ namespace BWC
 struct CommandState : State
 {
 public:
-  /** \brief Configure. */
-  void configure(const mc_rtc::Configuration & config) override;
-
   /** \brief Start. */
   void start(mc_control::fsm::Controller & ctl) override;
 
@@ -28,6 +25,9 @@ protected:
   void sendWalkingCommand(const Eigen::Vector3d & goalTrans, int lastFootstepNum);
 
 protected:
+  //! Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad])
+  Eigen::Vector3d deltaTransLimit_ = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
+
   //! Form entry keys of walking command
   const std::unordered_map<std::string, std::string> walkConfigKeys_ = {{"x", "goal x [m]"},
                                                                         {"y", "goal y [m]"},
