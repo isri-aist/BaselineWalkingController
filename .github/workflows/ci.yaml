@@ -51,7 +51,7 @@ jobs:
           set -e
           set -x
           curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/${{ matrix.mc-rtc-version }}/setup.deb.sh' | sudo -E bash
-          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin mc-openrtm libeigen-qld-dev
+          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin libeigen-qld-dev
       - name: Setup catkin workspace
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
@@ -114,6 +114,46 @@ jobs:
       #     set -x
       #     catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- baseline_walking_controller --no-deps
       #     catkin_test_results --verbose --all build
+      - name: Run simulation
+        # Only run for one configuration
+        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
+        run: |
+          set -e
+          set -x
+          sudo apt-get install -qq mc-openrtm jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+          set +x
+          . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
+          set -x
+          export DISPLAY=":1"
+          Xvfb $DISPLAY -screen 0 1920x1080x24 &
+          sleep 10s
+          fluxbox 2> /dev/null &
+          mkdir -p ${HOME}/.config/mc_rtc/controllers
+          cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+          cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/BaselineWalkingController.yaml ${HOME}/.config/mc_rtc/controllers/
+          pushd .
+          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i $DISPLAY -qscale 0 -vcodec huffyuv video.avi 2> /dev/null &
+          FFMPEG_PID=$!
+          cd /usr/share/hrpsys/samples/JVRC1
+          ./clear-omninames.sh
+          choreonoid --start-simulation sim_mc.cnoid &
+          CNOID_PID=$!
+          popd
+          sleep 30s
+          kill -2 $CNOID_PID
+          kill -2 $FFMPEG_PID
+          sleep 10s
+          mkdir -p /tmp/results
+          ffmpeg -i video.avi /tmp/results/video.mp4
+          tar czf /tmp/results/log.tar.gz `readlink -f /tmp/mc-control-LIPMWalking-latest.bin`
+      - name: Upload simulation data
+        # Only run for one configuration
+        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        uses: actions/upload-artifact@v1
+        with:
+          name: results
+          path: /tmp/results
       - name: Upload documentation
         # Only run on master branch and for one configuration
         if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
