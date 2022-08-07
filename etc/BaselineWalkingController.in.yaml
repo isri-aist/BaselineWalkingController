@@ -47,7 +47,7 @@ states:
 transitions:
   - [BWC::Initial_, OK, BWC::Command_, Auto]
 # Initial state
-init: BWC::Initial
+init: BWC::Initial_
 
 ObserverPipelines:
   name: MainObserverPipeline
