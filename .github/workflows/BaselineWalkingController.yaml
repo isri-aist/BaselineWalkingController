@@ -1,0 +1,34 @@
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 2.0
+      initialFootstepList:
+        - foot: Left
+          footMidpose:
+            translation: [0.15, 0.0, 0.0]
+          startTime: 2.0
+        - foot: Right
+          footMidpose:
+            translation: [0.30, 0.0, 0.0]
+          startTime: 2.8
+        - foot: Left
+          footMidpose:
+            translation: [0.45, 0.0, 0.0]
+          startTime: 3.6
+        - foot: Right
+          footMidpose:
+            translation: [0.60, 0.0, 0.0]
+          startTime: 4.4
+        - foot: Left
+          footMidpose:
+            translation: [0.75, 0.0, 0.0]
+          startTime: 5.2
+        - foot: Right
+          footMidpose:
+            translation: [0.9, 0.0, 0.0]
+          startTime: 6.0
+        - foot: Left
+          footMidpose:
+            translation: [0.9, 0.0, 0.0]
+          startTime: 6.8
