@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="rviz" type="rviz" name="$(anon rviz)"
+        args="-d $(find baseline_walking_controller)/rviz/display.rviz" output="screen"/>
+</launch>
