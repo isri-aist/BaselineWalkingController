@@ -6,11 +6,13 @@ Humanoid walking controller with various baseline methods
 
 ## Quick trial on Docker
 [Install Docker](https://docs.docker.com/engine/install/ubuntu/) and execute the following commands.
-The window of the dynamics simulator Choreonoid will open and the robot will walk.
 ```bash
 $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
+$ xhost +local:
 $ docker run --gpus all --rm -it --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
 ```
+The window of the dynamics simulator Choreonoid will open and the robot will walk.
+Close the Choreonoid window to exit.
 
 ## Install
 
