@@ -68,7 +68,7 @@ $ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.con
 $ sudo apt-get install mc-openrtm jvrc-choreonoid
 ```
 
-### Simulator execution
+### Simulation execution
 ```bash
 # Terminal 1
 $ source ~/ros/ws_bwc/devel/setup.bash
