@@ -29,15 +29,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build-type: [Debug, RelWithDebInfo]
+        os: [ubuntu-20.04, ubuntu-18.04]
+        build-type: [RelWithDebInfo, Debug]
         mc-rtc-version: [head, stable]
         exclude:
           - build-type: Debug
-            mc-rtc-version: head
-    runs-on: ubuntu-18.04
-    env:
-      ROS_DISTRO: melodic
+            mc-rtc-version: stable
+    runs-on: ${{ matrix.os }}
     steps:
+      - name: Set ROS version
+        run: |
+          if [ "${{ matrix.os }}" == "ubuntu-20.04" ]
+          then
+            echo "ROS_DISTRO=noetic" >> $GITHUB_ENV
+            echo "PYTHON_PACKAGE_PREFIX=python3" >> $GITHUB_ENV
+          else
+            echo "ROS_DISTRO=melodic" >> $GITHUB_ENV
+            echo "PYTHON_PACKAGE_PREFIX=python" >> $GITHUB_ENV
+          fi
       - name: Install ROS
         run: |
           set -e
@@ -45,7 +54,7 @@ jobs:
           sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
           wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
           sudo apt-get update -qq
-          sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base python-catkin-tools python-rosdep doxygen graphviz
+          sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
       - name: Install mc_rtc
         run: |
           set -e
@@ -116,7 +125,7 @@ jobs:
       #     catkin_test_results --verbose --all build
       - name: Run simulation
         # Only run for one configuration
-        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
         # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
         run: |
           set -e
@@ -149,14 +158,14 @@ jobs:
           tar czf /tmp/simulation_results/log.tar.gz `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
       - name: Upload simulation data
         # Only run for one configuration
-        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
         uses: actions/upload-artifact@v3
         with:
           name: simulation_results
           path: /tmp/simulation_results
       - name: Upload documentation
-        # Only run on master branch and for one configuration
-        if: matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
+        # Only run for one configuration and on master branch
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
