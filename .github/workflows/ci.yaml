@@ -1,4 +1,4 @@
-name: CI of BaselineWalkingController
+name: Main CI of BaselineWalkingController
 
 on:
   push:

@@ -1,0 +1,35 @@
+name: Docker image of BaselineWalkingController
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  docker-build-and-push:
+    if: github.repository_owner== 'isri-aist' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-20.04
+    env:
+      IMAGE_NAME: ghcr.io/isri-aist/baseline_walking_controller
+      IMAGE_TAG: latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          path: BaselineWalkingController
+      - name: Docker version
+        run: docker version
+      - name: Build docker image
+        run: |
+          cd ${GITHUB_WORKSPACE}/BaselineWalkingController/.github/workflows/
+          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+      - name: Docker images
+        run: docker images
+      - name: Login to registries
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u isri-aist --password-stdin
+      - name: Push to GitHub Packages
+        run: |
+          docker push ${IMAGE_NAME}:${IMAGE_TAG}
