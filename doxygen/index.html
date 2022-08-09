@@ -71,7 +71,8 @@ $(function() {
 <div class="textblock"><p>Humanoid walking controller with various baseline methods</p>
 <p><a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml"></a> <a href="https://isri-aist.github.io/BaselineWalkingController/"></a></p>
 <h2>Quick trial on Docker</h2>
-<p><a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker</a> and execute the following commands. The window of the dynamics simulator Choreonoid will open and the robot will walk. </p><div class="fragment"><div class="line">$ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest</div><div class="line">$ docker run --gpus all --rm -it --env=&quot;DISPLAY&quot; --volume=&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot; ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash</div></div><!-- fragment --><h2>Install</h2>
+<p><a href="https://docs.docker.com/engine/install/ubuntu/">Install Docker</a> and execute the following commands. </p><div class="fragment"><div class="line">$ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest</div><div class="line">$ xhost +local:</div><div class="line">$ docker run --gpus all --rm -it --env=&quot;DISPLAY&quot; --volume=&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot; ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash</div></div><!-- fragment --><p> The window of the dynamics simulator Choreonoid will open and the robot will walk. Close the Choreonoid window to exit.</p>
+<h2>Install</h2>
 <h3>Requirements</h3>
 <ul>
 <li>Compiler supporting C++17</li>
