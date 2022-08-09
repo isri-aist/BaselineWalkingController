@@ -5,14 +5,25 @@ Humanoid walking controller with various baseline methods
 [![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](https://isri-aist.github.io/BaselineWalkingController/)
 
 ## Quick trial on Docker
-[Install Docker](https://docs.docker.com/engine/install/ubuntu/) and execute the following commands.
+1. (Skip if Docker is already installed.) Install Docker. See [here](https://docs.docker.com/engine/install) for details.
+```bash
+$ sudo apt-get install ca-certificates curl gnupg lsb-release
+$ sudo mkdir -p /etc/apt/keyrings
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+$ echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+$ sudo apt-get update
+$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+
+2. By executing the following commands, the window of the dynamics simulator Choreonoid will open and the robot will walk.
+Close the Choreonoid window to exit.
 ```bash
 $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
 $ xhost +local:
 $ docker run --gpus all --rm -it --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
 ```
-The window of the dynamics simulator Choreonoid will open and the robot will walk.
-Close the Choreonoid window to exit.
 
 ## Install
 
@@ -28,7 +39,7 @@ This package depends on
 - [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection)
 
 ### Preparation
-1. Install ROS. See [here](http://wiki.ros.org/ROS/Installation) for details.
+1. (Skip if ROS is already installed.) Install ROS. See [here](http://wiki.ros.org/ROS/Installation) for details.
 ```bash
 $ export ROS_DISTRO=melodic
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -37,7 +48,7 @@ $ sudo apt-get update
 $ sudo apt-get install ros-${ROS_DISTRO}-ros-base python-catkin-tools python-rosdep
 ```
 
-2. Install mc_rtc. See [here](https://jrl-umi3218.github.io/mc_rtc/tutorials/introduction/installation-guide.html) for details.
+2. (Skip if mc_rtc is already installed.) Install mc_rtc. See [here](https://jrl-umi3218.github.io/mc_rtc/tutorials/introduction/installation-guide.html) for details.
 ```bash
 $ curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/stable/setup.deb.sh' | sudo -E bash
 $ sudo apt-get install libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin ros-${ROS_DISTRO}-mc-rtc-rviz-panel libeigen-qld-dev
