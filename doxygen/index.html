@@ -74,6 +74,13 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>Humanoid walking controller with various baseline methods</p>
 <p><a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml"><object type="image/svg+xml" data="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml/badge.svg" style="pointer-events: none;">CI</object></a> <a href="https://isri-aist.github.io/BaselineWalkingController/"><img src="https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&amp;style=flat" alt="Documentation" class="inline"/></a></p>
+<h1>Features</h1>
+<ul>
+<li>Easy to switch between various methods of centroidal trajectory generation for walking implemented in <a href="https://github.com/isri-aist/CentroidalControlCollection">CentroidalControlCollection</a>.</li>
+<li>Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.</li>
+<li>Support for a virtual robot whose model is publicly available so you can try out the controller right away.</li>
+<li>Automated management with CI: Dynamics simulation is run on CI to verify robot walking, and a docker image is <a href="https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller">released here</a> with the latest version of the controller ready to run.</li>
+</ul>
 <h1>Quick trial on Docker</h1>
 <ol type="1">
 <li>(Skip if Docker is already installed.) Install Docker. See <a href="https://docs.docker.com/engine/install">here</a> for details. <div class="fragment"><div class="line">$ sudo apt-get install ca-certificates curl gnupg lsb-release</div>
@@ -96,7 +103,7 @@ $(function() {
 <h2>Requirements</h2>
 <ul>
 <li>Compiler supporting C++17</li>
-<li>Tested with Ubuntu 18.04 / ROS Melodic</li>
+<li>Tested with <code>Ubuntu 20.04 / ROS Noetic</code> and <code>Ubuntu 18.04 / ROS Melodic</code></li>
 </ul>
 <h2>Dependencies</h2>
 <p>This package depends on</p><ul>
