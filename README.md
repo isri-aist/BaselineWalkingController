@@ -22,7 +22,9 @@ Close the Choreonoid window to exit.
 ```bash
 $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
 $ xhost +local:
-$ docker run --gpus all --rm -it --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
+$ docker run --gpus all --rm -it \
+  --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+  ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
 ```
 
 ## Install
