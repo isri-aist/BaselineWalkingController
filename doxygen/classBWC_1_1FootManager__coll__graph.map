@@ -1,5 +1,7 @@
 <map id="BWC::FootManager" name="BWC::FootManager">
-<area shape="rect" id="node2" href="$structBWC_1_1FootManager_1_1Configuration.html" title="Configuration. " alt="" coords="5,81,247,108"/>
-<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods. " alt="" coords="271,81,506,108"/>
-<area shape="rect" id="node5" href="$structBWC_1_1Footstep.html" title="Footstep. " alt="" coords="530,81,647,108"/>
+<area shape="rect" id="node1" title=" " alt="" coords="316,171,463,197"/>
+<area shape="rect" id="node2" href="$structBWC_1_1FootManager_1_1Configuration.html" title="Configuration." alt="" coords="5,81,248,108"/>
+<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="272,81,507,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="290,5,489,32"/>
+<area shape="rect" id="node5" href="$structBWC_1_1Footstep.html" title="Footstep." alt="" coords="531,81,648,108"/>
 </map>

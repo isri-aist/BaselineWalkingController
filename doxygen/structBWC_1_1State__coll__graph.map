@@ -1,3 +1,6 @@
 <map id="BWC::State" name="BWC::State">
-<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods. " alt="" coords="199,81,434,108"/>
+<area shape="rect" id="node1" title="FSM State with utility functions." alt="" coords="64,171,159,197"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,175,108"/>
+<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="199,81,434,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="217,5,416,32"/>
 </map>

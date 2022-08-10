@@ -1,5 +1,6 @@
 <map id="BWC::PiecewiseFunc&lt; T &gt;" name="BWC::PiecewiseFunc&lt; T &gt;">
-<area shape="rect" id="node3" href="$classBWC_1_1CubicHermiteSpline.html" title="Cubic Hermite spline. " alt="" coords="5,155,233,181"/>
-<area shape="rect" id="node4" href="$classBWC_1_1CubicSpline.html" title="Cubic spline. " alt="" coords="257,155,432,181"/>
-<area shape="rect" id="node2" href="$classBWC_1_1Func.html" title="Mathematical function. " alt="" coords="167,5,296,32"/>
+<area shape="rect" id="node1" title="Piecewise function." alt="" coords="134,80,329,107"/>
+<area shape="rect" id="node3" href="$classBWC_1_1CubicHermiteSpline.html" title="Cubic Hermite spline." alt="" coords="5,155,233,181"/>
+<area shape="rect" id="node4" href="$classBWC_1_1CubicSpline.html" title="Cubic spline." alt="" coords="257,155,432,181"/>
+<area shape="rect" id="node2" href="$classBWC_1_1Func.html" title="Mathematical function." alt="" coords="167,5,296,32"/>
 </map>

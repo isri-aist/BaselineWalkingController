@@ -1,3 +1,5 @@
 <map id="BWC::CentroidalManager" name="BWC::CentroidalManager">
-<area shape="rect" id="node2" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods. " alt="" coords="5,81,240,108"/>
+<area shape="rect" id="node1" title="Centroidal manager." alt="" coords="30,171,215,197"/>
+<area shape="rect" id="node2" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="5,81,240,108"/>
+<area shape="rect" id="node3" title=" " alt="" coords="23,5,222,32"/>
 </map>

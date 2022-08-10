@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['baselinewalkingcontroller',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC']]],
-  ['boundaryconstraint',['BoundaryConstraint',['../structBWC_1_1BoundaryConstraint.html',1,'BWC']]]
+  ['baselinewalkingcontroller_228',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC']]],
+  ['boundaryconstraint_229',['BoundaryConstraint',['../structBWC_1_1BoundaryConstraint.html',1,'BWC']]]
 ];
