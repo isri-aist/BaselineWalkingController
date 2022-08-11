@@ -163,6 +163,13 @@ jobs:
         with:
           name: simulation_results
           path: /tmp/simulation_results
+      - name: Check simulation results
+        # Only run for one configuration
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        run: |
+          set -e
+          set -x
+          ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
       - name: Upload documentation
         # Only run for one configuration and on master branch
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
