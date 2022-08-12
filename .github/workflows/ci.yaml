@@ -169,7 +169,9 @@ jobs:
         run: |
           set -e
           set -x
-          ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
+          # Workaround for https://github.com/jrl-umi3218/mc_rtc/issues/281
+          sudo sed -i "s/matplotlib.use('Qt5Agg')/# matplotlib.use('Qt5Agg')/g" /usr/lib/python3/dist-packages/mc_log_ui/mc_log_types.py
+          python3 ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
       - name: Upload documentation
         # Only run for one configuration and on master branch
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
