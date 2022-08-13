@@ -211,7 +211,7 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   MC_RTC_LOG_HELPER(config().name + "_ZMP_planned", plannedZmp_);
   MC_RTC_LOG_HELPER(config().name + "_ZMP_control", controlZmp_);
   logger.addLogEntry(config().name + "_ZMP_controlWrenchDist", this, [this]() {
-    return wrenchDist_ ? calcZmp(wrenchDist_->calcWrenchList()) : Eigen::Vector3d::Zero();
+    return wrenchDist_ ? calcZmp(wrenchDist_->calcWrenchList(), refZmp_.z()) : Eigen::Vector3d::Zero();
   });
   logger.addLogEntry(config().name + "_ZMP_measured", this, [this]() {
     std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
@@ -223,7 +223,7 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
       const auto & sensorWrench = sensor.worldWrenchWithoutGravity(ctl().robot());
       sensorWrenchList.emplace(foot, sensorWrench);
     }
-    return calcZmp(sensorWrenchList);
+    return calcZmp(sensorWrenchList, refZmp_.z());
   });
   logger.addLogEntry(config().name + "_ZMP_SupportRegion_min", this, [this]() {
     Eigen::Vector2d minPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::max());
