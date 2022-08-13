@@ -50,7 +50,7 @@ void CentroidalManagerPreviewControlZmp::runMpc()
   Eigen::Vector2d plannedData =
       pc_->planOnce(std::bind(&CentroidalManagerPreviewControlZmp::calcRefData, this, std::placeholders::_1),
                     initialParam, ctl().t(), ctl().dt());
-  plannedZmp_ << plannedData, 0.0;
+  plannedZmp_ << plannedData, refZmp_.z();
   plannedForceZ_ = robotMass_ * CCC::constants::g;
 
   if(firstIter_)

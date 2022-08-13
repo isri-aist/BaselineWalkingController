@@ -62,7 +62,7 @@ void CentroidalManagerDdpZmp::runMpc()
 
   CCC::DdpZmp::PlannedData plannedData = ddp_->planOnce(
       std::bind(&CentroidalManagerDdpZmp::calcRefData, this, std::placeholders::_1), initialParam, ctl().t());
-  plannedZmp_ << plannedData.zmp, 0.0;
+  plannedZmp_ << plannedData.zmp, refZmp_.z();
   plannedForceZ_ = plannedData.force_z;
 }
 
