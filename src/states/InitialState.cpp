@@ -93,7 +93,8 @@ bool InitialState::run(mc_control::fsm::Controller &)
         {
           startTime = ctl().t() + static_cast<double>(footstepConfig("startTime"));
         }
-        const auto & footstep = ctl().footManager_->makeFootstep(foot, footstepConfig("footMidpose"), startTime);
+        const auto & footstep = ctl().footManager_->makeFootstep(foot, footstepConfig("footMidpose"), startTime,
+                                                                 (footstepConfig("config", mc_rtc::Configuration())));
         ctl().footManager_->appendFootstep(footstep);
 
         foot = opposite(foot);

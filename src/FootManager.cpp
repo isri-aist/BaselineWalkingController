@@ -237,12 +237,17 @@ const std::string & FootManager::surfaceName(const Foot & foot) const
   return ctl().footTasks_.at(foot)->surface();
 }
 
-Footstep FootManager::makeFootstep(const Foot & foot, const sva::PTransformd & footMidpose, double startTime) const
+Footstep FootManager::makeFootstep(const Foot & foot,
+                                   const sva::PTransformd & footMidpose,
+                                   double startTime,
+                                   const mc_rtc::Configuration & mcRtcConfig) const
 {
-  return Footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
-                  startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
-                  startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
-                  startTime + config_.footstepDuration);
+  Footstep footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
+                    startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
+                    startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
+                    startTime + config_.footstepDuration);
+  footstep.config.load(mcRtcConfig);
+  return footstep;
 }
 
 bool FootManager::appendFootstep(const Footstep & newFootstep)

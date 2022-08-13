@@ -125,8 +125,12 @@ public:
       \param foot foot
       \param footMidpose middle pose of both feet
       \param startTime time to start the footstep
+      \param mcRtcConfig mc_rtc configuration
   */
-  Footstep makeFootstep(const Foot & foot, const sva::PTransformd & footMidpose, double startTime) const;
+  Footstep makeFootstep(const Foot & foot,
+                        const sva::PTransformd & footMidpose,
+                        double startTime,
+                        const mc_rtc::Configuration & mcRtcConfig = {}) const;
 
   /** \brief Append a target footstep to the queue.
       \param newFootstep footstep to append
