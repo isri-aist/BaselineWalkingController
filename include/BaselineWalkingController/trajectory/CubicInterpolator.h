@@ -179,7 +179,7 @@ public:
   /** \brief Add point.
       \param point time and value
 
-      \note ::calcCoeff should be called before calling ::operator().
+      \note CubicInterpolator::calcCoeff should be called before calling CubicInterpolator::operator().
   */
   void appendPoint(const std::pair<double, T> & point)
   {
