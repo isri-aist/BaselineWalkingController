@@ -221,7 +221,7 @@ protected:
   }
 
   /** \brief Update foot tasks. */
-  void updateFootTasks();
+  void updateFootTraj();
 
   /** \brief Update ZMP trajectory. */
   void updateZmpTraj();
@@ -274,8 +274,8 @@ protected:
   //! Support phase
   SupportPhase supportPhase_ = SupportPhase::DoubleSupport;
 
-  //! ZMP trajectory function
-  std::shared_ptr<CubicInterpolator<Eigen::Vector3d>> zmpTrajFunc_;
+  //! ZMP function
+  std::shared_ptr<CubicInterpolator<Eigen::Vector3d>> zmpFunc_;
 
   //! Ground Z position function
   std::shared_ptr<CubicInterpolator<Vector1d>> groundPosZFunc_;

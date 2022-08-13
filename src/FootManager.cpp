@@ -48,7 +48,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 }
 
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
-: ctlPtr_(ctlPtr), zmpTrajFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
+: ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
   groundPosZFunc_(std::make_shared<CubicInterpolator<Vector1d>>()),
   swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
   swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
@@ -72,10 +72,10 @@ void FootManager::reset()
   supportPhase_ = SupportPhase::DoubleSupport;
 
   Eigen::Vector3d targetZmp = calcZmpWithOffset(targetFootPoses_);
-  zmpTrajFunc_->clearPoints();
-  zmpTrajFunc_->appendPoint(std::make_pair(ctl().t(), targetZmp));
-  zmpTrajFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, targetZmp));
-  zmpTrajFunc_->calcCoeff();
+  zmpFunc_->clearPoints();
+  zmpFunc_->appendPoint(std::make_pair(ctl().t(), targetZmp));
+  zmpFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, targetZmp));
+  zmpFunc_->calcCoeff();
 
   Vector1d refGroundPosZ;
   refGroundPosZ << 0.5
@@ -105,7 +105,7 @@ void FootManager::reset()
 
 void FootManager::update()
 {
-  updateFootTasks();
+  updateFootTraj();
   updateZmpTraj();
 }
 
@@ -220,7 +220,7 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
 
   logger.addLogEntry(config_.name + "_supportPhase", this, [this]() { return std::to_string(supportPhase_); });
 
-  logger.addLogEntry(config_.name + "_refZmp", this, [this]() { return (*zmpTrajFunc_)(ctl().t()); });
+  logger.addLogEntry(config_.name + "_refZmp", this, [this]() { return (*zmpFunc_)(ctl().t()); });
 
   logger.addLogEntry(config_.name + "_refGroundPosZ", this, [this]() { return (*groundPosZFunc_)(ctl().t())[0]; });
 
@@ -286,11 +286,11 @@ Eigen::Vector3d FootManager::calcRefZmp(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*zmpTrajFunc_)(t);
+    return (*zmpFunc_)(t);
   }
   else
   {
-    return zmpTrajFunc_->derivative(t, derivOrder);
+    return zmpFunc_->derivative(t, derivOrder);
   }
 }
 
@@ -381,7 +381,7 @@ double FootManager::leftFootSupportRatio() const
   }
 }
 
-void FootManager::updateFootTasks()
+void FootManager::updateFootTraj()
 {
   // Remove old footsteps from footstepQueue_
   while(!footstepQueue_.empty() && footstepQueue_.front().transitEndTime < ctl().t())
@@ -644,7 +644,7 @@ void FootManager::updateFootTasks()
 
 void FootManager::updateZmpTraj()
 {
-  zmpTrajFunc_->clearPoints();
+  zmpFunc_->clearPoints();
   groundPosZFunc_->clearPoints();
 
   std::unordered_map<Foot, sva::PTransformd> footPoses = lastDoubleSupportFootPoses_;
@@ -658,7 +658,7 @@ void FootManager::updateZmpTraj()
   if(footstepQueue_.empty() || ctl().t() < footstepQueue_.front().transitStartTime)
   {
     // Set initial point
-    zmpTrajFunc_->appendPoint(std::make_pair(ctl().t(), calcZmpWithOffset(footPoses)));
+    zmpFunc_->appendPoint(std::make_pair(ctl().t(), calcZmpWithOffset(footPoses)));
     groundPosZFunc_->appendPoint(std::make_pair(ctl().t(), calcFootMidposZ(footPoses)));
   }
 
@@ -667,20 +667,20 @@ void FootManager::updateZmpTraj()
     Foot supportFoot = opposite(footstep.foot);
     Eigen::Vector3d supportFootZmp = calcZmpWithOffset(supportFoot, footPoses.at(supportFoot));
 
-    zmpTrajFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcZmpWithOffset(footPoses)));
+    zmpFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcZmpWithOffset(footPoses)));
     groundPosZFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcFootMidposZ(footPoses)));
 
-    zmpTrajFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
+    zmpFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
     groundPosZFunc_->appendPoint(std::make_pair(footstep.swingStartTime, calcFootMidposZ(footPoses)));
 
     // Update footPoses
     footPoses.at(footstep.foot) = footstep.pose;
 
-    zmpTrajFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));
+    zmpFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));
     groundPosZFunc_->appendPoint(std::make_pair(footstep.swingEndTime, calcFootMidposZ(footPoses)));
 
     groundPosZFunc_->appendPoint(std::make_pair(footstep.transitEndTime, calcFootMidposZ(footPoses)));
-    zmpTrajFunc_->appendPoint(std::make_pair(footstep.transitEndTime, calcZmpWithOffset(footPoses)));
+    zmpFunc_->appendPoint(std::make_pair(footstep.transitEndTime, calcZmpWithOffset(footPoses)));
 
     if(ctl().t() + config_.zmpHorizon <= footstep.transitEndTime)
     {
@@ -691,11 +691,11 @@ void FootManager::updateZmpTraj()
   if(footstepQueue_.empty() || footstepQueue_.back().transitEndTime < ctl().t() + config_.zmpHorizon)
   {
     // Set terminal point
-    zmpTrajFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, calcZmpWithOffset(footPoses)));
+    zmpFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, calcZmpWithOffset(footPoses)));
     groundPosZFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, calcFootMidposZ(footPoses)));
   }
 
-  zmpTrajFunc_->calcCoeff();
+  zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
 }
 
