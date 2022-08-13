@@ -155,6 +155,9 @@ protected:
   //! CoM velocity used as the initial state of MPC
   Eigen::Vector3d mpcComVel_ = Eigen::Vector3d::Zero();
 
+  //! Reference ZMP
+  Eigen::Vector3d refZmp_ = Eigen::Vector3d::Zero();
+
   //! ZMP planned by MPC
   Eigen::Vector3d plannedZmp_ = Eigen::Vector3d::Zero();
 

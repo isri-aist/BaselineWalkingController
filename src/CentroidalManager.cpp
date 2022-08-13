@@ -55,6 +55,7 @@ void CentroidalManager::update()
     mpcCom_ = ctl().comTask_->com();
     mpcComVel_ = ctl().comTask_->refVel();
   }
+  refZmp_ = ctl().footManager_->calcRefZmp(ctl().t());
 
   // Run MPC
   runMpc();
@@ -72,7 +73,7 @@ void CentroidalManager::update()
     // Apply DCM feedback
     if(config().enableZmpFeedback)
     {
-      double omega = std::sqrt(plannedForceZ_ / (robotMass_ * mpcCom_.z()));
+      double omega = std::sqrt(plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z())));
       Eigen::Vector3d plannedDcm = ctl().comTask_->com() + ctl().comTask_->refVel() / omega;
       Eigen::Vector3d actualDcm = ctl().realRobot().com() + ctl().realRobot().comVelocity() / omega;
       controlZmp_.head<2>() += config().dcmGainP * (actualDcm - plannedDcm).head<2>();
@@ -98,7 +99,7 @@ void CentroidalManager::update()
     Eigen::Vector3d comForWrenchDist =
         (config().useActualComForWrenchDist ? ctl().realRobot().com() : ctl().comTask_->com());
     sva::ForceVecd controlWrench;
-    controlWrench.force() << controlForceZ_ / comForWrenchDist.z()
+    controlWrench.force() << controlForceZ_ / (comForWrenchDist.z() - refZmp_.z())
                                  * (comForWrenchDist.head<2>() - controlZmp_.head<2>()),
         controlForceZ_;
     controlWrench.moment().setZero(); // Moment is represented around CoM
@@ -109,7 +110,8 @@ void CentroidalManager::update()
   {
     // Set target of CoM task
     Eigen::Vector3d plannedComAccel;
-    plannedComAccel << plannedForceZ_ / (robotMass_ * mpcCom_.z()) * (mpcCom_.head<2>() - plannedZmp_.head<2>()),
+    plannedComAccel << plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z()))
+                           * (mpcCom_.head<2>() - plannedZmp_.head<2>()),
         plannedForceZ_ / robotMass_;
     plannedComAccel.z() -= CCC::constants::g;
     Eigen::Vector3d nextPlannedCom =
@@ -205,7 +207,7 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
   MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
 
-  logger.addLogEntry(config().name + "_ZMP_ref", this, [this]() { return ctl().footManager_->calcRefZmp(ctl().t()); });
+  logger.addLogEntry(config().name + "_ZMP_ref", this, [this]() { return refZmp_; });
   MC_RTC_LOG_HELPER(config().name + "_ZMP_planned", plannedZmp_);
   MC_RTC_LOG_HELPER(config().name + "_ZMP_control", controlZmp_);
   logger.addLogEntry(config().name + "_ZMP_controlWrenchDist", this, [this]() {
