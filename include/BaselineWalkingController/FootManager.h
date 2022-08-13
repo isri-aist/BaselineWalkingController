@@ -149,6 +149,12 @@ public:
   */
   Eigen::Vector3d calcRefZmp(double t, int derivOrder = 0) const;
 
+  /** \brief Calculate reference ground Z position.
+      \param t time
+      \param derivOrder derivative order (0 for original value, 1 for velocity)
+  */
+  double calcRefGroundPosZ(double t, int derivOrder = 0) const;
+
   /** \brief Calculate contact feet. */
   std::set<Foot> getContactFeet() const;
 
@@ -262,11 +268,17 @@ protected:
   //! Target foot acceleration represented in world frame
   std::unordered_map<Foot, sva::MotionVecd> targetFootAccels_;
 
+  //! Foot poses in the last double support phase
+  std::unordered_map<Foot, sva::PTransformd> lastDoubleSupportFootPoses_;
+
   //! Support phase
   SupportPhase supportPhase_ = SupportPhase::DoubleSupport;
 
   //! ZMP trajectory function
   std::shared_ptr<CubicInterpolator<Eigen::Vector3d>> zmpTrajFunc_;
+
+  //! Ground Z position function
+  std::shared_ptr<CubicInterpolator<Vector1d>> groundPosZFunc_;
 
   //! Footstep during swing
   const Footstep * swingFootstep_ = nullptr;

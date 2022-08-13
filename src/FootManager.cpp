@@ -49,6 +49,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
 : ctlPtr_(ctlPtr), zmpTrajFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
+  groundPosZFunc_(std::make_shared<CubicInterpolator<Vector1d>>()),
   swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
   swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
   baseYawFunc_(std::make_shared<CubicInterpolator<Vector1d>>())
@@ -66,6 +67,7 @@ void FootManager::reset()
     targetFootVels_.emplace(foot, sva::MotionVecd::Zero());
     targetFootAccels_.emplace(foot, sva::MotionVecd::Zero());
   }
+  lastDoubleSupportFootPoses_ = targetFootPoses_;
 
   supportPhase_ = SupportPhase::DoubleSupport;
 
@@ -74,6 +76,15 @@ void FootManager::reset()
   zmpTrajFunc_->appendPoint(std::make_pair(ctl().t(), targetZmp));
   zmpTrajFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, targetZmp));
   zmpTrajFunc_->calcCoeff();
+
+  Vector1d refGroundPosZ;
+  refGroundPosZ << 0.5
+                       * (targetFootPoses_.at(Foot::Left).translation().z()
+                          + targetFootPoses_.at(Foot::Right).translation().z());
+  groundPosZFunc_->clearPoints();
+  groundPosZFunc_->appendPoint(std::make_pair(ctl().t(), refGroundPosZ));
+  groundPosZFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, refGroundPosZ));
+  groundPosZFunc_->calcCoeff();
 
   swingFootstep_ = nullptr;
 
@@ -211,6 +222,8 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
 
   logger.addLogEntry(config_.name + "_refZmp", this, [this]() { return (*zmpTrajFunc_)(ctl().t()); });
 
+  logger.addLogEntry(config_.name + "_refGroundPosZ", this, [this]() { return (*groundPosZFunc_)(ctl().t())[0]; });
+
   logger.addLogEntry(config_.name + "_leftFootSupportRatio", this, [this]() { return leftFootSupportRatio(); });
 
   logger.addLogEntry(config_.name + "_touchDown", this, [this]() { return touchDown_; });
@@ -278,6 +291,18 @@ Eigen::Vector3d FootManager::calcRefZmp(double t, int derivOrder) const
   else
   {
     return zmpTrajFunc_->derivative(t, derivOrder);
+  }
+}
+
+double FootManager::calcRefGroundPosZ(double t, int derivOrder) const
+{
+  if(derivOrder == 0)
+  {
+    return (*groundPosZFunc_)(t)[0];
+  }
+  else
+  {
+    return groundPosZFunc_->derivative(t, derivOrder)[0];
   }
 }
 
@@ -450,15 +475,16 @@ void FootManager::updateFootTasks()
       // Set baseYawFunc_
       {
         Vector1d swingStartBaseYaw;
-        swingStartBaseYaw << (mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Left).rotation()).z()
-                              + mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Right).rotation()).z())
-                                 / 2;
+        swingStartBaseYaw << 0.5
+                                 * (mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Left).rotation()).z()
+                                    + mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Right).rotation()).z());
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartBaseYaw));
 
         Vector1d swingEndBaseYaw;
-        swingEndBaseYaw << (mc_rbdyn::rpyFromMat(swingFootstep_->pose.rotation()).z()
-                            + mc_rbdyn::rpyFromMat(targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation()).z())
-                               / 2;
+        swingEndBaseYaw
+            << 0.5
+                   * (mc_rbdyn::rpyFromMat(swingFootstep_->pose.rotation()).z()
+                      + mc_rbdyn::rpyFromMat(targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation()).z());
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingEndBaseYaw));
 
         baseYawFunc_->calcCoeff();
@@ -511,6 +537,7 @@ void FootManager::updateFootTasks()
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
+      lastDoubleSupportFootPoses_ = targetFootPoses_;
 
       // Set supportPhase_
       supportPhase_ = SupportPhase::DoubleSupport;
@@ -618,39 +645,44 @@ void FootManager::updateFootTasks()
 void FootManager::updateZmpTraj()
 {
   zmpTrajFunc_->clearPoints();
+  groundPosZFunc_->clearPoints();
 
-  std::unordered_map<Foot, sva::PTransformd> footPoses = targetFootPoses_;
+  std::unordered_map<Foot, sva::PTransformd> footPoses = lastDoubleSupportFootPoses_;
+
+  auto calcFootMidposZ = [](const std::unordered_map<Foot, sva::PTransformd> & _footPoses) {
+    Vector1d footMidposZ;
+    footMidposZ << 0.5 * (_footPoses.at(Foot::Left).translation().z() + _footPoses.at(Foot::Right).translation().z());
+    return footMidposZ;
+  };
 
   if(footstepQueue_.empty() || ctl().t() < footstepQueue_.front().transitStartTime)
   {
-    // Set ZMP at the foot middle position
+    // Set initial point
     zmpTrajFunc_->appendPoint(std::make_pair(ctl().t(), calcZmpWithOffset(footPoses)));
+    groundPosZFunc_->appendPoint(std::make_pair(ctl().t(), calcFootMidposZ(footPoses)));
   }
 
-  for(const auto & focusedFootstep : footstepQueue_)
+  for(const auto & footstep : footstepQueue_)
   {
-    Foot supportFoot = opposite(focusedFootstep.foot);
+    Foot supportFoot = opposite(footstep.foot);
     Eigen::Vector3d supportFootZmp = calcZmpWithOffset(supportFoot, footPoses.at(supportFoot));
 
-    // Keep ZMP at the foot middle position
-    if(ctl().t() < focusedFootstep.swingStartTime)
-    {
-      zmpTrajFunc_->appendPoint(std::make_pair(focusedFootstep.transitStartTime, calcZmpWithOffset(footPoses)));
-    }
+    zmpTrajFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcZmpWithOffset(footPoses)));
+    groundPosZFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcFootMidposZ(footPoses)));
 
-    // Move ZMP to the support foot position
-    zmpTrajFunc_->appendPoint(std::make_pair(focusedFootstep.swingStartTime, supportFootZmp));
-
-    // Keep ZMP at the support foot position
-    zmpTrajFunc_->appendPoint(std::make_pair(focusedFootstep.swingEndTime, supportFootZmp));
+    zmpTrajFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
+    groundPosZFunc_->appendPoint(std::make_pair(footstep.swingStartTime, calcFootMidposZ(footPoses)));
 
     // Update footPoses
-    footPoses.at(focusedFootstep.foot) = focusedFootstep.pose;
+    footPoses.at(footstep.foot) = footstep.pose;
 
-    // Move ZMP to the foot middle position
-    zmpTrajFunc_->appendPoint(std::make_pair(focusedFootstep.transitEndTime, calcZmpWithOffset(footPoses)));
+    zmpTrajFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));
+    groundPosZFunc_->appendPoint(std::make_pair(footstep.swingEndTime, calcFootMidposZ(footPoses)));
 
-    if(ctl().t() + config_.zmpHorizon <= focusedFootstep.transitEndTime)
+    groundPosZFunc_->appendPoint(std::make_pair(footstep.transitEndTime, calcFootMidposZ(footPoses)));
+    zmpTrajFunc_->appendPoint(std::make_pair(footstep.transitEndTime, calcZmpWithOffset(footPoses)));
+
+    if(ctl().t() + config_.zmpHorizon <= footstep.transitEndTime)
     {
       break;
     }
@@ -658,11 +690,13 @@ void FootManager::updateZmpTraj()
 
   if(footstepQueue_.empty() || footstepQueue_.back().transitEndTime < ctl().t() + config_.zmpHorizon)
   {
-    // Keep ZMP at the foot middle position
+    // Set terminal point
     zmpTrajFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, calcZmpWithOffset(footPoses)));
+    groundPosZFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, calcFootMidposZ(footPoses)));
   }
 
   zmpTrajFunc_->calcCoeff();
+  groundPosZFunc_->calcCoeff();
 }
 
 Eigen::Vector3d FootManager::calcZmpWithOffset(const Foot & foot, const sva::PTransformd & footPose) const
