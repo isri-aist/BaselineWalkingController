@@ -21,7 +21,7 @@ public:
     double horizonDuration = 2.0;
 
     //! Horizon dt [sec]
-    double horizonDt = 0.02;
+    double horizonDt = 0.005;
 
     /** \brief Load mc_rtc configuration. */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
