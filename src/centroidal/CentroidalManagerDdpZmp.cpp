@@ -70,6 +70,6 @@ CCC::DdpZmp::RefData CentroidalManagerDdpZmp::calcRefData(double t) const
 {
   CCC::DdpZmp::RefData refData;
   refData.zmp = ctl().footManager_->calcRefZmp(t).head<2>();
-  refData.com_z = config_.refComZ;
+  refData.com_z = config_.refComZ + ctl().footManager_->calcRefGroundPosZ(t);
   return refData;
 };

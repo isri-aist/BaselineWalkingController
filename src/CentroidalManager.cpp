@@ -117,9 +117,9 @@ void CentroidalManager::update()
     Eigen::Vector3d nextPlannedComVel = mpcComVel_ + ctl().dt() * plannedComAccel;
     if(isConstantComZ())
     {
-      nextPlannedCom.z() = config().refComZ;
-      nextPlannedComVel.z() = 0;
-      plannedComAccel.z() = 0;
+      nextPlannedCom.z() = config().refComZ + ctl().footManager_->calcRefGroundPosZ(ctl().t());
+      nextPlannedComVel.z() = ctl().footManager_->calcRefGroundPosZ(ctl().t(), 1);
+      plannedComAccel.z() = ctl().footManager_->calcRefGroundPosZ(ctl().t(), 2);
     }
     ctl().comTask_->com(nextPlannedCom);
     ctl().comTask_->refVel(nextPlannedComVel);
