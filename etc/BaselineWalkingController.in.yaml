@@ -97,9 +97,6 @@ FootManager:
       translation: [0, 0.105, 0] # [m]
     Right:
       translation: [0, -0.105, 0] # [m]
-  swingHeight: 0.05 # [m]
-  swingInitialLiftHeight: 0.015 # [m]
-  swingInitialLiftDurationRatio: 0.25
   zmpHorizon: 2.0 # [sec]
   zmpOffset: [0, -0.02, 0] # (positive for x-forward, y-outside, z-upward) [m]
   stopSwingTrajForTouchDownFoot: true

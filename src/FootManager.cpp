@@ -27,9 +27,6 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
       mcRtcConfig("midToFootTranss")(std::to_string(foot), midToFootTranss.at(foot));
     }
   }
-  mcRtcConfig("swingHeight", swingHeight);
-  mcRtcConfig("swingInitialLiftHeight", swingInitialLiftHeight);
-  mcRtcConfig("swingInitialLiftDurationRatio", swingInitialLiftDurationRatio);
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
@@ -129,14 +126,6 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::NumberInput(
           "doubleSupportRatio", [this]() { return config_.doubleSupportRatio; },
           [this](double v) { config_.doubleSupportRatio = v; }),
-      mc_rtc::gui::NumberInput(
-          "swingHeight", [this]() { return config_.swingHeight; }, [this](double v) { config_.swingHeight = v; }),
-      mc_rtc::gui::NumberInput(
-          "swingInitialLiftHeight", [this]() { return config_.swingInitialLiftHeight; },
-          [this](double v) { config_.swingInitialLiftHeight = v; }),
-      mc_rtc::gui::NumberInput(
-          "swingInitialLiftDurationRatio", [this]() { return config_.swingInitialLiftDurationRatio; },
-          [this](double v) { config_.swingInitialLiftDurationRatio = v; }),
       mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
@@ -410,64 +399,65 @@ void FootManager::updateFootTraj()
       {
         const sva::PTransformd & swingStartPose = ctl().robot().surfacePose(surfaceName(swingFootstep_->foot));
         const sva::PTransformd & swingGoalPose = swingFootstep_->pose;
-        sva::PTransformd swingMidPose = sva::interpolate(swingStartPose, swingGoalPose, 0.5);
-        double swingInitialLiftDuration =
-            config_.swingInitialLiftDurationRatio * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
+        double withdrawDuration = swingFootstep_->config.withdrawDurationRatio
+                                  * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
+        double approachDuration = swingFootstep_->config.approachDurationRatio
+                                  * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
 
         BoundaryConstraint<Eigen::Vector3d> zeroVelBC(BoundaryConstraintType::Velocity, Eigen::Vector3d::Zero());
         BoundaryConstraint<Eigen::Vector3d> zeroAccelBC(BoundaryConstraintType::Acceleration, Eigen::Vector3d::Zero());
 
-        // Spline for initial lift up
+        // Spline to withdraw foot
         // Pos
-        std::map<double, Eigen::Vector3d> liftUpWayPosPoints = {
+        std::map<double, Eigen::Vector3d> withdrawPosWaypoints = {
             {swingFootstep_->swingStartTime, swingStartPose.translation()},
-            {swingFootstep_->swingStartTime + swingInitialLiftDuration,
-             (sva::PTransformd(Eigen::Vector3d(0, 0, config_.swingInitialLiftHeight)) * swingStartPose).translation()}};
-        auto liftUpPosSpline =
-            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, liftUpWayPosPoints, zeroVelBC, zeroAccelBC);
-        liftUpPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingStartTime + swingInitialLiftDuration, liftUpPosSpline);
+            {swingFootstep_->swingStartTime + withdrawDuration,
+             (sva::PTransformd(swingFootstep_->config.withdrawOffset) * swingStartPose).translation()}};
+        auto withdrawPosSpline =
+            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, withdrawPosWaypoints, zeroVelBC, zeroAccelBC);
+        withdrawPosSpline->calcCoeff();
+        swingPosFunc_->appendFunc(swingFootstep_->swingStartTime + withdrawDuration, withdrawPosSpline);
         // Rot
         swingRotFunc_->appendPoint(
             std::make_pair(swingFootstep_->swingStartTime, swingStartPose.rotation().transpose()));
-        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime + swingInitialLiftDuration,
-                                                  swingStartPose.rotation().transpose()));
+        swingRotFunc_->appendPoint(
+            std::make_pair(swingFootstep_->swingStartTime + withdrawDuration, swingStartPose.rotation().transpose()));
 
-        // Spline for final lift down
+        // Spline to approach foot
         // Pos
-        std::map<double, Eigen::Vector3d> liftDownWayPosPoints = {
-            {swingFootstep_->swingEndTime - swingInitialLiftDuration,
-             (sva::PTransformd(Eigen::Vector3d(0, 0, config_.swingInitialLiftHeight)) * swingGoalPose).translation()},
+        std::map<double, Eigen::Vector3d> approachPosWaypoints = {
+            {swingFootstep_->swingEndTime - approachDuration,
+             (sva::PTransformd(swingFootstep_->config.approachOffset) * swingGoalPose).translation()},
             {swingFootstep_->swingEndTime, swingGoalPose.translation()}};
-        auto liftDownPosSpline =
-            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, liftDownWayPosPoints, zeroAccelBC, zeroVelBC);
-        liftDownPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime, liftDownPosSpline);
+        auto approachPosSpline =
+            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, approachPosWaypoints, zeroAccelBC, zeroVelBC);
+        approachPosSpline->calcCoeff();
+        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime, approachPosSpline);
         // Rot
-        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime - swingInitialLiftDuration,
+        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime - approachDuration,
                                                   swingFootstep_->pose.rotation().transpose()));
         swingRotFunc_->appendPoint(
             std::make_pair(swingFootstep_->swingEndTime, swingFootstep_->pose.rotation().transpose()));
 
-        // Spline for swing
+        // Spline to swing foot
         // Pos
-        std::map<double, Eigen::Vector3d> swingWayPosPoints = {
-            *liftUpWayPosPoints.rbegin(),
+        std::map<double, Eigen::Vector3d> swingPosWaypoints = {
+            *withdrawPosWaypoints.rbegin(),
             {0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime),
-             Eigen::Vector3d(swingMidPose.translation().x(), swingMidPose.translation().y(),
-                             std::max(swingStartPose.translation().z(), swingGoalPose.translation().z())
-                                 + config_.swingHeight)},
-            *liftDownWayPosPoints.begin()};
+             (sva::PTransformd(swingFootstep_->config.swingOffset)
+              * sva::interpolate(swingStartPose, swingGoalPose, 0.5))
+                 .translation()},
+            *approachPosWaypoints.begin()};
         auto swingPosSpline = std::make_shared<CubicSpline<Eigen::Vector3d>>(
-            3, swingWayPosPoints,
+            3, swingPosWaypoints,
             BoundaryConstraint<Eigen::Vector3d>(
                 BoundaryConstraintType::Velocity,
-                liftUpPosSpline->derivative(swingFootstep_->swingStartTime + swingInitialLiftDuration, 1)),
+                withdrawPosSpline->derivative(swingFootstep_->swingStartTime + withdrawDuration, 1)),
             BoundaryConstraint<Eigen::Vector3d>(
                 BoundaryConstraintType::Velocity,
-                liftDownPosSpline->derivative(swingFootstep_->swingEndTime - swingInitialLiftDuration, 1)));
+                approachPosSpline->derivative(swingFootstep_->swingEndTime - approachDuration, 1)));
         swingPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime - swingInitialLiftDuration, swingPosSpline);
+        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime - approachDuration, swingPosSpline);
         // Rot
         swingRotFunc_->calcCoeff();
       }

@@ -40,15 +40,6 @@ public:
         {Foot::Left, sva::PTransformd(Eigen::Vector3d(0, 0.1, 0))},
         {Foot::Right, sva::PTransformd(Eigen::Vector3d(0, -0.1, 0))}};
 
-    //! Swing height [m]
-    double swingHeight = 0.05;
-
-    //! Swing initial and final height (included in swingHeight) [m]
-    double swingInitialLiftHeight = 0.01;
-
-    //! Swing initial and final duration
-    double swingInitialLiftDurationRatio = 0.2;
-
     //! Horizon of ZMP trajectory [sec]
     double zmpHorizon = 2.0;
 
