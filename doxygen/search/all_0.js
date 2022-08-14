@@ -6,5 +6,7 @@ var searchData=
   ['appendfootstep_3',['appendFootstep',['../classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92',1,'BWC::FootManager']]],
   ['appendfunc_4',['appendFunc',['../classBWC_1_1PiecewiseFunc.html#a99ef1b6ec7ddac2e1371320645f0d113',1,'BWC::PiecewiseFunc']]],
   ['appendpoint_5',['appendPoint',['../classBWC_1_1CubicHermiteSpline.html#aa71b02d1714d4839c756743c2da7d707',1,'BWC::CubicHermiteSpline::appendPoint()'],['../classBWC_1_1CubicInterpolator.html#a4556d78bcc7c6cb9080cf2c578b439c4',1,'BWC::CubicInterpolator::appendPoint()'],['../classBWC_1_1CubicSpline.html#aaa9f7386a1f242444714a06bcaa7794b',1,'BWC::CubicSpline::appendPoint()']]],
-  ['argsegment_6',['argSegment',['../classBWC_1_1CubicHermiteSpline.html#a9d17f20dc121a5118b7a408aa35bc303',1,'BWC::CubicHermiteSpline']]]
+  ['approachdurationratio_6',['approachDurationRatio',['../structBWC_1_1Footstep_1_1Configuration.html#a41418411ca83b8f24aff4bc26aad93ae',1,'BWC::Footstep::Configuration']]],
+  ['approachoffset_7',['approachOffset',['../structBWC_1_1Footstep_1_1Configuration.html#aba325a1da32b81c214299b7e3ff9690c',1,'BWC::Footstep::Configuration']]],
+  ['argsegment_8',['argSegment',['../classBWC_1_1CubicHermiteSpline.html#a9d17f20dc121a5118b7a408aa35bc303',1,'BWC::CubicHermiteSpline']]]
 ];

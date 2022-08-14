@@ -182,6 +182,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a93e93d996197a3bde9f6388aa7978d62"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62">mpcComVel_</a> = Eigen::Vector3d::Zero()</td></tr>
 <tr class="memdesc:a93e93d996197a3bde9f6388aa7978d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">CoM velocity used as the initial state of MPC.  <a href="classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62">More...</a><br /></td></tr>
 <tr class="separator:a93e93d996197a3bde9f6388aa7978d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28c2e717ae3c5b4200630fbbae32b6c9"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a28c2e717ae3c5b4200630fbbae32b6c9">refZmp_</a> = Eigen::Vector3d::Zero()</td></tr>
+<tr class="memdesc:a28c2e717ae3c5b4200630fbbae32b6c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference ZMP.  <a href="classBWC_1_1CentroidalManager.html#a28c2e717ae3c5b4200630fbbae32b6c9">More...</a><br /></td></tr>
+<tr class="separator:a28c2e717ae3c5b4200630fbbae32b6c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aa77c0911a409a233367684f684a6e3"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a2aa77c0911a409a233367684f684a6e3">plannedZmp_</a> = Eigen::Vector3d::Zero()</td></tr>
 <tr class="memdesc:a2aa77c0911a409a233367684f684a6e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZMP planned by MPC.  <a href="classBWC_1_1CentroidalManager.html#a2aa77c0911a409a233367684f684a6e3">More...</a><br /></td></tr>
 <tr class="separator:a2aa77c0911a409a233367684f684a6e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -712,7 +715,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classBWC_1_1Contact.html" title="Contact constraint.">Contact</a> list. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00174">174</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00177">177</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -738,7 +741,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Force Z with feedback control. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00168">168</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00171">171</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -764,7 +767,7 @@ Protected Attributes</h2></td></tr>
 
 <p>ZMP with feedback control. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00165">165</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00168">168</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -868,7 +871,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Force Z planned by MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00162">162</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00165">165</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -893,6 +896,32 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>ZMP planned by MPC. </p>
+
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00162">162</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+
+</div>
+</div>
+<a id="a28c2e717ae3c5b4200630fbbae32b6c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c2e717ae3c5b4200630fbbae32b6c9">&#9670;&nbsp;</a></span>refZmp_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Vector3d BWC::CentroidalManager::refZmp_ = Eigen::Vector3d::Zero()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reference ZMP. </p>
 
 <p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00159">159</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
@@ -946,7 +975,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Wrench distribution. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00171">171</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00174">174</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>

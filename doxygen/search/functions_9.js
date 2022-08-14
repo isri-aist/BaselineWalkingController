@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['makefootstep_326',['makeFootstep',['../classBWC_1_1FootManager.html#a66c5b73c90d2f237a946b5e479759cb0',1,'BWC::FootManager']]]
+  ['makefootstep_333',['makeFootstep',['../classBWC_1_1FootManager.html#aef27d93a76fc28bb62f3e1f8816d861f',1,'BWC::FootManager']]]
 ];

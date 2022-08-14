@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['stopswingtrajfortouchdownfoot_427',['stopSwingTrajForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c',1,'BWC::FootManager::Configuration']]],
-  ['supportphase_5f_428',['supportPhase_',['../classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f',1,'BWC::FootManager']]],
-  ['swingendtime_429',['swingEndTime',['../structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509',1,'BWC::Footstep']]],
-  ['swingfootstep_5f_430',['swingFootstep_',['../classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6',1,'BWC::FootManager']]],
-  ['swingheight_431',['swingHeight',['../structBWC_1_1FootManager_1_1Configuration.html#a169b89705bb08bb0c624517b3fa6ce72',1,'BWC::FootManager::Configuration']]],
-  ['swinginitialliftdurationratio_432',['swingInitialLiftDurationRatio',['../structBWC_1_1FootManager_1_1Configuration.html#a99d1dbef5501a4118ca3a7c3a9387679',1,'BWC::FootManager::Configuration']]],
-  ['swinginitialliftheight_433',['swingInitialLiftHeight',['../structBWC_1_1FootManager_1_1Configuration.html#a8f6a663d1395a16e9f3b69b7e868deca',1,'BWC::FootManager::Configuration']]],
-  ['swingposfunc_5f_434',['swingPosFunc_',['../classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9',1,'BWC::FootManager']]],
-  ['swingrotfunc_5f_435',['swingRotFunc_',['../classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727',1,'BWC::FootManager']]],
-  ['swingstarttime_436',['swingStartTime',['../structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b',1,'BWC::Footstep']]]
+  ['refcomz_431',['refComZ',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a7cd2c2d2bca99f7b679da4900501cbcd',1,'BWC::CentroidalManager::Configuration']]],
+  ['refzmp_5f_432',['refZmp_',['../classBWC_1_1CentroidalManager.html#a28c2e717ae3c5b4200630fbbae32b6c9',1,'BWC::CentroidalManager']]],
+  ['regularweight_433',['regularWeight',['../structBWC_1_1WrenchDistribution_1_1Configuration.html#addb8c33e01f86d9738a9cb1aeb0fac52',1,'BWC::WrenchDistribution::Configuration']]],
+  ['requireimpgainupdate_5f_434',['requireImpGainUpdate_',['../classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e',1,'BWC::FootManager']]],
+  ['resulttotalwrench_5f_435',['resultTotalWrench_',['../classBWC_1_1WrenchDistribution.html#af37bcb672acd23cb22624bbd466ce554',1,'BWC::WrenchDistribution']]],
+  ['resultwrenchratio_5f_436',['resultWrenchRatio_',['../classBWC_1_1WrenchDistribution.html#accdf9022ce35ba938c33b3587ffe5c2e',1,'BWC::WrenchDistribution']]],
+  ['ridgeforceminmax_437',['ridgeForceMinMax',['../structBWC_1_1WrenchDistribution_1_1Configuration.html#a6d6ed77491b81806410805860a85ae45',1,'BWC::WrenchDistribution::Configuration']]],
+  ['ridgelist_438',['ridgeList',['../structBWC_1_1Contact_1_1VertexWithRidge.html#abfaaa9dc8d1c4b0c92cf7715829c2c69',1,'BWC::Contact::VertexWithRidge']]],
+  ['robotmass_5f_439',['robotMass_',['../classBWC_1_1CentroidalManager.html#a73798dded16013c2186d63a5b4591033',1,'BWC::CentroidalManager']]]
 ];

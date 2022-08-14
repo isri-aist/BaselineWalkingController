@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_453',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
-  ['vertex_454',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
-  ['vertexwithridgelist_5f_455',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]]
+  ['useactualcomforwrenchdist_461',['useActualComForWrenchDist',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb',1,'BWC::CentroidalManager::Configuration']]],
+  ['useactualstateformpc_462',['useActualStateForMpc',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a2ca257faee34e51bbd5145eb0d82875a',1,'BWC::CentroidalManager::Configuration']]],
+  ['usetargetposeforcontrolrobotanchorframe_463',['useTargetPoseForControlRobotAnchorFrame',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316',1,'BWC::CentroidalManager::Configuration']]]
 ];

@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['zmphorizon_460',['zmpHorizon',['../structBWC_1_1FootManager_1_1Configuration.html#a8901f9aa68421af7e9f446c483c0e42a',1,'BWC::FootManager::Configuration']]],
-  ['zmpoffset_461',['zmpOffset',['../structBWC_1_1FootManager_1_1Configuration.html#a7927c0132a76234315a71538ee6a3910',1,'BWC::FootManager::Configuration']]],
-  ['zmptrajfunc_5f_462',['zmpTrajFunc_',['../classBWC_1_1FootManager.html#adc227123c5c91cf6907efb0253ff5b30',1,'BWC::FootManager']]],
-  ['zmpvelgain_463',['zmpVelGain',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ac490d67fabd980c891a0b04eac5de2c8',1,'BWC::CentroidalManager::Configuration']]]
+  ['walkconfigkeys_5f_467',['walkConfigKeys_',['../structBWC_1_1CommandState.html#a827f5009887b533c053562645e227670',1,'BWC::CommandState']]],
+  ['withdrawdurationratio_468',['withdrawDurationRatio',['../structBWC_1_1Footstep_1_1Configuration.html#ae65efd30dcafdc803d0e3cd554a82061',1,'BWC::Footstep::Configuration']]],
+  ['withdrawoffset_469',['withdrawOffset',['../structBWC_1_1Footstep_1_1Configuration.html#a9b1982057fb942618ed31fcec6a5fe3b',1,'BWC::Footstep::Configuration']]],
+  ['wrenchdist_5f_470',['wrenchDist_',['../classBWC_1_1CentroidalManager.html#a541d5d02c6977bd755aa7cd592aa6e56',1,'BWC::CentroidalManager']]],
+  ['wrenchdistconfig_471',['wrenchDistConfig',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc',1,'BWC::CentroidalManager::Configuration']]],
+  ['wrenchweight_472',['wrenchWeight',['../structBWC_1_1WrenchDistribution_1_1Configuration.html#ab4c70191fd878560cf0b0514b2937637',1,'BWC::WrenchDistribution::Configuration']]]
 ];

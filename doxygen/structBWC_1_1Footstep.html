@@ -73,6 +73,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structBWC_1_1Footstep-members.html">List of all members</a>  </div>
@@ -85,7 +86,22 @@ $(function() {
  <a href="structBWC_1_1Footstep.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for BWC::Footstep:</div>
+<div class="dyncontent">
+<div class="center"><img src="structBWC_1_1Footstep__coll__graph.png" border="0" usemap="#BWC_1_1Footstep_coll__map" alt="Collaboration graph"/></div>
+<map name="BWC_1_1Footstep_coll__map" id="BWC_1_1Footstep_coll__map">
+<area shape="rect" title="Footstep." alt="" coords="53,95,171,121"/>
+<area shape="rect" href="structBWC_1_1Footstep_1_1Configuration.html" title="Configuration." alt="" coords="5,5,219,32"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html">Configuration</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html" title="Configuration.">Configuration</a>.  <a href="structBWC_1_1Footstep_1_1Configuration.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a89422d586381792aa7f253bfc1ab050f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f">Footstep</a> (<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> _foot, sva::PTransformd _pose, double _transitStartTime=0, double _swingStartTime=0, double _swingEndTime=0, double _transitEndTime=0)</td></tr>
@@ -112,11 +128,14 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aee102d7d6bc2d90c643512fb79372e8c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1Footstep.html#aee102d7d6bc2d90c643512fb79372e8c">transitEndTime</a></td></tr>
 <tr class="memdesc:aee102d7d6bc2d90c643512fb79372e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time to end ZMP transition.  <a href="structBWC_1_1Footstep.html#aee102d7d6bc2d90c643512fb79372e8c">More...</a><br /></td></tr>
 <tr class="separator:aee102d7d6bc2d90c643512fb79372e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace239634710da95c96be51e40ce8b2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html">Configuration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1Footstep.html#aace239634710da95c96be51e40ce8b2b">config</a></td></tr>
+<tr class="memdesc:aace239634710da95c96be51e40ce8b2b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html" title="Configuration.">Configuration</a>.  <a href="structBWC_1_1Footstep.html#aace239634710da95c96be51e40ce8b2b">More...</a><br /></td></tr>
+<tr class="separator:aace239634710da95c96be51e40ce8b2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00039">39</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00041">41</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a89422d586381792aa7f253bfc1ab050f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89422d586381792aa7f253bfc1ab050f">&#9670;&nbsp;</a></span>Footstep()</h2>
@@ -190,11 +209,29 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The following relation must hold: _transitStartTime &lt; _swingStartTime &lt; _swingEndTime &lt; _transitEndTime. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00051">51</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00077">77</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="aace239634710da95c96be51e40ce8b2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace239634710da95c96be51e40ce8b2b">&#9670;&nbsp;</a></span>config</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html">Configuration</a> BWC::Footstep::config</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structBWC_1_1Footstep_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00105">105</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+
+</div>
+</div>
 <a id="aec0947a2e26cec2e9dbc0a12b8628f35"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec0947a2e26cec2e9dbc0a12b8628f35">&#9670;&nbsp;</a></span>foot</h2>
 
@@ -209,7 +246,7 @@ Public Attributes</h2></td></tr>
 
 <p>Foot. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00058">58</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00084">84</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
@@ -227,7 +264,7 @@ Public Attributes</h2></td></tr>
 
 <p>Foot pose. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00064">64</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00090">90</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +282,7 @@ Public Attributes</h2></td></tr>
 
 <p>Time to end swinging the foot. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00073">73</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00099">99</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
@@ -263,7 +300,7 @@ Public Attributes</h2></td></tr>
 
 <p>Time to start swinging the foot. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00070">70</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00096">96</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
@@ -281,7 +318,7 @@ Public Attributes</h2></td></tr>
 
 <p>Time to end ZMP transition. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00076">76</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00102">102</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +336,7 @@ Public Attributes</h2></td></tr>
 
 <p>Time to start ZMP transition. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00067">67</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootTypes_8h_source.html#l00093">93</a> of file <a class="el" href="FootTypes_8h_source.html">FootTypes.h</a>.</p>
 
 </div>
 </div>

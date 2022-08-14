@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['pc_5f_411',['pc_',['../classBWC_1_1CentroidalManagerPreviewControlZmp.html#a4805150bc6a857ee2d517d5e0a6da95c',1,'BWC::CentroidalManagerPreviewControlZmp']]],
-  ['phase_5f_412',['phase_',['../structBWC_1_1InitialState.html#ae8f4336e2be9b2b34e8e8c897b0c97f5',1,'BWC::InitialState']]],
-  ['plannedforcez_5f_413',['plannedForceZ_',['../classBWC_1_1CentroidalManager.html#a8c17d49838aacf2c7dd2da936d8bcd05',1,'BWC::CentroidalManager']]],
-  ['plannedzmp_5f_414',['plannedZmp_',['../classBWC_1_1CentroidalManager.html#a2aa77c0911a409a233367684f684a6e3',1,'BWC::CentroidalManager']]],
-  ['points_5f_415',['points_',['../classBWC_1_1CubicHermiteSpline.html#a62185c2977b1969ec7ea6dc1479a2c5f',1,'BWC::CubicHermiteSpline::points_()'],['../classBWC_1_1CubicInterpolator.html#a85bd3fcbf3b48c8385e56869b20d1919',1,'BWC::CubicInterpolator::points_()'],['../classBWC_1_1CubicSpline.html#aab4ccbe9dc756f5d6be9791978c480ad',1,'BWC::CubicSpline::points_()']]],
-  ['pose_416',['pose',['../structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541',1,'BWC::Footstep']]]
+  ['name_421',['name',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0',1,'BWC::CentroidalManager::Configuration::name()'],['../structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f',1,'BWC::FootManager::Configuration::name()']]],
+  ['name_5f_422',['name_',['../classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062',1,'BWC::Contact']]]
 ];

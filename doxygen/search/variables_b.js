@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['name_409',['name',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0',1,'BWC::CentroidalManager::Configuration::name()'],['../structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f',1,'BWC::FootManager::Configuration::name()']]],
-  ['name_5f_410',['name_',['../classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062',1,'BWC::Contact']]]
+  ['method_417',['method',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a09788972104ce4dd911fb58580687ca8',1,'BWC::CentroidalManager::Configuration']]],
+  ['midtofoottranss_418',['midToFootTranss',['../structBWC_1_1FootManager_1_1Configuration.html#a9021ca2b4aec11898c6471db329cca49',1,'BWC::FootManager::Configuration']]],
+  ['mpccom_5f_419',['mpcCom_',['../classBWC_1_1CentroidalManager.html#a237706c5428660b4fbb31b48833c9f4d',1,'BWC::CentroidalManager']]],
+  ['mpccomvel_5f_420',['mpcComVel_',['../classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62',1,'BWC::CentroidalManager']]]
 ];

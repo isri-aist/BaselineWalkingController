@@ -1,16 +1,11 @@
 var searchData=
 [
-  ['t0_5f_437',['t0_',['../classBWC_1_1Polynomial.html#af4e39ce8c9fb4ea3f7366925e2ed906b',1,'BWC::Polynomial']]],
-  ['t_5f_438',['t_',['../structBWC_1_1BaselineWalkingController.html#aa49be5f3b004c2d35d353c86e2d284b7',1,'BWC::BaselineWalkingController']]],
-  ['targetfootaccels_5f_439',['targetFootAccels_',['../classBWC_1_1FootManager.html#aacfc2012614d690968187579147e63e1',1,'BWC::FootManager']]],
-  ['targetfootposes_5f_440',['targetFootPoses_',['../classBWC_1_1FootManager.html#a2152d54064fce70638371c19cee1d77b',1,'BWC::FootManager']]],
-  ['targetfootvels_5f_441',['targetFootVels_',['../classBWC_1_1FootManager.html#af01870b998fc3c4b3a620b19e640dc00',1,'BWC::FootManager']]],
-  ['tlowerlimit_5f_442',['tLowerLimit_',['../classBWC_1_1PiecewiseFunc.html#acaa49f064b50fce751ce7f3131d31f9a',1,'BWC::PiecewiseFunc']]],
-  ['touchdown_5f_443',['touchDown_',['../classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb',1,'BWC::FootManager']]],
-  ['touchdownforcez_444',['touchDownForceZ',['../structBWC_1_1FootManager_1_1Configuration.html#a0b9b79c4add3356d4f2cb80effeec584',1,'BWC::FootManager::Configuration']]],
-  ['touchdownposerror_445',['touchDownPosError',['../structBWC_1_1FootManager_1_1Configuration.html#a93df2e499c17e9ec0238dccd1c58cb10',1,'BWC::FootManager::Configuration']]],
-  ['touchdownremainingduration_446',['touchDownRemainingDuration',['../structBWC_1_1FootManager_1_1Configuration.html#a5739f7d815815acfe4b3f3c144b93220',1,'BWC::FootManager::Configuration']]],
-  ['transitendtime_447',['transitEndTime',['../structBWC_1_1Footstep.html#aee102d7d6bc2d90c643512fb79372e8c',1,'BWC::Footstep']]],
-  ['transitstarttime_448',['transitStartTime',['../structBWC_1_1Footstep.html#a3477ebdc0f95668a3a93cbcaef1f3777',1,'BWC::Footstep']]],
-  ['type_449',['type',['../structBWC_1_1BoundaryConstraint.html#ab810897a652a925bf81e540fe8668056',1,'BWC::BoundaryConstraint']]]
+  ['stopswingtrajfortouchdownfoot_440',['stopSwingTrajForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c',1,'BWC::FootManager::Configuration']]],
+  ['supportphase_5f_441',['supportPhase_',['../classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f',1,'BWC::FootManager']]],
+  ['swingendtime_442',['swingEndTime',['../structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509',1,'BWC::Footstep']]],
+  ['swingfootstep_5f_443',['swingFootstep_',['../classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6',1,'BWC::FootManager']]],
+  ['swingoffset_444',['swingOffset',['../structBWC_1_1Footstep_1_1Configuration.html#abf7dbcc84c1c7a29e6cc764cf079ca50',1,'BWC::Footstep::Configuration']]],
+  ['swingposfunc_5f_445',['swingPosFunc_',['../classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9',1,'BWC::FootManager']]],
+  ['swingrotfunc_5f_446',['swingRotFunc_',['../classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727',1,'BWC::FootManager']]],
+  ['swingstarttime_447',['swingStartTime',['../structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b',1,'BWC::Footstep']]]
 ];
