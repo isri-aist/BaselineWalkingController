@@ -59,6 +59,9 @@ ObserverPipelines:
         anchorFrame:
           maxAnchorFrameDiscontinuity: 0.05 # [m]
 
+PostureTask:
+  stiffness: 10
+
 CoMTask:
   type: com
   stiffness: [1000.0, 1000.0, 100.0]
