@@ -8,7 +8,7 @@ Humanoid walking controller with various baseline methods
 - Easy to switch between various methods of centroidal trajectory generation for walking implemented in [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection).
 - Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.
 - Support for a virtual robot whose model is publicly available so you can try out the controller right away.
-- Automated management with CI: Dynamics simulation is run on CI to verify robot walking, and a docker image is [released here](https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller) with the latest version of the controller ready to run.
+- Automated management with CI: Dynamics simulation is run on CI to verify robot walking, and a Docker image is [released here](https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller) with the latest version of the controller ready to run.
 
 ## Quick trial on Docker
 1. (Skip if Docker is already installed.) Install Docker. See [here](https://docs.docker.com/engine/install) for details.
@@ -32,6 +32,8 @@ $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
 ```
+
+The Docker image is automatically updated on [CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml) from [this Dockerfile](https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile).
 
 ## Install
 
