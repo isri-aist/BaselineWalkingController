@@ -79,7 +79,7 @@ $(function() {
 <li>Easy to switch between various methods of centroidal trajectory generation for walking implemented in <a href="https://github.com/isri-aist/CentroidalControlCollection">CentroidalControlCollection</a>.</li>
 <li>Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.</li>
 <li>Support for a virtual robot whose model is publicly available so you can try out the controller right away.</li>
-<li>Automated management with CI: Dynamics simulation is run on CI to verify robot walking, and a docker image is <a href="https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller">released here</a> with the latest version of the controller ready to run.</li>
+<li>Automated management with CI: Dynamics simulation is run on CI to verify robot walking, and a Docker image is <a href="https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller">released here</a> with the latest version of the controller ready to run.</li>
 </ul>
 <h1>Quick trial on Docker</h1>
 <ol type="1">
@@ -99,6 +99,7 @@ $(function() {
 <div class="line">  ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash</div>
 </div><!-- fragment --></li>
 </ol>
+<p>The Docker image is automatically updated on <a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml">CI</a> from <a href="https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile">this Dockerfile</a>.</p>
 <h1>Install</h1>
 <h2>Requirements</h2>
 <ul>
