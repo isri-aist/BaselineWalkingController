@@ -155,7 +155,8 @@ jobs:
           sleep 10s
           mkdir -p /tmp/simulation_results
           ffmpeg -i video.avi /tmp/simulation_results/video.mp4
-          tar czf /tmp/simulation_results/log.tar.gz `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
+          LOG_PATH=`readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
+          tar czf /tmp/simulation_results/log.tar.gz -C `dirname $LOG_PATH` `basename $LOG_PATH`
       - name: Upload simulation data
         # Only run for one configuration
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
