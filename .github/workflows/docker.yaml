@@ -68,7 +68,13 @@ jobs:
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
-          choreonoid --start-simulation sim_mc.cnoid &
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlain" ]
+          then
+            CNOID_FILE=sim_mc.cnoid
+          else
+            CNOID_FILE=sim_mc_comanoid_staircase.cnoid
+          fi
+          choreonoid --start-simulation ${CNOID_FILE} &
           CNOID_PID=$!
           popd
           sleep 30s
