@@ -9,7 +9,7 @@ states:
   BWC::Initial_:
     base: BWC::Initial
     configs:
-      autoStartTime: 2.0
+      autoStartTime: 8.0
       initialFootstepList:
         - foot: Left
           footMidpose:
