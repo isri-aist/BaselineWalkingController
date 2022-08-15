@@ -140,7 +140,7 @@ jobs:
           fluxbox 2> /dev/null &
           mkdir -p ${HOME}/.config/mc_rtc/controllers
           cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/BaselineWalkingController.yaml ${HOME}/.config/mc_rtc/controllers/
+          cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingOnPlain.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           pushd .
           ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i $DISPLAY -qscale 0 -vcodec huffyuv video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
