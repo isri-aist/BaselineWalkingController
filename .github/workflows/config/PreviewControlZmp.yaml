@@ -1,0 +1,4 @@
+CentroidalManager:
+  method: PreviewControlZmp
+  horizonDuration: 2.0 # [sec]
+  horizonDt: 0.005 # [sec]

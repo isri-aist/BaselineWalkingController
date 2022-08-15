@@ -1,0 +1,5 @@
+CentroidalManager:
+  method: DdpZmp
+  horizonDuration: 2.0 # [sec]
+  horizonDt: 0.02 # [sec]
+  ddpMaxIter: 3

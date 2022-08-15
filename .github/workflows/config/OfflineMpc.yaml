@@ -1,0 +1,3 @@
+CentroidalManager:
+  useActualStateForMpc: false
+  enableZmpFeedback: true
