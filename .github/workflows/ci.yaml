@@ -135,14 +135,14 @@ jobs:
           . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
           set -x
           export DISPLAY=":1"
-          Xvfb $DISPLAY -screen 0 1920x1080x24 &
+          Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
           sleep 10s
           fluxbox 2> /dev/null &
           mkdir -p ${HOME}/.config/mc_rtc/controllers
           cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
           cp ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingOnPlain.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           pushd .
-          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i $DISPLAY -qscale 0 -vcodec huffyuv video.avi > /dev/null 2>&1 < /dev/null &
+          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
@@ -150,13 +150,13 @@ jobs:
           CNOID_PID=$!
           popd
           sleep 30s
-          kill -2 $CNOID_PID
-          kill -2 $FFMPEG_PID
+          kill -2 ${CNOID_PID}
+          kill -2 ${FFMPEG_PID}
           sleep 10s
           mkdir -p /tmp/simulation_results
           ffmpeg -i video.avi /tmp/simulation_results/video.mp4
           LOG_PATH=`readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
-          tar czf /tmp/simulation_results/log.tar.gz -C `dirname $LOG_PATH` `basename $LOG_PATH`
+          tar czf /tmp/simulation_results/log.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
       - name: Upload simulation data
         # Only run for one configuration
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
