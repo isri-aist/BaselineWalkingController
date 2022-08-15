@@ -63,7 +63,7 @@ jobs:
           mkdir -p ${HOME}/.config/mc_rtc/controllers
           cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
           CI_DIR=${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows
-          ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
+          python3 ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
