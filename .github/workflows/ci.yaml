@@ -146,7 +146,7 @@ jobs:
           ./clear-omninames.sh
           choreonoid --start-simulation sim_mc.cnoid &
           CNOID_PID=$!
-          sleep 30s
+          sleep 40s
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
           sleep 10s
