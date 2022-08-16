@@ -68,17 +68,17 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
   };
 
   // The 2D variables (i.e., goalTrans, deltaTrans) represent the transformation relative to the initial pose,
-  // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, currentFootMidpose) represent the
+  // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, footMidpose) represent the
   // transformation in the world frame.
   const sva::PTransformd & initialFootMidpose = projGround(sva::interpolate(
       ctl().footManager_->targetFootPose(Foot::Left), ctl().footManager_->targetFootPose(Foot::Right), 0.5));
   const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
 
   Foot foot = goalTrans.y() >= 0 ? Foot::Left : Foot::Right;
-  sva::PTransformd currentFootMidpose = initialFootMidpose;
+  sva::PTransformd footMidpose = initialFootMidpose;
   double startTime = ctl().t() + 1.0;
 
-  while(convertTo2d(goalFootMidpose * currentFootMidpose.inv()).norm() > 1e-6)
+  while(convertTo2d(goalFootMidpose * footMidpose.inv()).norm() > 1e-6)
   {
     Eigen::Vector3d deltaTransMax = deltaTransLimit_;
     Eigen::Vector3d deltaTransMin = -deltaTransLimit_;
@@ -90,11 +90,11 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
     {
       deltaTransMax.y() = 0;
     }
-    Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * currentFootMidpose.inv());
+    Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * footMidpose.inv());
     mc_filter::utils::clampInPlace(deltaTrans, deltaTransMin, deltaTransMax);
-    currentFootMidpose = convertTo3d(deltaTrans) * currentFootMidpose;
+    footMidpose = convertTo3d(deltaTrans) * footMidpose;
 
-    const auto & footstep = ctl().footManager_->makeFootstep(foot, currentFootMidpose, startTime);
+    const auto & footstep = ctl().footManager_->makeFootstep(foot, footMidpose, startTime);
     ctl().footManager_->appendFootstep(footstep);
 
     foot = opposite(foot);
@@ -103,7 +103,7 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
 
   for(int i = 0; i < lastFootstepNum + 1; i++)
   {
-    const auto & footstep = ctl().footManager_->makeFootstep(foot, currentFootMidpose, startTime);
+    const auto & footstep = ctl().footManager_->makeFootstep(foot, footMidpose, startTime);
     ctl().footManager_->appendFootstep(footstep);
 
     foot = opposite(foot);
