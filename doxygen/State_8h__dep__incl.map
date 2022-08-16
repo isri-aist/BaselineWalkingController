@@ -1,5 +1,6 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/State.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/State.h">
-<area shape="rect" id="node1" title=" " alt="" coords="150,5,514,76"/>
+<area shape="rect" id="node1" title=" " alt="" coords="319,5,683,76"/>
 <area shape="rect" id="node2" href="$CommandState_8h.html" title=" " alt="" coords="5,124,320,209"/>
 <area shape="rect" id="node3" href="$InitialState_8h.html" title=" " alt="" coords="344,124,659,209"/>
+<area shape="rect" id="node4" href="$TeleopState_8h.html" title=" " alt="" coords="683,124,997,209"/>
 </map>
