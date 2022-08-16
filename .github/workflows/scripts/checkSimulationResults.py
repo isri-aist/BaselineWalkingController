@@ -25,7 +25,7 @@ tilting_angle_list = np.array(tilting_angle_list)
 
 max_tilting_angle = np.max(np.abs(tilting_angle_list))
 
-tilting_angle_thre = 20.0 # [deg]
+tilting_angle_thre = 30.0 # [deg]
 if max_tilting_angle <= tilting_angle_thre:
     print("[checkSimulationResults.py] max_tilting_angle is below the threshold: {:.1f} <= {:.1f} [deg]".format(
         max_tilting_angle, tilting_angle_thre))
