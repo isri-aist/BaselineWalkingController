@@ -45,7 +45,7 @@ jobs:
         motion-type: [WalkingOnPlain, WalkingOnStairs]
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/mmurooka/baseline_walking_controller:latest
+      image: ghcr.io/isri-aist/baseline_walking_controller:latest
     env:
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
