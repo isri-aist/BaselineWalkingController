@@ -151,7 +151,7 @@ jobs:
           kill -2 ${FFMPEG_PID}
           sleep 10s
           mkdir -p /tmp/results
-          ffmpeg -i /tmp/video.avi /tmp/results/video.mp4
+          ffmpeg -nostats -i /tmp/video.avi /tmp/results/video.mp4
           LOG_PATH=`readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
           tar czf /tmp/results/`basename ${LOG_PATH}`.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
       - name: Upload simulation data
