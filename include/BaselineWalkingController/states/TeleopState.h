@@ -32,8 +32,8 @@ protected:
   void twistCallback(const geometry_msgs::Twist::ConstPtr & twistMsg);
 
 protected:
-  //! Whether to run teleoperation
-  bool runTeleop_ = false;
+  //! Whether teleoperation is running
+  bool teleopRunning_ = false;
 
   //! Whether starting teleoperation is triggered
   bool startTriggered_ = false;
@@ -41,17 +41,17 @@ protected:
   //! Whether ending teleoperation is triggered
   bool endTriggered_ = false;
 
-  //! Command footstep queue size
-  int footstepQueueSize_ = 3;
-
-  //! Velocity scale (x, y, theta)
-  Eigen::Vector3d velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15));
+  //! Target foot midpose transformation (x [m], y [m], theta [rad])
+  Eigen::Vector3d targetDeltaTrans_ = Eigen::Vector3d::Zero();
 
   //! Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad])
   Eigen::Vector3d deltaTransLimit_ = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
 
-  //! Target velocity (x [m/s], y [m/s], theta [rad/s])
-  Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
+  //! Scale to convert velocity to foot midpose transformation (x, y, theta)
+  Eigen::Vector3d velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15));
+
+  //! Command footstep queue size
+  int footstepQueueSize_ = 3;
 
   //! ROS variables
   //! @{

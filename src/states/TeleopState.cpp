@@ -1,3 +1,4 @@
+#include <mc_rtc/gui/Button.h>
 #include <mc_rtc/ros.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
@@ -22,14 +23,18 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   std::string twistTopicName = "/cmd_vel";
   if(config_.has("configs"))
   {
-    config_("configs")("twistTopicName", twistTopicName);
-    config_("configs")("footstepQueueSize", footstepQueueSize_);
-    config_("configs")("velScale", velScale_);
     if(config_("configs").has("deltaTransLimit"))
     {
       deltaTransLimit_ = config_("configs")("deltaTransLimit");
       deltaTransLimit_[2] = mc_rtc::constants::toRad(deltaTransLimit_[2]);
     }
+    if(config_("configs").has("velScale"))
+    {
+      velScale_ = config_("configs")("velScale");
+      velScale_[2] = mc_rtc::constants::toRad(velScale_[2]);
+    }
+    config_("configs")("footstepQueueSize", footstepQueueSize_);
+    config_("configs")("twistTopicName", twistTopicName);
   }
 
   // Setup ROS
@@ -40,10 +45,11 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
 
   // Setup GUI
   ctl().gui()->addElement({"BWC", "Teleop"}, mc_rtc::gui::Button("StartTeleop", [this]() { startTriggered_ = true; }));
-  ctl().gui()->addElement(
-      {"BWC", "Teleop", "Velocity"},
-      mc_rtc::gui::ArrayInput(
-          "TargetVel", {"x", "y", "yaw"}, [this]() { return targetVel_; }, [this](const Eigen::Vector3d & v) {}));
+  ctl().gui()->addElement({"BWC", "Teleop", "State"},
+                          mc_rtc::gui::ArrayInput(
+                              "targetDeltaTrans", {"x", "y", "theta"},
+                              [this]() -> const Eigen::Vector3d & { return targetDeltaTrans_; },
+                              [this](const Eigen::Vector3d & v) {}));
 
   output("OK");
 }
@@ -63,9 +69,18 @@ bool TeleopState::run(mc_control::fsm::Controller &)
   if(startTriggered_)
   {
     startTriggered_ = false;
-    startTeleop();
-    ctl().gui()->removeElement({"BWC", "Teleop"}, "StartTeleop");
-    ctl().gui()->addElement({"BWC", "Teleop"}, mc_rtc::gui::Button("EndTeleop", [this]() { endTriggered_ = true; }));
+
+    if(ctl().footManager_->footstepQueue().size() > 0)
+    {
+      mc_rtc::log::error("[TeleopState] Teleoperation can be started only when the footstep queue is empty: {}",
+                         ctl().footManager_->footstepQueue().size());
+    }
+    else
+    {
+      startTeleop();
+      ctl().gui()->removeElement({"BWC", "Teleop"}, "StartTeleop");
+      ctl().gui()->addElement({"BWC", "Teleop"}, mc_rtc::gui::Button("EndTeleop", [this]() { endTriggered_ = true; }));
+    }
   }
   if(endTriggered_)
   {
@@ -76,41 +91,46 @@ bool TeleopState::run(mc_control::fsm::Controller &)
                             mc_rtc::gui::Button("StartTeleop", [this]() { startTriggered_ = true; }));
   }
 
-  if(!runTeleop_)
+  if(!teleopRunning_)
   {
     return false;
   }
 
   // Update footstep queue
   {
+    auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+      return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+    };
+
     auto & footstepQueue = ctl().footManager_->footstepQueue();
     // Do not change the next footstep
     // Delete the second and subsequent footsteps, and add new ones
     footstepQueue.erase(footstepQueue.begin() + 1, footstepQueue.end());
     const auto & nextFootstep = footstepQueue.front();
 
+    // Append new footstep
     Foot foot = opposite(nextFootstep.foot);
     sva::PTransformd footMidpose = projGround(
         sva::interpolate(ctl().footManager_->targetFootPose(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
     double startTime = nextFootstep.transitEndTime;
     for(int i = 0; i < footstepQueueSize_ - 1; i++)
     {
-      // Truncate inside movement
-      Eigen::Vector3d targetVelWithLimit = targetVel_;
+      Eigen::Vector3d deltaTransMax = deltaTransLimit_;
+      Eigen::Vector3d deltaTransMin = -deltaTransLimit_;
       if(foot == Foot::Left)
       {
-        targetVelWithLimit.y() = std::max(targetVelWithLimit.y(), 0.0);
+        deltaTransMin.y() = 0;
       }
       else
       {
-        targetVelWithLimit.y() = std::min(targetVelWithLimit.y(), 0.0);
+        deltaTransMax.y() = 0;
       }
-      // Calculate next footMidpose from previous one and append new footstep
-      sva::PTransformd deltaFootMidpose(sva::RotZ(targetVelWithLimit[2]),
-                                        Eigen::Vector3d(targetVelWithLimit[0], targetVelWithLimit[1], 0));
-      footMidpose = deltaFootMidpose * footMidpose;
+      Eigen::Vector3d deltaTrans = mc_filter::utils::clamp(targetDeltaTrans_, deltaTransMin, deltaTransMax);
+      footMidpose = convertTo3d(deltaTrans) * footMidpose;
+
       const auto & footstep = ctl().footManager_->makeFootstep(foot, footMidpose, startTime);
       footstepQueue.push_back(footstep);
+
       foot = opposite(foot);
       startTime = footstep.transitEndTime;
     }
@@ -127,19 +147,20 @@ void TeleopState::teardown(mc_control::fsm::Controller &)
 
 void TeleopState::startTeleop()
 {
-  runTeleop_ = true;
+  teleopRunning_ = true;
 
-  targetVel_.setZero();
+  targetDeltaTrans_.setZero();
 
   // Add footsteps to queue for walking in place
   Foot foot = Foot::Left;
-  sva::PTransformd footMidpose = projGround(sva::interpolate(ctl().footManager_->targetFootPose(Foot::Left),
-                                                             ctl().footManager_->targetFootPose(Foot::Right), 0.5));
+  const sva::PTransformd & footMidpose = projGround(sva::interpolate(
+      ctl().footManager_->targetFootPose(Foot::Left), ctl().footManager_->targetFootPose(Foot::Right), 0.5));
   double startTime = ctl().t() + 1.0;
   for(int i = 0; i < footstepQueueSize_; i++)
   {
     const auto & footstep = ctl().footManager_->makeFootstep(foot, footMidpose, startTime);
     ctl().footManager_->appendFootstep(footstep);
+
     foot = opposite(foot);
     startTime = footstep.transitEndTime;
   }
@@ -147,25 +168,22 @@ void TeleopState::startTeleop()
 
 void TeleopState::endTeleop()
 {
-  runTeleop_ = false;
+  teleopRunning_ = false;
 
-  targetVel_.setZero();
+  targetDeltaTrans_.setZero();
 
-  // Update footstep pose to align both feet
-  auto & footstepQueue = ctl().footManager_->footstepQueue();
-  const auto & nextFootstep = footstepQueue.front();
-  auto & finalFootstep1 = *(footstepQueue.rbegin() + 1);
-  auto & finalFootstep2 = *(footstepQueue.rbegin());
-  sva::PTransformd footMidpose = projGround(
-      sva::interpolate(ctl().footManager_->targetFootPose(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
+  // Update last footstep pose to align both feet
   const auto & footManagerConfig = ctl().footManager_->config();
-  finalFootstep1.pose = footManagerConfig.midToFootTranss.at(finalFootstep1.foot) * footMidpose;
-  finalFootstep2.pose = footManagerConfig.midToFootTranss.at(finalFootstep2.foot) * footMidpose;
+  const auto & lastFootstep1 = *(ctl().footManager_->footstepQueue().rbegin() + 1);
+  auto & lastFootstep2 = *(ctl().footManager_->footstepQueue().rbegin());
+  sva::PTransformd footMidpose = footManagerConfig.midToFootTranss.at(lastFootstep1.foot).inv() * lastFootstep1.pose;
+  lastFootstep2.pose = footManagerConfig.midToFootTranss.at(lastFootstep2.foot) * footMidpose;
 }
 
 void TeleopState::twistCallback(const geometry_msgs::Twist::ConstPtr & twistMsg)
 {
-  targetVel_ = velScale_.cwiseProduct(Eigen::Vector3d(twistMsg->linear.x, twistMsg->linear.y, twistMsg->angular.z));
+  targetDeltaTrans_ =
+      velScale_.cwiseProduct(Eigen::Vector3d(twistMsg->linear.x, twistMsg->linear.y, twistMsg->angular.z));
 }
 
 EXPORT_SINGLE_STATE("BWC::Teleop", TeleopState)
