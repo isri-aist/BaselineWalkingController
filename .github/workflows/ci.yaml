@@ -151,17 +151,17 @@ jobs:
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
           sleep 10s
-          mkdir -p /tmp/simulation_results
-          ffmpeg -i /tmp/video.avi /tmp/simulation_results/video.mp4
+          mkdir -p /tmp/results
+          ffmpeg -i /tmp/video.avi /tmp/results/video.mp4
           LOG_PATH=`readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
-          tar czf /tmp/simulation_results/log.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
+          tar czf /tmp/results/`basename ${LOG_PATH}`.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
       - name: Upload simulation data
         # Only run for one configuration
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
         uses: actions/upload-artifact@v3
         with:
-          name: simulation_results
-          path: /tmp/simulation_results
+          name: BWC-ci-results
+          path: /tmp/results
       - name: Check simulation results
         # Only run for one configuration
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
