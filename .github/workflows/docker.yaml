@@ -82,13 +82,13 @@ jobs:
           sleep 10s
           mkdir -p /tmp/results
           ffmpeg -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
-          LOG_PATH=/tmp/BWC-log-${RESULTS_POSTFIX}.bin
-          mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` ${LOG_PATH}
-          tar czf /tmp/results/log.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
+          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+          mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
+          tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
       - name: Upload simulation data
         uses: actions/upload-artifact@v3
         with:
-          name: BWC-results-${RESULTS_POSTFIX}
+          name: BWC-results
           path: /tmp/results
       - name: Check simulation results
         shell: bash
