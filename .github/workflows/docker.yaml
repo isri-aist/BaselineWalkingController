@@ -76,7 +76,7 @@ jobs:
           fi
           choreonoid --start-simulation ${CNOID_FILE} &
           CNOID_PID=$!
-          sleep 30s
+          sleep 40s
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
           sleep 10s
@@ -97,4 +97,4 @@ jobs:
           set -x
           # Workaround for https://github.com/jrl-umi3218/mc_rtc/issues/281
           sudo sed -i "s/matplotlib.use('Qt5Agg')/# matplotlib.use('Qt5Agg')/g" /usr/lib/python3/dist-packages/mc_log_ui/mc_log_types.py
-          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
+          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin
