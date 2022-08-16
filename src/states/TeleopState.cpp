@@ -1,3 +1,5 @@
+#include <mc_rtc/ros.h>
+
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
@@ -8,6 +10,13 @@ using namespace BWC;
 void TeleopState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);
+
+  // Skip if ROS is not initialized
+  if(!mc_rtc::ROSBridge::get_node_handle())
+  {
+    output("OK");
+    return;
+  }
 
   // Load configuration
   std::string twistTopicName = "/cmd_vel";
@@ -24,7 +33,7 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   }
 
   // Setup ROS
-  nh_ = std::make_shared<ros::NodeHandle>();
+  nh_ = std::make_unique<ros::NodeHandle>();
   // Use a dedicated queue so as not to call callbacks of other modules
   nh_->setCallbackQueue(&callbackQueue_);
   twistSub_ = nh_->subscribe<geometry_msgs::Twist>(twistTopicName, 1, &TeleopState::twistCallback, this);
@@ -41,6 +50,12 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
 
 bool TeleopState::run(mc_control::fsm::Controller &)
 {
+  // Finish if ROS is not initialized
+  if(!mc_rtc::ROSBridge::get_node_handle())
+  {
+    return true;
+  }
+
   // Call ROS callback
   callbackQueue_.callAvailable(ros::WallDuration());
 

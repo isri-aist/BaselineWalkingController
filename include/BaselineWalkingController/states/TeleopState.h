@@ -55,7 +55,7 @@ protected:
 
   //! ROS variables
   //! @{
-  std::shared_ptr<ros::NodeHandle> nh_;
+  std::unique_ptr<ros::NodeHandle> nh_;
   ros::CallbackQueue callbackQueue_;
   ros::Subscriber twistSub_;
   //! @}
