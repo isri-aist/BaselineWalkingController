@@ -32,9 +32,17 @@ Close the Choreonoid window to exit.
 ```bash
 $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
 $ xhost +local:
+```
+
+- Simulate walking on a plain like in [this video](https://user-images.githubusercontent.com/6636600/184788681-10219f2e-cbe9-4e52-a7f7-ec3b0e1d7515.mp4).
+```bash
 $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_plane.bash
+```
+
+- Simulate walking on stairs like in [this video](https://user-images.githubusercontent.com/6636600/184788709-fcb55fa8-fd93-4be3-ba93-d76be6fafe6a.mp4).
+```bash
 $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_stairs.bash
