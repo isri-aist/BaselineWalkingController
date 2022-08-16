@@ -470,16 +470,20 @@ void FootManager::updateFootTraj()
       // Set baseYawFunc_
       {
         Vector1d swingStartBaseYaw;
-        swingStartBaseYaw << 0.5
-                                 * (mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Left).rotation()).z()
-                                    + mc_rbdyn::rpyFromMat(targetFootPoses_.at(Foot::Right).rotation()).z());
+        swingStartBaseYaw << mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(
+                                                      targetFootPoses_.at(Foot::Left).rotation().transpose(),
+                                                      targetFootPoses_.at(Foot::Right).rotation().transpose(), 0.5)
+                                                      .transpose())
+                                 .z();
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartBaseYaw));
 
         Vector1d swingEndBaseYaw;
-        swingEndBaseYaw
-            << 0.5
-                   * (mc_rbdyn::rpyFromMat(swingFootstep_->pose.rotation()).z()
-                      + mc_rbdyn::rpyFromMat(targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation()).z());
+        swingEndBaseYaw << mc_rbdyn::rpyFromMat(
+                               interpolate<Eigen::Matrix3d>(
+                                   swingFootstep_->pose.rotation().transpose(),
+                                   targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation().transpose(), 0.5)
+                                   .transpose())
+                               .z();
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingEndBaseYaw));
 
         baseYawFunc_->calcCoeff();
