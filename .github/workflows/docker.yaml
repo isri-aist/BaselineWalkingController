@@ -42,7 +42,7 @@ jobs:
       matrix:
         mpc-method: [PreviewControlZmp, DdpZmp]
         mpc-framework: [OnlineMpc, OfflineMpc]
-        motion-type: [WalkingOnPlain, WalkingOnStairs]
+        motion-type: [WalkingOnPlane, WalkingOnStairs]
     runs-on: ubuntu-20.04
     container:
       image: ghcr.io/isri-aist/baseline_walking_controller:latest
@@ -68,7 +68,7 @@ jobs:
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlain" ]; then
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
             CNOID_FILE=sim_mc.cnoid
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid

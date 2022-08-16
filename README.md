@@ -34,7 +34,7 @@ $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
 $ xhost +local:
 $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_plain.bash
+  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_plane.bash
 $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_stairs.bash
