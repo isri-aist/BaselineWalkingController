@@ -4,6 +4,10 @@ Humanoid walking controller with various baseline methods
 [![CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml/badge.svg)](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml)
 [![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](https://isri-aist.github.io/BaselineWalkingController/)
 
+https://user-images.githubusercontent.com/6636600/184788681-10219f2e-cbe9-4e52-a7f7-ec3b0e1d7515.mp4
+
+https://user-images.githubusercontent.com/6636600/184788709-fcb55fa8-fd93-4be3-ba93-d76be6fafe6a.mp4
+
 ## Features
 - Easy to switch between various methods of centroidal trajectory generation for walking implemented in [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection).
 - Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.
