@@ -8,6 +8,7 @@ add_compile_options(-std=c++17)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  geometry_msgs
   qp_solver_collection
   centroidal_control_collection
   )
@@ -28,6 +29,7 @@ find_package(mc_rtc REQUIRED)
 catkin_package(
   CATKIN_DEPENDS
   roscpp
+  geometry_msgs
   qp_solver_collection
   centroidal_control_collection
   DEPENDS EIGEN3

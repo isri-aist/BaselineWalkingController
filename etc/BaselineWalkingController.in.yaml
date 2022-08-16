@@ -43,9 +43,18 @@ states:
     configs:
       deltaTransLimit: [0.125, 0.1, 12.5] #  (x [m], y [m], theta [deg])
 
+  BWC::Teleop_:
+    base: BWC::Teleop
+    configs:
+      twistTopicName: /cmd_vel
+
+  BWC::Main_:
+    base: Parallel
+    states: [BWC::Command_, BWC::Teleop_]
+
 # Transitions map
 transitions:
-  - [BWC::Initial_, OK, BWC::Command_, Auto]
+  - [BWC::Initial_, OK, BWC::Main_, Auto]
 # Initial state
 init: BWC::Initial_
 
