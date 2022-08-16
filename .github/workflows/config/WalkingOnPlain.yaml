@@ -15,8 +15,44 @@ states:
         - footMidpose:
             translation: [0.60, 0.0, 0.0]
         - footMidpose:
-            translation: [0.75, 0.0, 0.0]
+            translation: [0.60, 0.0, 0.0]
+        - foot: Right
+          footMidpose:
+            translation: [0.60, -0.1, 0.0]
         - footMidpose:
-            translation: [0.9, 0.0, 0.0]
+            translation: [0.60, -0.1, 0.0]
         - footMidpose:
-            translation: [0.9, 0.0, 0.0]
+            translation: [0.60, -0.2, 0.0]
+        - footMidpose:
+            translation: [0.60, -0.2, 0.0]
+        - footMidpose:
+            translation: [0.60, -0.3, 0.0]
+        - foot: Left
+          footMidpose:
+            translation: [0.60, -0.3, 0.0]
+            rotation: [0.0, 0.0, 0.25]
+        - footMidpose:
+            translation: [0.60, -0.3, 0.0]
+            rotation: [0.0, 0.0, 0.50]
+        - footMidpose:
+            translation: [0.60, -0.3, 0.0]
+            rotation: [0.0, 0.0, 0.75]
+        - foot: Right
+          footMidpose:
+            translation: [0.777917206333, -0.270923072884, 0.0]
+            rotation: [0.0, 0.0, 0.4882006122008506]
+        - footMidpose:
+            translation: [0.910393946568, -0.200567452661, 0.0]
+            rotation: [0.0, 0.0, 0.22640122440170118]
+        - footMidpose:
+            translation: [1.07901323058, -0.264344698281, 0.0]
+            rotation: [0.0, 0.0, -0.03539816339744828]
+        - footMidpose:
+            translation: [1.22891926315, -0.269653313986, 0.0]
+            rotation: [0.0, 0.0, -0.29719755119659763]
+        - footMidpose:
+            translation: [1.34305922386, -0.409195670883, 0.0]
+            rotation: [0.0, 0.0, -0.558996938995747]
+        - footMidpose:
+            translation: [1.34305922386, -0.409195670883, 0.0]
+            rotation: [0.0, 0.0, -0.558996938995747]
