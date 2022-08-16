@@ -39,8 +39,7 @@ jobs:
     steps:
       - name: Set ROS version
         run: |
-          if [ "${{ matrix.os }}" == "ubuntu-20.04" ]
-          then
+          if [ "${{ matrix.os }}" == "ubuntu-20.04" ]; then
             echo "ROS_DISTRO=noetic" >> $GITHUB_ENV
             echo "PYTHON_PACKAGE_PREFIX=python3" >> $GITHUB_ENV
           else

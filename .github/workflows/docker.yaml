@@ -68,8 +68,7 @@ jobs:
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlain" ]
-          then
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlain" ]; then
             CNOID_FILE=sim_mc.cnoid
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid
@@ -97,4 +96,11 @@ jobs:
           set -x
           # Workaround for https://github.com/jrl-umi3218/mc_rtc/issues/281
           sudo sed -i "s/matplotlib.use('Qt5Agg')/# matplotlib.use('Qt5Agg')/g" /usr/lib/python3/dist-packages/mc_log_ui/mc_log_types.py
-          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin
+          # Workaround to achieve allow-failure
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlain" ] && [ "${{ matrix.mpc-framework }}" == "OnlineMpc" ]; then
+            ALLOW_FAILURE=true
+          else
+            ALLOW_FAILURE=false
+          fi
+          echo "- ALLOW_FAILURE: ${ALLOW_FAILURE}"
+          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin || ${ALLOW_FAILURE}
