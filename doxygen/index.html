@@ -96,11 +96,18 @@ $(function() {
 </div><!-- fragment --></li>
 <li>By executing the following commands, the window of the dynamics simulator Choreonoid will open and the robot will walk. Close the Choreonoid window to exit. <div class="fragment"><div class="line">$ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest</div>
 <div class="line">$ xhost +local:</div>
-<div class="line">$ docker run --gpus all --rm -it \</div>
-<div class="line">  --env=&quot;DISPLAY&quot; --volume=&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot; \</div>
-<div class="line">  ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash</div>
 </div><!-- fragment --></li>
 </ol>
+<ul>
+<li>Simulate walking on a plain like in <a href="https://user-images.githubusercontent.com/6636600/184788681-10219f2e-cbe9-4e52-a7f7-ec3b0e1d7515.mp4">this video</a>. <div class="fragment"><div class="line">$ docker run --gpus all --rm -it \</div>
+<div class="line">  --env=&quot;DISPLAY&quot; --volume=&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot; \</div>
+<div class="line">  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_plane.bash</div>
+</div><!-- fragment --></li>
+<li>Simulate walking on stairs like in <a href="https://user-images.githubusercontent.com/6636600/184788709-fcb55fa8-fd93-4be3-ba93-d76be6fafe6a.mp4">this video</a>. <div class="fragment"><div class="line">$ docker run --gpus all --rm -it \</div>
+<div class="line">  --env=&quot;DISPLAY&quot; --volume=&quot;/tmp/.X11-unix:/tmp/.X11-unix:rw&quot; \</div>
+<div class="line">  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_stairs.bash</div>
+</div><!-- fragment --></li>
+</ul>
 <p>The Docker image is automatically updated on <a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml">CI</a> from <a href="https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile">this Dockerfile</a>.</p>
 <h1>Install</h1>
 <h2>Requirements</h2>
