@@ -103,4 +103,9 @@ jobs:
             ALLOW_FAILURE=false
           fi
           echo "- ALLOW_FAILURE: ${ALLOW_FAILURE}"
-          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin || ${ALLOW_FAILURE}
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
+            EXPECTED_BASE_POS="1.34 -0.41 0.8"
+          else
+            EXPECTED_BASE_POS="1.75 0.0 1.68"
+          fi
+          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
