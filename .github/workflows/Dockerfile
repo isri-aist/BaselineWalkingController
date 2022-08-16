@@ -60,7 +60,13 @@ RUN mkdir -p ${HOME}/.config/mc_rtc/controllers
 RUN cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc/mc_rtc.yaml
 RUN echo $'#!/usr/bin/env bash \n\
 source ${HOME}/catkin_ws/devel/setup.bash \n\
-cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/BaselineWalkingController.yaml ${HOME}/.config/mc_rtc/controllers \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingOnPlain.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
 /usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
-cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc.cnoid' > ${HOME}/run_simulation.bash
-RUN chmod 755 ${HOME}/run_simulation.bash
+cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc.cnoid' > ${HOME}/walk_on_plain.bash
+RUN echo $'#!/usr/bin/env bash \n\
+source ${HOME}/catkin_ws/devel/setup.bash \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingOnStairs.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
+/usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
+cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc_comanoid_staircase.cnoid' > ${HOME}/walk_on_stairs.bash
+RUN chmod 755 ${HOME}/walk_on_plain.bash
+RUN chmod 755 ${HOME}/walk_on_stairs.bash

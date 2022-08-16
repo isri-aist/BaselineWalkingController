@@ -34,7 +34,10 @@ $ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest
 $ xhost +local:
 $ docker run --gpus all --rm -it \
   --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-  ghcr.io/isri-aist/baseline_walking_controller:latest ./run_simulation.bash
+  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_plain.bash
+$ docker run --gpus all --rm -it \
+  --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_stairs.bash
 ```
 
 The Docker image is automatically updated on [CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml) from [this Dockerfile](https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile).
