@@ -127,7 +127,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "doubleSupportRatio", [this]() { return config_.doubleSupportRatio; },
           [this](double v) { config_.doubleSupportRatio = v; }),
       mc_rtc::gui::ArrayInput(
-          "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d { return config_.zmpOffset; },
+          "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
       mc_rtc::gui::Checkbox(
           "stopSwingTrajForTouchDownFoot", [this]() { return config_.stopSwingTrajForTouchDownFoot; },
