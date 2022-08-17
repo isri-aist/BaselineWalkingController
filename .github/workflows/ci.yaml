@@ -1,4 +1,4 @@
-name: Building and testing BaselineWalkingController
+name: Build and test
 
 on:
   push:
