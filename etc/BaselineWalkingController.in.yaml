@@ -185,3 +185,8 @@ CentroidalManager:
 
   # # FootGuidedControl
   # method: FootGuidedControl
+
+  # # IntrinsicallyStableMpc
+  # method: IntrinsicallyStableMpc
+  # horizonDuration: 2.0 # [sec]
+  # horizonDt: 0.02 # [sec]

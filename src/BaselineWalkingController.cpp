@@ -9,6 +9,7 @@
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerDdpZmp.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerFootGuidedControl.h>
+#include <BaselineWalkingController/centroidal/CentroidalManagerIntrinsicallyStableMpc.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerPreviewControlZmp.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 
@@ -53,6 +54,10 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
   else if(centroidalManagerMethod == "FootGuidedControl")
   {
     centroidalManager_ = std::make_shared<CentroidalManagerFootGuidedControl>(this, config()("CentroidalManager"));
+  }
+  else if(centroidalManagerMethod == "IntrinsicallyStableMpc")
+  {
+    centroidalManager_ = std::make_shared<CentroidalManagerIntrinsicallyStableMpc>(this, config()("CentroidalManager"));
   }
   else
   {
