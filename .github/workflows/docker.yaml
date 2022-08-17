@@ -40,7 +40,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mpc-method: [PreviewControlZmp, DdpZmp]
+        mpc-method: [PreviewControlZmp, DdpZmp, FootGuidedControl]
         mpc-framework: [OnlineMpc, OfflineMpc]
         motion-type: [WalkingOnPlane, WalkingOnStairs]
     runs-on: ubuntu-20.04
