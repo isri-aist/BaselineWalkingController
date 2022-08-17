@@ -48,8 +48,8 @@ void CentroidalManagerFootGuidedControl::runMpc()
 CCC::FootGuidedControl::RefData CentroidalManagerFootGuidedControl::calcRefData() const
 {
   double constantZmpDuration = 1.0; // [sec]
-  double footstepsConcatDurationThre = 0.1; // [sec]
-  double horizonMargin = 1e-3; // [sec]
+  double footstepsMergeDurationThre = 0.1; // [sec]
+  double horizonMargin = 1e-2; // [sec]
   CCC::FootGuidedControl::RefData refData;
 
   if(ctl().footManager_->footstepQueue().empty())
@@ -87,16 +87,16 @@ CCC::FootGuidedControl::RefData CentroidalManagerFootGuidedControl::calcRefData(
       // becoming too short
       if(ctl().footManager_->prevFootstep())
       {
-        if(ctl().footManager_->prevFootstep()->foot == opposite(footstep.foot)
-           && footstep.transitStartTime - ctl().footManager_->prevFootstep()->transitEndTime
-                  < footstepsConcatDurationThre)
+        const auto & prevFootstep = ctl().footManager_->prevFootstep();
+        if(prevFootstep->foot == opposite(footstep.foot)
+           && footstep.transitStartTime - prevFootstep->transitEndTime < footstepsMergeDurationThre)
         {
           refData.transit_start_zmp =
               ctl()
                   .footManager_->calcZmpWithOffset(footstep.foot, ctl().footManager_->targetFootPose(footstep.foot))
                   .head<2>();
-          refData.transit_start_time = ctl().footManager_->prevFootstep()->swingEndTime;
-          refData.transit_duration = footstep.swingStartTime - ctl().footManager_->prevFootstep()->swingEndTime;
+          refData.transit_start_time = prevFootstep->swingEndTime;
+          refData.transit_duration = footstep.swingStartTime - prevFootstep->swingEndTime;
         }
       }
     }
@@ -122,7 +122,7 @@ CCC::FootGuidedControl::RefData CentroidalManagerFootGuidedControl::calcRefData(
       {
         const auto & nextFootstep = ctl().footManager_->footstepQueue()[1];
         if(nextFootstep.foot == opposite(footstep.foot)
-           && nextFootstep.transitStartTime - footstep.transitEndTime < footstepsConcatDurationThre)
+           && nextFootstep.transitStartTime - footstep.transitEndTime < footstepsMergeDurationThre)
         {
           refData.transit_end_zmp = ctl().footManager_->calcZmpWithOffset(footstep.foot, footstep.pose).head<2>();
           refData.transit_duration = nextFootstep.swingStartTime - footstep.swingEndTime;
@@ -133,7 +133,7 @@ CCC::FootGuidedControl::RefData CentroidalManagerFootGuidedControl::calcRefData(
     // Ensure a horizon, since a horizon close to zero produces a very large input
     if(refData.transit_start_time + refData.transit_duration < ctl().t() + horizonMargin)
     {
-      refData.transit_duration += horizonMargin;
+      refData.transit_duration = ctl().t() + horizonMargin - refData.transit_start_time;
     }
   }
 
