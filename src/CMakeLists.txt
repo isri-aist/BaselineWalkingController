@@ -7,6 +7,7 @@ add_library(${CONTROLLER_NAME} SHARED
   CentroidalManager.cpp
   centroidal/CentroidalManagerPreviewControlZmp.cpp
   centroidal/CentroidalManagerDdpZmp.cpp
+  centroidal/CentroidalManagerFootGuidedControl.cpp
   wrench/Contact.cpp
   wrench/WrenchDistribution.cpp
   trajectory/CubicHermiteSpline.cpp

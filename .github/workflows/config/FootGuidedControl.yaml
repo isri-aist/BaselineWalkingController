@@ -1,0 +1,2 @@
+CentroidalManager:
+  method: FootGuidedControl
