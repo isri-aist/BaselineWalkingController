@@ -9,6 +9,7 @@ https://user-images.githubusercontent.com/6636600/184788681-10219f2e-cbe9-4e52-a
 https://user-images.githubusercontent.com/6636600/184788709-fcb55fa8-fd93-4be3-ba93-d76be6fafe6a.mp4
 
 ## Features
+- Completely open source! (controller framework: mc_rtc, simulator: Choreonoid, sample robot model: JVRC1)
 - Easy to switch between various methods of centroidal trajectory generation for walking implemented in [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection).
 - Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.
 - Support for a virtual robot whose model is publicly available so you can try out the controller right away.
