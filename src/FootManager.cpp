@@ -301,7 +301,7 @@ double FootManager::calcRefGroundPosZ(double t, int derivOrder) const
   }
 }
 
-std::set<Foot> FootManager::getContactFeet() const
+std::set<Foot> FootManager::getCurrentContactFeet() const
 {
   if(supportPhase_ == SupportPhase::DoubleSupport)
   {
@@ -327,11 +327,11 @@ std::set<Foot> FootManager::getContactFeet() const
   }
 }
 
-std::unordered_map<Foot, std::shared_ptr<Contact>> FootManager::calcContactList() const
+std::unordered_map<Foot, std::shared_ptr<Contact>> FootManager::calcCurrentContactList() const
 {
   // Set contactList
   std::unordered_map<Foot, std::shared_ptr<Contact>> contactList;
-  for(const auto & foot : getContactFeet())
+  for(const auto & foot : getCurrentContactFeet())
   {
     std::vector<Eigen::Vector3d> localVertexList;
     const auto & surface = ctl().robot().surface(surfaceName(foot));
@@ -599,7 +599,7 @@ void FootManager::updateFootTraj()
 
   // Update impGainTypes_ and requireImpGainUpdate_
   std::unordered_map<Foot, std::string> newImpGainTypes;
-  const auto & contactFeet = getContactFeet();
+  const auto & contactFeet = getCurrentContactFeet();
   if(contactFeet.size() == 1)
   {
     newImpGainTypes.emplace(*(contactFeet.cbegin()), "singleSupport");

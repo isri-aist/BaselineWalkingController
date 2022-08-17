@@ -91,7 +91,7 @@ void CentroidalManager::update()
     }
 
     // Convert ZMP to wrench and distribute
-    contactList_ = ctl().footManager_->calcContactList();
+    contactList_ = ctl().footManager_->calcCurrentContactList();
     if(!wrenchDist_ || wrenchDist_->contactList_ != contactList_)
     {
       wrenchDist_ = std::make_shared<WrenchDistribution>(contactList_, config().wrenchDistConfig);
@@ -215,7 +215,7 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   });
   logger.addLogEntry(config().name + "_ZMP_measured", this, [this]() {
     std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
-    for(const auto & foot : ctl().footManager_->getContactFeet())
+    for(const auto & foot : ctl().footManager_->getCurrentContactFeet())
     {
       const auto & surfaceName = ctl().footManager_->surfaceName(foot);
       const auto & sensorName = ctl().robot().indirectSurfaceForceSensor(surfaceName).name();

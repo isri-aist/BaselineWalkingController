@@ -150,11 +150,11 @@ public:
   */
   double calcRefGroundPosZ(double t, int derivOrder = 0) const;
 
-  /** \brief Calculate contact feet. */
-  std::set<Foot> getContactFeet() const;
+  /** \brief Calculate current contact feet. */
+  std::set<Foot> getCurrentContactFeet() const;
 
-  /** \brief Calculate contact list. */
-  std::unordered_map<Foot, std::shared_ptr<Contact>> calcContactList() const;
+  /** \brief Calculate current contact list. */
+  std::unordered_map<Foot, std::shared_ptr<Contact>> calcCurrentContactList() const;
 
   /** \brief Get the support ratio of left foot.
 
