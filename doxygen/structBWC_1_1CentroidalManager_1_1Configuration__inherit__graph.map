@@ -1,5 +1,6 @@
 <map id="BWC::CentroidalManager::Configuration" name="BWC::CentroidalManager::Configuration">
-<area shape="rect" id="node1" title="Configuration." alt="" coords="5,39,191,80"/>
+<area shape="rect" id="node1" title="Configuration." alt="" coords="5,71,191,112"/>
 <area shape="rect" id="node2" href="$structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html" title="Configuration." alt="" coords="252,5,463,47"/>
-<area shape="rect" id="node3" href="$structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html" title="Configuration." alt="" coords="239,71,476,112"/>
+<area shape="rect" id="node3" href="$structBWC_1_1CentroidalManagerFootGuidedControl_1_1Configuration.html" title="Configuration." alt="" coords="251,71,464,112"/>
+<area shape="rect" id="node4" href="$structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html" title="Configuration." alt="" coords="239,136,476,177"/>
 </map>

@@ -1,0 +1,8 @@
+<map id="BWC::CentroidalManagerFootGuidedControl" name="BWC::CentroidalManagerFootGuidedControl">
+<area shape="rect" id="node1" title="Centroidal manager with foot&#45;guided control." alt="" coords="133,289,347,331"/>
+<area shape="rect" id="node2" href="$classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="37,193,222,219"/>
+<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="5,89,240,115"/>
+<area shape="rect" id="node4" title=" " alt="" coords="23,5,222,32"/>
+<area shape="rect" id="node5" href="$structBWC_1_1CentroidalManagerFootGuidedControl_1_1Configuration.html" title="Configuration." alt="" coords="249,185,463,227"/>
+<area shape="rect" id="node6" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="265,81,450,123"/>
+</map>
