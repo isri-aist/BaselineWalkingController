@@ -57,6 +57,7 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
 void FootManager::reset()
 {
   footstepQueue_.clear();
+  prevFootstep_.reset();
 
   for(const auto & foot : Feet::Both)
   {
@@ -375,11 +376,41 @@ double FootManager::leftFootSupportRatio() const
   }
 }
 
+Eigen::Vector3d FootManager::calcZmpWithOffset(const Foot & foot, const sva::PTransformd & footPose) const
+{
+  Eigen::Vector3d zmpOffset = config_.zmpOffset;
+  if(foot == Foot::Right)
+  {
+    zmpOffset.y() *= -1;
+  }
+  return (sva::PTransformd(zmpOffset) * footPose).translation();
+}
+
+Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sva::PTransformd> & footPoses) const
+{
+  if(footPoses.size() == 0)
+  {
+    mc_rtc::log::error("[FootManager] footPoses is empty in calcZmpWithOffset.");
+    return Eigen::Vector3d::Zero();
+  }
+  else if(footPoses.size() == 1)
+  {
+    return calcZmpWithOffset(footPoses.begin()->first, footPoses.begin()->second);
+  }
+  else // if(footPoses.size() == 2)
+  {
+    return 0.5
+           * (calcZmpWithOffset(Foot::Left, footPoses.at(Foot::Left))
+              + calcZmpWithOffset(Foot::Right, footPoses.at(Foot::Right)));
+  }
+}
+
 void FootManager::updateFootTraj()
 {
   // Remove old footsteps from footstepQueue_
   while(!footstepQueue_.empty() && footstepQueue_.front().transitEndTime < ctl().t())
   {
+    prevFootstep_ = std::make_shared<Footstep>(footstepQueue_.front());
     footstepQueue_.pop_front();
   }
 
@@ -696,35 +727,6 @@ void FootManager::updateZmpTraj()
 
   zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
-}
-
-Eigen::Vector3d FootManager::calcZmpWithOffset(const Foot & foot, const sva::PTransformd & footPose) const
-{
-  Eigen::Vector3d zmpOffset = config_.zmpOffset;
-  if(foot == Foot::Right)
-  {
-    zmpOffset.y() *= -1;
-  }
-  return (sva::PTransformd(zmpOffset) * footPose).translation();
-}
-
-Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sva::PTransformd> & footPoses) const
-{
-  if(footPoses.size() == 0)
-  {
-    mc_rtc::log::error("[FootManager] footPoses is empty in zmpWithOffset.");
-    return Eigen::Vector3d::Zero();
-  }
-  else if(footPoses.size() == 1)
-  {
-    return calcZmpWithOffset(footPoses.begin()->first, footPoses.begin()->second);
-  }
-  else //  if(footPoses.size() == 2)
-  {
-    return 0.5
-           * (calcZmpWithOffset(Foot::Left, footPoses.at(Foot::Left))
-              + calcZmpWithOffset(Foot::Right, footPoses.at(Foot::Right)));
-  }
 }
 
 double FootManager::touchDownRemainingDuration() const

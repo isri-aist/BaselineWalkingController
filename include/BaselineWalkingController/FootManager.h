@@ -162,6 +162,19 @@ public:
   */
   double leftFootSupportRatio() const;
 
+  /** \brief Calculate ZMP with offset.
+      \param foot foot
+      \param footPose foot pose
+  */
+  Eigen::Vector3d calcZmpWithOffset(const Foot & foot, const sva::PTransformd & footPose) const;
+
+  /** \brief Calculate ZMP with offset.
+      \param footPoses foot poses
+
+      Returns zero if footPoses is empty
+  */
+  Eigen::Vector3d calcZmpWithOffset(const std::unordered_map<Foot, sva::PTransformd> & footPoses) const;
+
   /** \brief Access footstep queue. */
   inline const std::deque<Footstep> & footstepQueue() const noexcept
   {
@@ -176,6 +189,12 @@ public:
   inline std::deque<Footstep> & footstepQueue() noexcept
   {
     return footstepQueue_;
+  }
+
+  /** \brief Access previous footstep. */
+  std::shared_ptr<Footstep> prevFootstep() const
+  {
+    return prevFootstep_;
   }
 
   /** \brief Get the target foot pose represented in world frame. */
@@ -221,19 +240,6 @@ protected:
   /** \brief Update ZMP trajectory. */
   void updateZmpTraj();
 
-  /** \brief Calculate ZMP with offset.
-      \param foot foot
-      \param footPose foot pose
-  */
-  Eigen::Vector3d calcZmpWithOffset(const Foot & foot, const sva::PTransformd & footPose) const;
-
-  /** \brief Calculate ZMP with offset.
-      \param footPoses foot poses
-
-      Returns zero if footPoses is empty
-  */
-  Eigen::Vector3d calcZmpWithOffset(const std::unordered_map<Foot, sva::PTransformd> & footPoses) const;
-
   /** \brief Get the remaining duration for next touch down.
 
       Returns zero in double support phase. */
@@ -253,6 +259,9 @@ protected:
 
   //! Footstep queue
   std::deque<Footstep> footstepQueue_;
+
+  //! Previous footstep
+  std::shared_ptr<Footstep> prevFootstep_;
 
   //! Target foot pose represented in world frame
   std::unordered_map<Foot, sva::PTransformd> targetFootPoses_;
