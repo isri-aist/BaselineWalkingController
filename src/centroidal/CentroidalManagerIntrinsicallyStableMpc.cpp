@@ -39,6 +39,16 @@ void CentroidalManagerIntrinsicallyStableMpc::reset()
   firstIter_ = true;
 }
 
+void CentroidalManagerIntrinsicallyStableMpc::addToLogger(mc_rtc::Logger & logger)
+{
+  CentroidalManager::addToLogger(logger);
+
+  logger.addLogEntry(config_.name + "_IntrinsicallyStableMpc_zmpLimits_min", this,
+                     [this]() { return calcRefData(ctl().t()).zmp_limits[0]; });
+  logger.addLogEntry(config_.name + "_IntrinsicallyStableMpc_zmpLimits_max", this,
+                     [this]() { return calcRefData(ctl().t()).zmp_limits[1]; });
+}
+
 void CentroidalManagerIntrinsicallyStableMpc::runMpc()
 {
   CCC::IntrinsicallyStableMpc::InitialParam initialParam;
@@ -69,20 +79,20 @@ CCC::IntrinsicallyStableMpc::RefData CentroidalManagerIntrinsicallyStableMpc::ca
 {
   CCC::IntrinsicallyStableMpc::RefData refData;
   refData.zmp = ctl().footManager_->calcRefZmp(t).head<2>();
-  // \todo
-  // Eigen::Vector2d minPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::max());
-  // Eigen::Vector2d maxPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::lowest());
-  // for(const auto & contactKV : contactList_)
-  // {
-  //   for(const auto & vertexWithRidge : contactKV.second->vertexWithRidgeList_)
-  //   {
-  //     minPos = minPos.cwiseMin(vertexWithRidge.vertex.head<2>());
-  //     maxPos = maxPos.cwiseMax(vertexWithRidge.vertex.head<2>());
-  //   }
-  // }
-  // refData.zmp_limits[0] = minPos;
-  // refData.zmp_limits[1] = maxPos;
-  refData.zmp_limits[0] = refData.zmp + Eigen::Vector2d::Constant(-0.2);
-  refData.zmp_limits[1] = refData.zmp + Eigen::Vector2d::Constant(0.2);
+  Eigen::Vector2d minPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::max());
+  Eigen::Vector2d maxPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::lowest());
+  for(const auto & footPoseKV : ctl().footManager_->calcContactFootPoses(t))
+  {
+    const auto & surface = ctl().robot().surface(ctl().footManager_->surfaceName(footPoseKV.first));
+    for(const auto & point : surface.points())
+    {
+      // Surface points are represented in body frame, not surface frame
+      Eigen::Vector2d pos = (point * surface.X_b_s().inv() * footPoseKV.second).translation().head<2>();
+      minPos = minPos.cwiseMin(pos);
+      maxPos = maxPos.cwiseMax(pos);
+    }
+  }
+  refData.zmp_limits[0] = minPos;
+  refData.zmp_limits[1] = maxPos;
   return refData;
 };

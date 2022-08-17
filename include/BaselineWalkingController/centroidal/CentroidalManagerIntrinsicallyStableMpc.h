@@ -50,6 +50,9 @@ public:
     return config_;
   }
 
+  /** \brief Add entries to the logger. */
+  virtual void addToLogger(mc_rtc::Logger & logger) override;
+
 protected:
   /** \brief Accessor to the configuration. */
   inline virtual Configuration & config() override

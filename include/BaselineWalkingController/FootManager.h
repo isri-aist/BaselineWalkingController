@@ -150,10 +150,27 @@ public:
   */
   double calcRefGroundPosZ(double t, int derivOrder = 0) const;
 
-  /** \brief Calculate current contact feet. */
+  /** \brief Calculate contact foot poses.
+      \param t time
+
+      Touch down foot is NOT included.
+
+      \see FootManager::calcCurrentContactList
+  */
+  std::unordered_map<Foot, sva::PTransformd> calcContactFootPoses(double t) const;
+
+  /** \brief Get current contact feet.
+
+      If FootManager::Configuration::enableWrenchDistForTouchDownFoot is true, the touch down foot is also included.
+  */
   std::set<Foot> getCurrentContactFeet() const;
 
-  /** \brief Calculate current contact list. */
+  /** \brief Calculate current contact list.
+
+      If FootManager::Configuration::enableWrenchDistForTouchDownFoot is true, the touch down foot is also included.
+
+      \see FootManager::calcContactFootPoses
+  */
   std::unordered_map<Foot, std::shared_ptr<Contact>> calcCurrentContactList() const;
 
   /** \brief Get the support ratio of left foot.
@@ -283,6 +300,9 @@ protected:
 
   //! Ground Z position function
   std::shared_ptr<CubicInterpolator<Vector1d>> groundPosZFunc_;
+
+  //! Contact foot poses list
+  std::map<double, std::unordered_map<Foot, sva::PTransformd>> contactFootPosesList_;
 
   //! Footstep during swing
   const Footstep * swingFootstep_ = nullptr;
