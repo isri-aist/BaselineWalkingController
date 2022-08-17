@@ -41,10 +41,10 @@ tilting_angle_list = np.array(tilting_angle_list)
 max_tilting_angle = np.max(np.abs(tilting_angle_list))
 
 if max_tilting_angle <= args.tilting_angle_thre:
-    print(u"[checkSimulationResults.py] max_tilting_angle is below the threshold: {:.1f} <= \u00b1 {:.1f} [deg]".format(
+    print(u"[success][checkSimulationResults.py] max_tilting_angle is below the threshold: {:.1f} <= \u00b1 {:.1f} [deg]".format(
         max_tilting_angle, args.tilting_angle_thre))
 else:
-    print(u"[checkSimulationResults.py] max_tilting_angle exceeds the threshold: {:.1f} > \u00b1 {:.1f} [deg]".format(
+    print(u"[error][checkSimulationResults.py] max_tilting_angle exceeds the threshold: {:.1f} > \u00b1 {:.1f} [deg]".format(
         max_tilting_angle, args.tilting_angle_thre))
     exit_status = 1
 
@@ -56,11 +56,11 @@ last_base_pos = np.array([log["FloatingBase_position_x"][-1],
 if args.expected_base_pos is not None:
     if (np.abs(last_base_pos - np.array(args.expected_base_pos)) < np.array(args.base_pos_thre)).all():
         with np.printoptions(precision=2):
-            print(u"[checkSimulationResults.py] last_base_pos is within the expected range: {} <= {} \u00b1 {} [m]".format(
+            print(u"[success][checkSimulationResults.py] last_base_pos is within the expected range: {} <= {} \u00b1 {} [m]".format(
                 last_base_pos, np.array(args.expected_base_pos), np.array(args.base_pos_thre)))
     else:
         with np.printoptions(precision=2):
-            print(u"[checkSimulationResults.py] last_base_pos is outside the expected range: {} > {} \u00b1 {} [m]".format(
+            print(u"[error][checkSimulationResults.py] last_base_pos is outside the expected range: {} > {} \u00b1 {} [m]".format(
                 last_base_pos, np.array(args.expected_base_pos), np.array(args.base_pos_thre)))
         exit_status = 1
 
