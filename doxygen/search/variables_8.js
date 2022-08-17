@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['impgains_444',['impGains',['../structBWC_1_1FootManager_1_1Configuration.html#ae97d85eb6df4cba328c029bcd9469675',1,'BWC::FootManager::Configuration']]],
-  ['impgaintypes_5f_445',['impGainTypes_',['../classBWC_1_1FootManager.html#a04c72bf897db34284ea5e2e1fee11776',1,'BWC::FootManager']]]
+  ['impgains_455',['impGains',['../structBWC_1_1FootManager_1_1Configuration.html#ae97d85eb6df4cba328c029bcd9469675',1,'BWC::FootManager::Configuration']]],
+  ['impgaintypes_5f_456',['impGainTypes_',['../classBWC_1_1FootManager.html#a04c72bf897db34284ea5e2e1fee11776',1,'BWC::FootManager']]]
 ];

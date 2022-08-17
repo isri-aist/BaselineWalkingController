@@ -1,6 +1,7 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/CentroidalManager.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/CentroidalManager.h">
-<area shape="rect" id="node1" title=" " alt="" coords="363,5,677,91"/>
+<area shape="rect" id="node1" title=" " alt="" coords="556,5,871,91"/>
 <area shape="rect" id="node2" href="$CentroidalManagerDdpZmp_8h.html" title=" " alt="" coords="5,139,320,224"/>
 <area shape="rect" id="node3" href="$CentroidalManagerFootGuidedControl_8h.html" title=" " alt="" coords="344,139,696,224"/>
-<area shape="rect" id="node4" href="$CentroidalManagerPreviewControlZmp_8h.html" title=" " alt="" coords="720,139,1080,224"/>
+<area shape="rect" id="node4" href="$CentroidalManagerIntrinsicallyStableMpc_8h.html" title=" " alt="" coords="721,139,1095,224"/>
+<area shape="rect" id="node5" href="$CentroidalManagerPreviewControlZmp_8h.html" title=" " alt="" coords="1120,139,1480,224"/>
 </map>

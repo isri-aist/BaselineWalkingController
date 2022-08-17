@@ -146,12 +146,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a08918cccbaf13595277abef27da1028f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a08918cccbaf13595277abef27da1028f">calcRefGroundPosZ</a> (double t, int derivOrder=0) const</td></tr>
 <tr class="memdesc:a08918cccbaf13595277abef27da1028f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate reference ground Z position.  <a href="classBWC_1_1FootManager.html#a08918cccbaf13595277abef27da1028f">More...</a><br /></td></tr>
 <tr class="separator:a08918cccbaf13595277abef27da1028f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb04ac448ed704b11f016ae275feaa36"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#acb04ac448ed704b11f016ae275feaa36">getContactFeet</a> () const</td></tr>
-<tr class="memdesc:acb04ac448ed704b11f016ae275feaa36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate contact feet.  <a href="classBWC_1_1FootManager.html#acb04ac448ed704b11f016ae275feaa36">More...</a><br /></td></tr>
-<tr class="separator:acb04ac448ed704b11f016ae275feaa36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7b747f6e6e663196c0b11c54379c9d8"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, std::shared_ptr&lt; <a class="el" href="classBWC_1_1Contact.html">Contact</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ac7b747f6e6e663196c0b11c54379c9d8">calcContactList</a> () const</td></tr>
-<tr class="memdesc:ac7b747f6e6e663196c0b11c54379c9d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate contact list.  <a href="classBWC_1_1FootManager.html#ac7b747f6e6e663196c0b11c54379c9d8">More...</a><br /></td></tr>
-<tr class="separator:ac7b747f6e6e663196c0b11c54379c9d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a311e6626ba442c910df5f66c09036578"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::PTransformd &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a311e6626ba442c910df5f66c09036578">calcContactFootPoses</a> (double t) const</td></tr>
+<tr class="memdesc:a311e6626ba442c910df5f66c09036578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate contact foot poses.  <a href="classBWC_1_1FootManager.html#a311e6626ba442c910df5f66c09036578">More...</a><br /></td></tr>
+<tr class="separator:a311e6626ba442c910df5f66c09036578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa15a33caf757c8432949e95e8d0b0103"><td class="memItemLeft" align="right" valign="top">std::set&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#aa15a33caf757c8432949e95e8d0b0103">getCurrentContactFeet</a> () const</td></tr>
+<tr class="memdesc:aa15a33caf757c8432949e95e8d0b0103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current contact feet.  <a href="classBWC_1_1FootManager.html#aa15a33caf757c8432949e95e8d0b0103">More...</a><br /></td></tr>
+<tr class="separator:aa15a33caf757c8432949e95e8d0b0103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a938ea77a40b61d70ac1a4ec850e5d7a2"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, std::shared_ptr&lt; <a class="el" href="classBWC_1_1Contact.html">Contact</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a938ea77a40b61d70ac1a4ec850e5d7a2">calcCurrentContactList</a> () const</td></tr>
+<tr class="memdesc:a938ea77a40b61d70ac1a4ec850e5d7a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate current contact list.  <a href="classBWC_1_1FootManager.html#a938ea77a40b61d70ac1a4ec850e5d7a2">More...</a><br /></td></tr>
+<tr class="separator:a938ea77a40b61d70ac1a4ec850e5d7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c6861fdda40e99e54098d80799e4b2"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a28c6861fdda40e99e54098d80799e4b2">leftFootSupportRatio</a> () const</td></tr>
 <tr class="memdesc:a28c6861fdda40e99e54098d80799e4b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the support ratio of left foot.  <a href="classBWC_1_1FootManager.html#a28c6861fdda40e99e54098d80799e4b2">More...</a><br /></td></tr>
 <tr class="separator:a28c6861fdda40e99e54098d80799e4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,6 +248,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a72659b4236c55ffdb9bd869eb2e5342a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; <a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a72659b4236c55ffdb9bd869eb2e5342a">groundPosZFunc_</a></td></tr>
 <tr class="memdesc:a72659b4236c55ffdb9bd869eb2e5342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ground Z position function.  <a href="classBWC_1_1FootManager.html#a72659b4236c55ffdb9bd869eb2e5342a">More...</a><br /></td></tr>
 <tr class="separator:a72659b4236c55ffdb9bd869eb2e5342a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4a619255385ec8fa1f0bc44ce4b352"><td class="memItemLeft" align="right" valign="top">std::map&lt; double, std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::PTransformd &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#abe4a619255385ec8fa1f0bc44ce4b352">contactFootPosesList_</a></td></tr>
+<tr class="memdesc:abe4a619255385ec8fa1f0bc44ce4b352"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBWC_1_1Contact.html" title="Contact constraint.">Contact</a> foot poses list.  <a href="classBWC_1_1FootManager.html#abe4a619255385ec8fa1f0bc44ce4b352">More...</a><br /></td></tr>
+<tr class="separator:abe4a619255385ec8fa1f0bc44ce4b352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBWC_1_1Footstep.html">Footstep</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">swingFootstep_</a> = nullptr</td></tr>
 <tr class="memdesc:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing.  <a href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">More...</a><br /></td></tr>
 <tr class="separator:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -404,14 +410,42 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac7b747f6e6e663196c0b11c54379c9d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7b747f6e6e663196c0b11c54379c9d8">&#9670;&nbsp;</a></span>calcContactList()</h2>
+<a id="a311e6626ba442c910df5f66c09036578"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a311e6626ba442c910df5f66c09036578">&#9670;&nbsp;</a></span>calcContactFootPoses()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, std::shared_ptr&lt;<a class="el" href="classBWC_1_1Contact.html">Contact</a>&gt; &gt; BWC::FootManager::calcContactList </td>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::PTransformd&gt; BWC::FootManager::calcContactFootPoses </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculate contact foot poses. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>time</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Touch down foot is NOT included.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBWC_1_1FootManager.html#a938ea77a40b61d70ac1a4ec850e5d7a2" title="Calculate current contact list.">FootManager::calcCurrentContactList</a> </dd></dl>
+
+</div>
+</div>
+<a id="a938ea77a40b61d70ac1a4ec850e5d7a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a938ea77a40b61d70ac1a4ec850e5d7a2">&#9670;&nbsp;</a></span>calcCurrentContactList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, std::shared_ptr&lt;<a class="el" href="classBWC_1_1Contact.html">Contact</a>&gt; &gt; BWC::FootManager::calcCurrentContactList </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -419,7 +453,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate contact list. </p>
+<p>Calculate current contact list. </p>
+<p>If <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a26b3e6c99ec4f275cdfaa4bc0d37e7e4" title="Whether to enable wrench distribution for touch down foot.">FootManager::Configuration::enableWrenchDistForTouchDownFoot</a> is true, the touch down foot is also included.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classBWC_1_1FootManager.html#a311e6626ba442c910df5f66c09036578" title="Calculate contact foot poses.">FootManager::calcContactFootPoses</a> </dd></dl>
 
 </div>
 </div>
@@ -615,7 +651,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00232">232</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00249">249</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -644,7 +680,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Const accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00226">226</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00243">243</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -701,7 +737,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Access footstep queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00179">179</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00196">196</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -731,18 +767,18 @@ Protected Attributes</h2></td></tr>
 <p>Access footstep queue. </p>
 <dl class="section note"><dt>Note</dt><dd>Changing footstep queue directly is dangerous and should be avoided if possible. To safely add a footstep to footstep queue, call <a class="el" href="classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92" title="Append a target footstep to the queue.">appendFootstep()</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00189">189</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00206">206</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
-<a id="acb04ac448ed704b11f016ae275feaa36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb04ac448ed704b11f016ae275feaa36">&#9670;&nbsp;</a></span>getContactFeet()</h2>
+<a id="aa15a33caf757c8432949e95e8d0b0103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15a33caf757c8432949e95e8d0b0103">&#9670;&nbsp;</a></span>getCurrentContactFeet()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::set&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>&gt; BWC::FootManager::getContactFeet </td>
+          <td class="memname">std::set&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>&gt; BWC::FootManager::getCurrentContactFeet </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -750,7 +786,8 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calculate contact feet. </p>
+<p>Get current contact feet. </p>
+<p>If <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a26b3e6c99ec4f275cdfaa4bc0d37e7e4" title="Whether to enable wrench distribution for touch down foot.">FootManager::Configuration::enableWrenchDistForTouchDownFoot</a> is true, the touch down foot is also included. </p>
 
 </div>
 </div>
@@ -850,7 +887,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Access previous footstep. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00195">195</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00212">212</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -939,7 +976,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00219">219</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00236">236</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -989,7 +1026,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot acceleration represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00213">213</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00230">230</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +1056,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot pose represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00201">201</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00218">218</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1049,7 +1086,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot velocity represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00207">207</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00224">224</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1178,7 +1215,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base link Yaw trajectory. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00297">297</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00317">317</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1204,7 +1241,33 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00255">255</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00272">272</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+
+</div>
+</div>
+<a id="abe4a619255385ec8fa1f0bc44ce4b352"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4a619255385ec8fa1f0bc44ce4b352">&#9670;&nbsp;</a></span>contactFootPosesList_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;double, std::unordered_map&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::PTransformd&gt; &gt; BWC::FootManager::contactFootPosesList_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classBWC_1_1Contact.html" title="Contact constraint.">Contact</a> foot poses list. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00305">305</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1230,7 +1293,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00258">258</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00275">275</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1256,7 +1319,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00261">261</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00278">278</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1282,7 +1345,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Ground Z position function. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00285">285</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00302">302</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1308,7 +1371,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Types of impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00303">303</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00323">323</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1334,7 +1397,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Foot poses in the last double support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00276">276</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00293">293</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1360,7 +1423,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Previous footstep. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00264">264</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00281">281</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1386,7 +1449,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether to require updating impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00306">306</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00326">326</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1412,7 +1475,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00279">279</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00296">296</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1438,7 +1501,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00288">288</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00308">308</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1463,7 +1526,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Swing foot trajectory </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00292">292</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00312">312</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1488,7 +1551,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Swing foot trajectory </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00293">293</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00313">313</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1514,7 +1577,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot acceleration represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00273">273</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00290">290</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1540,7 +1603,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot pose represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00267">267</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00284">284</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1566,7 +1629,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot velocity represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00270">270</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00287">287</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1592,7 +1655,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether touch down is detected during swing. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00300">300</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00320">320</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1618,7 +1681,7 @@ Protected Attributes</h2></td></tr>
 
 <p>ZMP function. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00282">282</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00299">299</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>

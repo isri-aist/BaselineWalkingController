@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="5,64,191,91"/>
-<area shape="rect" id="node2" href="$classBWC_1_1CentroidalManagerDdpZmp.html" title="Centroidal manager with DDP." alt="" coords="239,5,480,32"/>
-<area shape="rect" id="node3" href="$classBWC_1_1CentroidalManagerFootGuidedControl.html" title="Centroidal manager with foot&#45;guided control." alt="" coords="253,57,466,98"/>
-<area shape="rect" id="node4" href="$classBWC_1_1CentroidalManagerPreviewControlZmp.html" title="Centroidal manager with preview control." alt="" coords="241,122,478,163"/>
+<area shape="rect" id="node1" href="$classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="5,97,191,124"/>
+<area shape="rect" id="node2" href="$classBWC_1_1CentroidalManagerDdpZmp.html" title="Centroidal manager with DDP." alt="" coords="249,5,490,32"/>
+<area shape="rect" id="node3" href="$classBWC_1_1CentroidalManagerFootGuidedControl.html" title="Centroidal manager with foot&#45;guided control." alt="" coords="263,57,476,98"/>
+<area shape="rect" id="node4" href="$classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html" title="Centroidal manager with intrinsically stable MPC." alt="" coords="239,122,500,163"/>
+<area shape="rect" id="node5" href="$classBWC_1_1CentroidalManagerPreviewControlZmp.html" title="Centroidal manager with preview control." alt="" coords="251,187,488,229"/>
 </map>
