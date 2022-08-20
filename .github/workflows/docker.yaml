@@ -9,12 +9,10 @@ on:
 
 jobs:
 
-  build-and-push-docker:
-    if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+  build:
     runs-on: ubuntu-20.04
     env:
-      IMAGE_NAME: ghcr.io/isri-aist/baseline_walking_controller
-      IMAGE_TAG: latest
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v2
@@ -26,19 +24,23 @@ jobs:
       - name: Build docker image
         run: |
           cd ${GITHUB_WORKSPACE}/BaselineWalkingController/.github/workflows/
-          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+          docker build -t ${IMAGE_NAME}_ci:${{ github.sha }} .
       - name: Docker images
         run: docker images
       - name: Login to registries
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u isri-aist --password-stdin
-      - name: Push to GitHub Packages
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      - name: Push image for CI
         run: |
-          docker push ${IMAGE_NAME}:${IMAGE_TAG}
+          docker push ${IMAGE_NAME}_ci:${{ github.sha }}
+      - name: Push image for release
+        if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        run: |
+          docker tag ${IMAGE_NAME}_ci:${{ github.sha }} ${IMAGE_NAME}:latest
+          docker push ${IMAGE_NAME}:latest
 
-  test-simulation-on-docker:
-    if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
-    needs: build-and-push-docker
+  test:
+    needs: build
     strategy:
       fail-fast: false
       matrix:
@@ -46,8 +48,10 @@ jobs:
         mpc-framework: [OnlineMpc, OfflineMpc]
         motion-type: [WalkingOnPlane, WalkingOnStairs]
     runs-on: ubuntu-20.04
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
     container:
-      image: ghcr.io/isri-aist/baseline_walking_controller:latest
+      image: ${IMAGE_NAME}_ci:${{ github.sha }}
     env:
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
