@@ -12,7 +12,7 @@ on:
 
 jobs:
 
-  build:
+  build-docker:
     runs-on: ubuntu-20.04
     env:
       IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
@@ -27,7 +27,7 @@ jobs:
       - name: Build docker image
         run: |
           cd ${GITHUB_WORKSPACE}/BaselineWalkingController/.github/workflows/
-          docker build -t ${IMAGE_NAME}_ci:${{ github.sha }} .
+          docker build -t ${IMAGE_NAME}_ci:${{ github.sha }} --build-arg REPOSITORY=${{ github.repository_owner }} --build-arg COMMIT_SHA=${{ github.sha }} .
       - name: Docker images
         run: docker images
       - name: Login to registries
@@ -42,8 +42,8 @@ jobs:
           docker tag ${IMAGE_NAME}_ci:${{ github.sha }} ${IMAGE_NAME}:latest
           docker push ${IMAGE_NAME}:latest
 
-  test:
-    needs: build
+  test-docker:
+    needs: build-docker
     strategy:
       fail-fast: false
       matrix:
@@ -51,13 +51,21 @@ jobs:
         mpc-framework: [OnlineMpc, OfflineMpc]
         motion-type: [WalkingOnPlane, WalkingOnStairs]
     runs-on: ubuntu-20.04
+    container:
+      image: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller_ci:${{ github.sha }}
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
-    container:
-      image: ${IMAGE_NAME}_ci:${{ github.sha }}
     steps:
+      - name: Check repository
+        shell: bash
+        run: |
+          set -e
+          . ${HOME}/catkin_ws/devel/setup.bash
+          set -x
+          roscd baseline_walking_controller
+          git remote get-url origin
+          git log HEAD^..HEAD
       - name: Run simulation
         shell: bash
         run: |
