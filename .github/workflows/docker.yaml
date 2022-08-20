@@ -53,11 +53,10 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
-    container:
-      image: ${IMAGE_NAME}_ci:${{ github.sha }}
-    env:
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
+    container:
+      image: ${IMAGE_NAME}_ci:${{ github.sha }}
     steps:
       - name: Run simulation
         shell: bash
