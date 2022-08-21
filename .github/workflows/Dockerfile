@@ -47,7 +47,15 @@ RUN wstool init src
 RUN wstool set -t src QpSolverCollection https://github.com/isri-aist/QpSolverCollection --git -y
 RUN wstool set -t src NMPC https://github.com/isri-aist/NMPC --git -y
 RUN wstool set -t src CentroidalControlCollection https://github.com/isri-aist/CentroidalControlCollection --git -y
-RUN wstool set -t src BaselineWalkingController https://github.com/${REPOSITORY}/BaselineWalkingController --git -y -v ${COMMIT_SHA}
+# To handle CI triggered by Pull Request, COMMIT_SHA must be specified in the git fetch argument,
+# but since wstool does not support it, execute the git commands directly instead.
+# RUN wstool set -t src BaselineWalkingController https://github.com/${REPOSITORY}/BaselineWalkingController --git -y -v ${COMMIT_SHA}
+RUN mkdir src/BaselineWalkingController && \
+    cd src/BaselineWalkingController && \
+    git init && \
+    git remote add origin https://github.com/${REPOSITORY}/BaselineWalkingController && \
+    git fetch origin ${COMMIT_SHA} && \
+    git checkout ${COMMIT_SHA}
 RUN wstool update -t src
 
 # Rosdep install
