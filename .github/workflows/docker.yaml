@@ -3,18 +3,16 @@ name: Docker release
 on:
   push:
     branches:
-      - master
+      - '**'
   schedule:
     - cron: '0 0 * * 0'
 
 jobs:
 
-  build-and-push-docker:
-    if: github.repository_owner== 'isri-aist' && github.ref == 'refs/heads/master'
+  build-docker:
     runs-on: ubuntu-20.04
     env:
-      IMAGE_NAME: ghcr.io/isri-aist/baseline_walking_controller
-      IMAGE_TAG: latest
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v2
@@ -26,19 +24,23 @@ jobs:
       - name: Build docker image
         run: |
           cd ${GITHUB_WORKSPACE}/BaselineWalkingController/.github/workflows/
-          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+          docker build -t ${IMAGE_NAME}_ci:${{ github.sha }} --build-arg REPOSITORY=${{ github.repository_owner }} --build-arg COMMIT_SHA=${{ github.sha }} .
       - name: Docker images
         run: docker images
       - name: Login to registries
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u isri-aist --password-stdin
-      - name: Push to GitHub Packages
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      - name: Push image for CI
         run: |
-          docker push ${IMAGE_NAME}:${IMAGE_TAG}
+          docker push ${IMAGE_NAME}_ci:${{ github.sha }}
+      - name: Push image for release
+        if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        run: |
+          docker tag ${IMAGE_NAME}_ci:${{ github.sha }} ${IMAGE_NAME}:latest
+          docker push ${IMAGE_NAME}:latest
 
-  test-simulation-on-docker:
-    if: github.repository_owner== 'isri-aist' && github.ref == 'refs/heads/master'
-    needs: build-and-push-docker
+  test-docker:
+    needs: build-docker
     strategy:
       fail-fast: false
       matrix:
@@ -47,11 +49,20 @@ jobs:
         motion-type: [WalkingOnPlane, WalkingOnStairs]
     runs-on: ubuntu-20.04
     container:
-      image: ghcr.io/isri-aist/baseline_walking_controller:latest
+      image: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller_ci:${{ github.sha }}
     env:
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
     steps:
+      - name: Check repository
+        shell: bash
+        run: |
+          set -e
+          . ${HOME}/catkin_ws/devel/setup.bash
+          roscd baseline_walking_controller
+          set -x
+          git remote get-url origin
+          git log HEAD^..HEAD
       - name: Run simulation
         shell: bash
         run: |
@@ -63,8 +74,8 @@ jobs:
           sleep 10s
           fluxbox 2> /dev/null &
           mkdir -p ${HOME}/.config/mc_rtc/controllers
-          cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          CI_DIR=${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows
+          cp ${HOME}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+          CI_DIR=${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows
           python3 ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
@@ -110,4 +121,4 @@ jobs:
           else
             EXPECTED_BASE_POS="1.75 0.0 1.68"
           fi
-          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
+          python3 ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
