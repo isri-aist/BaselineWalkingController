@@ -1,6 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="5,31,143,57"/>
-<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="191,31,285,57"/>
-<area shape="rect" id="node3" href="$structBWC_1_1CommandState.html" title="FSM state to send walking command from GUI." alt="" coords="333,5,496,32"/>
-<area shape="rect" id="node4" href="$structBWC_1_1InitialState.html" title="FSM state to initialize." alt="" coords="349,56,481,83"/>
+<area shape="rect" id="node1" href="$structBWC_1_1InitialState.html" title="FSM state to initialize." alt="" coords="5,56,137,83"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="185,56,280,83"/>
+<area shape="rect" id="node3" href="$structBWC_1_1CommandState.html" title="FSM state to send walking command from GUI." alt="" coords="343,5,506,32"/>
+<area shape="rect" id="node4" href="$structBWC_1_1ConfigFootstepState.html" title="FSM state to send walking command from configuration." alt="" coords="328,56,521,83"/>
+<area shape="rect" id="node5" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="356,107,493,133"/>
 </map>
