@@ -24,7 +24,7 @@ void GuiFootstepState::start(mc_control::fsm::Controller & _ctl)
 
   // Setup GUI
   ctl().gui()->addElement(
-      {"BWC", "FootstepCommand"},
+      {"BWC", "GuiFootstep"},
       mc_rtc::gui::Form(
           "Walk",
           [this](const mc_rtc::Configuration & config) {
@@ -55,7 +55,7 @@ bool GuiFootstepState::run(mc_control::fsm::Controller &)
 void GuiFootstepState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
-  ctl().gui()->removeCategory({"BWC", "FootstepCommand"});
+  ctl().gui()->removeCategory({"BWC", "GuiFootstep"});
 }
 
 void GuiFootstepState::sendFootstepList(const Eigen::Vector3d & goalTrans, // (x [m], y [m], theta [rad])
