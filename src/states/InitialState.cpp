@@ -77,31 +77,6 @@ bool InitialState::run(mc_control::fsm::Controller &)
     ctl().footManager_->addToLogger(ctl().logger());
     ctl().centroidalManager_->addToLogger(ctl().logger());
 
-    // Send initial footstep
-    if(config_.has("configs") && config_("configs").has("initialFootstepList"))
-    {
-      Foot foot = Foot::Left;
-      double startTime = ctl().t();
-
-      for(const auto & footstepConfig : config_("configs")("initialFootstepList"))
-      {
-        if(footstepConfig.has("foot"))
-        {
-          foot = strToFoot(footstepConfig("foot"));
-        }
-        if(footstepConfig.has("startTime"))
-        {
-          startTime = ctl().t() + static_cast<double>(footstepConfig("startTime"));
-        }
-        const auto & footstep = ctl().footManager_->makeFootstep(foot, footstepConfig("footMidpose"), startTime,
-                                                                 (footstepConfig("config", mc_rtc::Configuration())));
-        ctl().footManager_->appendFootstep(footstep);
-
-        foot = opposite(foot);
-        startTime = footstep.transitEndTime;
-      }
-    }
-
     return true;
   }
 }

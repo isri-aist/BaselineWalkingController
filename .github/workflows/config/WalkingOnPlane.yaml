@@ -1,9 +1,16 @@
+transitions:
+  - [BWC::Initial_, OK, BWC::ConfigFootstep_, Auto]
+
 states:
   BWC::Initial_:
     base: BWC::Initial
     configs:
       autoStartTime: 8.0
-      initialFootstepList:
+
+  BWC::ConfigFootstep_:
+    base: BWC::ConfigFootstep
+    configs:
+      footstepList:
         - foot: Left
           footMidpose:
             translation: [0.15, 0.0, 0.0]
