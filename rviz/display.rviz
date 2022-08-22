@@ -7,7 +7,7 @@ Panels:
         - /TF1/Frames1
         - /Surface1/Namespaces1
       Splitter Ratio: 0.4228571355342865
-    Tree Height: 390
+    Tree Height: 475
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -37,12 +37,12 @@ Visualization Manager:
   Class: ""
   Displays:
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 0.20000000298023224
       Name: Axes
       Radius: 0.03999999910593033
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -673,7 +673,7 @@ Visualization Manager:
       Marker Topic: /mc_rtc_rviz
       Name: mc_rtc GUI markers
       Namespaces:
-        {}
+        BWC/FootManager/FootstepMarker/Footstep: true
       Queue Size: 100
       Value: true
     - Class: rviz/TF
@@ -726,25 +726,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 3.7577102184295654
+      Distance: 1.1860166788101196
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.672059178352356
-        Y: 0.6012470126152039
-        Z: 0.8255382180213928
+        X: 0.2754117548465729
+        Y: 0.1879705786705017
+        Z: -0.030322298407554626
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3348006010055542
+      Pitch: 0.7698003053665161
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.283888816833496
+      Yaw: 5.36389684677124
     Saved: ~
 Window Geometry:
   Displays:
