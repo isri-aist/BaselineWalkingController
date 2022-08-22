@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertexwithridge_287',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact']]]
+  ['teleopstate_286',['TeleopState',['../structBWC_1_1TeleopState.html',1,'BWC']]]
 ];

@@ -10,7 +10,7 @@ var searchData=
   ['targetfootposes_5f_218',['targetFootPoses_',['../classBWC_1_1FootManager.html#a2152d54064fce70638371c19cee1d77b',1,'BWC::FootManager']]],
   ['targetfootvel_219',['targetFootVel',['../classBWC_1_1FootManager.html#aefb341a9e36facc7136e997b883d76e1',1,'BWC::FootManager']]],
   ['targetfootvels_5f_220',['targetFootVels_',['../classBWC_1_1FootManager.html#af01870b998fc3c4b3a620b19e640dc00',1,'BWC::FootManager']]],
-  ['teardown_221',['teardown',['../structBWC_1_1CommandState.html#a4b2322d6474d2e374c5edd23affc838b',1,'BWC::CommandState::teardown()'],['../structBWC_1_1ConfigFootstepState.html#abcd95f967aec2ff56df4d6205e210c9f',1,'BWC::ConfigFootstepState::teardown()'],['../structBWC_1_1InitialState.html#a062fdd17c9bba1075c4208da37bc477e',1,'BWC::InitialState::teardown()'],['../structBWC_1_1TeleopState.html#aae18f1774b5be8a1bc1fd15630984886',1,'BWC::TeleopState::teardown()']]],
+  ['teardown_221',['teardown',['../structBWC_1_1ConfigFootstepState.html#abcd95f967aec2ff56df4d6205e210c9f',1,'BWC::ConfigFootstepState::teardown()'],['../structBWC_1_1GuiFootstepState.html#ac6153b9e552aa78f7dffe682960ea9b7',1,'BWC::GuiFootstepState::teardown()'],['../structBWC_1_1InitialState.html#a062fdd17c9bba1075c4208da37bc477e',1,'BWC::InitialState::teardown()'],['../structBWC_1_1TeleopState.html#aae18f1774b5be8a1bc1fd15630984886',1,'BWC::TeleopState::teardown()']]],
   ['teleoprunning_5f_222',['teleopRunning_',['../structBWC_1_1TeleopState.html#aabb7d433a89e4c17fd9e987aa3922d4e',1,'BWC::TeleopState']]],
   ['teleopstate_223',['TeleopState',['../structBWC_1_1TeleopState.html',1,'BWC']]],
   ['teleopstate_2eh_224',['TeleopState.h',['../TeleopState_8h.html',1,'']]],

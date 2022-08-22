@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrenchdistribution_288',['WrenchDistribution',['../classBWC_1_1WrenchDistribution.html',1,'BWC']]]
+  ['vertexwithridge_287',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact']]]
 ];
