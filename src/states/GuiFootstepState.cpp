@@ -4,11 +4,11 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
-#include <BaselineWalkingController/states/CommandState.h>
+#include <BaselineWalkingController/states/GuiFootstepState.h>
 
 using namespace BWC;
 
-void CommandState::start(mc_control::fsm::Controller & _ctl)
+void GuiFootstepState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);
 
@@ -24,19 +24,20 @@ void CommandState::start(mc_control::fsm::Controller & _ctl)
 
   // Setup GUI
   ctl().gui()->addElement(
-      {"BWC", "Command"},
+      {"BWC", "FootstepCommand"},
       mc_rtc::gui::Form(
           "Walk",
           [this](const mc_rtc::Configuration & config) {
             if(ctl().footManager_->footstepQueue().size() > 0)
             {
-              mc_rtc::log::error("[CommandState] The command can be sent only when the footstep queue is empty: {}",
-                                 ctl().footManager_->footstepQueue().size());
+              mc_rtc::log::error(
+                  "[GuiFootstepState] The footstep command can be sent only when the footstep queue is empty: {}",
+                  ctl().footManager_->footstepQueue().size());
               return;
             }
-            sendWalkingCommand(Eigen::Vector3d(config(walkConfigKeys_.at("x")), config(walkConfigKeys_.at("y")),
-                                               mc_rtc::constants::toRad(config(walkConfigKeys_.at("theta")))),
-                               config(walkConfigKeys_.at("last")));
+            sendFootstepList(Eigen::Vector3d(config(walkConfigKeys_.at("x")), config(walkConfigKeys_.at("y")),
+                                             mc_rtc::constants::toRad(config(walkConfigKeys_.at("theta")))),
+                             config(walkConfigKeys_.at("last")));
           },
           mc_rtc::gui::FormNumberInput(walkConfigKeys_.at("x"), true, 0.0),
           mc_rtc::gui::FormNumberInput(walkConfigKeys_.at("y"), true, 0.0),
@@ -46,19 +47,19 @@ void CommandState::start(mc_control::fsm::Controller & _ctl)
   output("OK");
 }
 
-bool CommandState::run(mc_control::fsm::Controller &)
+bool GuiFootstepState::run(mc_control::fsm::Controller &)
 {
   return false;
 }
 
-void CommandState::teardown(mc_control::fsm::Controller &)
+void GuiFootstepState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
-  ctl().gui()->removeCategory({"BWC", "Command"});
+  ctl().gui()->removeCategory({"BWC", "FootstepCommand"});
 }
 
-void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [m], y [m], theta [rad])
-                                      int lastFootstepNum)
+void GuiFootstepState::sendFootstepList(const Eigen::Vector3d & goalTrans, // (x [m], y [m], theta [rad])
+                                        int lastFootstepNum)
 {
   auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
     return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
@@ -111,4 +112,4 @@ void CommandState::sendWalkingCommand(const Eigen::Vector3d & goalTrans, // (x [
   }
 }
 
-EXPORT_SINGLE_STATE("BWC::Command", CommandState)
+EXPORT_SINGLE_STATE("BWC::GuiFootstep", GuiFootstepState)

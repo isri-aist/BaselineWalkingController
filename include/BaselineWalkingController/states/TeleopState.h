@@ -50,7 +50,7 @@ protected:
   //! Scale to convert velocity to foot midpose transformation (x, y, theta)
   Eigen::Vector3d velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15));
 
-  //! Command footstep queue size
+  //! Queue size of footsteps to be sent
   int footstepQueueSize_ = 3;
 
   //! ROS variables
