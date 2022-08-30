@@ -167,8 +167,6 @@ jobs:
         run: |
           set -e
           set -x
-          # Workaround for https://github.com/jrl-umi3218/mc_rtc/issues/281
-          sudo sed -i "s/matplotlib.use('Qt5Agg')/# matplotlib.use('Qt5Agg')/g" /usr/lib/python3/dist-packages/mc_log_ui/mc_log_types.py
           EXPECTED_BASE_POS="1.34 -0.41 0.8"
           python3 ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` --expected-base-pos ${EXPECTED_BASE_POS}
       - name: Upload documentation
