@@ -1,6 +1,20 @@
 #pragma once
 
+#include <BaselineFootstepPlanner/FootstepPlanner.h>
+
 #include <BaselineWalkingController/State.h>
+
+namespace BFP
+{
+/** \brief Configuration of environment for footstep planning set via mc_rtc configuration. */
+struct FootstepEnvConfigMcRtc : public FootstepEnvConfig
+{
+  /** \brief Constructor.
+      \param mcRtcConfig mc_rtc configuration
+  */
+  FootstepEnvConfigMcRtc(const mc_rtc::Configuration & mcRtcConfig = {});
+};
+} // namespace BFP
 
 namespace BWC
 {
@@ -18,6 +32,9 @@ public:
   void teardown(mc_control::fsm::Controller & ctl) override;
 
 protected:
+  //! Footstep planner
+  std::shared_ptr<BFP::FootstepPlanner> planner_;
+
   //! Whether planning and walking is triggered
   bool triggered_ = false;
 
