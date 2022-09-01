@@ -65,7 +65,8 @@ RUN rosdep update
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash && rosdep install -y -r --from-paths src --ignore-src
 
 # Catkin build
-RUN source /opt/ros/${ROS_DISTRO}/setup.bash && catkin build baseline_walking_controller -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_QLD=ON
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash && catkin build baseline_footstep_planner -DCMAKE_BUILD_TYPE=RelWithDebInfo
+RUN source ${HOME}/catkin_ws/devel/setup.bash && catkin build baseline_walking_controller -DCMAKE_BUILD_TYPE=RelWithDebInfo -DENABLE_QLD=ON
 RUN echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ${HOME}/.bashrc
 
 # Setup simulation
