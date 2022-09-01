@@ -47,6 +47,7 @@ RUN wstool init src
 RUN wstool set -t src QpSolverCollection https://github.com/isri-aist/QpSolverCollection --git -y
 RUN wstool set -t src NMPC https://github.com/isri-aist/NMPC --git -y
 RUN wstool set -t src CentroidalControlCollection https://github.com/isri-aist/CentroidalControlCollection --git -y
+RUN wstool set -t src BaselineFootstepPlanner https://github.com/isri-aist/BaselineFootstepPlanner --git -y
 # To handle CI triggered by Pull Request, COMMIT_SHA must be specified in the git fetch argument,
 # but since wstool does not support it, execute the git commands directly instead.
 # RUN wstool set -t src BaselineWalkingController https://github.com/${REPOSITORY}/BaselineWalkingController --git -y -v ${COMMIT_SHA}
