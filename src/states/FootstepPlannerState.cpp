@@ -1,4 +1,5 @@
 #include <mc_rtc/gui/Button.h>
+#include <mc_rtc/gui/Polygon.h>
 #include <mc_rtc/gui/XYTheta.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
@@ -91,6 +92,18 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
       std::make_shared<BFP::FootstepPlanner>(std::make_shared<BFP::FootstepEnvConfigMcRtc>(footstepPlannerConfig));
 
   // Setup GUI
+  std::vector<std::vector<Eigen::Vector3d>> obstPolygonList;
+  for(const auto & rect_obst : footstepPlanner_->env_->config()->rect_obst_list)
+  {
+    double x_center = rect_obst.x_center;
+    double y_center = rect_obst.y_center;
+    double x_half_length = rect_obst.x_half_length;
+    double y_half_length = rect_obst.y_half_length;
+    obstPolygonList.push_back({Eigen::Vector3d(x_center + x_half_length, y_center + y_half_length, 0),
+                               Eigen::Vector3d(x_center - x_half_length, y_center + y_half_length, 0),
+                               Eigen::Vector3d(x_center - x_half_length, y_center - y_half_length, 0),
+                               Eigen::Vector3d(x_center + x_half_length, y_center - y_half_length, 0)});
+  }
   ctl().gui()->addElement(
       {"BWC", "FootstepPlanner"}, mc_rtc::gui::Button("PlanAndWalk", [this]() { triggered_ = true; }),
       mc_rtc::gui::XYTheta(
@@ -103,7 +116,9 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
           },
           [this](const std::array<double, 4> & goalFootMidpose) {
             return std::copy(goalFootMidpose.begin(), goalFootMidpose.begin() + 3, goalFootMidpose_.begin());
-          }));
+          }),
+      mc_rtc::gui::Polygon("Obstacles", {mc_rtc::gui::Color::Gray, 0.02},
+                           [obstPolygonList]() { return obstPolygonList; }));
 
   output("OK");
 }

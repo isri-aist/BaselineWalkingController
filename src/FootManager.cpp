@@ -5,6 +5,7 @@
 #include <mc_rtc/gui/Checkbox.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
+#include <mc_rtc/gui/Polygon.h>
 #include <mc_tasks/OrientationTask.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
