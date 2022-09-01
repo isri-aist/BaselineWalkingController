@@ -190,7 +190,7 @@ jobs:
           python3 ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` --expected-base-pos ${EXPECTED_BASE_POS}
       - name: Upload documentation
         # Only run for one configuration and on master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON' && github.ref == 'refs/heads/master'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
