@@ -88,6 +88,8 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
   mc_rtc::Configuration footstepPlannerConfig;
   if(config_.has("configs"))
   {
+    config_("configs")("autoStart", triggered_);
+    config_("configs")("goalFootMidpose", goalFootMidpose_);
     config_("configs")("maxPlanningDuration", maxPlanningDuration_);
     config_("configs")("initialHeuristicsWeight", initialHeuristicsWeight_);
     config_("configs")("footstepPlanner", footstepPlannerConfig);
