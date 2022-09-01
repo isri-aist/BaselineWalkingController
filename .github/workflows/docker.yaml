@@ -107,8 +107,6 @@ jobs:
         run: |
           set -e
           set -x
-          # Workaround for https://github.com/jrl-umi3218/mc_rtc/issues/281
-          sudo sed -i "s/matplotlib.use('Qt5Agg')/# matplotlib.use('Qt5Agg')/g" /usr/lib/python3/dist-packages/mc_log_ui/mc_log_types.py
           # Workaround to achieve allow-failure
           if [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ] && [ "${{ matrix.mpc-framework }}" == "OnlineMpc" ]; then
             ALLOW_FAILURE=true
