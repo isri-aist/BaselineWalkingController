@@ -1,5 +1,7 @@
 #pragma once
 
+#include <thread>
+
 #include <BaselineFootstepPlanner/FootstepPlanner.h>
 
 #include <BaselineWalkingController/State.h>
@@ -32,8 +34,15 @@ public:
   void teardown(mc_control::fsm::Controller & ctl) override;
 
 protected:
+  /** \brief Thread function for footstep planning. */
+  void planningThread();
+
+protected:
   //! Footstep planner
   std::shared_ptr<BFP::FootstepPlanner> footstepPlanner_;
+
+  //! Thread for footstep planning
+  std::thread planningThread_;
 
   //! Whether planning and walking is triggered
   bool triggered_ = false;

@@ -1,3 +1,5 @@
+#include <chrono>
+
 #include <mc_rtc/gui/Button.h>
 #include <mc_rtc/gui/Polygon.h>
 #include <mc_rtc/gui/XYTheta.h>
@@ -122,76 +124,14 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
       mc_rtc::gui::Polygon("Obstacles", {mc_rtc::gui::Color::Gray, 0.02},
                            [obstPolygonList]() { return obstPolygonList; }));
 
+  // Setup thread
+  planningThread_ = std::thread(&FootstepPlannerState::planningThread, this);
+
   output("OK");
 }
 
 bool FootstepPlannerState::run(mc_control::fsm::Controller &)
 {
-  if(triggered_)
-  {
-    triggered_ = false;
-
-    if(ctl().footManager_->footstepQueue().size() > 0)
-    {
-      mc_rtc::log::error(
-          "[FootstepPlannerState] Planning and walking can be started only when the footstep queue is empty: {}",
-          ctl().footManager_->footstepQueue().size());
-    }
-    else
-    {
-      auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
-        return Eigen::Vector3d(pose.translation().x(), pose.translation().y(),
-                               mc_rbdyn::rpyFromMat(pose.rotation()).z());
-      };
-      auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
-        return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
-      };
-
-      std::unordered_map<Foot, Eigen::Vector3d> footPoses2d = {
-          {Foot::Left, convertTo2d(ctl().footManager_->targetFootPose(Foot::Left))},
-          {Foot::Right, convertTo2d(ctl().footManager_->targetFootPose(Foot::Right))}};
-      footstepPlanner_->setStartGoal(
-          std::make_shared<BFP::FootstepState>(footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[0]),
-                                               footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[1]),
-                                               footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Left)[2]),
-                                               BFP::Foot::LEFT),
-          std::make_shared<BFP::FootstepState>(footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[0]),
-                                               footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[1]),
-                                               footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Right)[2]),
-                                               BFP::Foot::RIGHT),
-          footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::LEFT),
-          footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::RIGHT));
-      footstepPlanner_->run(false, maxPlanningDuration_, initialHeuristicsWeight_);
-
-      if(footstepPlanner_->solution_.is_solved)
-      {
-        double startTime = ctl().t() + 1.0;
-        for(auto it = footstepPlanner_->solution_.state_list.begin() + 2;
-            it != footstepPlanner_->solution_.state_list.end(); it++)
-        {
-          Foot foot = ((*it)->foot_ == BFP::Foot::LEFT ? Foot::Left : Foot::Right);
-          sva::PTransformd pose = convertTo3d(Eigen::Vector3d(footstepPlanner_->env_->discToContXy((*it)->x_),
-                                                              footstepPlanner_->env_->discToContXy((*it)->y_),
-                                                              footstepPlanner_->env_->discToContTheta((*it)->theta_)));
-          Footstep footstep(foot, pose, startTime,
-                            startTime
-                                + 0.5 * ctl().footManager_->config().doubleSupportRatio
-                                      * ctl().footManager_->config().footstepDuration,
-                            startTime
-                                + (1.0 - 0.5 * ctl().footManager_->config().doubleSupportRatio)
-                                      * ctl().footManager_->config().footstepDuration,
-                            startTime + ctl().footManager_->config().footstepDuration);
-          ctl().footManager_->appendFootstep(footstep);
-          startTime = footstep.transitEndTime;
-        }
-      }
-      else
-      {
-        mc_rtc::log::error("[FootstepPlannerState] Failed footstep planning.");
-      }
-    }
-  }
-
   return false;
 }
 
@@ -199,6 +139,82 @@ void FootstepPlannerState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
   ctl().gui()->removeCategory({"BWC", "FootstepPlanner"});
+
+  // Clean up thread
+  planningThread_.join();
+}
+
+void FootstepPlannerState::planningThread()
+{
+  while(true)
+  {
+    if(triggered_)
+    {
+      triggered_ = false;
+
+      if(ctl().footManager_->footstepQueue().size() > 0)
+      {
+        mc_rtc::log::error(
+            "[FootstepPlannerState] Planning and walking can be started only when the footstep queue is empty: {}",
+            ctl().footManager_->footstepQueue().size());
+      }
+      else
+      {
+        auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+          return Eigen::Vector3d(pose.translation().x(), pose.translation().y(),
+                                 mc_rbdyn::rpyFromMat(pose.rotation()).z());
+        };
+        auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+          return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+        };
+
+        std::unordered_map<Foot, Eigen::Vector3d> footPoses2d = {
+            {Foot::Left, convertTo2d(ctl().footManager_->targetFootPose(Foot::Left))},
+            {Foot::Right, convertTo2d(ctl().footManager_->targetFootPose(Foot::Right))}};
+        footstepPlanner_->setStartGoal(
+            std::make_shared<BFP::FootstepState>(footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[0]),
+                                                 footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[1]),
+                                                 footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Left)[2]),
+                                                 BFP::Foot::LEFT),
+            std::make_shared<BFP::FootstepState>(
+                footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[0]),
+                footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[1]),
+                footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Right)[2]), BFP::Foot::RIGHT),
+            footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::LEFT),
+            footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::RIGHT));
+        footstepPlanner_->run(false, maxPlanningDuration_, initialHeuristicsWeight_);
+
+        if(footstepPlanner_->solution_.is_solved)
+        {
+          double startTime = ctl().t() + 1.0;
+          for(auto it = footstepPlanner_->solution_.state_list.begin() + 2;
+              it != footstepPlanner_->solution_.state_list.end(); it++)
+          {
+            Foot foot = ((*it)->foot_ == BFP::Foot::LEFT ? Foot::Left : Foot::Right);
+            sva::PTransformd pose = convertTo3d(Eigen::Vector3d(
+                footstepPlanner_->env_->discToContXy((*it)->x_), footstepPlanner_->env_->discToContXy((*it)->y_),
+                footstepPlanner_->env_->discToContTheta((*it)->theta_)));
+            Footstep footstep(foot, pose, startTime,
+                              startTime
+                                  + 0.5 * ctl().footManager_->config().doubleSupportRatio
+                                        * ctl().footManager_->config().footstepDuration,
+                              startTime
+                                  + (1.0 - 0.5 * ctl().footManager_->config().doubleSupportRatio)
+                                        * ctl().footManager_->config().footstepDuration,
+                              startTime + ctl().footManager_->config().footstepDuration);
+            ctl().footManager_->appendFootstep(footstep);
+            startTime = footstep.transitEndTime;
+          }
+        }
+        else
+        {
+          mc_rtc::log::error("[FootstepPlannerState] Failed footstep planning.");
+        }
+      }
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+  }
 }
 
 EXPORT_SINGLE_STATE("BWC::FootstepPlanner", FootstepPlannerState)
