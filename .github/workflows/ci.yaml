@@ -32,9 +32,15 @@ jobs:
         os: [ubuntu-20.04, ubuntu-18.04]
         build-type: [RelWithDebInfo, Debug]
         mc-rtc-version: [head, stable]
+        footstep-planner: [ON]
         exclude:
           - build-type: Debug
             mc-rtc-version: stable
+        include:
+          - os: ubuntu-20.04
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            footstep-planner: OFF
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set ROS version
@@ -92,6 +98,13 @@ jobs:
           repository: isri-aist/CentroidalControlCollection
           submodules: recursive
           path: catkin_ws/src/CentroidalControlCollection
+      - name: Checkout BaselineFootstepPlanner
+        if: matrix.footstep-planner == 'ON'
+        uses: actions/checkout@v2
+        with:
+          repository: isri-aist/BaselineFootstepPlanner
+          submodules: recursive
+          path: catkin_ws/src/BaselineFootstepPlanner
       - name: Rosdep install
         run: |
           set -e
@@ -124,7 +137,7 @@ jobs:
       #     catkin_test_results --verbose --all build
       - name: Run simulation
         # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON'
         # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
         run: |
           set -e
@@ -156,14 +169,14 @@ jobs:
           tar czf /tmp/results/`basename ${LOG_PATH}`.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
       - name: Upload simulation data
         # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON'
         uses: actions/upload-artifact@v3
         with:
           name: BWC-ci-results
           path: /tmp/results
       - name: Check simulation results
         # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON'
         run: |
           set -e
           set -x
@@ -171,7 +184,7 @@ jobs:
           python3 ${GITHUB_WORKSPACE}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` --expected-base-pos ${EXPECTED_BASE_POS}
       - name: Upload documentation
         # Only run for one configuration and on master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && github.ref == 'refs/heads/master'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
