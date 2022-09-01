@@ -40,5 +40,11 @@ protected:
 
   //! Goal foot midpose (x [m], y [m], theta [rad])
   std::array<double, 3> goalFootMidpose_ = {0, 0, 0};
+
+  //! Maximum duration for footstep planning [sec]
+  double maxPlanningDuration_ = 0.5;
+
+  //! Initial heuristic weight for footstep planning
+  double initialHeuristicsWeight_ = 10.0;
 };
 } // namespace BWC

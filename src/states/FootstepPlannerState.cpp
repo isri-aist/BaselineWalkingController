@@ -86,6 +86,8 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
   mc_rtc::Configuration footstepPlannerConfig;
   if(config_.has("configs"))
   {
+    config_("configs")("maxPlanningDuration", maxPlanningDuration_);
+    config_("configs")("initialHeuristicsWeight", initialHeuristicsWeight_);
     config_("configs")("footstepPlanner", footstepPlannerConfig);
   }
   footstepPlanner_ =
@@ -159,7 +161,7 @@ bool FootstepPlannerState::run(mc_control::fsm::Controller &)
                                                BFP::Foot::RIGHT),
           footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::LEFT),
           footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::RIGHT));
-      footstepPlanner_->run();
+      footstepPlanner_->run(false, maxPlanningDuration_, initialHeuristicsWeight_);
 
       if(footstepPlanner_->solution_.is_solved)
       {
