@@ -33,12 +33,12 @@ public:
 
 protected:
   //! Footstep planner
-  std::shared_ptr<BFP::FootstepPlanner> planner_;
+  std::shared_ptr<BFP::FootstepPlanner> footstepPlanner_;
 
   //! Whether planning and walking is triggered
   bool triggered_ = false;
 
   //! Goal foot midpose (x [m], y [m], theta [rad])
-  std::array<double, 3> goalFootMidpose_ = std::array<double, 3>{0, 0, 0};
+  std::array<double, 3> goalFootMidpose_ = {0, 0, 0};
 };
 } // namespace BWC

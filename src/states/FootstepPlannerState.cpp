@@ -82,14 +82,25 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
   State::start(_ctl);
 
   // Setup footstep planner
-  planner_ = std::make_shared<BFP::FootstepPlanner>(
-      std::make_shared<BFP::FootstepEnvConfigMcRtc>(config_("footstepPlanner", mc_rtc::Configuration())));
+  mc_rtc::Configuration footstepPlannerConfig;
+  if(config_.has("configs"))
+  {
+    config_("configs")("footstepPlanner", footstepPlannerConfig);
+  }
+  footstepPlanner_ =
+      std::make_shared<BFP::FootstepPlanner>(std::make_shared<BFP::FootstepEnvConfigMcRtc>(footstepPlannerConfig));
 
   // Setup GUI
   ctl().gui()->addElement(
       {"BWC", "FootstepPlanner"}, mc_rtc::gui::Button("PlanAndWalk", [this]() { triggered_ = true; }),
       mc_rtc::gui::XYTheta(
-          "GoalPose", [this]() -> std::array<double, 3> { return goalFootMidpose_; },
+          "GoalPose",
+          [this]() -> std::array<double, 4> {
+            std::array<double, 4> goalFootMidpose;
+            std::copy(goalFootMidpose_.begin(), goalFootMidpose_.begin() + 3, goalFootMidpose.begin());
+            goalFootMidpose[3] = 0.0;
+            return goalFootMidpose;
+          },
           [this](const std::array<double, 4> & goalFootMidpose) {
             return std::copy(goalFootMidpose.begin(), goalFootMidpose.begin() + 3, goalFootMidpose_.begin());
           }));
@@ -111,9 +122,49 @@ bool FootstepPlannerState::run(mc_control::fsm::Controller &)
     }
     else
     {
-      // TODO
-      mc_rtc::log::success("goalFootMidpose: [{}, {}, {}]", goalFootMidpose_[0], goalFootMidpose_[1],
-                           goalFootMidpose_[2]);
+      auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+        return Eigen::Vector3d(pose.translation().x(), pose.translation().y(),
+                               mc_rbdyn::rpyFromMat(pose.rotation()).z());
+      };
+      auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+        return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+      };
+
+      std::unordered_map<Foot, Eigen::Vector3d> footPoses2d = {
+          {Foot::Left, convertTo2d(ctl().footManager_->targetFootPose(Foot::Left))},
+          {Foot::Right, convertTo2d(ctl().footManager_->targetFootPose(Foot::Right))}};
+      footstepPlanner_->setStartGoal(
+          std::make_shared<BFP::FootstepState>(footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[0]),
+                                               footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Left)[1]),
+                                               footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Left)[2]),
+                                               BFP::Foot::LEFT),
+          std::make_shared<BFP::FootstepState>(footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[0]),
+                                               footstepPlanner_->env_->contToDiscXy(footPoses2d.at(Foot::Right)[1]),
+                                               footstepPlanner_->env_->contToDiscTheta(footPoses2d.at(Foot::Right)[2]),
+                                               BFP::Foot::RIGHT),
+          footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::LEFT),
+          footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::RIGHT));
+      footstepPlanner_->run();
+
+      double startTime = ctl().t() + 1.0;
+      for(auto it = footstepPlanner_->solution_.state_list.begin() + 2;
+          it != footstepPlanner_->solution_.state_list.end(); it++)
+      {
+        Foot foot = ((*it)->foot_ == BFP::Foot::LEFT ? Foot::Left : Foot::Right);
+        sva::PTransformd pose = convertTo3d(Eigen::Vector3d(footstepPlanner_->env_->discToContXy((*it)->x_),
+                                                            footstepPlanner_->env_->discToContXy((*it)->y_),
+                                                            footstepPlanner_->env_->discToContTheta((*it)->theta_)));
+        Footstep footstep(foot, pose, startTime,
+                          startTime
+                              + 0.5 * ctl().footManager_->config().doubleSupportRatio
+                                    * ctl().footManager_->config().footstepDuration,
+                          startTime
+                              + (1.0 - 0.5 * ctl().footManager_->config().doubleSupportRatio)
+                                    * ctl().footManager_->config().footstepDuration,
+                          startTime + ctl().footManager_->config().footstepDuration);
+        ctl().footManager_->appendFootstep(footstep);
+        startTime = footstep.transitEndTime;
+      }
     }
   }
 
