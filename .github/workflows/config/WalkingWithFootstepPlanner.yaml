@@ -1,0 +1,48 @@
+transitions:
+  - [BWC::Initial_, OK, BWC::FootstepPlanner_, Auto]
+
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 8.0
+
+  BWC::FootstepPlanner_:
+    base: BWC::FootstepPlanner
+    configs:
+      autoStart: true
+      goalFootMidpose: [2.5, -0.25, 1.57] # [m], [rad]
+
+      maxPlanningDuration: 1.0 # [sec]
+      initialHeuristicsWeight: 10.0
+
+      footstepPlanner:
+        theta_divide_num: 64
+        xy_divide_step: 0.01 # [m]
+
+        cost_scale: 1.0e3
+        theta_scale: 0 # [m/rad]
+        step_cost: 1.0
+
+        heuristic_type: DijkstraPath
+        dijkstra_path_heuristic_expand_scale: 5.0
+
+        nominal_foot_separation: 0.2 # [m]
+
+        r2l_action_cont_list: # [m], [rad]
+          [
+          [0.175, 0, 0],
+          [-0.125, 0, 0],
+          [0, 0.125, 0],
+          [0, -0.05, 0],
+          [0, 0, 0.2618],
+          [0, 0, -0.2618]
+          ]
+
+        r2l_reachable_min: [-0.1, 0.0, -0.1745] # [m], [rad]
+        r2l_reachable_max: [0.1, 0.1, 0.1745] # [m], [rad]
+
+        rect_obstacle_list: # [m]
+          [
+          [1.2, 0.0, 1.1, 1.0],
+          ]
