@@ -146,24 +146,31 @@ bool FootstepPlannerState::run(mc_control::fsm::Controller &)
           footstepPlanner_->env_->makeStateFromMidpose(goalFootMidpose_, BFP::Foot::RIGHT));
       footstepPlanner_->run();
 
-      double startTime = ctl().t() + 1.0;
-      for(auto it = footstepPlanner_->solution_.state_list.begin() + 2;
-          it != footstepPlanner_->solution_.state_list.end(); it++)
+      if(footstepPlanner_->solution_.is_solved)
       {
-        Foot foot = ((*it)->foot_ == BFP::Foot::LEFT ? Foot::Left : Foot::Right);
-        sva::PTransformd pose = convertTo3d(Eigen::Vector3d(footstepPlanner_->env_->discToContXy((*it)->x_),
-                                                            footstepPlanner_->env_->discToContXy((*it)->y_),
-                                                            footstepPlanner_->env_->discToContTheta((*it)->theta_)));
-        Footstep footstep(foot, pose, startTime,
-                          startTime
-                              + 0.5 * ctl().footManager_->config().doubleSupportRatio
-                                    * ctl().footManager_->config().footstepDuration,
-                          startTime
-                              + (1.0 - 0.5 * ctl().footManager_->config().doubleSupportRatio)
-                                    * ctl().footManager_->config().footstepDuration,
-                          startTime + ctl().footManager_->config().footstepDuration);
-        ctl().footManager_->appendFootstep(footstep);
-        startTime = footstep.transitEndTime;
+        double startTime = ctl().t() + 1.0;
+        for(auto it = footstepPlanner_->solution_.state_list.begin() + 2;
+            it != footstepPlanner_->solution_.state_list.end(); it++)
+        {
+          Foot foot = ((*it)->foot_ == BFP::Foot::LEFT ? Foot::Left : Foot::Right);
+          sva::PTransformd pose = convertTo3d(Eigen::Vector3d(footstepPlanner_->env_->discToContXy((*it)->x_),
+                                                              footstepPlanner_->env_->discToContXy((*it)->y_),
+                                                              footstepPlanner_->env_->discToContTheta((*it)->theta_)));
+          Footstep footstep(foot, pose, startTime,
+                            startTime
+                                + 0.5 * ctl().footManager_->config().doubleSupportRatio
+                                      * ctl().footManager_->config().footstepDuration,
+                            startTime
+                                + (1.0 - 0.5 * ctl().footManager_->config().doubleSupportRatio)
+                                      * ctl().footManager_->config().footstepDuration,
+                            startTime + ctl().footManager_->config().footstepDuration);
+          ctl().footManager_->appendFootstep(footstep);
+          startTime = footstep.transitEndTime;
+        }
+      }
+      else
+      {
+        mc_rtc::log::error("[FootstepPlannerState] Failed footstep planning.");
       }
     }
   }
