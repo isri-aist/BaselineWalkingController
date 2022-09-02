@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['approachdurationratio_412',['approachDurationRatio',['../structBWC_1_1Footstep_1_1Configuration.html#a41418411ca83b8f24aff4bc26aad93ae',1,'BWC::Footstep::Configuration']]],
-  ['approachoffset_413',['approachOffset',['../structBWC_1_1Footstep_1_1Configuration.html#aba325a1da32b81c214299b7e3ff9690c',1,'BWC::Footstep::Configuration']]]
+  ['approachdurationratio_429',['approachDurationRatio',['../structBWC_1_1Footstep_1_1Configuration.html#a41418411ca83b8f24aff4bc26aad93ae',1,'BWC::Footstep::Configuration']]],
+  ['approachoffset_430',['approachOffset',['../structBWC_1_1Footstep_1_1Configuration.html#aba325a1da32b81c214299b7e3ff9690c',1,'BWC::Footstep::Configuration']]]
 ];

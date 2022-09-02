@@ -1,0 +1,5 @@
+<map id="BWC::FootstepPlannerState" name="BWC::FootstepPlannerState">
+<area shape="rect" id="node1" title="FSM state to walk with footstep planner." alt="" coords="5,155,205,181"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="58,80,153,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="21,5,190,32"/>
+</map>
