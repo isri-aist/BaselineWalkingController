@@ -53,6 +53,13 @@ $ docker run --gpus all --rm -it \
   ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_on_stairs.bash
 ```
 
+- Simulate walking with planning footstep sequence avoiding obstacles like in [this video](https://user-images.githubusercontent.com/6636600/187928560-9835e148-bd4b-4b12-8c65-ead6cf3d92f1.mp4).
+```bash
+$ docker run --gpus all --rm -it \
+  --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+  ghcr.io/isri-aist/baseline_walking_controller:latest ./walk_with_footstep_planner.bash
+```
+
 The Docker image is automatically updated on [CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml) from [this Dockerfile](https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile).
 
 ## Install
