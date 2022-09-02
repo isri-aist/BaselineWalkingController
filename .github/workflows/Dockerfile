@@ -87,7 +87,15 @@ RUN echo $'#!/usr/bin/env bash \n\
 source ${HOME}/catkin_ws/devel/setup.bash \n\
 cp ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingWithFootstepPlanner.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
 /usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
-cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc_comanoid_staircase.cnoid' > ${HOME}/walk_with_footstep_planner.bash
+roscore > /dev/null 2>&1 < /dev/null & \n\
+ROSCORE_PID=$! \n\
+sleep 1s \n\
+roslaunch baseline_walking_controller display.launch > /dev/null 2>&1 < /dev/null & \n\
+RVIZ_PID=$! \n\
+sleep 1s \n\
+cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc_comanoid_staircase.cnoid \n\
+kill -2 ${ROSCORE_PID} \n\
+kill -2 ${RVIZ_PID}' > ${HOME}/walk_with_footstep_planner.bash
 RUN chmod 755 ${HOME}/walk_on_plane.bash
 RUN chmod 755 ${HOME}/walk_on_stairs.bash
 RUN chmod 755 ${HOME}/walk_with_footstep_planner.bash
