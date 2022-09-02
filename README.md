@@ -14,6 +14,7 @@ https://user-images.githubusercontent.com/6636600/187928560-9835e148-bd4b-4b12-8
 
 ## Features
 - Completely open source! (controller framework: mc_rtc, simulator: Choreonoid, sample robot model: JVRC1)
+- Full capabilities, including 3D walking and integration with a footstep planner.
 - Easy to switch between various methods of centroidal trajectory generation for walking implemented in [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection).
 - Easy to switch between the two frameworks for centroidal trajectory generation for walking: (1) online MPC and (2) offline MPC + stabilizer.
 - Support for a virtual robot whose model is publicly available so you can try out the controller right away.
@@ -74,6 +75,7 @@ This package depends on
 - [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 - [NMPC](https://github.com/isri-aist/NMPC)
 - [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection)
+- [BaselineFootstepPlanner](https://github.com/isri-aist/BaselineFootstepPlanner) (used only when found)
 
 ### Preparation
 1. (Skip if ROS is already installed.) Install ROS. See [here](http://wiki.ros.org/ROS/Installation) for details.
