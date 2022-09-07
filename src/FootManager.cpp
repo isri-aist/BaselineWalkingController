@@ -428,6 +428,12 @@ Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sv
 
 void FootManager::updateFootTraj()
 {
+  // Disable hold mode by default
+  for(const auto & foot : Feet::Both)
+  {
+    ctl().footTasks_.at(foot)->hold(false);
+  }
+
   // Remove old footsteps from footstepQueue_
   while(!footstepQueue_.empty() && footstepQueue_.front().transitEndTime < ctl().t())
   {
@@ -454,6 +460,10 @@ void FootManager::updateFootTraj()
 
       // Set swingPosFunc_ and swingRotFunc_
       {
+        // Enable hold mode to prevent IK target pose from jumping
+        // https://github.com/jrl-umi3218/mc_rtc/pull/143
+        ctl().footTasks_.at(swingFootstep_->foot)->hold(true);
+
         const sva::PTransformd & swingStartPose = ctl().robot().surfacePose(surfaceName(swingFootstep_->foot));
         sva::PTransformd swingGoalPose = swingFootstep_->pose;
         if(config_.overwriteLandingPose && prevFootstep_)
