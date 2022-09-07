@@ -46,6 +46,9 @@ public:
     //! ZMP offset of each foot (positive for x-forward, y-outside, z-upward) [m]
     Eigen::Vector3d zmpOffset = Eigen::Vector3d::Zero();
 
+    //! Whether to overwrite landing pose so that the relative pose from support foot to swing foot is retained
+    bool overwriteLandingPose = false;
+
     //! Whether to stop swing trajectory for touch down foot
     bool stopSwingTrajForTouchDownFoot = true;
 

@@ -30,6 +30,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
+  mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
   mcRtcConfig("enableWrenchDistForTouchDownFoot", enableWrenchDistForTouchDownFoot);
@@ -133,6 +134,9 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
+      mc_rtc::gui::Checkbox(
+          "overwriteLandingPose", [this]() { return config_.overwriteLandingPose; },
+          [this]() { config_.overwriteLandingPose = !config_.overwriteLandingPose; }),
       mc_rtc::gui::Checkbox(
           "stopSwingTrajForTouchDownFoot", [this]() { return config_.stopSwingTrajForTouchDownFoot; },
           [this]() { config_.stopSwingTrajForTouchDownFoot = !config_.stopSwingTrajForTouchDownFoot; }),
@@ -451,7 +455,12 @@ void FootManager::updateFootTraj()
       // Set swingPosFunc_ and swingRotFunc_
       {
         const sva::PTransformd & swingStartPose = ctl().robot().surfacePose(surfaceName(swingFootstep_->foot));
-        const sva::PTransformd & swingGoalPose = swingFootstep_->pose;
+        sva::PTransformd swingGoalPose = swingFootstep_->pose;
+        if(config_.overwriteLandingPose && prevFootstep_)
+        {
+          sva::PTransformd swingRelPose = swingFootstep_->pose * prevFootstep_->pose.inv();
+          swingGoalPose = swingRelPose * targetFootPoses_.at(prevFootstep_->foot);
+        }
         double withdrawDuration = swingFootstep_->config.withdrawDurationRatio
                                   * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
         double approachDuration = swingFootstep_->config.approachDurationRatio
