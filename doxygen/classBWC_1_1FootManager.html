@@ -75,7 +75,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classBWC_1_1FootManager-members.html">List of all members</a>  </div>
@@ -186,12 +185,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a543f5ed6aaee9754629cb038198c113e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the support phase.  <a href="classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e">More...</a><br /></td></tr>
 <tr class="separator:a543f5ed6aaee9754629cb038198c113e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
-Protected Types</h2></td></tr>
-<tr class="memitem:a80fb582ffaedb8a910d97b5916a676f0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a> = Eigen::Matrix&lt; double, 1, 1 &gt;</td></tr>
-<tr class="memdesc:a80fb582ffaedb8a910d97b5916a676f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D vector  <a href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">More...</a><br /></td></tr>
-<tr class="separator:a80fb582ffaedb8a910d97b5916a676f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a519919c99a09cb64e67c9003b14a023c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBWC_1_1BaselineWalkingController.html">BaselineWalkingController</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a519919c99a09cb64e67c9003b14a023c">ctl</a> () const</td></tr>
@@ -245,18 +238,18 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a2dd78774419b4b7a6ccf8540a8705263"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a2dd78774419b4b7a6ccf8540a8705263">zmpFunc_</a></td></tr>
 <tr class="memdesc:a2dd78774419b4b7a6ccf8540a8705263"><td class="mdescLeft">&#160;</td><td class="mdescRight">ZMP function.  <a href="classBWC_1_1FootManager.html#a2dd78774419b4b7a6ccf8540a8705263">More...</a><br /></td></tr>
 <tr class="separator:a2dd78774419b4b7a6ccf8540a8705263"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72659b4236c55ffdb9bd869eb2e5342a"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; <a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a72659b4236c55ffdb9bd869eb2e5342a">groundPosZFunc_</a></td></tr>
-<tr class="memdesc:a72659b4236c55ffdb9bd869eb2e5342a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ground Z position function.  <a href="classBWC_1_1FootManager.html#a72659b4236c55ffdb9bd869eb2e5342a">More...</a><br /></td></tr>
-<tr class="separator:a72659b4236c55ffdb9bd869eb2e5342a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a089d8fa891cc2fcc3dde4450a512e938"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a089d8fa891cc2fcc3dde4450a512e938">groundPosZFunc_</a></td></tr>
+<tr class="memdesc:a089d8fa891cc2fcc3dde4450a512e938"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ground Z position function.  <a href="classBWC_1_1FootManager.html#a089d8fa891cc2fcc3dde4450a512e938">More...</a><br /></td></tr>
+<tr class="separator:a089d8fa891cc2fcc3dde4450a512e938"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe4a619255385ec8fa1f0bc44ce4b352"><td class="memItemLeft" align="right" valign="top">std::map&lt; double, std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::PTransformd &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#abe4a619255385ec8fa1f0bc44ce4b352">contactFootPosesList_</a></td></tr>
 <tr class="memdesc:abe4a619255385ec8fa1f0bc44ce4b352"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classBWC_1_1Contact.html" title="Contact constraint.">Contact</a> foot poses list.  <a href="classBWC_1_1FootManager.html#abe4a619255385ec8fa1f0bc44ce4b352">More...</a><br /></td></tr>
 <tr class="separator:abe4a619255385ec8fa1f0bc44ce4b352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBWC_1_1Footstep.html">Footstep</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">swingFootstep_</a> = nullptr</td></tr>
 <tr class="memdesc:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing.  <a href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">More...</a><br /></td></tr>
 <tr class="separator:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d4def45ebf4fb0d6ae9a7a3b0c51eb0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; <a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a7d4def45ebf4fb0d6ae9a7a3b0c51eb0">baseYawFunc_</a></td></tr>
-<tr class="memdesc:a7d4def45ebf4fb0d6ae9a7a3b0c51eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base link Yaw trajectory.  <a href="classBWC_1_1FootManager.html#a7d4def45ebf4fb0d6ae9a7a3b0c51eb0">More...</a><br /></td></tr>
-<tr class="separator:a7d4def45ebf4fb0d6ae9a7a3b0c51eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ad0d36f5c653c87d22f1fa06ccc5d3745">baseYawFunc_</a></td></tr>
+<tr class="memdesc:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base link Yaw trajectory.  <a href="classBWC_1_1FootManager.html#ad0d36f5c653c87d22f1fa06ccc5d3745">More...</a><br /></td></tr>
+<tr class="separator:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb">touchDown_</a> = false</td></tr>
 <tr class="memdesc:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether touch down is detected during swing.  <a href="classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb">More...</a><br /></td></tr>
 <tr class="separator:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,6 +259,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a8342fb81cf38899ff7bd58b7232e579e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e">requireImpGainUpdate_</a> = true</td></tr>
 <tr class="memdesc:a8342fb81cf38899ff7bd58b7232e579e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to require updating impedance gains.  <a href="classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e">More...</a><br /></td></tr>
 <tr class="separator:a8342fb81cf38899ff7bd58b7232e579e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13edc7feca7c6031864ba51e0b022cf6"><td class="memItemLeft" align="right" valign="top">mc_filter::LowPass&lt; Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a13edc7feca7c6031864ba51e0b022cf6">overwriteLandingPosLowPass_</a> = mc_filter::LowPass&lt;Eigen::Vector3d&gt;(0.005, 1.0)</td></tr>
+<tr class="memdesc:a13edc7feca7c6031864ba51e0b022cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-pass filter for the overwrite amount of landing position.  <a href="classBWC_1_1FootManager.html#a13edc7feca7c6031864ba51e0b022cf6">More...</a><br /></td></tr>
+<tr class="separator:a13edc7feca7c6031864ba51e0b022cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ab04709356a75d2dde491ea57ece986a9"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1PiecewiseFunc.html">PiecewiseFunc</a>&lt; Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9">swingPosFunc_</a></td></tr>
 <tr class="separator:ab04709356a75d2dde491ea57ece986a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,35 +272,8 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Foot manager.</p>
 <p>Foot manager generates a swing foot trajectory and ZMP trajectory from a specified footstep sequence. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00023">23</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
-</div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a80fb582ffaedb8a910d97b5916a676f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80fb582ffaedb8a910d97b5916a676f0">&#9670;&nbsp;</a></span>Vector1d</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">BWC::FootManager::Vector1d</a> =  Eigen::Matrix&lt;double, 1, 1&gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>1D vector </p>
-
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00082">82</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00024">24</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a93ff2f753b87f497b1816d29899daae0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93ff2f753b87f497b1816d29899daae0">&#9670;&nbsp;</a></span>FootManager()</h2>
 
@@ -1193,8 +1162,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a7d4def45ebf4fb0d6ae9a7a3b0c51eb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d4def45ebf4fb0d6ae9a7a3b0c51eb0">&#9670;&nbsp;</a></span>baseYawFunc_</h2>
+<a id="ad0d36f5c653c87d22f1fa06ccc5d3745"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0d36f5c653c87d22f1fa06ccc5d3745">&#9670;&nbsp;</a></span>baseYawFunc_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1203,7 +1172,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;<a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a>&gt; &gt; BWC::FootManager::baseYawFunc_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;double&gt; &gt; BWC::FootManager::baseYawFunc_</td>
         </tr>
       </table>
   </td>
@@ -1323,8 +1292,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a72659b4236c55ffdb9bd869eb2e5342a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72659b4236c55ffdb9bd869eb2e5342a">&#9670;&nbsp;</a></span>groundPosZFunc_</h2>
+<a id="a089d8fa891cc2fcc3dde4450a512e938"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a089d8fa891cc2fcc3dde4450a512e938">&#9670;&nbsp;</a></span>groundPosZFunc_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1333,7 +1302,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;<a class="el" href="classBWC_1_1FootManager.html#a80fb582ffaedb8a910d97b5916a676f0">Vector1d</a>&gt; &gt; BWC::FootManager::groundPosZFunc_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;double&gt; &gt; BWC::FootManager::groundPosZFunc_</td>
         </tr>
       </table>
   </td>
@@ -1398,6 +1367,32 @@ Protected Attributes</h2></td></tr>
 <p>Foot poses in the last double support phase. </p>
 
 <p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00293">293</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+
+</div>
+</div>
+<a id="a13edc7feca7c6031864ba51e0b022cf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13edc7feca7c6031864ba51e0b022cf6">&#9670;&nbsp;</a></span>overwriteLandingPosLowPass_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mc_filter::LowPass&lt;Eigen::Vector3d&gt; BWC::FootManager::overwriteLandingPosLowPass_ = mc_filter::LowPass&lt;Eigen::Vector3d&gt;(0.005, 1.0)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Low-pass filter for the overwrite amount of landing position. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00329">329</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>

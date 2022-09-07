@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['value_542',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
-  ['velscale_5f_543',['velScale_',['../structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13',1,'BWC::TeleopState']]],
-  ['vertex_544',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
-  ['vertexwithridgelist_5f_545',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]]
+  ['useactualcomforwrenchdist_551',['useActualComForWrenchDist',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb',1,'BWC::CentroidalManager::Configuration']]],
+  ['useactualstateformpc_552',['useActualStateForMpc',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a2ca257faee34e51bbd5145eb0d82875a',1,'BWC::CentroidalManager::Configuration']]],
+  ['usetargetposeforcontrolrobotanchorframe_553',['useTargetPoseForControlRobotAnchorFrame',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316',1,'BWC::CentroidalManager::Configuration']]]
 ];
