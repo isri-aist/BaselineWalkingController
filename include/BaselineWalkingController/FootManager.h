@@ -81,10 +81,6 @@ public:
     void load(const mc_rtc::Configuration & mcRtcConfig);
   };
 
-protected:
-  //! 1D vector
-  using Vector1d = Eigen::Matrix<double, 1, 1>;
-
 public:
   /** \brief Constructor.
       \param ctlPtr pointer to controller
@@ -303,7 +299,7 @@ protected:
   std::shared_ptr<CubicInterpolator<Eigen::Vector3d>> zmpFunc_;
 
   //! Ground Z position function
-  std::shared_ptr<CubicInterpolator<Vector1d>> groundPosZFunc_;
+  std::shared_ptr<CubicInterpolator<double>> groundPosZFunc_;
 
   //! Contact foot poses list
   std::map<double, std::unordered_map<Foot, sva::PTransformd>> contactFootPosesList_;
@@ -318,7 +314,7 @@ protected:
   //! @}
 
   //! Base link Yaw trajectory
-  std::shared_ptr<CubicInterpolator<Vector1d>> baseYawFunc_;
+  std::shared_ptr<CubicInterpolator<double>> baseYawFunc_;
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;

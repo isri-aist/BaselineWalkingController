@@ -48,10 +48,10 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
 : ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
-  groundPosZFunc_(std::make_shared<CubicInterpolator<Vector1d>>()),
+  groundPosZFunc_(std::make_shared<CubicInterpolator<double>>()),
   swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
   swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
-  baseYawFunc_(std::make_shared<CubicInterpolator<Vector1d>>())
+  baseYawFunc_(std::make_shared<CubicInterpolator<double>>())
 {
   config_.load(mcRtcConfig);
 }
@@ -77,10 +77,8 @@ void FootManager::reset()
   zmpFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, targetZmp));
   zmpFunc_->calcCoeff();
 
-  Vector1d refGroundPosZ;
-  refGroundPosZ << 0.5
-                       * (targetFootPoses_.at(Foot::Left).translation().z()
-                          + targetFootPoses_.at(Foot::Right).translation().z());
+  double refGroundPosZ =
+      0.5 * (targetFootPoses_.at(Foot::Left).translation().z() + targetFootPoses_.at(Foot::Right).translation().z());
   groundPosZFunc_->clearPoints();
   groundPosZFunc_->appendPoint(std::make_pair(ctl().t(), refGroundPosZ));
   groundPosZFunc_->appendPoint(std::make_pair(ctl().t() + config_.zmpHorizon, refGroundPosZ));
@@ -303,11 +301,11 @@ double FootManager::calcRefGroundPosZ(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*groundPosZFunc_)(t)[0] + overwriteLandingPosLowPass_.eval().z();
+    return (*groundPosZFunc_)(t) + overwriteLandingPosLowPass_.eval().z();
   }
   else
   {
-    return groundPosZFunc_->derivative(t, derivOrder)[0];
+    return groundPosZFunc_->derivative(t, derivOrder);
   }
 }
 
@@ -539,21 +537,20 @@ void FootManager::updateFootTraj()
 
       // Set baseYawFunc_
       {
-        Vector1d swingStartBaseYaw;
-        swingStartBaseYaw << mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(
-                                                      targetFootPoses_.at(Foot::Left).rotation().transpose(),
-                                                      targetFootPoses_.at(Foot::Right).rotation().transpose(), 0.5)
-                                                      .transpose())
-                                 .z();
+        double swingStartBaseYaw =
+            mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(targetFootPoses_.at(Foot::Left).rotation().transpose(),
+                                                              targetFootPoses_.at(Foot::Right).rotation().transpose(),
+                                                              0.5)
+                                     .transpose())
+                .z();
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartBaseYaw));
 
-        Vector1d swingEndBaseYaw;
-        swingEndBaseYaw << mc_rbdyn::rpyFromMat(
-                               interpolate<Eigen::Matrix3d>(
-                                   swingFootstep_->pose.rotation().transpose(),
-                                   targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation().transpose(), 0.5)
-                                   .transpose())
-                               .z();
+        double swingEndBaseYaw =
+            mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(
+                                     swingFootstep_->pose.rotation().transpose(),
+                                     targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation().transpose(), 0.5)
+                                     .transpose())
+                .z();
         baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingEndBaseYaw));
 
         baseYawFunc_->calcCoeff();
@@ -687,9 +684,9 @@ void FootManager::updateFootTraj()
   }
   else
   {
-    ctl().baseOriTask_->orientation(sva::RotZ((*baseYawFunc_)(ctl().t())[0]));
-    ctl().baseOriTask_->refVel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 1)[0]));
-    ctl().baseOriTask_->refAccel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 2)[0]));
+    ctl().baseOriTask_->orientation(sva::RotZ((*baseYawFunc_)(ctl().t())));
+    ctl().baseOriTask_->refVel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 1)));
+    ctl().baseOriTask_->refAccel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 2)));
   }
 
   // Update footstep visualization
@@ -721,9 +718,7 @@ void FootManager::updateZmpTraj()
   std::unordered_map<Foot, sva::PTransformd> footPoses = lastDoubleSupportFootPoses_;
 
   auto calcFootMidposZ = [](const std::unordered_map<Foot, sva::PTransformd> & _footPoses) {
-    Vector1d footMidposZ;
-    footMidposZ << 0.5 * (_footPoses.at(Foot::Left).translation().z() + _footPoses.at(Foot::Right).translation().z());
-    return footMidposZ;
+    return 0.5 * (_footPoses.at(Foot::Left).translation().z() + _footPoses.at(Foot::Right).translation().z());
   };
 
   if(footstepQueue_.empty() || ctl().t() < footstepQueue_.front().transitStartTime)
