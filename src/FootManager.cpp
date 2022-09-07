@@ -103,6 +103,9 @@ void FootManager::reset()
   }
 
   requireImpGainUpdate_ = true;
+
+  overwriteLandingPosLowPass_.dt(ctl().solver().dt());
+  overwriteLandingPosLowPass_.reset(Eigen::Vector3d::Zero());
 }
 
 void FootManager::update()
@@ -217,9 +220,9 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
 
   logger.addLogEntry(config_.name + "_supportPhase", this, [this]() { return std::to_string(supportPhase_); });
 
-  logger.addLogEntry(config_.name + "_refZmp", this, [this]() { return (*zmpFunc_)(ctl().t()); });
+  logger.addLogEntry(config_.name + "_refZmp", this, [this]() { return calcRefZmp(ctl().t()); });
 
-  logger.addLogEntry(config_.name + "_refGroundPosZ", this, [this]() { return (*groundPosZFunc_)(ctl().t())[0]; });
+  logger.addLogEntry(config_.name + "_refGroundPosZ", this, [this]() { return calcRefGroundPosZ(ctl().t()); });
 
   logger.addLogEntry(config_.name + "_leftFootSupportRatio", this, [this]() { return leftFootSupportRatio(); });
 
@@ -288,7 +291,7 @@ Eigen::Vector3d FootManager::calcRefZmp(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*zmpFunc_)(t);
+    return (*zmpFunc_)(t) + overwriteLandingPosLowPass_.eval();
   }
   else
   {
@@ -300,7 +303,7 @@ double FootManager::calcRefGroundPosZ(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*groundPosZFunc_)(t)[0];
+    return (*groundPosZFunc_)(t)[0] + overwriteLandingPosLowPass_.eval().z();
   }
   else
   {
@@ -603,7 +606,8 @@ void FootManager::updateFootTraj()
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
-      lastDoubleSupportFootPoses_ = targetFootPoses_;
+
+      lastDoubleSupportFootPoses_.at(swingFootstep_->foot) = swingFootstep_->pose;
 
       // Set supportPhase_
       supportPhase_ = SupportPhase::DoubleSupport;
@@ -770,6 +774,33 @@ void FootManager::updateZmpTraj()
 
   zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
+
+  // Update low-pass filter for the overwrite amount of landing position
+  if(config_.overwriteLandingPose)
+  {
+    Eigen::Vector3d overwriteLandingMeanPos = Eigen::Vector3d::Zero();
+    const auto & currentContactFootPoses = calcContactFootPoses(ctl().t());
+    if(currentContactFootPoses.size() == 0)
+    {
+      overwriteLandingMeanPos.setZero();
+    }
+    else
+    {
+      for(const auto & contactFootPosesKV : currentContactFootPoses)
+      {
+        const Foot & foot = contactFootPosesKV.first;
+        const sva::PTransformd & originalLandingPose = contactFootPosesKV.second;
+        sva::PTransformd overwriteLandingPose = targetFootPoses_.at(foot);
+        overwriteLandingMeanPos += overwriteLandingPose.translation() - originalLandingPose.translation();
+      }
+      overwriteLandingMeanPos /= currentContactFootPoses.size();
+    }
+    overwriteLandingPosLowPass_.update(overwriteLandingMeanPos);
+  }
+  else
+  {
+    overwriteLandingPosLowPass_.update(Eigen::Vector3d::Zero());
+  }
 }
 
 double FootManager::touchDownRemainingDuration() const

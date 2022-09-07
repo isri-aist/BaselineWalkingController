@@ -3,6 +3,7 @@
 #include <deque>
 #include <unordered_map>
 
+#include <mc_filter/LowPass.h>
 #include <mc_rtc/gui/StateBuilder.h>
 #include <mc_rtc/log/Logger.h>
 #include <mc_tasks/ImpedanceGains.h>
@@ -327,5 +328,8 @@ protected:
 
   //! Whether to require updating impedance gains
   bool requireImpGainUpdate_ = true;
+
+  //! Low-pass filter for the overwrite amount of landing position
+  mc_filter::LowPass<Eigen::Vector3d> overwriteLandingPosLowPass_ = mc_filter::LowPass<Eigen::Vector3d>(0.005, 1.0);
 };
 } // namespace BWC
