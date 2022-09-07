@@ -20,5 +20,17 @@ public:
 protected:
   //! Phase
   int phase_ = 0;
+
+  //! Function to interpolate task stiffness
+  std::shared_ptr<CubicInterpolator<double>> stiffnessRatioFunc_;
+
+  //! Stiffness of CoM task
+  Eigen::Vector3d comTaskStiffness_ = Eigen::Vector3d::Zero();
+
+  //! Stiffness of base link orientation task
+  Eigen::Vector3d baseOriTaskStiffness_ = Eigen::Vector3d::Zero();
+
+  //! Stiffness of foot tasks
+  std::unordered_map<Foot, Eigen::Vector6d> footTasksStiffness_;
 };
 } // namespace BWC

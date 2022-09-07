@@ -75,6 +75,25 @@ inline U interpolateDerivative(const T & start, const T & end, double ratio, int
   }
 }
 
+/** \brief Calculate the derivative of scalar value interpolating from start to end.
+    \param start start value
+    \param end end value
+    \param ratio interpolation ratio
+    \param order derivative order
+*/
+template<>
+inline double interpolateDerivative(const double & start, const double & end, double ratio, int order)
+{
+  if(order == 1)
+  {
+    return end - start;
+  }
+  else
+  {
+    return 0.0;
+  }
+}
+
 /** \brief Calculate the derivative of Quaternion interpolating from start to end.
     \param start start value
     \param end end value

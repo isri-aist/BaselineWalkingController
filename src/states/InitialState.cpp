@@ -32,8 +32,6 @@ bool InitialState::run(mc_control::fsm::Controller &)
     {
       phase_ = 1;
     }
-
-    return false;
   }
   if(phase_ == 1)
   {
@@ -53,6 +51,17 @@ bool InitialState::run(mc_control::fsm::Controller &)
       ctl().solver().addTask(ctl().footTasks_.at(foot));
     }
 
+    // Setup task stiffness interpolation
+    comTaskStiffness_ = ctl().comTask_->dimStiffness();
+    baseOriTaskStiffness_ = ctl().baseOriTask_->dimStiffness();
+    for(const auto & foot : Feet::Both)
+    {
+      footTasksStiffness_.emplace(foot, ctl().footTasks_.at(foot)->dimStiffness());
+    }
+    constexpr double stiffnessInterpDuration = 1.0; // [sec]
+    stiffnessRatioFunc_ = std::make_shared<CubicInterpolator<double>>(
+        std::map<double, double>{{ctl().t(), 0.0}, {ctl().t() + stiffnessInterpDuration, 1.0}});
+
     // Reset managers
     ctl().footManager_->reset();
     ctl().centroidalManager_->reset();
@@ -64,10 +73,8 @@ bool InitialState::run(mc_control::fsm::Controller &)
     // Add GUI of managers
     ctl().footManager_->addToGUI(*ctl().gui());
     ctl().centroidalManager_->addToGUI(*ctl().gui());
-
-    return false;
   }
-  else // if(phase_ == 2)
+  else if(phase_ == 2)
   {
     phase_ = 3;
 
@@ -76,9 +83,28 @@ bool InitialState::run(mc_control::fsm::Controller &)
     // it is safe to call the update method once and then add the logger
     ctl().footManager_->addToLogger(ctl().logger());
     ctl().centroidalManager_->addToLogger(ctl().logger());
-
-    return true;
   }
+
+  // Interpolate task stiffness
+  if(stiffnessRatioFunc_)
+  {
+    if(ctl().t() <= stiffnessRatioFunc_->endTime())
+    {
+      double stiffnessRatio = (*stiffnessRatioFunc_)(ctl().t());
+      ctl().comTask_->stiffness(stiffnessRatio * comTaskStiffness_);
+      ctl().baseOriTask_->stiffness(stiffnessRatio * baseOriTaskStiffness_);
+      for(const auto & foot : Feet::Both)
+      {
+        ctl().footTasks_.at(foot)->stiffness(stiffnessRatio * footTasksStiffness_.at(foot));
+      }
+    }
+    else
+    {
+      stiffnessRatioFunc_.reset();
+    }
+  }
+
+  return (phase_ == 3 && !stiffnessRatioFunc_);
 }
 
 void InitialState::teardown(mc_control::fsm::Controller &) {}
