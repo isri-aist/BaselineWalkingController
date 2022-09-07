@@ -148,7 +148,7 @@ jobs:
         run: |
           set -e
           set -x
-          sudo apt-get install -qq mc-openrtm jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+          sudo apt-get install -qq jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
           set +x
           . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
           set -x
