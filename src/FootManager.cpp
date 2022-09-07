@@ -790,8 +790,7 @@ bool FootManager::detectTouchDown() const
 
   // False if the position error does not meet the threshold
   Foot swingFoot = (supportPhase_ == SupportPhase::LeftSupport ? Foot::Right : Foot::Left);
-  if((swingFootstep_->pose.translation() - ctl().footTasks_.at(swingFoot)->surfacePose().translation()).norm()
-     > config_.touchDownPosError)
+  if(((*swingPosFunc_)(swingFootstep_->swingEndTime) - (*swingPosFunc_)(ctl().t())).norm() > config_.touchDownPosError)
   {
     return false;
   }
