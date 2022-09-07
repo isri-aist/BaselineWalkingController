@@ -25,6 +25,7 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/BaselineWalkingController/.github/workflows/
           docker build -t ${IMAGE_NAME}_ci:${{ github.sha }} --build-arg REPOSITORY=${{ github.repository_owner }} --build-arg COMMIT_SHA=${{ github.sha }} .
+          docker build -f Dockerfile-HVAC2022 -t ${IMAGE_NAME}_hvac2022:latest --build-arg FROM_IMAGE=${IMAGE_NAME}_ci:${{ github.sha }} .
       - name: Docker images
         run: docker images
       - name: Login to registries
@@ -33,6 +34,7 @@ jobs:
       - name: Push image for CI
         run: |
           docker push ${IMAGE_NAME}_ci:${{ github.sha }}
+          docker push ${IMAGE_NAME}_hvac2022:latest
       - name: Push image for release
         if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |

@@ -1,0 +1,37 @@
+ARG FROM_IMAGE=ghcr.io/isri-aist/baseline_walking_controller:latest
+
+FROM ${FROM_IMAGE}
+MAINTAINER m-murooka@aist.go.jp
+
+# Build HVAC2022 branch
+RUN cd ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController && \
+    git remote add mmurooka https://github.com/mmurooka/BaselineWalkingController && \
+    git fetch mmurooka && \
+    git checkout -b HVAC2022 -t mmurooka/HVAC2022
+RUN source ${HOME}/catkin_ws/devel/setup.bash && \
+    cd ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController && \
+    catkin bt --no-deps --force-cmake
+
+# Install HVAC2022 environment
+RUN git clone https://github.com/mmurooka/vnoid -b hvac2022-jvrc1 && \
+    mkdir ${HOME}/vnoid/build && \
+    cd ${HOME}/vnoid/build && \
+    cmake .. && \
+    make && \
+    make install
+
+# Setup simulation
+RUN echo $'#!/usr/bin/env bash \n\
+source ${HOME}/catkin_ws/devel/setup.bash \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/HVAC2022UnevenTerrain.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
+/usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
+roscore > /dev/null 2>&1 < /dev/null & \n\
+ROSCORE_PID=$! \n\
+sleep 1s \n\
+roslaunch baseline_walking_controller display.launch > /dev/null 2>&1 < /dev/null & \n\
+RVIZ_PID=$! \n\
+sleep 1s \n\
+cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation hvac2022_jvrc1.cnoid \n\
+kill -2 ${ROSCORE_PID} \n\
+kill -2 ${RVIZ_PID}' > ${HOME}/hvac2022_uneven_terrain.bash
+RUN chmod 755 ${HOME}/hvac2022_uneven_terrain.bash

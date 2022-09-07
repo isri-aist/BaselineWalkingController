@@ -1,0 +1,168 @@
+constraints:
+  - type: contact
+  - type: kinematics
+    damper: [0.1, 0.01, 0.5]
+    velocityPercent: 4.0
+  - type: compoundJoint
+
+CoMTask:
+  stiffness: 50000.0
+
+FootTaskList:
+  - type: firstOrderImpedance
+    foot: Left
+    surface: LeftFootCenter
+    cutoffPeriod: 0.01
+    stiffness: 30000.0
+    weight: 1000.0
+  - type: firstOrderImpedance
+    foot: Right
+    surface: RightFootCenter
+    cutoffPeriod: 0.01
+    stiffness: 30000.0
+    weight: 1000.0
+
+FootManager:
+  footstepDuration: 2.5 # [sec]
+  doubleSupportRatio: 0.5 # []
+  overwriteLandingPose: true
+  keepSupportFootPoseForTouchDownFoot: true
+  touchDownRemainingDuration: 0.4 # [sec]
+  touchDownPosError: 0.1 # [m]
+  touchDownForceZ: 300 # [N]
+  impedanceGains:
+    singleSupport:
+      damper:
+        angular: [75, 75, 75]
+    doubleSupport:
+      damper:
+        linear: [5e3, 5e3, 5e3]
+        angular: [75, 75, 75]
+
+CentroidalManager:
+  dcmGainP: 2.5 # It must be greater than 1 to be stable
+  refComZ: 0.775 # [m]
+
+transitions:
+  - [BWC::Initial_, OK, BWC::ConfigFootstep_, Auto]
+
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 8.0
+
+  BWC::ConfigFootstep_:
+    base: BWC::ConfigFootstep
+    configs:
+      footstepList:
+        - foot: Left
+          footMidpose:
+            translation: [0.3, 0.0, 0.0]
+          startTime: 2.0
+        - footMidpose:
+            translation: [0.6, 0.0, 0.0]
+        - footMidpose:
+            translation: [0.9, 0.0, 0.0]
+        - footMidpose:
+            translation: [1.2, 0.0, 0.0]
+        - footMidpose:
+            translation: [1.5, 0.0, 0.0]
+        - footMidpose:
+            translation: [1.8, 0.0, 0.0]
+        - footMidpose:
+            translation: [2.1, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [2.4, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [2.7, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [3.0, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [3.3, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [3.6, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [3.9, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [4.2, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [4.5, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [4.8, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [5.1, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
+        - footMidpose:
+            translation: [5.1, 0.0, 0.0]
+          config:
+            withdrawDurationRatio: 0.05
+            approachDurationRatio: 0.35
+            withdrawOffset: [0, 0, 0.03]
+            approachOffset: [0, 0., 0.18]
+            swingOffset: [0.1, 0, 0.18]
