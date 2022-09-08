@@ -17,12 +17,6 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-# SpaceVecAlg
-find_package(SpaceVecAlg REQUIRED)
-
-# RBDyn
-find_package(RBDyn REQUIRED)
-
 # mc_rtc
 find_package(mc_rtc REQUIRED)
 
