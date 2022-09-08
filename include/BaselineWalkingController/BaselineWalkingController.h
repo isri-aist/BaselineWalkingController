@@ -76,7 +76,7 @@ public:
   bool enableManagerUpdate_ = false;
 
 protected:
-  //! Current time
+  //! Current time [sec]
   double t_ = 0;
 };
 } // namespace BWC
