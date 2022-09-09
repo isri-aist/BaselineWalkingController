@@ -29,7 +29,7 @@ void CentroidalManagerDdpZmp::reset()
   CentroidalManager::reset();
 
   ddp_ = std::make_shared<CCC::DdpZmp>(robotMass_, config_.horizonDt,
-                                       static_cast<int>(config_.horizonDuration / config_.horizonDt));
+                                       static_cast<int>(std::floor(config_.horizonDuration / config_.horizonDt)));
   ddp_->ddp_solver_->config().max_iter = config_.ddpMaxIter;
 }
 
