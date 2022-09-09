@@ -61,8 +61,7 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
   }
   else
   {
-    mc_rtc::log::error_and_throw("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.",
-                                 centroidalManagerMethod);
+    mc_rtc::log::error("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.", centroidalManagerMethod);
   }
 
   // Setup anchor
