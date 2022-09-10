@@ -30,9 +30,15 @@ jobs:
       - name: Login to registries
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
-      - name: Push image for CI
+      - name: Save image for CI
         run: |
-          docker push ${IMAGE_NAME}_ci:${{ github.sha }}
+          mkdir /tmp/image
+          docker save ${IMAGE_NAME}_ci:${{ github.sha }} -o /tmp/image/${{ github.repository_owner }}-baseline_walking_controller-image.tar
+      - name: Upload image for CI
+        uses: actions/upload-artifact@v3
+        with:
+          name: BWC-docker-image
+          path: /tmp/image
       - name: Push image for release
         if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
@@ -58,76 +64,84 @@ jobs:
       HOME: /root
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
     steps:
-      - name: Check repository
-        shell: bash
-        run: |
-          set -e
-          . ${HOME}/catkin_ws/devel/setup.bash
-          roscd baseline_walking_controller
-          set -x
-          git remote get-url origin
-          git log HEAD^..HEAD
-      - name: Run simulation
-        shell: bash
-        run: |
-          set -e
-          . ${HOME}/catkin_ws/devel/setup.bash
-          set -x
-          export DISPLAY=":1"
-          Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
-          sleep 10s
-          fluxbox 2> /dev/null &
-          mkdir -p ${HOME}/.config/mc_rtc/controllers
-          cp ${HOME}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          CI_DIR=${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows
-          python3 ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
-          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
-          FFMPEG_PID=$!
-          cd /usr/share/hrpsys/samples/JVRC1
-          ./clear-omninames.sh
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
-            CNOID_FILE=sim_mc.cnoid
-          else
-            CNOID_FILE=sim_mc_comanoid_staircase.cnoid
-          fi
-          choreonoid --start-simulation ${CNOID_FILE} &
-          CNOID_PID=$!
-          if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
-            SLEEP_DURATION="60s"
-          else
-            SLEEP_DURATION="40s"
-          fi
-          sleep ${SLEEP_DURATION}
-          kill -2 ${CNOID_PID}
-          kill -2 ${FFMPEG_PID}
-          sleep 10s
-          mkdir -p /tmp/results
-          ffmpeg -nostats -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
-          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
-          mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
-          tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
-      - name: Upload simulation data
-        uses: actions/upload-artifact@v3
+      - name: Download image for CI
+        uses: actions/download-artifact@v3
         with:
-          name: BWC-docker-results
-          path: /tmp/results
-      - name: Check simulation results
-        shell: bash
+          name: BWC-docker-image
+          path: /tmp/image
+      - name: tmp
         run: |
-          set -e
-          set -x
-          # Workaround to achieve allow-failure
-          if [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ] && [ "${{ matrix.mpc-framework }}" == "OnlineMpc" ]; then
-            ALLOW_FAILURE=true
-          else
-            ALLOW_FAILURE=false
-          fi
-          echo "- ALLOW_FAILURE: ${ALLOW_FAILURE}"
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
-            EXPECTED_BASE_POS="1.34 -0.41 0.8"
-          elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
-            EXPECTED_BASE_POS="1.75 0.0 1.68"
-          else
-            EXPECTED_BASE_POS="2.5 -0.25 0.8"
-          fi
-          python3 ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
+          ls /tmp/image
+      # - name: Check repository
+      #   shell: bash
+      #   run: |
+      #     set -e
+      #     . ${HOME}/catkin_ws/devel/setup.bash
+      #     roscd baseline_walking_controller
+      #     set -x
+      #     git remote get-url origin
+      #     git log HEAD^..HEAD
+      # - name: Run simulation
+      #   shell: bash
+      #   run: |
+      #     set -e
+      #     . ${HOME}/catkin_ws/devel/setup.bash
+      #     set -x
+      #     export DISPLAY=":1"
+      #     Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
+      #     sleep 10s
+      #     fluxbox 2> /dev/null &
+      #     mkdir -p ${HOME}/.config/mc_rtc/controllers
+      #     cp ${HOME}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+      #     CI_DIR=${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows
+      #     python3 ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
+      #     ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
+      #     FFMPEG_PID=$!
+      #     cd /usr/share/hrpsys/samples/JVRC1
+      #     ./clear-omninames.sh
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
+      #       CNOID_FILE=sim_mc.cnoid
+      #     else
+      #       CNOID_FILE=sim_mc_comanoid_staircase.cnoid
+      #     fi
+      #     choreonoid --start-simulation ${CNOID_FILE} &
+      #     CNOID_PID=$!
+      #     if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
+      #       SLEEP_DURATION="60s"
+      #     else
+      #       SLEEP_DURATION="40s"
+      #     fi
+      #     sleep ${SLEEP_DURATION}
+      #     kill -2 ${CNOID_PID}
+      #     kill -2 ${FFMPEG_PID}
+      #     sleep 10s
+      #     mkdir -p /tmp/results
+      #     ffmpeg -nostats -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
+      #     LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+      #     mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
+      #     tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
+      # - name: Upload simulation data
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: BWC-docker-results
+      #     path: /tmp/results
+      # - name: Check simulation results
+      #   shell: bash
+      #   run: |
+      #     set -e
+      #     set -x
+      #     # Workaround to achieve allow-failure
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ] && [ "${{ matrix.mpc-framework }}" == "OnlineMpc" ]; then
+      #       ALLOW_FAILURE=true
+      #     else
+      #       ALLOW_FAILURE=false
+      #     fi
+      #     echo "- ALLOW_FAILURE: ${ALLOW_FAILURE}"
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
+      #       EXPECTED_BASE_POS="1.34 -0.41 0.8"
+      #     elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
+      #       EXPECTED_BASE_POS="1.75 0.0 1.68"
+      #     else
+      #       EXPECTED_BASE_POS="2.5 -0.25 0.8"
+      #     fi
+      #     python3 ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
