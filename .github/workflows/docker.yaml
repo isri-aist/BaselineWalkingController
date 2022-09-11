@@ -76,9 +76,10 @@ jobs:
            docker images
       - name: Run test on image
         run: |
-           docker run --env MPC_METHOD=${{ matrix.mpc-method }} --env MPC_FRAMEWORK=${{ matrix.mpc-framework }} --env MOTION_TYPE=${{ matrix.motion-type }} --env RESULTS_POSTFIX=${RESULTS_POSTFIX} ${IMAGE_NAME}:${{ github.sha }} /root/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/test_docker.bash
-      # - name: Upload simulation data
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: BWC-docker-results
-      #     path: /tmp/results
+           docker run --env MPC_METHOD=${{ matrix.mpc-method }} --env MPC_FRAMEWORK=${{ matrix.mpc-framework }} --env MOTION_TYPE=${{ matrix.motion-type }} --env RESULTS_POSTFIX=${RESULTS_POSTFIX} --volume=/tmp/results:/tmp/results ${IMAGE_NAME}:${{ github.sha }} /root/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/test_docker.bash
+      - name: Upload simulation data
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: BWC-docker-results
+          path: /tmp/results

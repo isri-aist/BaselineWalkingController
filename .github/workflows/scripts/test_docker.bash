@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-# Check repository
 set -e
+set +x
 . ${HOME}/catkin_ws/devel/setup.bash
 roscd baseline_walking_controller
 set -x
+
+# Check repository
 git remote get-url origin
 git log HEAD^..HEAD
 
 # Run simulation
-set -e
-. ${HOME}/catkin_ws/devel/setup.bash
-set -x
 export DISPLAY=":1"
 Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
 sleep 10s
@@ -47,8 +46,6 @@ mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG
 tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
 
 # Check simulation results
-set -e
-set -x
 # Workaround to achieve allow-failure
 if [ "${MOTION_TYPE}" == "WalkingOnStairs" ] && [ "${MPC_FRAMEWORK}" == "OnlineMpc" ]; then
   ALLOW_FAILURE=true
