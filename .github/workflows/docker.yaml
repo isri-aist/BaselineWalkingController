@@ -30,9 +30,6 @@ jobs:
           docker build -t ${IMAGE_NAME}:${{ github.sha }} --build-arg REPOSITORY=${{ github.repository_owner }} --build-arg COMMIT_SHA=${{ github.sha }} .
       - name: Docker images
         run: docker images
-      - name: Login to registries
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
       - name: Save image for CI
         run: |
           mkdir /tmp/image
@@ -42,6 +39,10 @@ jobs:
         with:
           name: BWC-docker-image
           path: /tmp/image
+      - name: Login to registries
+        if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
       - name: Push image for release
         if: github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
