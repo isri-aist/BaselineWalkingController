@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['firstorderimpedancetask_379',['FirstOrderImpedanceTask',['../structBWC_1_1FirstOrderImpedanceTask.html#a30e685289b37e7c3af402e0e89d8fe48',1,'BWC::FirstOrderImpedanceTask']]],
-  ['footmanager_380',['FootManager',['../classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0',1,'BWC::FootManager']]],
-  ['footstep_381',['Footstep',['../structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f',1,'BWC::Footstep']]],
-  ['footstepenvconfigmcrtc_382',['FootstepEnvConfigMcRtc',['../structBFP_1_1FootstepEnvConfigMcRtc.html#a3820a49fd6ba716504f51ec55152e683',1,'BFP::FootstepEnvConfigMcRtc']]],
-  ['footstepqueue_383',['footstepQueue',['../classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637',1,'BWC::FootManager::footstepQueue() const noexcept'],['../classBWC_1_1FootManager.html#a5aa0d1f9310defc7ccd73ad551bdec48',1,'BWC::FootManager::footstepQueue() noexcept']]],
-  ['frictionpyramid_384',['FrictionPyramid',['../classBWC_1_1FrictionPyramid.html#aeb1ae9d569b888f4f423b4a48c050802',1,'BWC::FrictionPyramid']]],
-  ['func_385',['Func',['../classBWC_1_1Func.html#a534ff23b0d156dcdd25054dec70ccf1a',1,'BWC::Func']]]
+  ['firstorderimpedancetask_380',['FirstOrderImpedanceTask',['../structBWC_1_1FirstOrderImpedanceTask.html#a30e685289b37e7c3af402e0e89d8fe48',1,'BWC::FirstOrderImpedanceTask']]],
+  ['footmanager_381',['FootManager',['../classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0',1,'BWC::FootManager']]],
+  ['footstep_382',['Footstep',['../structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f',1,'BWC::Footstep']]],
+  ['footstepenvconfigmcrtc_383',['FootstepEnvConfigMcRtc',['../structBFP_1_1FootstepEnvConfigMcRtc.html#a3820a49fd6ba716504f51ec55152e683',1,'BFP::FootstepEnvConfigMcRtc']]],
+  ['footstepqueue_384',['footstepQueue',['../classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637',1,'BWC::FootManager::footstepQueue() const noexcept'],['../classBWC_1_1FootManager.html#a5aa0d1f9310defc7ccd73ad551bdec48',1,'BWC::FootManager::footstepQueue() noexcept']]],
+  ['frictionpyramid_385',['FrictionPyramid',['../classBWC_1_1FrictionPyramid.html#aeb1ae9d569b888f4f423b4a48c050802',1,'BWC::FrictionPyramid']]],
+  ['func_386',['Func',['../classBWC_1_1Func.html#a534ff23b0d156dcdd25054dec70ccf1a',1,'BWC::Func']]]
 ];
