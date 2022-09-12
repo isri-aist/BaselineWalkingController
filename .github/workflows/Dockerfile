@@ -99,3 +99,6 @@ kill -2 ${RVIZ_PID}' > ${HOME}/walk_with_footstep_planner.bash
 RUN chmod 755 ${HOME}/walk_on_plane.bash
 RUN chmod 755 ${HOME}/walk_on_stairs.bash
 RUN chmod 755 ${HOME}/walk_with_footstep_planner.bash
+
+RUN rm -rf ${HOME}/catkin_ws/build
+RUN cd ${HOME}/catkin_ws/src && rm -rf `ls -1 | grep -v BaselineWalkingController`
