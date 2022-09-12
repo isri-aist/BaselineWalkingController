@@ -55,5 +55,8 @@ protected:
 
   //! Initial heuristic weight for footstep planning
   double initialHeuristicsWeight_ = 10.0;
+
+  //! Whether state is running
+  bool running_ = true;
 };
 } // namespace BWC

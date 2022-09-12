@@ -143,12 +143,16 @@ void FootstepPlannerState::teardown(mc_control::fsm::Controller &)
   ctl().gui()->removeCategory({"BWC", "FootstepPlanner"});
 
   // Clean up thread
-  planningThread_.join();
+  running_ = false;
+  if(planningThread_.joinable())
+  {
+    planningThread_.join();
+  }
 }
 
 void FootstepPlannerState::planningThread()
 {
-  while(true)
+  while(running_)
   {
     if(triggered_)
     {
