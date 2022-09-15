@@ -189,6 +189,13 @@ public:
     }
   }
 
+  /** \brief Copy constructor. */
+  CubicInterpolator(const CubicInterpolator & inst)
+  {
+    points_ = inst.points_;
+    func_ = std::make_shared<CubicHermiteSpline<Vector1d>>(*inst.func_);
+  }
+
   /** \brief Clear points. */
   void clearPoints()
   {
