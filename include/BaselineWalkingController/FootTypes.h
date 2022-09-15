@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 #include <mc_rtc/Configuration.h>
 
 namespace BWC
