@@ -1,4 +1,4 @@
-#include <mc_rtc/log/Logger.h>
+#include <mc_rtc/logging.h>
 
 #include <BaselineWalkingController/FootTypes.h>
 
