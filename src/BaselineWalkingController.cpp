@@ -21,47 +21,76 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
 : mc_control::fsm::Controller(rm, dt, _config)
 {
   // Setup tasks
-  if(!(config().has("CoMTask") && config().has("BaseOrientationTask") && config().has("FootTaskList")))
+  if(config().has("CoMTask"))
   {
-    mc_rtc::log::error_and_throw("[BaselineWalkingController] Task configuration is missing.");
-  }
-  comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config()("CoMTask"));
-  comTask_->name("CoMTask");
-  baseOriTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config()("BaseOrientationTask"));
-  baseOriTask_->name("BaseOriTask");
-  for(const auto & footTaskConfig : config()("FootTaskList"))
-  {
-    Foot foot = strToFoot(footTaskConfig("foot"));
-    footTasks_.emplace(foot, mc_tasks::MetaTaskLoader::load<FirstOrderImpedanceTask>(solver(), footTaskConfig));
-    footTasks_.at(foot)->name("FootTask_" + std::to_string(foot));
-  }
-
-  // Setup managers
-  if(!(config().has("FootManager") && config().has("CentroidalManager")))
-  {
-    mc_rtc::log::error_and_throw("[BaselineWalkingController] Manager configuration is missing.");
-  }
-  footManager_ = std::make_shared<FootManager>(this, config()("FootManager"));
-  std::string centroidalManagerMethod = config()("CentroidalManager")("method", std::string(""));
-  if(centroidalManagerMethod == "PreviewControlZmp")
-  {
-    centroidalManager_ = std::make_shared<CentroidalManagerPreviewControlZmp>(this, config()("CentroidalManager"));
-  }
-  else if(centroidalManagerMethod == "DdpZmp")
-  {
-    centroidalManager_ = std::make_shared<CentroidalManagerDdpZmp>(this, config()("CentroidalManager"));
-  }
-  else if(centroidalManagerMethod == "FootGuidedControl")
-  {
-    centroidalManager_ = std::make_shared<CentroidalManagerFootGuidedControl>(this, config()("CentroidalManager"));
-  }
-  else if(centroidalManagerMethod == "IntrinsicallyStableMpc")
-  {
-    centroidalManager_ = std::make_shared<CentroidalManagerIntrinsicallyStableMpc>(this, config()("CentroidalManager"));
+    comTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::CoMTask>(solver(), config()("CoMTask"));
+    comTask_->name("CoMTask");
   }
   else
   {
-    mc_rtc::log::error("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.", centroidalManagerMethod);
+    mc_rtc::log::warning("[BaselineWalkingController] CoMTask configuration is missing.");
+  }
+  if(config().has("BaseOrientationTask"))
+  {
+    baseOriTask_ = mc_tasks::MetaTaskLoader::load<mc_tasks::OrientationTask>(solver(), config()("BaseOrientationTask"));
+    baseOriTask_->name("BaseOriTask");
+  }
+  else
+  {
+    mc_rtc::log::warning("[BaselineWalkingController] BaseOrientationTask configuration is missing.");
+  }
+  if(config().has("FootTaskList"))
+  {
+    for(const auto & footTaskConfig : config()("FootTaskList"))
+    {
+      Foot foot = strToFoot(footTaskConfig("foot"));
+      footTasks_.emplace(foot, mc_tasks::MetaTaskLoader::load<FirstOrderImpedanceTask>(solver(), footTaskConfig));
+      footTasks_.at(foot)->name("FootTask_" + std::to_string(foot));
+    }
+  }
+  else
+  {
+    mc_rtc::log::warning("[BaselineWalkingController] FootTaskList configuration is missing.");
+  }
+
+  // Setup managers
+  if(config().has("FootManager"))
+  {
+    footManager_ = std::make_shared<FootManager>(this, config()("FootManager"));
+  }
+  else
+  {
+    mc_rtc::log::warning("[BaselineWalkingController] FootManager configuration is missing.");
+  }
+  if(config().has("CentroidalManager"))
+  {
+    std::string centroidalManagerMethod = config()("CentroidalManager")("method", std::string(""));
+    if(centroidalManagerMethod == "PreviewControlZmp")
+    {
+      centroidalManager_ = std::make_shared<CentroidalManagerPreviewControlZmp>(this, config()("CentroidalManager"));
+    }
+    else if(centroidalManagerMethod == "DdpZmp")
+    {
+      centroidalManager_ = std::make_shared<CentroidalManagerDdpZmp>(this, config()("CentroidalManager"));
+    }
+    else if(centroidalManagerMethod == "FootGuidedControl")
+    {
+      centroidalManager_ = std::make_shared<CentroidalManagerFootGuidedControl>(this, config()("CentroidalManager"));
+    }
+    else if(centroidalManagerMethod == "IntrinsicallyStableMpc")
+    {
+      centroidalManager_ =
+          std::make_shared<CentroidalManagerIntrinsicallyStableMpc>(this, config()("CentroidalManager"));
+    }
+    else
+    {
+      mc_rtc::log::error_and_throw("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.",
+                                   centroidalManagerMethod);
+    }
+  }
+  else
+  {
+    mc_rtc::log::warning("[BaselineWalkingController] CentroidalManager configuration is missing.");
   }
 
   // Setup anchor
