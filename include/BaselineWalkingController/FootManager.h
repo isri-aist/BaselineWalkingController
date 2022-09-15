@@ -88,6 +88,9 @@ public:
   */
   FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig = {});
 
+  /** \brief Destructor. */
+  virtual ~FootManager() = default;
+
   /** \brief Reset.
 
       This method should be called once when controller is reset.
