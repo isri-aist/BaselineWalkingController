@@ -88,9 +88,6 @@ public:
   */
   FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig = {});
 
-  /** \brief Destructor. */
-  virtual ~FootManager() = default;
-
   /** \brief Reset.
 
       This method should be called once when controller is reset.
@@ -101,7 +98,7 @@ public:
 
       This method should be called once every control cycle.
   */
-  void update();
+  virtual void update();
 
   /** \brief Const accessor to the configuration. */
   inline const Configuration & config() const noexcept
@@ -255,10 +252,10 @@ protected:
   }
 
   /** \brief Update foot tasks. */
-  void updateFootTraj();
+  virtual void updateFootTraj();
 
   /** \brief Update ZMP trajectory. */
-  void updateZmpTraj();
+  virtual void updateZmpTraj();
 
   /** \brief Get the remaining duration for next touch down.
 
