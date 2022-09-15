@@ -7,7 +7,10 @@ namespace BWC
 /** \brief Foot. */
 enum class Foot
 {
+  //! Left foot
   Left = 0,
+
+  //! Right foot
   Right
 };
 
