@@ -1,7 +1,10 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/centroidal/CentroidalManagerDdpZmp.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/BaselineWalkingController/include/BaselineWalkingController/centroidal/CentroidalManagerDdpZmp.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,320,91"/>
-<area shape="rect" id="node2" title=" " alt="" coords="11,146,133,173"/>
-<area shape="rect" id="node3" href="$CentroidalManager_8h.html" title=" " alt="" coords="157,139,352,180"/>
-<area shape="rect" id="node4" title=" " alt="" coords="64,228,251,255"/>
-<area shape="rect" id="node5" title=" " alt="" coords="275,228,426,255"/>
+<area shape="rect" id="node1" title=" " alt="" coords="43,5,357,91"/>
+<area shape="rect" id="node2" title=" " alt="" coords="49,146,170,173"/>
+<area shape="rect" id="node3" href="$CentroidalManager_8h.html" title=" " alt="" coords="195,139,389,180"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,235,192,262"/>
+<area shape="rect" id="node5" title=" " alt="" coords="217,235,367,262"/>
+<area shape="rect" id="node6" href="$FootTypes_8h.html" title=" " alt="" coords="392,228,587,269"/>
+<area shape="rect" id="node7" title=" " alt="" coords="403,317,445,344"/>
+<area shape="rect" id="node8" title=" " alt="" coords="469,317,640,344"/>
 </map>
