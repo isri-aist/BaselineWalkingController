@@ -3,6 +3,8 @@
 #include <mc_rtc/gui/StateBuilder.h>
 #include <mc_rtc/log/Logger.h>
 
+#include <BaselineWalkingController/FootTypes.h>
+
 namespace BWC
 {
 class BaselineWalkingController;
