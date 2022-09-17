@@ -37,8 +37,13 @@ int sign(const Foot & foot);
 /** \brief Support phase. */
 enum class SupportPhase
 {
+  //! Both feet support phase
   DoubleSupport = 0,
+
+  //! Left foot support phase
   LeftSupport,
+
+  //! Right foot support phase
   RightSupport
 };
 
