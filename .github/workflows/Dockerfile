@@ -44,19 +44,16 @@ ENV HOME /root
 RUN mkdir -p ${HOME}/catkin_ws/src
 WORKDIR ${HOME}/catkin_ws
 RUN wstool init src
-RUN wstool set -t src QpSolverCollection https://github.com/isri-aist/QpSolverCollection --git -y
-RUN wstool set -t src NMPC https://github.com/isri-aist/NMPC --git -y
-RUN wstool set -t src CentroidalControlCollection https://github.com/isri-aist/CentroidalControlCollection --git -y
-RUN wstool set -t src BaselineFootstepPlanner https://github.com/isri-aist/BaselineFootstepPlanner --git -y
 # To handle CI triggered by Pull Request, COMMIT_SHA must be specified in the git fetch argument,
 # but since wstool does not support it, execute the git commands directly instead.
 # RUN wstool set -t src BaselineWalkingController https://github.com/${REPOSITORY}/BaselineWalkingController --git -y -v ${COMMIT_SHA}
-RUN mkdir src/BaselineWalkingController && \
-    cd src/BaselineWalkingController && \
+RUN mkdir src/isri-aist/BaselineWalkingController && \
+    cd src/isri-aist/BaselineWalkingController && \
     git init && \
     git remote add origin https://github.com/${REPOSITORY}/BaselineWalkingController && \
     git fetch origin ${COMMIT_SHA} && \
     git checkout ${COMMIT_SHA}
+RUN wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall
 RUN wstool update -t src
 
 # Rosdep install
@@ -72,20 +69,20 @@ RUN echo "source ${HOME}/catkin_ws/devel/setup.bash" >> ${HOME}/.bashrc
 # Setup simulation
 WORKDIR ${HOME}
 RUN mkdir -p ${HOME}/.config/mc_rtc/controllers
-RUN cp ${HOME}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc/mc_rtc.yaml
+RUN cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc/mc_rtc.yaml
 RUN echo $'#!/usr/bin/env bash \n\
 source ${HOME}/catkin_ws/devel/setup.bash \n\
-cp ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingOnPlane.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingOnPlane.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
 /usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
 cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc.cnoid' > ${HOME}/walk_on_plane.bash
 RUN echo $'#!/usr/bin/env bash \n\
 source ${HOME}/catkin_ws/devel/setup.bash \n\
-cp ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingOnStairs.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingOnStairs.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
 /usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
 cd /usr/share/hrpsys/samples/JVRC1 && choreonoid --start-simulation sim_mc_comanoid_staircase.cnoid' > ${HOME}/walk_on_stairs.bash
 RUN echo $'#!/usr/bin/env bash \n\
 source ${HOME}/catkin_ws/devel/setup.bash \n\
-cp ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/config/WalkingWithFootstepPlanner.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
+cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingWithFootstepPlanner.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml \n\
 /usr/share/hrpsys/samples/JVRC1/clear-omninames.sh \n\
 roscore > /dev/null 2>&1 < /dev/null & \n\
 ROSCORE_PID=$! \n\

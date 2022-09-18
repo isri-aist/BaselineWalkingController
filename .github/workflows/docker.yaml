@@ -78,8 +78,8 @@ jobs:
           sleep 10s
           fluxbox 2> /dev/null &
           mkdir -p ${HOME}/.config/mc_rtc/controllers
-          cp ${HOME}/catkin_ws/src/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          CI_DIR=${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows
+          cp ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+          CI_DIR=${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows
           python3 ${CI_DIR}/scripts/mergeConfigs.py ${CI_DIR}/config/${{ matrix.mpc-method }}.yaml ${CI_DIR}/config/${{ matrix.mpc-framework }}.yaml ${CI_DIR}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
@@ -130,4 +130,4 @@ jobs:
           else
             EXPECTED_BASE_POS="2.5 -0.25 0.8"
           fi
-          python3 ${HOME}/catkin_ws/src/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
+          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}

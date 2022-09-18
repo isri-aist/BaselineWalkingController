@@ -99,10 +99,9 @@ $ sudo apt-get install libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugi
 $ mkdir -p ~/ros/ws_bwc/src
 $ cd ~/ros/ws_bwc
 $ wstool init src
-$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y
-$ wstool set -t src isri-aist/NMPC git@github.com:isri-aist/NMPC.git --git -y
-$ wstool set -t src isri-aist/CentroidalControlCollection git@github.com:isri-aist/CentroidalControlCollection.git --git -y
-$ wstool set -t src isri-aist/BaselineWalkingController git@github.com:isri-aist/BaselineWalkingController.git --git -y
+$ wstool set -t src isri-aist/BaselineWalkingController https://github.com/isri-aist/BaselineWalkingController --git -y
+$ wstool update -t src isri-aist/BaselineWalkingController
+$ wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall
 $ wstool update -t src
 ```
 

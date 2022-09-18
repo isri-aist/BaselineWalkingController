@@ -1,0 +1,12 @@
+- git:
+    local-name: isri-aist/BaselineFootstepPlanner
+    uri: https://github.com/isri-aist/BaselineFootstepPlanner
+- git:
+    local-name: isri-aist/CentroidalControlCollection
+    uri: https://github.com/isri-aist/CentroidalControlCollection
+- git:
+    local-name: isri-aist/NMPC
+    uri: https://github.com/isri-aist/NMPC
+- git:
+    local-name: isri-aist/QpSolverCollection
+    uri: https://github.com/isri-aist/QpSolverCollection
