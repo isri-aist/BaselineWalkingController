@@ -85,7 +85,7 @@ struct Footstep
       \note The following relation must hold: _transitStartTime < _swingStartTime < _swingEndTime < _transitEndTime.
   */
   Footstep(Foot _foot,
-           sva::PTransformd _pose,
+           const sva::PTransformd & _pose,
            double _transitStartTime = 0,
            double _swingStartTime = 0,
            double _swingEndTime = 0,

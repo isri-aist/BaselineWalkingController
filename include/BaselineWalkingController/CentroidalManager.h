@@ -5,6 +5,11 @@
 
 #include <BaselineWalkingController/FootTypes.h>
 
+namespace mc_rbdyn
+{
+class Robot;
+}
+
 namespace BWC
 {
 class BaselineWalkingController;
