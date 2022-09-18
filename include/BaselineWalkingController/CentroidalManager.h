@@ -90,7 +90,7 @@ public:
 
       This method should be called once every control cycle.
    */
-  void update();
+  virtual void update();
 
   /** \brief Const accessor to the configuration. */
   virtual const Configuration & config() const = 0;
