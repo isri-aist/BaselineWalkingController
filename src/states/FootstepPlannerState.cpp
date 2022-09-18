@@ -111,7 +111,7 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
                                Eigen::Vector3d(x_center + x_half_length, y_center - y_half_length, 0)});
   }
   ctl().gui()->addElement(
-      {"BWC", "FootstepPlanner"}, mc_rtc::gui::Button("PlanAndWalk", [this]() { triggered_ = true; }),
+      {ctl().name(), "FootstepPlanner"}, mc_rtc::gui::Button("PlanAndWalk", [this]() { triggered_ = true; }),
       mc_rtc::gui::XYTheta(
           "GoalPose",
           [this]() -> std::array<double, 4> {
@@ -140,7 +140,7 @@ bool FootstepPlannerState::run(mc_control::fsm::Controller &)
 void FootstepPlannerState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
-  ctl().gui()->removeCategory({"BWC", "FootstepPlanner"});
+  ctl().gui()->removeCategory({ctl().name(), "FootstepPlanner"});
 
   // Clean up thread
   running_ = false;

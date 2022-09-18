@@ -144,7 +144,7 @@ void CentroidalManager::update()
 void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.addElement(
-      {"BWC", config().name}, mc_rtc::gui::Label("method", [this]() { return config().method; }),
+      {ctl().name(), config().name}, mc_rtc::gui::Label("method", [this]() { return config().method; }),
       mc_rtc::gui::Checkbox(
           "useActualStateForMpc", [this]() { return config().useActualStateForMpc; },
           [this]() { config().useActualStateForMpc = !config().useActualStateForMpc; }),
@@ -177,7 +177,7 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 
 void CentroidalManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 {
-  gui.removeCategory({"BWC", config().name});
+  gui.removeCategory({ctl().name(), config().name});
 }
 
 void CentroidalManager::addToLogger(mc_rtc::Logger & logger)

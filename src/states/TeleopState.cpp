@@ -44,8 +44,9 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   twistSub_ = nh_->subscribe<geometry_msgs::Twist>(twistTopicName, 1, &TeleopState::twistCallback, this);
 
   // Setup GUI
-  ctl().gui()->addElement({"BWC", "Teleop"}, mc_rtc::gui::Button("StartTeleop", [this]() { startTriggered_ = true; }));
-  ctl().gui()->addElement({"BWC", "Teleop", "State"},
+  ctl().gui()->addElement({ctl().name(), "Teleop"},
+                          mc_rtc::gui::Button("StartTeleop", [this]() { startTriggered_ = true; }));
+  ctl().gui()->addElement({ctl().name(), "Teleop", "State"},
                           mc_rtc::gui::ArrayInput(
                               "targetDeltaTrans", {"x", "y", "theta"},
                               [this]() -> const Eigen::Vector3d & { return targetDeltaTrans_; },
@@ -78,16 +79,17 @@ bool TeleopState::run(mc_control::fsm::Controller &)
     else
     {
       startTeleop();
-      ctl().gui()->removeElement({"BWC", "Teleop"}, "StartTeleop");
-      ctl().gui()->addElement({"BWC", "Teleop"}, mc_rtc::gui::Button("EndTeleop", [this]() { endTriggered_ = true; }));
+      ctl().gui()->removeElement({ctl().name(), "Teleop"}, "StartTeleop");
+      ctl().gui()->addElement({ctl().name(), "Teleop"},
+                              mc_rtc::gui::Button("EndTeleop", [this]() { endTriggered_ = true; }));
     }
   }
   if(endTriggered_)
   {
     endTriggered_ = false;
     endTeleop();
-    ctl().gui()->removeElement({"BWC", "Teleop"}, "EndTeleop");
-    ctl().gui()->addElement({"BWC", "Teleop"},
+    ctl().gui()->removeElement({ctl().name(), "Teleop"}, "EndTeleop");
+    ctl().gui()->addElement({ctl().name(), "Teleop"},
                             mc_rtc::gui::Button("StartTeleop", [this]() { startTriggered_ = true; }));
   }
 
@@ -142,7 +144,7 @@ bool TeleopState::run(mc_control::fsm::Controller &)
 void TeleopState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
-  ctl().gui()->removeCategory({"BWC", "Teleop"});
+  ctl().gui()->removeCategory({ctl().name(), "Teleop"});
 }
 
 void TeleopState::startTeleop()

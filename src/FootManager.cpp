@@ -114,18 +114,18 @@ void FootManager::update()
 
 void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
-  gui.addElement({"BWC", config_.name, "Status"},
+  gui.addElement({ctl().name(), config_.name, "Status"},
                  mc_rtc::gui::Label("supportPhase", [this]() { return std::to_string(supportPhase_); }),
                  mc_rtc::gui::Label("footstepQueueSize", [this]() { return std::to_string(footstepQueue_.size()); }));
-  gui.addElement({"BWC", config_.name, "Status"}, mc_rtc::gui::ElementsStacking::Horizontal,
+  gui.addElement({ctl().name(), config_.name, "Status"}, mc_rtc::gui::ElementsStacking::Horizontal,
                  mc_rtc::gui::Label("LeftFootSurface", [this]() { return surfaceName(Foot::Left); }),
                  mc_rtc::gui::Label("RightFootSurface", [this]() { return surfaceName(Foot::Right); }));
-  gui.addElement({"BWC", config_.name, "Status"}, mc_rtc::gui::ElementsStacking::Horizontal,
+  gui.addElement({ctl().name(), config_.name, "Status"}, mc_rtc::gui::ElementsStacking::Horizontal,
                  mc_rtc::gui::Label("LeftImpGainType", [this]() { return impGainTypes_.at(Foot::Left); }),
                  mc_rtc::gui::Label("RightImpGainType", [this]() { return impGainTypes_.at(Foot::Right); }));
 
   gui.addElement(
-      {"BWC", config_.name, "Config"},
+      {ctl().name(), config_.name, "Config"},
       mc_rtc::gui::NumberInput(
           "footstepDuration", [this]() { return config_.footstepDuration; },
           [this](double v) { config_.footstepDuration = v; }),
@@ -162,7 +162,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
   for(const auto & impGainKV : config_.impGains)
   {
     const auto & impGainType = impGainKV.first;
-    gui.addElement({"BWC", config_.name, "ImpedanceGains", impGainType},
+    gui.addElement({ctl().name(), config_.name, "ImpedanceGains", impGainType},
                    mc_rtc::gui::ArrayInput(
                        "Damper", {"cx", "cy", "cz", "fx", "fy", "fz"},
                        [this, impGainType]() -> const sva::ImpedanceVecd & {
@@ -172,7 +172,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                          config_.impGains.at(impGainType).damper().vec(v);
                          requireImpGainUpdate_ = true;
                        }));
-    gui.addElement({"BWC", config_.name, "ImpedanceGains", impGainType},
+    gui.addElement({ctl().name(), config_.name, "ImpedanceGains", impGainType},
                    mc_rtc::gui::ArrayInput(
                        "Spring", {"cx", "cy", "cz", "fx", "fy", "fz"},
                        [this, impGainType]() -> const sva::ImpedanceVecd & {
@@ -182,7 +182,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                          config_.impGains.at(impGainType).spring().vec(v);
                          requireImpGainUpdate_ = true;
                        }));
-    gui.addElement({"BWC", config_.name, "ImpedanceGains", impGainType},
+    gui.addElement({ctl().name(), config_.name, "ImpedanceGains", impGainType},
                    mc_rtc::gui::ArrayInput(
                        "Wrench", {"cx", "cy", "cz", "fx", "fy", "fz"},
                        [this, impGainType]() -> const sva::ImpedanceVecd & {
@@ -197,7 +197,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 
 void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 {
-  gui.removeCategory({"BWC", config_.name});
+  gui.removeCategory({ctl().name(), config_.name});
 }
 
 void FootManager::addToLogger(mc_rtc::Logger & logger)
@@ -703,8 +703,8 @@ void FootManager::updateFootTraj()
     footstepPolygonList.push_back(footstepPolygon);
   }
 
-  ctl().gui()->removeCategory({"BWC", config_.name, "FootstepMarker"});
-  ctl().gui()->addElement({"BWC", config_.name, "FootstepMarker"},
+  ctl().gui()->removeCategory({ctl().name(), config_.name, "FootstepMarker"});
+  ctl().gui()->addElement({ctl().name(), config_.name, "FootstepMarker"},
                           mc_rtc::gui::Polygon("Footstep", {mc_rtc::gui::Color::Blue, 0.02},
                                                [footstepPolygonList]() { return footstepPolygonList; }));
 }

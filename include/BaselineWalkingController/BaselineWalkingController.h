@@ -41,6 +41,12 @@ public:
    */
   void stop() override;
 
+  /** \brief Get controller name. */
+  inline const std::string & name() const
+  {
+    return name_;
+  }
+
   /** \brief Get current time. */
   inline double t() const noexcept
   {
@@ -76,6 +82,9 @@ public:
   bool enableManagerUpdate_ = false;
 
 protected:
+  //! Controller name
+  std::string name_ = "WalkingController";
+
   //! Current time [sec]
   double t_ = 0;
 };

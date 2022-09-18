@@ -71,6 +71,8 @@ ObserverPipelines:
         anchorFrame:
           maxAnchorFrameDiscontinuity: 0.05 # [m]
 
+controllerName: BWC
+
 PostureTask:
   stiffness: 10
 

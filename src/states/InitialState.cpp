@@ -17,7 +17,7 @@ void InitialState::start(mc_control::fsm::Controller & _ctl)
   phase_ = 0;
 
   // Setup GUI
-  ctl().gui()->addElement({"BWC"}, mc_rtc::gui::Button("Start", [this]() { phase_ = 1; }));
+  ctl().gui()->addElement({ctl().name()}, mc_rtc::gui::Button("Start", [this]() { phase_ = 1; }));
 
   output("OK");
 }
@@ -38,7 +38,7 @@ bool InitialState::run(mc_control::fsm::Controller &)
     phase_ = 2;
 
     // Clean up GUI
-    ctl().gui()->removeElement({"BWC"}, "Start");
+    ctl().gui()->removeElement({ctl().name()}, "Start");
 
     // Reset and add tasks
     ctl().comTask_->reset();

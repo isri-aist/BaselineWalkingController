@@ -20,6 +20,8 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
                                                      const mc_rtc::Configuration & _config)
 : mc_control::fsm::Controller(rm, dt, _config)
 {
+  config()("controllerName", name_);
+
   // Setup tasks
   if(config().has("CoMTask"))
   {
