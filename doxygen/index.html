@@ -147,10 +147,9 @@ $(function() {
 <li>Setup catkin workspace. <div class="fragment"><div class="line">$ mkdir -p ~/ros/ws_bwc/src</div>
 <div class="line">$ cd ~/ros/ws_bwc</div>
 <div class="line">$ wstool init src</div>
-<div class="line">$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y</div>
-<div class="line">$ wstool set -t src isri-aist/NMPC git@github.com:isri-aist/NMPC.git --git -y</div>
-<div class="line">$ wstool set -t src isri-aist/CentroidalControlCollection git@github.com:isri-aist/CentroidalControlCollection.git --git -y</div>
-<div class="line">$ wstool set -t src isri-aist/BaselineWalkingController git@github.com:isri-aist/BaselineWalkingController.git --git -y</div>
+<div class="line">$ wstool set -t src isri-aist/BaselineWalkingController https://github.com/isri-aist/BaselineWalkingController --git -y</div>
+<div class="line">$ wstool update -t src isri-aist/BaselineWalkingController</div>
+<div class="line">$ wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall</div>
 <div class="line">$ wstool update -t src</div>
 </div><!-- fragment --></li>
 <li>Install dependent packages. <div class="fragment"><div class="line">$ source /opt/ros/${ROS_DISTRO}/setup.bash</div>
