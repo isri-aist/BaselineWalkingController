@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['piecewisefunc_401',['PiecewiseFunc',['../classBWC_1_1PiecewiseFunc.html#ae536c4e6afa3087525236db64f748c79',1,'BWC::PiecewiseFunc']]],
-  ['planningthread_402',['planningThread',['../structBWC_1_1FootstepPlannerState.html#aba4ca752dc13ec106607f28327fb1b6b',1,'BWC::FootstepPlannerState']]],
-  ['points_403',['points',['../classBWC_1_1CubicHermiteSpline.html#ad6f5946f6eb58d24d4d0dc65a9d7bca0',1,'BWC::CubicHermiteSpline::points()'],['../classBWC_1_1CubicInterpolator.html#a2ec06c4680fbb255de54e23361c09abf',1,'BWC::CubicInterpolator::points()'],['../classBWC_1_1CubicSpline.html#ae097324c67d4723652a71d7ba876f1e9',1,'BWC::CubicSpline::points()']]],
-  ['polynomial_404',['Polynomial',['../classBWC_1_1Polynomial.html#a276b67c492d9e3a718f1b683e0103e6b',1,'BWC::Polynomial']]],
-  ['prevfootstep_405',['prevFootstep',['../classBWC_1_1FootManager.html#a3c2e1e4940e5f3b1bd982ae02d8098eb',1,'BWC::FootManager']]],
-  ['projground_406',['projGround',['../namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb',1,'BWC']]]
+  ['operator_28_29_399',['operator()',['../classBWC_1_1CubicHermiteSpline.html#a5dbd438a9887ff5ccde26d25ef636214',1,'BWC::CubicHermiteSpline::operator()()'],['../classBWC_1_1CubicInterpolator.html#abe588829d84bff2505a4e3c301d431c6',1,'BWC::CubicInterpolator::operator()()'],['../classBWC_1_1Func.html#aa6eb8e5f95ca7defb276a70b3bde818b',1,'BWC::Func::operator()()'],['../classBWC_1_1PiecewiseFunc.html#a83c55eaeca7ed8b804bbdcf5cf905534',1,'BWC::PiecewiseFunc::operator()()'],['../classBWC_1_1Polynomial.html#a72ae15cd451d8de42492d0f0103eb3d6',1,'BWC::Polynomial::operator()()'],['../classBWC_1_1Constant.html#accf72bf8da15bef2663dc9bb4a15df11',1,'BWC::Constant::operator()()']]],
+  ['opposite_400',['opposite',['../namespaceBWC.html#af15efed8fd3cff90b911c2187042f58b',1,'BWC']]],
+  ['order_401',['order',['../classBWC_1_1Polynomial.html#a13da663fb883bf75937e82bd955a6a32',1,'BWC::Polynomial']]]
 ];

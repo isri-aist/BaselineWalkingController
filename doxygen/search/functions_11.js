@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrenchdistribution_437',['WrenchDistribution',['../classBWC_1_1WrenchDistribution.html#a4953951a591f0a915ab6518b9b7cd06f',1,'BWC::WrenchDistribution']]]
+  ['vertexwithridge_437',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a67b41dec5669fb70a179fcb3d976aaf6',1,'BWC::Contact::VertexWithRidge']]]
 ];
