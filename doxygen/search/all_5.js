@@ -8,7 +8,7 @@ var searchData=
   ['footmanager_101',['FootManager',['../classBWC_1_1FootManager.html',1,'BWC::FootManager'],['../classBWC_1_1FootManager.html#a93ff2f753b87f497b1816d29899daae0',1,'BWC::FootManager::FootManager()']]],
   ['footmanager_2eh_102',['FootManager.h',['../FootManager_8h.html',1,'']]],
   ['footmanager_5f_103',['footManager_',['../structBWC_1_1BaselineWalkingController.html#a02906ddae6b920235d0e7534fa479892',1,'BWC::BaselineWalkingController']]],
-  ['footstep_104',['Footstep',['../structBWC_1_1Footstep.html',1,'BWC::Footstep'],['../structBWC_1_1Footstep.html#a89422d586381792aa7f253bfc1ab050f',1,'BWC::Footstep::Footstep()']]],
+  ['footstep_104',['Footstep',['../structBWC_1_1Footstep.html',1,'BWC::Footstep'],['../structBWC_1_1Footstep.html#a3b4a169dbdaf2d51dac7a1389722e079',1,'BWC::Footstep::Footstep()']]],
   ['footstepduration_105',['footstepDuration',['../structBWC_1_1FootManager_1_1Configuration.html#a5f80b28429c7c9e575331361eb613df5',1,'BWC::FootManager::Configuration']]],
   ['footstepenvconfigmcrtc_106',['FootstepEnvConfigMcRtc',['../structBFP_1_1FootstepEnvConfigMcRtc.html',1,'BFP::FootstepEnvConfigMcRtc'],['../structBFP_1_1FootstepEnvConfigMcRtc.html#a3820a49fd6ba716504f51ec55152e683',1,'BFP::FootstepEnvConfigMcRtc::FootstepEnvConfigMcRtc()']]],
   ['footstepplanner_5f_107',['footstepPlanner_',['../structBWC_1_1FootstepPlannerState.html#afa1cf934e81c0a8e7b2812d741edcd50',1,'BWC::FootstepPlannerState']]],
