@@ -47,7 +47,7 @@ RUN wstool init src
 # To handle CI triggered by Pull Request, COMMIT_SHA must be specified in the git fetch argument,
 # but since wstool does not support it, execute the git commands directly instead.
 # RUN wstool set -t src BaselineWalkingController https://github.com/${REPOSITORY}/BaselineWalkingController --git -y -v ${COMMIT_SHA}
-RUN mkdir src/isri-aist/BaselineWalkingController && \
+RUN mkdir -p src/isri-aist/BaselineWalkingController && \
     cd src/isri-aist/BaselineWalkingController && \
     git init && \
     git remote add origin https://github.com/${REPOSITORY}/BaselineWalkingController && \
