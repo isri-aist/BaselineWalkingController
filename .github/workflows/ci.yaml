@@ -19,8 +19,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install clang-format-10
         run: |
-          sudo apt-get -qq update
-          sudo apt-get -qq install clang-format-10
+          sudo apt-get -y -qq update
+          sudo apt-get -y -qq install clang-format-10
       - name: Run clang-format-check
         run: |
           ./.clang-format-check.sh
@@ -58,14 +58,14 @@ jobs:
           set -x
           sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
           wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
-          sudo apt-get update -qq
-          sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
+          sudo apt-get update -y -qq
+          sudo apt-get install -y -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
       - name: Install mc_rtc
         run: |
           set -e
           set -x
           curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/${{ matrix.mc-rtc-version }}/setup.deb.sh' | sudo -E bash
-          sudo apt install -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin libeigen-qld-dev
+          sudo apt install -y -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin libeigen-qld-dev
       - name: Setup catkin workspace
         run: |
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
@@ -148,7 +148,7 @@ jobs:
         run: |
           set -e
           set -x
-          sudo apt-get install -qq jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+          sudo apt-get install -y -qq jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
           set +x
           . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
           set -x
