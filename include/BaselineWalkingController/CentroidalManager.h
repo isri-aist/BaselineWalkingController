@@ -153,7 +153,7 @@ protected:
 
       This method is overridden to support extended CoM-ZMP models (e.g., manipulation forces) in inherited classes.
   */
-  Eigen::Vector3d calcPlannedComAccel() const;
+  virtual Eigen::Vector3d calcPlannedComAccel() const;
 
 protected:
   //! Pointer to controller
