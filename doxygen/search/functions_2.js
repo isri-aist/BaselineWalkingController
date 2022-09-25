@@ -6,7 +6,7 @@ var searchData=
   ['calccurrentcontactlist_351',['calcCurrentContactList',['../classBWC_1_1FootManager.html#a938ea77a40b61d70ac1a4ec850e5d7a2',1,'BWC::FootManager']]],
   ['calcglobalridgelist_352',['calcGlobalRidgeList',['../classBWC_1_1FrictionPyramid.html#a1ce49acbda8af8a89ca6d55e931ff289',1,'BWC::FrictionPyramid']]],
   ['calcmonotonevelocity_353',['calcMonotoneVelocity',['../classBWC_1_1CubicHermiteSpline.html#a01c04597e08cd29a98348ab2797d5f03',1,'BWC::CubicHermiteSpline']]],
-  ['calcplannedcomaccel_354',['calcPlannedComAccel',['../classBWC_1_1CentroidalManager.html#aa3bd118534358398a3b0ee38bb129abc',1,'BWC::CentroidalManager']]],
+  ['calcplannedcomaccel_354',['calcPlannedComAccel',['../classBWC_1_1CentroidalManager.html#a5f5c839876b54458b1eb67a4d9f360b6',1,'BWC::CentroidalManager']]],
   ['calcrefdata_355',['calcRefData',['../classBWC_1_1CentroidalManagerDdpZmp.html#a1358597facfac7873c9454f0bae40a4f',1,'BWC::CentroidalManagerDdpZmp::calcRefData()'],['../classBWC_1_1CentroidalManagerFootGuidedControl.html#afe6a8ef8d7cf41703157ef36b72a4d34',1,'BWC::CentroidalManagerFootGuidedControl::calcRefData()'],['../classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html#a3217d4f2135451f8ae8d818e863a7820',1,'BWC::CentroidalManagerIntrinsicallyStableMpc::calcRefData()'],['../classBWC_1_1CentroidalManagerPreviewControlZmp.html#ab9872763403041676fef75a3d7962341',1,'BWC::CentroidalManagerPreviewControlZmp::calcRefData()']]],
   ['calcrefgroundposz_356',['calcRefGroundPosZ',['../classBWC_1_1FootManager.html#a08918cccbaf13595277abef27da1028f',1,'BWC::FootManager']]],
   ['calcrefzmp_357',['calcRefZmp',['../classBWC_1_1FootManager.html#a1a08a3c67f49f4965e591f2604ce4414',1,'BWC::FootManager']]],
