@@ -109,11 +109,7 @@ void CentroidalManager::update()
   // Set target of tasks
   {
     // Set target of CoM task
-    Eigen::Vector3d plannedComAccel;
-    plannedComAccel << plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z()))
-                           * (mpcCom_.head<2>() - plannedZmp_.head<2>()),
-        plannedForceZ_ / robotMass_;
-    plannedComAccel.z() -= CCC::constants::g;
+    Eigen::Vector3d plannedComAccel = calcPlannedComAccel();
     Eigen::Vector3d nextPlannedCom =
         mpcCom_ + ctl().dt() * mpcComVel_ + 0.5 * std::pow(ctl().dt(), 2) * plannedComAccel;
     Eigen::Vector3d nextPlannedComVel = mpcComVel_ + ctl().dt() * plannedComAccel;
@@ -301,4 +297,14 @@ Eigen::Vector3d CentroidalManager::calcZmp(const std::unordered_map<Foot, sva::F
   }
 
   return zmp;
+}
+
+Eigen::Vector3d CentroidalManager::calcPlannedComAccel() const
+{
+  Eigen::Vector3d plannedComAccel;
+  plannedComAccel << plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z()))
+                         * (mpcCom_.head<2>() - plannedZmp_.head<2>()),
+      plannedForceZ_ / robotMass_;
+  plannedComAccel.z() -= CCC::constants::g;
+  return plannedComAccel;
 }

@@ -149,6 +149,12 @@ protected:
                           double zmpPlaneHeight = 0,
                           const Eigen::Vector3d & zmpPlaneNormal = Eigen::Vector3d::UnitZ()) const;
 
+  /** \brief Calculate planned CoM acceleration.
+
+      This method is overridden to support extended CoM-ZMP models (e.g., manipulation forces) in inherited classes.
+  */
+  Eigen::Vector3d calcPlannedComAccel() const;
+
 protected:
   //! Pointer to controller
   BaselineWalkingController * ctlPtr_ = nullptr;
