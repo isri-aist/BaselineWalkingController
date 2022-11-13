@@ -247,9 +247,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBWC_1_1Footstep.html">Footstep</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">swingFootstep_</a> = nullptr</td></tr>
 <tr class="memdesc:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing.  <a href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">More...</a><br /></td></tr>
 <tr class="separator:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ad0d36f5c653c87d22f1fa06ccc5d3745">baseYawFunc_</a></td></tr>
-<tr class="memdesc:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base link Yaw trajectory.  <a href="classBWC_1_1FootManager.html#ad0d36f5c653c87d22f1fa06ccc5d3745">More...</a><br /></td></tr>
-<tr class="separator:ad0d36f5c653c87d22f1fa06ccc5d3745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a874dee9b58837127d95334fa57164ddf"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; Eigen::Matrix3d, Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a874dee9b58837127d95334fa57164ddf">baseYawFunc_</a></td></tr>
+<tr class="memdesc:a874dee9b58837127d95334fa57164ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base link Yaw trajectory.  <a href="classBWC_1_1FootManager.html#a874dee9b58837127d95334fa57164ddf">More...</a><br /></td></tr>
+<tr class="separator:a874dee9b58837127d95334fa57164ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb">touchDown_</a> = false</td></tr>
 <tr class="memdesc:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether touch down is detected during swing.  <a href="classBWC_1_1FootManager.html#a2c55cc4e20702d18a45a13b561fbd7eb">More...</a><br /></td></tr>
 <tr class="separator:a2c55cc4e20702d18a45a13b561fbd7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1170,8 +1170,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ad0d36f5c653c87d22f1fa06ccc5d3745"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0d36f5c653c87d22f1fa06ccc5d3745">&#9670;&nbsp;</a></span>baseYawFunc_</h2>
+<a id="a874dee9b58837127d95334fa57164ddf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874dee9b58837127d95334fa57164ddf">&#9670;&nbsp;</a></span>baseYawFunc_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1180,7 +1180,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;double&gt; &gt; BWC::FootManager::baseYawFunc_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;Eigen::Matrix3d, Eigen::Vector3d&gt; &gt; BWC::FootManager::baseYawFunc_</td>
         </tr>
       </table>
   </td>
