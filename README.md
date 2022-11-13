@@ -6,11 +6,11 @@ Humanoid walking controller with various baseline methods
 [![LICENSE](https://img.shields.io/github/license/isri-aist/BaselineWalkingController)](https://github.com/isri-aist/BaselineWalkingController/blob/master/LICENSE)
 [![Docker](https://img.shields.io/badge/Docker%20image-ready-blue)](https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller)
 
+https://user-images.githubusercontent.com/6636600/201510077-5be6ab58-9671-413a-93c4-9b84caf9735e.mp4
+
 https://user-images.githubusercontent.com/6636600/184788681-10219f2e-cbe9-4e52-a7f7-ec3b0e1d7515.mp4
 
 https://user-images.githubusercontent.com/6636600/184788709-fcb55fa8-fd93-4be3-ba93-d76be6fafe6a.mp4
-
-https://user-images.githubusercontent.com/6636600/187928560-9835e148-bd4b-4b12-8c65-ead6cf3d92f1.mp4
 
 ## Features
 - Completely open source! (controller framework: mc_rtc, simulator: Choreonoid, sample robot model: JVRC1)
