@@ -314,7 +314,7 @@ protected:
   //! @}
 
   //! Base link Yaw trajectory
-  std::shared_ptr<CubicInterpolator<double>> baseYawFunc_;
+  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;

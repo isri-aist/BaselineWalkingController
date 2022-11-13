@@ -51,7 +51,7 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
   groundPosZFunc_(std::make_shared<CubicInterpolator<double>>()),
   swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
   swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
-  baseYawFunc_(std::make_shared<CubicInterpolator<double>>())
+  baseYawFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
 }
@@ -543,7 +543,9 @@ void FootManager::updateFootTraj()
                                                               0.5)
                                      .transpose())
                 .z();
-        baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, swingStartBaseYaw));
+        baseYawFunc_->appendPoint(
+            std::make_pair(swingFootstep_->swingStartTime,
+                           Eigen::AngleAxisd(swingStartBaseYaw, Eigen::Vector3d::UnitZ()).toRotationMatrix()));
 
         double swingEndBaseYaw =
             mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(
@@ -551,7 +553,9 @@ void FootManager::updateFootTraj()
                                      targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation().transpose(), 0.5)
                                      .transpose())
                 .z();
-        baseYawFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime, swingEndBaseYaw));
+        baseYawFunc_->appendPoint(
+            std::make_pair(swingFootstep_->swingEndTime,
+                           Eigen::AngleAxisd(swingEndBaseYaw, Eigen::Vector3d::UnitZ()).toRotationMatrix()));
 
         baseYawFunc_->calcCoeff();
       }
@@ -684,9 +688,9 @@ void FootManager::updateFootTraj()
   }
   else
   {
-    ctl().baseOriTask_->orientation(sva::RotZ((*baseYawFunc_)(ctl().t())));
-    ctl().baseOriTask_->refVel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 1)));
-    ctl().baseOriTask_->refAccel(Eigen::Vector3d(0, 0, baseYawFunc_->derivative(ctl().t(), 2)));
+    ctl().baseOriTask_->orientation((*baseYawFunc_)(ctl().t()).transpose());
+    ctl().baseOriTask_->refVel(baseYawFunc_->derivative(ctl().t(), 1));
+    ctl().baseOriTask_->refAccel(baseYawFunc_->derivative(ctl().t(), 2));
   }
 
   // Update footstep visualization
