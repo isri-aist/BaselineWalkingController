@@ -6,6 +6,7 @@
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/CentroidalManager.h>
+#include <BaselineWalkingController/ConfigUtils.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerDdpZmp.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerFootGuidedControl.h>
@@ -18,7 +19,7 @@ using namespace BWC;
 BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                                                      double dt,
                                                      const mc_rtc::Configuration & _config)
-: mc_control::fsm::Controller(rm, dt, _config)
+: mc_control::fsm::Controller(rm, dt, overwriteConfig(_config, rm->name))
 {
   config()("controllerName", name_);
 
