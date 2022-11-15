@@ -137,13 +137,13 @@ FootManager:
         angular: [1, 1, 0]
     doubleSupport:
       damper:
-        linear: [1e4, 1e4, 1e4]
+        linear: [300, 300, 1e4]
         angular: [100, 100, 100]
       spring:
-        linear: [0, 0, 0]
+        linear: [2250, 2250, 0]
         angular: [0, 0, 2000]
       wrench:
-        linear: [1, 1, 1]
+        linear: [0, 0, 1]
         angular: [1, 1, 0]
     swing:
       damper:
@@ -167,7 +167,7 @@ CentroidalManager:
   comZGainD: 500.0
   refComZ: 0.825 # [m]
   useTargetPoseForControlRobotAnchorFrame: true
-  useActualComForWrenchDist: true
+  useActualComForWrenchDist: false
   wrenchDistConfig:
     wrenchWeight:
       linear: [1.0, 1.0, 1.0]
@@ -193,3 +193,61 @@ CentroidalManager:
   # method: IntrinsicallyStableMpc
   # horizonDuration: 2.0 # [sec]
   # horizonDt: 0.02 # [sec]
+
+
+OverwriteConfigList:
+  hrp5_p:
+    CoMTask:
+      activeJoints: [
+      "Root",
+      "LCY", "LCR", "LCP", "LKP", "LAP", "LAR",
+      "RCY", "RCR", "RCP", "RKP", "RAP", "RAR"]
+
+    BaseOrientationTask:
+      body: Chest_Link2
+
+    FootManager:
+      footstepDuration: 1.2 # [sec]
+      doubleSupportRatio: 0.2 # []
+      impedanceGains:
+        singleSupport:
+          spring:
+            linear: [2250, 2250, 450] # Weaken Z-component spring to avoid a too fast recovery for mass errors
+
+    CentroidalManager:
+      dcmGainP: 2.0 # It must be greater than 1 to be stable
+      comZGainP: 20000.0
+      refComZ: 0.95 # [m]
+      method: PreviewControlZmp
+      horizonDuration: 2.0 # [sec]
+      horizonDt: 0.002 # [sec]
+
+  hrp2_drc:
+    PostureTask:
+      jointGains:
+        - jointName: CHEST_JOINT0
+          stiffness: 1000.0
+        - jointName: CHEST_JOINT1
+          stiffness: 1000.0
+
+    CoMTask:
+      activeJoints: [
+      "Root",
+      "CHEST_JOINT0", "CHEST_JOINT1",
+      "RLEG_JOINT0", "RLEG_JOINT1", "RLEG_JOINT2", "RLEG_JOINT3", "RLEG_JOINT4", "RLEG_JOINT5",
+      "LLEG_JOINT0", "LLEG_JOINT1", "LLEG_JOINT2", "LLEG_JOINT3", "LLEG_JOINT4", "LLEG_JOINT5"]
+
+    BaseOrientationTask:
+      body: CHEST_LINK1
+
+    FootManager:
+      footstepDuration: 1.2 # [sec]
+      doubleSupportRatio: 0.2 # []
+      zmpOffset: [0, -0.03, 0] # (positive for x-forward, y-outside, z-upward) [m]
+
+    CentroidalManager:
+      dcmGainP: 2.0 # It must be greater than 1 to be stable
+      refComZ: 0.87 # [m]
+      method: PreviewControlZmp
+      horizonDuration: 2.0 # [sec]
+      horizonDt: 0.005 # [sec]
