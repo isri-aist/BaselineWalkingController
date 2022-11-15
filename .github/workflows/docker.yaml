@@ -15,7 +15,7 @@ jobs:
       IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
           path: BaselineWalkingController

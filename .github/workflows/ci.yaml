@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install clang-format-10
         run: |
           sudo apt-get -y -qq update
@@ -76,31 +76,31 @@ jobs:
           catkin init
           catkin build --limit-status-rate 0.1
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
           path: catkin_ws/src/isri-aist/BaselineWalkingController
       - name: Checkout QpSolverCollection
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: isri-aist/QpSolverCollection
           submodules: recursive
           path: catkin_ws/src/isri-aist/QpSolverCollection
       - name: Checkout NMPC
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: isri-aist/NMPC
           submodules: recursive
           path: catkin_ws/src/isri-aist/NMPC
       - name: Checkout CentroidalControlCollection
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: isri-aist/CentroidalControlCollection
           submodules: recursive
           path: catkin_ws/src/isri-aist/CentroidalControlCollection
       - name: Checkout BaselineFootstepPlanner
         if: matrix.footstep-planner == 'ON'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: isri-aist/BaselineFootstepPlanner
           submodules: recursive
