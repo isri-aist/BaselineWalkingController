@@ -200,6 +200,9 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad986c4e677b689504691b2566ef66414"><td class="memItemLeft" align="right" valign="top">mc_rtc::Configuration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#ad986c4e677b689504691b2566ef66414">overwriteConfig</a> (const mc_rtc::Configuration &amp;config, const std::string &amp;robotName)</td></tr>
+<tr class="memdesc:ad986c4e677b689504691b2566ef66414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overwrite the controller configuration.  <a href="namespaceBWC.html#ad986c4e677b689504691b2566ef66414">More...</a><br /></td></tr>
+<tr class="separator:ad986c4e677b689504691b2566ef66414"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94ec1a2521a3cdeb52bb6dc566378f0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c">strToFoot</a> (const std::string &amp;footStr)</td></tr>
 <tr class="memdesc:a94ec1a2521a3cdeb52bb6dc566378f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert string to foot.  <a href="namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c">More...</a><br /></td></tr>
 <tr class="separator:a94ec1a2521a3cdeb52bb6dc566378f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -977,6 +980,54 @@ template&lt;class T , class U  = T&gt; </div>
 </div><div class="memdoc">
 
 <p>Get the opposite foot. </p>
+
+</div>
+</div>
+<a id="ad986c4e677b689504691b2566ef66414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad986c4e677b689504691b2566ef66414">&#9670;&nbsp;</a></span>overwriteConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">mc_rtc::Configuration BWC::overwriteConfig </td>
+          <td>(</td>
+          <td class="paramtype">const mc_rtc::Configuration &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>robotName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Overwrite the controller configuration. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>original configuration </td></tr>
+    <tr><td class="paramname">robotName</td><td>robot name</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Extract the configurations specific to robotName and OverwriteConfigKeys from OverwriteConfigList and overwrite the original configuration. </p>
+
+<p class="definition">Definition at line <a class="el" href="ConfigUtils_8h_source.html#l00014">14</a> of file <a class="el" href="ConfigUtils_8h_source.html">ConfigUtils.h</a>.</p>
 
 </div>
 </div>
