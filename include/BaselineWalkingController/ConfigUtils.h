@@ -36,7 +36,7 @@ inline mc_rtc::Configuration overwriteConfig(const mc_rtc::Configuration & confi
   // Overwrite configuration
   for(const std::string & overwriteConfigKey : overwriteConfigKeys)
   {
-    if(!newConfig("OverwriteConfigList").has(overwriteConfigKey))
+    if(!(newConfig.has("OverwriteConfigList") && newConfig("OverwriteConfigList").has(overwriteConfigKey)))
     {
       if(overwriteConfigKey != robotName)
       {
