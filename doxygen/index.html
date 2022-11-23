@@ -116,6 +116,18 @@ $(function() {
 </div><!-- fragment --></li>
 </ul>
 <p>The Docker image is automatically updated on <a href="https://github.com/isri-aist/BaselineWalkingController/actions/workflows/docker.yaml">CI</a> from <a href="https://github.com/isri-aist/BaselineWalkingController/blob/master/.github/workflows/Dockerfile">this Dockerfile</a>.</p>
+<h1>Technical details</h1>
+<p>This controller is a simple combination of the following existing typical elemental methods in the field of biped robotics:</p><ul>
+<li>CoM trajectory generation based on LIPM</li>
+<li>ZMP feedback based on DCM</li>
+<li>Wrench distribution</li>
+<li>Foot damping control</li>
+</ul>
+<p>For more information on the technical details, please see the following papers:</p><ul>
+<li>Papers listed in <a href="https://github.com/isri-aist/CentroidalControlCollection">CentroidalControlCollection</a></li>
+<li>S Kajita, et al. Biped walking stabilization based on linear inverted pendulum tracking. IROS, 2010.</li>
+<li>S Caron, et al. Stair climbing stabilization of the HRP-4 humanoid robot using whole-body admittance control. ICRA, 2019.</li>
+</ul>
 <h1>Install</h1>
 <h2>Requirements</h2>
 <ul>
