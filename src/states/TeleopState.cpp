@@ -56,6 +56,16 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
                               [this](const Eigen::Vector3d & v) {
                                 targetDeltaTrans_ = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
                               }));
+  ctl().gui()->addElement({ctl().name(), "Teleop", "Config"},
+                          mc_rtc::gui::ArrayInput(
+                              "deltaTransLimit", {"x", "y", "theta"},
+                              [this]() -> Eigen::Vector3d {
+                                return Eigen::Vector3d(deltaTransLimit_[0], deltaTransLimit_[1],
+                                                       mc_rtc::constants::toDeg(deltaTransLimit_[2]));
+                              },
+                              [this](const Eigen::Vector3d & v) {
+                                deltaTransLimit_ = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
+                              }));
 
   output("OK");
 }

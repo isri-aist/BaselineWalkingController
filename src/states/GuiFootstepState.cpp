@@ -43,6 +43,16 @@ void GuiFootstepState::start(mc_control::fsm::Controller & _ctl)
           mc_rtc::gui::FormNumberInput(walkConfigKeys_.at("y"), true, 0.0),
           mc_rtc::gui::FormNumberInput(walkConfigKeys_.at("theta"), true, 0.0),
           mc_rtc::gui::FormIntegerInput(walkConfigKeys_.at("last"), true, 0)));
+  ctl().gui()->addElement({ctl().name(), "GuiFootstep", "Config"},
+                          mc_rtc::gui::ArrayInput(
+                              "deltaTransLimit", {"x", "y", "theta"},
+                              [this]() -> Eigen::Vector3d {
+                                return Eigen::Vector3d(deltaTransLimit_[0], deltaTransLimit_[1],
+                                                       mc_rtc::constants::toDeg(deltaTransLimit_[2]));
+                              },
+                              [this](const Eigen::Vector3d & v) {
+                                deltaTransLimit_ = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
+                              }));
 
   output("OK");
 }
