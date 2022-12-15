@@ -112,6 +112,12 @@ void FootManager::update()
   updateZmpTraj();
 }
 
+void FootManager::stop()
+{
+  removeFromGUI(*ctl().gui());
+  removeFromLogger(ctl().logger());
+}
+
 void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.addElement({ctl().name(), config_.name, "Status"},

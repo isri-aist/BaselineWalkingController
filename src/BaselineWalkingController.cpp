@@ -144,11 +144,9 @@ void BaselineWalkingController::stop()
   }
 
   // Clean up managers
-  footManager_->removeFromGUI(*gui());
-  footManager_->removeFromLogger(logger());
+  footManager_->stop();
   footManager_.reset();
-  centroidalManager_->removeFromGUI(*gui());
-  centroidalManager_->removeFromLogger(logger());
+  centroidalManager_->stop();
   centroidalManager_.reset();
 
   // Clean up anchor

@@ -100,6 +100,12 @@ public:
   */
   virtual void update();
 
+  /** \brief Stop.
+
+      This method should be called once when stopping the controller.
+  */
+  void stop();
+
   /** \brief Const accessor to the configuration. */
   inline const Configuration & config() const noexcept
   {

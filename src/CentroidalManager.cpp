@@ -137,6 +137,12 @@ void CentroidalManager::update()
   }
 }
 
+void CentroidalManager::stop()
+{
+  removeFromGUI(*ctl().gui());
+  removeFromLogger(ctl().logger());
+}
+
 void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.addElement(

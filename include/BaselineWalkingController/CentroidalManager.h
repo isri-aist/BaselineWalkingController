@@ -92,6 +92,12 @@ public:
    */
   virtual void update();
 
+  /** \brief Stop.
+
+      This method should be called once when stopping the controller.
+  */
+  virtual void stop();
+
   /** \brief Const accessor to the configuration. */
   virtual const Configuration & config() const = 0;
 
