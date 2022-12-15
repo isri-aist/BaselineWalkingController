@@ -13,7 +13,7 @@ var searchData=
   ['state_2eh_217',['State.h',['../State_8h.html',1,'']]],
   ['std_218',['std',['../namespacestd.html',1,'']]],
   ['stiffnessratiofunc_5f_219',['stiffnessRatioFunc_',['../structBWC_1_1InitialState.html#a5960b4127a8a6e34175531ceb34eddec',1,'BWC::InitialState']]],
-  ['stop_220',['stop',['../structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f',1,'BWC::BaselineWalkingController']]],
+  ['stop_220',['stop',['../structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f',1,'BWC::BaselineWalkingController::stop()'],['../classBWC_1_1CentroidalManager.html#a59fa7af2a5f2906b914384f30d99ae2b',1,'BWC::CentroidalManager::stop()'],['../classBWC_1_1FootManager.html#a6f2e097039d3edb428928eb086948d82',1,'BWC::FootManager::stop()']]],
   ['stopswingtrajfortouchdownfoot_221',['stopSwingTrajForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c',1,'BWC::FootManager::Configuration']]],
   ['strtofoot_222',['strToFoot',['../namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c',1,'BWC']]],
   ['supportphase_223',['supportPhase',['../classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e',1,'BWC::FootManager::supportPhase()'],['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900',1,'BWC::SupportPhase()']]],
