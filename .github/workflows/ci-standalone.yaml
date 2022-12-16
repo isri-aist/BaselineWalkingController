@@ -37,7 +37,7 @@ jobs:
           ros:
             apt: mc-rtc-plugin
     - name: Install BaselineFootstepPlanner
-      if: ${{ matrix.os }} == 'with-planner'
+      if: ${{ matrix.planner  == 'with-planner' }}
       uses: jrl-umi3218/github-actions/install-dependencies@master
       with:
         compiler: ${{ matrix.compiler }}
