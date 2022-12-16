@@ -1,0 +1,54 @@
+name: Build and test (standalone)
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04]
+        build-type: [Debug, RelWithDebInfo]
+        compiler: [gcc, clang]
+        planner: [with-planner, without-planner]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Install dependencies
+      uses: jrl-umi3218/github-actions/install-dependencies@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}
+        ubuntu: |
+          apt-mirrors:
+            mc-rtc:
+              cloudsmith: mc-rtc/head
+          apt: cmake libcentroidalcontrolcollection-dev libmc-rtc-dev
+          ros:
+            apt: mc-rtc-plugin
+    - name: Install BaselineFootstepPlanner
+      if: ${{ matrix.planner  == 'with-planner' }}
+      uses: jrl-umi3218/github-actions/install-dependencies@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}
+        ros: |
+          apt: sbpl
+        github: |
+          - path: isri-aist/BaselineFootstepPlanner
+            ref: master
+    - name: Build and test
+      uses: jrl-umi3218/github-actions/build-cmake-project@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}

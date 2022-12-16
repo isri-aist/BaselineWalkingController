@@ -52,7 +52,8 @@ RUN mkdir -p src/isri-aist/BaselineWalkingController && \
     git init && \
     git remote add origin https://github.com/${REPOSITORY}/BaselineWalkingController && \
     git fetch origin ${COMMIT_SHA} && \
-    git checkout ${COMMIT_SHA}
+    git checkout ${COMMIT_SHA} && \
+    git submodule update --init --recursive
 RUN wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall
 RUN wstool update -t src
 

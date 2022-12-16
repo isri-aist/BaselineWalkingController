@@ -9,11 +9,11 @@ IdleKeepState: true
 # Where to look for state libraries
 StatesLibraries:
   - "@MC_STATES_DEFAULT_INSTALL_PREFIX@"
-  - "@CATKIN_DEVEL_PREFIX@/lib/@PROJECT_NAME@/states"
+  - "@STATES_INSTALL_PREFIX@/@PROJECT_NAME@/states"
 # Where to look for state files
 StatesFiles:
   - "@MC_STATES_DEFAULT_INSTALL_PREFIX@/data"
-  - "@CATKIN_DEVEL_PREFIX@/lib/@PROJECT_NAME@/states/data"
+  - "@STATES_INSTALL_PREFIX@/@PROJECT_NAME@/states/data"
 # If true, state factory will be more verbose
 VerboseStateFactory: false
 # Additional robots to load
@@ -66,6 +66,8 @@ ObserverPipelines:
   gui: false
   observers:
     - type: Encoder
+    - type: Attitude
+      required: false
     - type: KinematicInertial
       config:
         anchorFrame:
