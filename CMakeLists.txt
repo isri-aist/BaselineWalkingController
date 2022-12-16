@@ -21,7 +21,7 @@ if(NOT TARGET mc_rtc::mc_rtc_ros)
 endif()
 
 if(DEFINED CATKIN_DEVEL_PREFIX)
-  set(DOXYGEN_HTML_OUTPUT html)
+  set(DOXYGEN_HTML_OUTPUT doc/html)
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     geometry_msgs
