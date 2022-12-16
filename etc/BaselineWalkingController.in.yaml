@@ -66,6 +66,8 @@ ObserverPipelines:
   gui: false
   observers:
     - type: Encoder
+    - type: Attitude
+      required: false
     - type: KinematicInertial
       config:
         anchorFrame:
