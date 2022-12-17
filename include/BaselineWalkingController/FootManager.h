@@ -17,7 +17,7 @@ namespace BWC
 class BaselineWalkingController;
 class Contact;
 
-/** Foot manager.
+/** \brief Foot manager.
 
     Foot manager generates a swing foot trajectory and ZMP trajectory from a specified footstep sequence.
 */
