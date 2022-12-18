@@ -16,7 +16,7 @@ var searchData=
   ['footstepplannerstate_2eh_110',['FootstepPlannerState.h',['../FootstepPlannerState_8h.html',1,'']]],
   ['footstepqueue_111',['footstepQueue',['../classBWC_1_1FootManager.html#a6284995894591505c2ca7352cdc6b637',1,'BWC::FootManager']]],
   ['footstepqueue_5f_112',['footstepQueue_',['../classBWC_1_1FootManager.html#aa4d4aa44b6e582b70ed49c1c9d4d36b7',1,'BWC::FootManager']]],
-  ['footstepqueuesize_113',['footstepQueueSize',['../structBWC_1_1FootManager_1_1Configuration.html#a52888434fe5d4d99540d6cbea2b4b67d',1,'BWC::FootManager::Configuration']]],
+  ['footstepqueuesizeinvelmode_113',['footstepQueueSizeInVelMode',['../structBWC_1_1FootManager_1_1Configuration.html#ab8889ad990c0473419381101e21c2fb9',1,'BWC::FootManager::Configuration']]],
   ['foottasks_5f_114',['footTasks_',['../structBWC_1_1BaselineWalkingController.html#a19b6714f70319f6ac9e59dd64a291bdd',1,'BWC::BaselineWalkingController']]],
   ['foottasksstiffness_5f_115',['footTasksStiffness_',['../structBWC_1_1InitialState.html#a6106eab02774db58932ee19819135e05',1,'BWC::InitialState']]],
   ['foottypes_2eh_116',['FootTypes.h',['../FootTypes_8h.html',1,'']]],
