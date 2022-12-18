@@ -22,33 +22,15 @@ public:
   void teardown(mc_control::fsm::Controller & ctl) override;
 
 protected:
-  /** \brief Start teleoperation. */
-  void startTeleop();
-
-  /** \brief End teleoperation. */
-  void endTeleop();
-
   /** \brief ROS callback of twist topic. */
   void twistCallback(const geometry_msgs::Twist::ConstPtr & twistMsg);
 
 protected:
-  //! Whether teleoperation is running
-  bool teleopRunning_ = false;
+  //! Relative target velocity of foot midpose (x [m/s], y [m/s], theta [rad/s])
+  Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
 
-  //! Whether starting teleoperation is triggered
-  bool startTriggered_ = false;
-
-  //! Whether ending teleoperation is triggered
-  bool endTriggered_ = false;
-
-  //! Target foot midpose transformation (x [m], y [m], theta [rad])
-  Eigen::Vector3d targetDeltaTrans_ = Eigen::Vector3d::Zero();
-
-  //! Scale to convert velocity to foot midpose transformation (x, y, theta)
-  Eigen::Vector3d velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15));
-
-  //! Queue size of footsteps to be sent
-  int footstepQueueSize_ = 3;
+  //! Scale to convert twist message to target velocity (x, y, theta)
+  Eigen::Vector3d velScale_ = Eigen::Vector3d::Ones();
 
   //! ROS variables
   //! @{

@@ -3,6 +3,7 @@
 #include <mc_filter/utils/clamp.h>
 #include <mc_rtc/gui/ArrayInput.h>
 #include <mc_rtc/gui/Checkbox.h>
+#include <mc_rtc/gui/IntegerInput.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_rtc/gui/Polygon.h>
@@ -36,6 +37,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
+  mcRtcConfig("footstepQueueSize", footstepQueueSize);
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
@@ -99,6 +101,9 @@ void FootManager::reset()
 
   baseYawFunc_->clearPoints();
 
+  velMode_ = false;
+  targetVel_.setZero();
+
   touchDown_ = false;
 
   for(const auto & foot : Feet::Both)
@@ -116,6 +121,10 @@ void FootManager::update()
 {
   updateFootTraj();
   updateZmpTraj();
+  if(velMode_)
+  {
+    updateWalkAtRelativeVel();
+  }
 }
 
 void FootManager::stop()
@@ -156,6 +165,9 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
+      mc_rtc::gui::IntegerInput(
+          "footstepQueueSize", [this]() { return config_.footstepQueueSize; },
+          [this](int footstepQueueSize) { config_.footstepQueueSize = footstepQueueSize; }),
       mc_rtc::gui::Checkbox(
           "overwriteLandingPose", [this]() { return config_.overwriteLandingPose; },
           [this]() { config_.overwriteLandingPose = !config_.overwriteLandingPose; }),
@@ -244,6 +256,9 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
   logger.addLogEntry(config_.name + "_refGroundPosZ", this, [this]() { return calcRefGroundPosZ(ctl().t()); });
 
   logger.addLogEntry(config_.name + "_leftFootSupportRatio", this, [this]() { return leftFootSupportRatio(); });
+
+  logger.addLogEntry(config_.name + "_velMode", this, [this]() -> std::string { return velMode_ ? "ON" : "OFF"; });
+  logger.addLogEntry(config_.name + "_targetVel", this, [this]() { return targetVel_; });
 
   logger.addLogEntry(config_.name + "_touchDown", this, [this]() { return touchDown_; });
 
@@ -448,7 +463,7 @@ Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sv
   }
 }
 
-bool FootManager::walkToRelativePose(const Eigen::Vector3d & goalTrans, int lastFootstepNum)
+bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum)
 {
   if(footstepQueue_.size() > 0)
   {
@@ -464,14 +479,14 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & goalTrans, int last
     return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
   };
 
-  // The 2D variables (i.e., goalTrans, deltaTrans) represent the transformation relative to the initial pose,
+  // The 2D variables (i.e., targetTrans, deltaTrans) represent the transformation relative to the initial pose,
   // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, footMidpose) represent the
   // transformation in the world frame.
   const sva::PTransformd & initialFootMidpose =
-      projGround(sva::interpolate(targetFootPose(Foot::Left), targetFootPose(Foot::Right), 0.5));
-  const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
+      projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+  const sva::PTransformd & goalFootMidpose = convertTo3d(targetTrans) * initialFootMidpose;
 
-  Foot foot = goalTrans.y() >= 0 ? Foot::Left : Foot::Right;
+  Foot foot = targetTrans.y() >= 0 ? Foot::Left : Foot::Right;
   sva::PTransformd footMidpose = initialFootMidpose;
   double startTime = ctl().t() + 1.0;
 
@@ -508,6 +523,67 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & goalTrans, int last
   }
 
   return true;
+}
+
+bool FootManager::startWalkAtRelativeVel()
+{
+  if(velMode_)
+  {
+    mc_rtc::log::warning("[FootManager] It is already in velocity mode, but startWalkAtRelativeVel is called.");
+    return false;
+  }
+
+  if(footstepQueue_.size() > 0)
+  {
+    mc_rtc::log::error("[FootManager] startWalkAtRelativeVel is available only when the footstep queue is empty: {}",
+                       footstepQueue_.size());
+    return false;
+  }
+
+  velMode_ = true;
+  targetVel_.setZero();
+
+  // Add footsteps to queue for walking in place
+  Foot foot = Foot::Left;
+  const sva::PTransformd & footMidpose =
+      projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+  double startTime = ctl().t() + 1.0;
+  for(int i = 0; i < config_.footstepQueueSize; i++)
+  {
+    const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+    appendFootstep(footstep);
+
+    foot = opposite(foot);
+    startTime = footstep.transitEndTime;
+  }
+
+  return true;
+}
+
+bool FootManager::endWalkAtRelativeVel()
+{
+  if(!velMode_)
+  {
+    mc_rtc::log::warning("[FootManager] It is not in velocity mode, but endWalkAtRelativeVel is called.");
+    return false;
+  }
+
+  velMode_ = false;
+  targetVel_.setZero();
+
+  // Update last footstep pose to align both feet
+  // Note that this process assumes that config_.footstepQueueSize is at least 3
+  const auto & lastFootstep1 = *(footstepQueue_.rbegin() + 1);
+  auto & lastFootstep2 = *(footstepQueue_.rbegin());
+  sva::PTransformd footMidpose = config_.midToFootTranss.at(lastFootstep1.foot).inv() * lastFootstep1.pose;
+  lastFootstep2.pose = config_.midToFootTranss.at(lastFootstep2.foot) * footMidpose;
+
+  return true;
+}
+
+void FootManager::setRelativeVel(const Eigen::Vector3d & targetVel)
+{
+  targetVel_ = targetVel;
 }
 
 void FootManager::updateFootTraj()
@@ -882,6 +958,46 @@ void FootManager::updateZmpTraj()
   else
   {
     overwriteLandingPosLowPass_.update(Eigen::Vector3d::Zero());
+  }
+}
+
+void FootManager::updateWalkAtRelativeVel()
+{
+  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+  };
+
+  // Do not change the next footstep
+  // Delete the second and subsequent footsteps, and add new ones
+  footstepQueue_.erase(footstepQueue_.begin() + 1, footstepQueue_.end());
+  const auto & nextFootstep = footstepQueue_.front();
+
+  // Append new footstep
+  Foot foot = opposite(nextFootstep.foot);
+  sva::PTransformd footMidpose =
+      projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
+  double startTime = nextFootstep.transitEndTime;
+  for(int i = 0; i < config_.footstepQueueSize - 1; i++)
+  {
+    Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
+    Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
+    if(foot == Foot::Left)
+    {
+      deltaTransMin.y() = 0;
+    }
+    else
+    {
+      deltaTransMax.y() = 0;
+    }
+    Eigen::Vector3d targetDeltaTrans = config_.footstepDuration * targetVel_;
+    Eigen::Vector3d deltaTrans = mc_filter::utils::clamp(targetDeltaTrans, deltaTransMin, deltaTransMax);
+    footMidpose = convertTo3d(deltaTrans) * footMidpose;
+
+    const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+    footstepQueue_.push_back(footstep);
+
+    foot = opposite(foot);
+    startTime = footstep.transitEndTime;
   }
 }
 

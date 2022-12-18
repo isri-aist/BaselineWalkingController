@@ -50,6 +50,9 @@ public:
     //! ZMP offset of each foot (positive for x-forward, y-outside, z-upward) [m]
     Eigen::Vector3d zmpOffset = Eigen::Vector3d::Zero();
 
+    //! Queue size of footsteps to be sent in the velocity mode (must be at least 3)
+    int footstepQueueSize = 3;
+
     //! Whether to overwrite landing pose so that the relative pose from support foot to swing foot is retained
     bool overwriteLandingPose = false;
 
@@ -207,16 +210,6 @@ public:
     return footstepQueue_;
   }
 
-  /** \brief Access footstep queue.
-
-      \note Changing footstep queue directly is dangerous and should be avoided if possible. To safely add a footstep to
-      footstep queue, call appendFootstep().
-  */
-  inline std::deque<Footstep> & footstepQueue() noexcept
-  {
-    return footstepQueue_;
-  }
-
   /** \brief Access previous footstep. */
   std::shared_ptr<Footstep> prevFootstep() const
   {
@@ -247,12 +240,37 @@ public:
     return supportPhase_;
   }
 
-  /** \brief Send a footstep sequence walking to the relative goal pose.
-      \param goalTrans relative goal transformation of foot midpose (x [m], y [m], theta [rad])
+  /** \brief Send footstep sequence to walk to the relative target pose.
+      \param targetTrans relative target pose of foot midpose (x [m], y [m], theta [rad])
       \param lastFootstepNum number of last footstep
-      \return whether footstep is correctly commanded
+      \return whether footstep is successfully sent
    */
-  bool walkToRelativePose(const Eigen::Vector3d & goalTrans, int lastFootstepNum = 0);
+  bool walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum = 0);
+
+  /** \brief Start sending footstep sequence to walk at the relative target velocity.
+      \return whether it is successfully started
+
+      This enables the velocity mode.
+   */
+  bool startWalkAtRelativeVel();
+
+  /** \brief End sending footstep sequence to walk at the relative target velocity.
+      \return whether it is successfully ended
+
+      This disables the velocity mode.
+   */
+  bool endWalkAtRelativeVel();
+
+  /** \brief Set the relative target velocity
+      \param targetVel relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s])
+   */
+  void setRelativeVel(const Eigen::Vector3d & targetVel);
+
+  /** \brief Whether the velocity mode (i.e., walking at the relative target velocity) is enabled. */
+  inline bool velMode() const
+  {
+    return velMode_;
+  }
 
 protected:
   /** \brief Const accessor to the controller. */
@@ -272,6 +290,9 @@ protected:
 
   /** \brief Update ZMP trajectory. */
   virtual void updateZmpTraj();
+
+  /** \brief Update footstep sequence to walk at the relative target velocity. */
+  void updateWalkAtRelativeVel();
 
   /** \brief Get the remaining duration for next touch down.
 
@@ -331,6 +352,12 @@ protected:
 
   //! Base link Yaw trajectory
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;
+
+  //! Whether the velocity mode (i.e., walking at the relative target velocity) is enabled
+  bool velMode_ = false;
+
+  //! Relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s])
+  Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;

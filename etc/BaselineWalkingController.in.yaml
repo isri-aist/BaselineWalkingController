@@ -44,8 +44,6 @@ states:
   BWC::Teleop_:
     base: BWC::Teleop
     configs:
-      velScale: [0.25, 0.2, 12.5] # (x [m], y [m], theta [deg])
-      footstepQueueSize: 3
       twistTopicName: /cmd_vel
 
   BWC::Main_:
