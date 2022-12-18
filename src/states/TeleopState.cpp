@@ -23,11 +23,6 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   std::string twistTopicName = "/cmd_vel";
   if(config_.has("configs"))
   {
-    if(config_("configs").has("deltaTransLimit"))
-    {
-      deltaTransLimit_ = config_("configs")("deltaTransLimit");
-      deltaTransLimit_[2] = mc_rtc::constants::toRad(deltaTransLimit_[2]);
-    }
     if(config_("configs").has("velScale"))
     {
       velScale_ = config_("configs")("velScale");
@@ -56,16 +51,7 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
                               [this](const Eigen::Vector3d & v) {
                                 targetDeltaTrans_ = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
                               }));
-  ctl().gui()->addElement({ctl().name(), "Teleop", "Config"},
-                          mc_rtc::gui::ArrayInput(
-                              "deltaTransLimit", {"x", "y", "theta"},
-                              [this]() -> Eigen::Vector3d {
-                                return Eigen::Vector3d(deltaTransLimit_[0], deltaTransLimit_[1],
-                                                       mc_rtc::constants::toDeg(deltaTransLimit_[2]));
-                              },
-                              [this](const Eigen::Vector3d & v) {
-                                deltaTransLimit_ = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
-                              }));
+  ctl().gui()->addElement({ctl().name(), "Teleop", "Config"});
 
   output("OK");
 }
@@ -132,8 +118,8 @@ bool TeleopState::run(mc_control::fsm::Controller &)
     double startTime = nextFootstep.transitEndTime;
     for(int i = 0; i < footstepQueueSize_ - 1; i++)
     {
-      Eigen::Vector3d deltaTransMax = deltaTransLimit_;
-      Eigen::Vector3d deltaTransMin = -deltaTransLimit_;
+      Eigen::Vector3d deltaTransMax = ctl().footManager_->config().deltaTransLimit;
+      Eigen::Vector3d deltaTransMin = -1 * ctl().footManager_->config().deltaTransLimit;
       if(foot == Foot::Left)
       {
         deltaTransMin.y() = 0;

@@ -44,9 +44,6 @@ protected:
   //! Target foot midpose transformation (x [m], y [m], theta [rad])
   Eigen::Vector3d targetDeltaTrans_ = Eigen::Vector3d::Zero();
 
-  //! Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad])
-  Eigen::Vector3d deltaTransLimit_ = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
-
   //! Scale to convert velocity to foot midpose transformation (x, y, theta)
   Eigen::Vector3d velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15));
 
