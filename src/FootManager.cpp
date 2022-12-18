@@ -10,6 +10,7 @@
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
+#include <BaselineWalkingController/MathUtils.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 #include <BaselineWalkingController/wrench/Contact.h>
@@ -21,6 +22,11 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("name", name);
   mcRtcConfig("footstepDuration", footstepDuration);
   mcRtcConfig("doubleSupportRatio", doubleSupportRatio);
+  if(mcRtcConfig.has("deltaTransLimit"))
+  {
+    deltaTransLimit = mcRtcConfig("deltaTransLimit");
+    deltaTransLimit[2] = mc_rtc::constants::toRad(deltaTransLimit[2]);
+  }
   if(mcRtcConfig.has("midToFootTranss"))
   {
     for(const auto & foot : Feet::Both)
@@ -138,6 +144,15 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::NumberInput(
           "doubleSupportRatio", [this]() { return config_.doubleSupportRatio; },
           [this](double v) { config_.doubleSupportRatio = v; }),
+      mc_rtc::gui::ArrayInput(
+          "deltaTransLimit", {"x", "y", "theta"},
+          [this]() -> Eigen::Vector3d {
+            return Eigen::Vector3d(config_.deltaTransLimit[0], config_.deltaTransLimit[1],
+                                   mc_rtc::constants::toDeg(config_.deltaTransLimit[2]));
+          },
+          [this](const Eigen::Vector3d & v) {
+            config_.deltaTransLimit = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
+          }),
       mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
@@ -431,6 +446,68 @@ Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sv
            * (calcZmpWithOffset(Foot::Left, footPoses.at(Foot::Left))
               + calcZmpWithOffset(Foot::Right, footPoses.at(Foot::Right)));
   }
+}
+
+bool FootManager::walkToRelativePose(const Eigen::Vector3d & goalTrans, int lastFootstepNum)
+{
+  if(footstepQueue_.size() > 0)
+  {
+    mc_rtc::log::error("[FootManager] walkToRelativePose is available only when the footstep queue is empty: {}",
+                       footstepQueue_.size());
+    return false;
+  }
+
+  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
+  };
+  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+  };
+
+  // The 2D variables (i.e., goalTrans, deltaTrans) represent the transformation relative to the initial pose,
+  // while the 3D variables (i.e., initialFootMidpose, goalFootMidpose, footMidpose) represent the
+  // transformation in the world frame.
+  const sva::PTransformd & initialFootMidpose =
+      projGround(sva::interpolate(targetFootPose(Foot::Left), targetFootPose(Foot::Right), 0.5));
+  const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
+
+  Foot foot = goalTrans.y() >= 0 ? Foot::Left : Foot::Right;
+  sva::PTransformd footMidpose = initialFootMidpose;
+  double startTime = ctl().t() + 1.0;
+
+  while(convertTo2d(goalFootMidpose * footMidpose.inv()).norm() > 1e-6)
+  {
+    Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
+    Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
+    if(foot == Foot::Left)
+    {
+      deltaTransMin.y() = 0;
+    }
+    else
+    {
+      deltaTransMax.y() = 0;
+    }
+    Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * footMidpose.inv());
+    mc_filter::utils::clampInPlace(deltaTrans, deltaTransMin, deltaTransMax);
+    footMidpose = convertTo3d(deltaTrans) * footMidpose;
+
+    const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+    appendFootstep(footstep);
+
+    foot = opposite(foot);
+    startTime = footstep.transitEndTime;
+  }
+
+  for(int i = 0; i < lastFootstepNum + 1; i++)
+  {
+    const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+    appendFootstep(footstep);
+
+    foot = opposite(foot);
+    startTime = footstep.transitEndTime;
+  }
+
+  return true;
 }
 
 void FootManager::updateFootTraj()

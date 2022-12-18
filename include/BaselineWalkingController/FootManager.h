@@ -36,6 +36,9 @@ public:
     //! Duration ratio of double support phase
     double doubleSupportRatio = 0.2;
 
+    //! Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad])
+    Eigen::Vector3d deltaTransLimit = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
+
     //! Transformation from foot midpose to each foot pose
     std::unordered_map<Foot, sva::PTransformd> midToFootTranss = {
         {Foot::Left, sva::PTransformd(Eigen::Vector3d(0, 0.1, 0))},
@@ -243,6 +246,13 @@ public:
   {
     return supportPhase_;
   }
+
+  /** \brief Send a footstep sequence walking to the relative goal pose.
+      \param goalTrans relative goal transformation of foot midpose (x [m], y [m], theta [rad])
+      \param lastFootstepNum number of last footstep
+      \return whether footstep is correctly commanded
+   */
+  bool walkToRelativePose(const Eigen::Vector3d & goalTrans, int lastFootstepNum = 0);
 
 protected:
   /** \brief Const accessor to the controller. */
