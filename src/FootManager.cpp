@@ -37,7 +37,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
-  mcRtcConfig("footstepQueueSize", footstepQueueSize);
+  mcRtcConfig("footstepQueueSizeInVelMode", footstepQueueSizeInVelMode);
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
@@ -166,8 +166,8 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
       mc_rtc::gui::IntegerInput(
-          "footstepQueueSize", [this]() { return config_.footstepQueueSize; },
-          [this](int footstepQueueSize) { config_.footstepQueueSize = footstepQueueSize; }),
+          "footstepQueueSizeInVelMode", [this]() { return config_.footstepQueueSizeInVelMode; },
+          [this](int footstepQueueSizeInVelMode) { config_.footstepQueueSizeInVelMode = footstepQueueSizeInVelMode; }),
       mc_rtc::gui::Checkbox(
           "overwriteLandingPose", [this]() { return config_.overwriteLandingPose; },
           [this]() { config_.overwriteLandingPose = !config_.overwriteLandingPose; }),
@@ -548,7 +548,7 @@ bool FootManager::startWalkAtRelativeVel()
   const sva::PTransformd & footMidpose =
       projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
   double startTime = ctl().t() + 1.0;
-  for(int i = 0; i < config_.footstepQueueSize; i++)
+  for(int i = 0; i < config_.footstepQueueSizeInVelMode; i++)
   {
     const auto & footstep = makeFootstep(foot, footMidpose, startTime);
     appendFootstep(footstep);
@@ -572,7 +572,7 @@ bool FootManager::endWalkAtRelativeVel()
   targetVel_.setZero();
 
   // Update last footstep pose to align both feet
-  // Note that this process assumes that config_.footstepQueueSize is at least 3
+  // Note that this process assumes that config_.footstepQueueSizeInVelMode is at least 3
   const auto & lastFootstep1 = *(footstepQueue_.rbegin() + 1);
   auto & lastFootstep2 = *(footstepQueue_.rbegin());
   sva::PTransformd footMidpose = config_.midToFootTranss.at(lastFootstep1.foot).inv() * lastFootstep1.pose;
@@ -977,7 +977,7 @@ void FootManager::updateWalkAtRelativeVel()
   sva::PTransformd footMidpose =
       projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
   double startTime = nextFootstep.transitEndTime;
-  for(int i = 0; i < config_.footstepQueueSize - 1; i++)
+  for(int i = 0; i < config_.footstepQueueSizeInVelMode - 1; i++)
   {
     Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
     Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;

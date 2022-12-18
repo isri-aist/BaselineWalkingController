@@ -51,7 +51,7 @@ public:
     Eigen::Vector3d zmpOffset = Eigen::Vector3d::Zero();
 
     //! Queue size of footsteps to be sent in the velocity mode (must be at least 3)
-    int footstepQueueSize = 3;
+    int footstepQueueSizeInVelMode = 3;
 
     //! Whether to overwrite landing pose so that the relative pose from support foot to swing foot is retained
     bool overwriteLandingPose = false;
