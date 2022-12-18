@@ -158,9 +158,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a63b0d08c95fef369914ed2361514e5f7"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a63b0d08c95fef369914ed2361514e5f7">targetDeltaTrans_</a> = Eigen::Vector3d::Zero()</td></tr>
 <tr class="memdesc:a63b0d08c95fef369914ed2361514e5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target foot midpose transformation (x [m], y [m], theta [rad])  <a href="structBWC_1_1TeleopState.html#a63b0d08c95fef369914ed2361514e5f7">More...</a><br /></td></tr>
 <tr class="separator:a63b0d08c95fef369914ed2361514e5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acef45a179d6c38cac3a38c5bac22488a"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#acef45a179d6c38cac3a38c5bac22488a">deltaTransLimit_</a> = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15))</td></tr>
-<tr class="memdesc:acef45a179d6c38cac3a38c5bac22488a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad])  <a href="structBWC_1_1TeleopState.html#acef45a179d6c38cac3a38c5bac22488a">More...</a><br /></td></tr>
-<tr class="separator:acef45a179d6c38cac3a38c5bac22488a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">velScale_</a> = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15))</td></tr>
 <tr class="memdesc:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale to convert velocity to foot midpose transformation (x, y, theta)  <a href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">More...</a><br /></td></tr>
 <tr class="separator:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -372,33 +369,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00059">59</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
-
-</div>
-</div>
-<a id="acef45a179d6c38cac3a38c5bac22488a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acef45a179d6c38cac3a38c5bac22488a">&#9670;&nbsp;</a></span>deltaTransLimit_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::Vector3d BWC::TeleopState::deltaTransLimit_ = Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15))</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad]) </p>
-
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00048">48</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00056">56</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -450,7 +421,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Queue size of footsteps to be sent. </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00054">54</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00051">51</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -475,7 +446,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00058">58</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00055">55</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -578,7 +549,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00060">60</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00057">57</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -604,7 +575,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Scale to convert velocity to foot midpose transformation (x, y, theta) </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00051">51</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00048">48</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>

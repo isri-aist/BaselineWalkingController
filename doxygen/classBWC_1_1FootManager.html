@@ -190,6 +190,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a543f5ed6aaee9754629cb038198c113e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespaceBWC.html#ac3fd95620cff314072d2d1c881753900">SupportPhase</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e">supportPhase</a> () const noexcept</td></tr>
 <tr class="memdesc:a543f5ed6aaee9754629cb038198c113e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the support phase.  <a href="classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e">More...</a><br /></td></tr>
 <tr class="separator:a543f5ed6aaee9754629cb038198c113e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25228c81e775d494c29f1e1fe22e434d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a25228c81e775d494c29f1e1fe22e434d">walkToRelativePose</a> (const Eigen::Vector3d &amp;goalTrans, int lastFootstepNum=0)</td></tr>
+<tr class="memdesc:a25228c81e775d494c29f1e1fe22e434d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a footstep sequence walking to the relative goal pose.  <a href="classBWC_1_1FootManager.html#a25228c81e775d494c29f1e1fe22e434d">More...</a><br /></td></tr>
+<tr class="separator:a25228c81e775d494c29f1e1fe22e434d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -597,7 +600,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Const accessor to the configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00110">110</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00113">113</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -626,7 +629,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00255">255</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00265">265</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -655,7 +658,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Const accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00249">249</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00259">259</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -712,7 +715,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Access footstep queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00202">202</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00205">205</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -742,7 +745,7 @@ Protected Attributes</h2></td></tr>
 <p>Access footstep queue. </p>
 <dl class="section note"><dt>Note</dt><dd>Changing footstep queue directly is dangerous and should be avoided if possible. To safely add a footstep to footstep queue, call <a class="el" href="classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92" title="Append a target footstep to the queue.">appendFootstep()</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00212">212</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00215">215</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -862,7 +865,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Access previous footstep. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00218">218</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00221">221</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -971,7 +974,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00242">242</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00245">245</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1024,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot acceleration represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00236">236</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00239">239</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1051,7 +1054,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot pose represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00224">224</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00227">227</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1084,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get the target foot velocity represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00230">230</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00233">233</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1195,6 +1198,44 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a25228c81e775d494c29f1e1fe22e434d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25228c81e775d494c29f1e1fe22e434d">&#9670;&nbsp;</a></span>walkToRelativePose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BWC::FootManager::walkToRelativePose </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::Vector3d &amp;&#160;</td>
+          <td class="paramname"><em>goalTrans</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lastFootstepNum</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send a footstep sequence walking to the relative goal pose. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goalTrans</td><td>relative goal transformation of foot midpose (x [m], y [m], theta [rad]) </td></tr>
+    <tr><td class="paramname">lastFootstepNum</td><td>number of last footstep </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>whether footstep is correctly commanded </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a874dee9b58837127d95334fa57164ddf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a874dee9b58837127d95334fa57164ddf">&#9670;&nbsp;</a></span>baseYawFunc_</h2>
@@ -1218,7 +1259,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base link Yaw trajectory. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00323">323</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00333">333</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1244,7 +1285,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00278">278</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00288">288</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1270,7 +1311,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="classBWC_1_1Contact.html" title="Contact constraint.">Contact</a> foot poses list. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00311">311</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00321">321</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1296,7 +1337,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00281">281</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00291">291</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1322,7 +1363,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00284">284</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00294">294</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1348,7 +1389,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Ground Z position function. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00308">308</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00318">318</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1374,7 +1415,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Types of impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00329">329</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00339">339</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1400,7 +1441,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Foot poses in the last double support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00299">299</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00309">309</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1426,7 +1467,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Low-pass filter for the overwrite amount of landing position. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00335">335</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00345">345</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1452,7 +1493,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Previous footstep. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00287">287</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00297">297</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1519,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether to require updating impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00332">332</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00342">342</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1504,7 +1545,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00302">302</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00312">312</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1530,7 +1571,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00314">314</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00324">324</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1555,7 +1596,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Swing foot trajectory </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00318">318</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00328">328</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1580,7 +1621,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Swing foot trajectory </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00319">319</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00329">329</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1606,7 +1647,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot acceleration represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00296">296</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00306">306</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1632,7 +1673,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot pose represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00290">290</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00300">300</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1658,7 +1699,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Target foot velocity represented in world frame. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00293">293</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00303">303</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1684,7 +1725,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether touch down is detected during swing. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00326">326</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00336">336</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1710,7 +1751,7 @@ Protected Attributes</h2></td></tr>
 
 <p>ZMP function. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00305">305</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00315">315</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>

@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['walkconfigkeys_5f_271',['walkConfigKeys_',['../structBWC_1_1GuiFootstepState.html#a3c46c174f0f4068fd75b50ed0a7c41c1',1,'BWC::GuiFootstepState']]],
+  ['walkconfigkeys_5f_270',['walkConfigKeys_',['../structBWC_1_1GuiFootstepState.html#a3c46c174f0f4068fd75b50ed0a7c41c1',1,'BWC::GuiFootstepState']]],
+  ['walktorelativepose_271',['walkToRelativePose',['../classBWC_1_1FootManager.html#a25228c81e775d494c29f1e1fe22e434d',1,'BWC::FootManager']]],
   ['withdrawdurationratio_272',['withdrawDurationRatio',['../structBWC_1_1Footstep_1_1Configuration.html#ae65efd30dcafdc803d0e3cd554a82061',1,'BWC::Footstep::Configuration']]],
   ['withdrawoffset_273',['withdrawOffset',['../structBWC_1_1Footstep_1_1Configuration.html#a9b1982057fb942618ed31fcec6a5fe3b',1,'BWC::Footstep::Configuration']]],
   ['wrenchdist_5f_274',['wrenchDist_',['../classBWC_1_1CentroidalManager.html#a541d5d02c6977bd755aa7cd592aa6e56',1,'BWC::CentroidalManager']]],
