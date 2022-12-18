@@ -127,12 +127,6 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aad3fb6e4d78ff17e8a858e970c4db62f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#aad3fb6e4d78ff17e8a858e970c4db62f">startTeleop</a> ()</td></tr>
-<tr class="memdesc:aad3fb6e4d78ff17e8a858e970c4db62f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start teleoperation.  <a href="structBWC_1_1TeleopState.html#aad3fb6e4d78ff17e8a858e970c4db62f">More...</a><br /></td></tr>
-<tr class="separator:aad3fb6e4d78ff17e8a858e970c4db62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fbaac95cdc22b64da909e434948a731"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a6fbaac95cdc22b64da909e434948a731">endTeleop</a> ()</td></tr>
-<tr class="memdesc:a6fbaac95cdc22b64da909e434948a731"><td class="mdescLeft">&#160;</td><td class="mdescRight">End teleoperation.  <a href="structBWC_1_1TeleopState.html#a6fbaac95cdc22b64da909e434948a731">More...</a><br /></td></tr>
-<tr class="separator:a6fbaac95cdc22b64da909e434948a731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae17bb72a783d0ca1f5403eb9870e6c7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#ae17bb72a783d0ca1f5403eb9870e6c7c">twistCallback</a> (const geometry_msgs::Twist::ConstPtr &amp;twistMsg)</td></tr>
 <tr class="memdesc:ae17bb72a783d0ca1f5403eb9870e6c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS callback of twist topic.  <a href="structBWC_1_1TeleopState.html#ae17bb72a783d0ca1f5403eb9870e6c7c">More...</a><br /></td></tr>
 <tr class="separator:ae17bb72a783d0ca1f5403eb9870e6c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,24 +140,12 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aabb7d433a89e4c17fd9e987aa3922d4e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#aabb7d433a89e4c17fd9e987aa3922d4e">teleopRunning_</a> = false</td></tr>
-<tr class="memdesc:aabb7d433a89e4c17fd9e987aa3922d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether teleoperation is running.  <a href="structBWC_1_1TeleopState.html#aabb7d433a89e4c17fd9e987aa3922d4e">More...</a><br /></td></tr>
-<tr class="separator:aabb7d433a89e4c17fd9e987aa3922d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a491ad71b902ca37ba404624751e093af"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a491ad71b902ca37ba404624751e093af">startTriggered_</a> = false</td></tr>
-<tr class="memdesc:a491ad71b902ca37ba404624751e093af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether starting teleoperation is triggered.  <a href="structBWC_1_1TeleopState.html#a491ad71b902ca37ba404624751e093af">More...</a><br /></td></tr>
-<tr class="separator:a491ad71b902ca37ba404624751e093af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e7e48d16e31b19a05058ece1c85c519"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a8e7e48d16e31b19a05058ece1c85c519">endTriggered_</a> = false</td></tr>
-<tr class="memdesc:a8e7e48d16e31b19a05058ece1c85c519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether ending teleoperation is triggered.  <a href="structBWC_1_1TeleopState.html#a8e7e48d16e31b19a05058ece1c85c519">More...</a><br /></td></tr>
-<tr class="separator:a8e7e48d16e31b19a05058ece1c85c519"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63b0d08c95fef369914ed2361514e5f7"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a63b0d08c95fef369914ed2361514e5f7">targetDeltaTrans_</a> = Eigen::Vector3d::Zero()</td></tr>
-<tr class="memdesc:a63b0d08c95fef369914ed2361514e5f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Target foot midpose transformation (x [m], y [m], theta [rad])  <a href="structBWC_1_1TeleopState.html#a63b0d08c95fef369914ed2361514e5f7">More...</a><br /></td></tr>
-<tr class="separator:a63b0d08c95fef369914ed2361514e5f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">velScale_</a> = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15))</td></tr>
-<tr class="memdesc:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale to convert velocity to foot midpose transformation (x, y, theta)  <a href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">More...</a><br /></td></tr>
+<tr class="memitem:a6b30d6cd1bece9942600deafceb0e398"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a6b30d6cd1bece9942600deafceb0e398">targetVel_</a> = Eigen::Vector3d::Zero()</td></tr>
+<tr class="memdesc:a6b30d6cd1bece9942600deafceb0e398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relative target velocity of foot midpose (x [m/s], y [m/s], theta [rad/s])  <a href="structBWC_1_1TeleopState.html#a6b30d6cd1bece9942600deafceb0e398">More...</a><br /></td></tr>
+<tr class="separator:a6b30d6cd1bece9942600deafceb0e398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">velScale_</a> = Eigen::Vector3d::Ones()</td></tr>
+<tr class="memdesc:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale to convert twist message to target velocity (x, y, theta)  <a href="structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13">More...</a><br /></td></tr>
 <tr class="separator:a9f32a09ced2a2545e4d7e9701bdc8c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1ef75d2b5c6365feee380c70eb7362e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#af1ef75d2b5c6365feee380c70eb7362e">footstepQueueSize_</a> = 3</td></tr>
-<tr class="memdesc:af1ef75d2b5c6365feee380c70eb7362e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue size of footsteps to be sent.  <a href="structBWC_1_1TeleopState.html#af1ef75d2b5c6365feee380c70eb7362e">More...</a><br /></td></tr>
-<tr class="separator:af1ef75d2b5c6365feee380c70eb7362e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a5792f944f4b394347a30808ae46aa76b"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; ros::NodeHandle &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html#a5792f944f4b394347a30808ae46aa76b">nh_</a></td></tr>
 <tr class="separator:a5792f944f4b394347a30808ae46aa76b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,33 +163,6 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00012">12</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6fbaac95cdc22b64da909e434948a731"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fbaac95cdc22b64da909e434948a731">&#9670;&nbsp;</a></span>endTeleop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BWC::TeleopState::endTeleop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>End teleoperation. </p>
-
-</div>
-</div>
 <a id="a8e5b24d130534db8667ac481b8873794"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e5b24d130534db8667ac481b8873794">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -261,33 +216,6 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Start. </p>
-
-</div>
-</div>
-<a id="aad3fb6e4d78ff17e8a858e970c4db62f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad3fb6e4d78ff17e8a858e970c4db62f">&#9670;&nbsp;</a></span>startTeleop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BWC::TeleopState::startTeleop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Start teleoperation. </p>
 
 </div>
 </div>
@@ -369,59 +297,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00056">56</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
-
-</div>
-</div>
-<a id="a8e7e48d16e31b19a05058ece1c85c519"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e7e48d16e31b19a05058ece1c85c519">&#9670;&nbsp;</a></span>endTriggered_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool BWC::TeleopState::endTriggered_ = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Whether ending teleoperation is triggered. </p>
-
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00042">42</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
-
-</div>
-</div>
-<a id="af1ef75d2b5c6365feee380c70eb7362e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1ef75d2b5c6365feee380c70eb7362e">&#9670;&nbsp;</a></span>footstepQueueSize_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int BWC::TeleopState::footstepQueueSize_ = 3</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Queue size of footsteps to be sent. </p>
-
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00051">51</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00038">38</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -446,12 +322,12 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00055">55</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00037">37</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
-<a id="a491ad71b902ca37ba404624751e093af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a491ad71b902ca37ba404624751e093af">&#9670;&nbsp;</a></span>startTriggered_</h2>
+<a id="a6b30d6cd1bece9942600deafceb0e398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b30d6cd1bece9942600deafceb0e398">&#9670;&nbsp;</a></span>targetVel_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -460,7 +336,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool BWC::TeleopState::startTriggered_ = false</td>
+          <td class="memname">Eigen::Vector3d BWC::TeleopState::targetVel_ = Eigen::Vector3d::Zero()</td>
         </tr>
       </table>
   </td>
@@ -470,61 +346,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Whether starting teleoperation is triggered. </p>
+<p>Relative target velocity of foot midpose (x [m/s], y [m/s], theta [rad/s]) </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00039">39</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
-
-</div>
-</div>
-<a id="a63b0d08c95fef369914ed2361514e5f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63b0d08c95fef369914ed2361514e5f7">&#9670;&nbsp;</a></span>targetDeltaTrans_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Eigen::Vector3d BWC::TeleopState::targetDeltaTrans_ = Eigen::Vector3d::Zero()</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Target foot midpose transformation (x [m], y [m], theta [rad]) </p>
-
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00045">45</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
-
-</div>
-</div>
-<a id="aabb7d433a89e4c17fd9e987aa3922d4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabb7d433a89e4c17fd9e987aa3922d4e">&#9670;&nbsp;</a></span>teleopRunning_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool BWC::TeleopState::teleopRunning_ = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Whether teleoperation is running. </p>
-
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00036">36</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00030">30</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -549,7 +373,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>ROS variables </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00057">57</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00039">39</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>
@@ -563,7 +387,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Eigen::Vector3d BWC::TeleopState::velScale_ = Eigen::Vector3d(0.3, 0.2, mc_rtc::constants::toRad(15))</td>
+          <td class="memname">Eigen::Vector3d BWC::TeleopState::velScale_ = Eigen::Vector3d::Ones()</td>
         </tr>
       </table>
   </td>
@@ -573,9 +397,9 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Scale to convert velocity to foot midpose transformation (x, y, theta) </p>
+<p>Scale to convert twist message to target velocity (x, y, theta) </p>
 
-<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00048">48</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TeleopState_8h_source.html#l00033">33</a> of file <a class="el" href="TeleopState_8h_source.html">TeleopState.h</a>.</p>
 
 </div>
 </div>

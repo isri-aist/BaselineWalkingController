@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['endteleop_385',['endTeleop',['../structBWC_1_1TeleopState.html#a6fbaac95cdc22b64da909e434948a731',1,'BWC::TeleopState']]],
-  ['endtime_386',['endTime',['../classBWC_1_1CubicInterpolator.html#a93f9130771f8ce433ea6ecdab912b6c9',1,'BWC::CubicInterpolator']]]
+  ['endtime_386',['endTime',['../classBWC_1_1CubicInterpolator.html#a93f9130771f8ce433ea6ecdab912b6c9',1,'BWC::CubicInterpolator']]],
+  ['endwalkatrelativevel_387',['endWalkAtRelativeVel',['../classBWC_1_1FootManager.html#a55ff267273ca91e68dbf61ef505c30a4',1,'BWC::FootManager']]]
 ];
