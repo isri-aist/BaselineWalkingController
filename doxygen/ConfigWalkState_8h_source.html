@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>baseline_walking_controller: /home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri-aist/BaselineWalkingController/include/BaselineWalkingController/states/ConfigFootstepState.h Source File</title>
+<title>baseline_walking_controller: /home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri-aist/BaselineWalkingController/include/BaselineWalkingController/states/ConfigWalkState.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,34 +73,34 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">ConfigFootstepState.h</div>  </div>
+<div class="title">ConfigWalkState.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="ConfigFootstepState_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<a href="ConfigWalkState_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="State_8h.html">BaselineWalkingController/State.h</a>&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceBWC.html">BWC</a></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structBWC_1_1ConfigFootstepState.html">    8</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBWC_1_1ConfigFootstepState.html">ConfigFootstepState</a> : <a class="code" href="structBWC_1_1State.html">State</a></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structBWC_1_1ConfigWalkState.html">    8</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBWC_1_1ConfigWalkState.html">ConfigWalkState</a> : <a class="code" href="structBWC_1_1State.html">State</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structBWC_1_1ConfigFootstepState.html#a688b79e42617c7e1abeb1eb6d755c72b">start</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structBWC_1_1ConfigWalkState.html#a1048525b714c4df27f37c927b2e9c990">start</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structBWC_1_1ConfigFootstepState.html#a9d5873830eadd860ec814153119a0051">run</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="structBWC_1_1ConfigWalkState.html#aed1f8ba1997961e5d25df9838db20143">run</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structBWC_1_1ConfigFootstepState.html#abcd95f967aec2ff56df4d6205e210c9f">teardown</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="structBWC_1_1ConfigWalkState.html#af5dd2fa242fadf3c87edf218a3f23c4e">teardown</a>(mc_control::fsm::Controller &amp; <a class="code" href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">ctl</a>) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;} <span class="comment">// namespace BWC</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructBWC_1_1ConfigFootstepState_html_a688b79e42617c7e1abeb1eb6d755c72b"><div class="ttname"><a href="structBWC_1_1ConfigFootstepState.html#a688b79e42617c7e1abeb1eb6d755c72b">BWC::ConfigFootstepState::start</a></div><div class="ttdeci">void start(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Start.</div></div>
-<div class="ttc" id="astructBWC_1_1ConfigFootstepState_html_a9d5873830eadd860ec814153119a0051"><div class="ttname"><a href="structBWC_1_1ConfigFootstepState.html#a9d5873830eadd860ec814153119a0051">BWC::ConfigFootstepState::run</a></div><div class="ttdeci">bool run(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Run.</div></div>
+<div class="ttc" id="astructBWC_1_1ConfigWalkState_html"><div class="ttname"><a href="structBWC_1_1ConfigWalkState.html">BWC::ConfigWalkState</a></div><div class="ttdoc">FSM state to send footstep from configuration.</div><div class="ttdef"><b>Definition:</b> <a href="ConfigWalkState_8h_source.html#l00008">ConfigWalkState.h:8</a></div></div>
 <div class="ttc" id="anamespaceBWC_html"><div class="ttname"><a href="namespaceBWC.html">BWC</a></div><div class="ttdef"><b>Definition:</b> <a href="BaselineWalkingController_8h_source.html#l00013">BaselineWalkingController.h:13</a></div></div>
 <div class="ttc" id="astructBWC_1_1State_html"><div class="ttname"><a href="structBWC_1_1State.html">BWC::State</a></div><div class="ttdoc">FSM State with utility functions.</div><div class="ttdef"><b>Definition:</b> <a href="State_8h_source.html#l00010">State.h:10</a></div></div>
 <div class="ttc" id="astructBWC_1_1State_html_aa9ccaaec0ca52bacdab1ff0115e53344"><div class="ttname"><a href="structBWC_1_1State.html#aa9ccaaec0ca52bacdab1ff0115e53344">BWC::State::ctl</a></div><div class="ttdeci">const BaselineWalkingController &amp; ctl() const</div><div class="ttdoc">Const accessor to the controller.</div><div class="ttdef"><b>Definition:</b> <a href="State_8h_source.html#l00018">State.h:18</a></div></div>
-<div class="ttc" id="astructBWC_1_1ConfigFootstepState_html_abcd95f967aec2ff56df4d6205e210c9f"><div class="ttname"><a href="structBWC_1_1ConfigFootstepState.html#abcd95f967aec2ff56df4d6205e210c9f">BWC::ConfigFootstepState::teardown</a></div><div class="ttdeci">void teardown(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Teardown.</div></div>
+<div class="ttc" id="astructBWC_1_1ConfigWalkState_html_a1048525b714c4df27f37c927b2e9c990"><div class="ttname"><a href="structBWC_1_1ConfigWalkState.html#a1048525b714c4df27f37c927b2e9c990">BWC::ConfigWalkState::start</a></div><div class="ttdeci">void start(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Start.</div></div>
+<div class="ttc" id="astructBWC_1_1ConfigWalkState_html_af5dd2fa242fadf3c87edf218a3f23c4e"><div class="ttname"><a href="structBWC_1_1ConfigWalkState.html#af5dd2fa242fadf3c87edf218a3f23c4e">BWC::ConfigWalkState::teardown</a></div><div class="ttdeci">void teardown(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Teardown.</div></div>
 <div class="ttc" id="aState_8h_html"><div class="ttname"><a href="State_8h.html">State.h</a></div></div>
-<div class="ttc" id="astructBWC_1_1ConfigFootstepState_html"><div class="ttname"><a href="structBWC_1_1ConfigFootstepState.html">BWC::ConfigFootstepState</a></div><div class="ttdoc">FSM state to send footstep from configuration.</div><div class="ttdef"><b>Definition:</b> <a href="ConfigFootstepState_8h_source.html#l00008">ConfigFootstepState.h:8</a></div></div>
+<div class="ttc" id="astructBWC_1_1ConfigWalkState_html_aed1f8ba1997961e5d25df9838db20143"><div class="ttname"><a href="structBWC_1_1ConfigWalkState.html#aed1f8ba1997961e5d25df9838db20143">BWC::ConfigWalkState::run</a></div><div class="ttdeci">bool run(mc_control::fsm::Controller &amp;ctl) override</div><div class="ttdoc">Run.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['guifootstepstate_305',['GuiFootstepState',['../structBWC_1_1GuiFootstepState.html',1,'BWC']]]
+  ['guiwalkstate_305',['GuiWalkState',['../structBWC_1_1GuiWalkState.html',1,'BWC']]]
 ];

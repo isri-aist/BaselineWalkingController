@@ -6,6 +6,6 @@ var searchData=
   ['goalfootmidpose_5f_126',['goalFootMidpose_',['../structBWC_1_1FootstepPlannerState.html#a155e31c7e17832ee1500df51119cb673',1,'BWC::FootstepPlannerState']]],
   ['graspmat_5f_127',['graspMat_',['../classBWC_1_1Contact.html#af0dc624fc22936afa29f60e5c2eac1f7',1,'BWC::Contact']]],
   ['groundposzfunc_5f_128',['groundPosZFunc_',['../classBWC_1_1FootManager.html#a089d8fa891cc2fcc3dde4450a512e938',1,'BWC::FootManager']]],
-  ['guifootstepstate_129',['GuiFootstepState',['../structBWC_1_1GuiFootstepState.html',1,'BWC']]],
-  ['guifootstepstate_2eh_130',['GuiFootstepState.h',['../GuiFootstepState_8h.html',1,'']]]
+  ['guiwalkstate_129',['GuiWalkState',['../structBWC_1_1GuiWalkState.html',1,'BWC']]],
+  ['guiwalkstate_2eh_130',['GuiWalkState.h',['../GuiWalkState_8h.html',1,'']]]
 ];

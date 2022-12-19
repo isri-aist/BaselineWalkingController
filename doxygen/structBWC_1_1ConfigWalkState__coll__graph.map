@@ -1,5 +1,5 @@
-<map id="BWC::ConfigFootstepState" name="BWC::ConfigFootstepState">
-<area shape="rect" id="node1" title="FSM state to send footstep from configuration." alt="" coords="15,247,208,273"/>
+<map id="BWC::ConfigWalkState" name="BWC::ConfigWalkState">
+<area shape="rect" id="node1" title="FSM state to send footstep from configuration." alt="" coords="26,247,197,273"/>
 <area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="64,171,159,197"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,81,175,108"/>
 <area shape="rect" id="node4" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="199,81,434,108"/>

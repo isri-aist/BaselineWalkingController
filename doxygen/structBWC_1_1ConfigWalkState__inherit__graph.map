@@ -1,0 +1,5 @@
+<map id="BWC::ConfigWalkState" name="BWC::ConfigWalkState">
+<area shape="rect" id="node1" title="FSM state to send footstep from configuration." alt="" coords="5,155,176,181"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="43,80,138,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="6,5,175,32"/>
+</map>
