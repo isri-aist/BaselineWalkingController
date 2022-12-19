@@ -5,7 +5,7 @@
 namespace BWC
 {
 /** \brief FSM state to send footstep from configuration. */
-struct ConfigFootstepState : State
+struct ConfigWalkState : State
 {
 public:
   /** \brief Start. */

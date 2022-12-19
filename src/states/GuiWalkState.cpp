@@ -3,16 +3,16 @@
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
-#include <BaselineWalkingController/states/GuiFootstepState.h>
+#include <BaselineWalkingController/states/GuiWalkState.h>
 
 using namespace BWC;
 
-void GuiFootstepState::start(mc_control::fsm::Controller & _ctl)
+void GuiWalkState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);
 
   // Setup GUI
-  ctl().gui()->addElement({ctl().name(), "GuiFootstep"},
+  ctl().gui()->addElement({ctl().name(), "GuiWalk"},
                           mc_rtc::gui::Form(
                               "Walk",
                               [this](const mc_rtc::Configuration & config) {
@@ -29,15 +29,15 @@ void GuiFootstepState::start(mc_control::fsm::Controller & _ctl)
   output("OK");
 }
 
-bool GuiFootstepState::run(mc_control::fsm::Controller &)
+bool GuiWalkState::run(mc_control::fsm::Controller &)
 {
   return false;
 }
 
-void GuiFootstepState::teardown(mc_control::fsm::Controller &)
+void GuiWalkState::teardown(mc_control::fsm::Controller &)
 {
   // Clean up GUI
-  ctl().gui()->removeCategory({ctl().name(), "GuiFootstep"});
+  ctl().gui()->removeCategory({ctl().name(), "GuiWalk"});
 }
 
-EXPORT_SINGLE_STATE("BWC::GuiFootstep", GuiFootstepState)
+EXPORT_SINGLE_STATE("BWC::GuiWalk", GuiWalkState)

@@ -5,7 +5,7 @@
 namespace BWC
 {
 /** \brief FSM state to send footstep from GUI. */
-struct GuiFootstepState : State
+struct GuiWalkState : State
 {
 public:
   /** \brief Start. */

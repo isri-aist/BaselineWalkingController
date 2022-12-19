@@ -2,12 +2,12 @@ add_fsm_state(InitialState InitialState.cpp)
 target_link_libraries(InitialState PUBLIC
   ${CONTROLLER_NAME})
 
-add_fsm_state(ConfigFootstepState ConfigFootstepState.cpp)
-target_link_libraries(ConfigFootstepState PUBLIC
+add_fsm_state(ConfigWalkState ConfigWalkState.cpp)
+target_link_libraries(ConfigWalkState PUBLIC
   ${CONTROLLER_NAME})
 
-add_fsm_state(GuiFootstepState GuiFootstepState.cpp)
-target_link_libraries(GuiFootstepState PUBLIC
+add_fsm_state(GuiWalkState GuiWalkState.cpp)
+target_link_libraries(GuiWalkState PUBLIC
   ${CONTROLLER_NAME})
 
 add_fsm_state(TeleopState TeleopState.cpp)

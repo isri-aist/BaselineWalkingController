@@ -1,10 +1,10 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
-#include <BaselineWalkingController/states/ConfigFootstepState.h>
+#include <BaselineWalkingController/states/ConfigWalkState.h>
 
 using namespace BWC;
 
-void ConfigFootstepState::start(mc_control::fsm::Controller & _ctl)
+void ConfigWalkState::start(mc_control::fsm::Controller & _ctl)
 {
   State::start(_ctl);
 
@@ -36,11 +36,11 @@ void ConfigFootstepState::start(mc_control::fsm::Controller & _ctl)
   output("OK");
 }
 
-bool ConfigFootstepState::run(mc_control::fsm::Controller &)
+bool ConfigWalkState::run(mc_control::fsm::Controller &)
 {
   return ctl().footManager_->footstepQueue().empty();
 }
 
-void ConfigFootstepState::teardown(mc_control::fsm::Controller &) {}
+void ConfigWalkState::teardown(mc_control::fsm::Controller &) {}
 
-EXPORT_SINGLE_STATE("BWC::ConfigFootstep", ConfigFootstepState)
+EXPORT_SINGLE_STATE("BWC::ConfigWalk", ConfigWalkState)

@@ -6,7 +6,7 @@ CentroidalManager:
   refComZ: 0.81 # [m]
 
 transitions:
-  - [BWC::Initial_, OK, BWC::ConfigFootstep_, Auto]
+  - [BWC::Initial_, OK, BWC::ConfigWalk_, Auto]
 
 states:
   BWC::Initial_:
@@ -14,8 +14,8 @@ states:
     configs:
       autoStartTime: 8.0
 
-  BWC::ConfigFootstep_:
-    base: BWC::ConfigFootstep
+  BWC::ConfigWalk_:
+    base: BWC::ConfigWalk
     configs:
       footstepList:
         - foot: Left

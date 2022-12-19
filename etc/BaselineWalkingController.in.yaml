@@ -38,8 +38,8 @@ states:
   BWC::Initial_:
     base: BWC::Initial
 
-  BWC::GuiFootstep_:
-    base: BWC::GuiFootstep
+  BWC::GuiWalk_:
+    base: BWC::GuiWalk
 
   BWC::Teleop_:
     base: BWC::Teleop
@@ -48,7 +48,7 @@ states:
 
   BWC::Main_:
     base: Parallel
-    states: [BWC::GuiFootstep_, BWC::Teleop_]
+    states: [BWC::GuiWalk_, BWC::Teleop_]
 
 # Transitions map
 transitions:
