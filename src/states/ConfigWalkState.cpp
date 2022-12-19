@@ -32,13 +32,32 @@ void ConfigWalkState::start(mc_control::fsm::Controller & _ctl)
       startTime = footstep.transitEndTime;
     }
   }
+  else if(config_.has("configs") && config_("configs").has("walkAtRelativeVel"))
+  {
+    ctl().footManager_->startWalkAtRelativeVel();
+    ctl().footManager_->setRelativeVel(config_("configs")("walkAtRelativeVel")("velocity"));
+    velModeEndTime_ = ctl().t() + static_cast<double>(config_("configs")("walkAtRelativeVel")("duration"));
+  }
 
   output("OK");
 }
 
 bool ConfigWalkState::run(mc_control::fsm::Controller &)
 {
-  return ctl().footManager_->footstepQueue().empty();
+  if(config_.has("configs") && config_("configs").has("footstepList"))
+  {
+    return ctl().footManager_->footstepQueue().empty();
+  }
+  else if(config_.has("configs") && config_("configs").has("walkAtRelativeVel"))
+  {
+    if(ctl().t() > velModeEndTime_)
+    {
+      ctl().footManager_->endWalkAtRelativeVel();
+    }
+    return !ctl().footManager_->velMode() && ctl().footManager_->footstepQueue().empty();
+  }
+
+  return true;
 }
 
 void ConfigWalkState::teardown(mc_control::fsm::Controller &) {}

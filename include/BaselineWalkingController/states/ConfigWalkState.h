@@ -16,5 +16,9 @@ public:
 
   /** \brief Teardown. */
   void teardown(mc_control::fsm::Controller & ctl) override;
+
+protected:
+  //! End time of velocity mode [sec]
+  double velModeEndTime_ = 0.0;
 };
 } // namespace BWC
