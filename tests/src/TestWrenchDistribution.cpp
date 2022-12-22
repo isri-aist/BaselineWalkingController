@@ -5,7 +5,7 @@
 #include <BaselineWalkingController/wrench/Contact.h>
 #include <BaselineWalkingController/wrench/WrenchDistribution.h>
 
-TEST(TestWrenchDistribution, Case1)
+TEST(TestWrenchDistribution, Test1)
 {
   double fricCoeff = 0.5;
   auto leftContact = std::make_shared<BWC::Contact>("LeftContact", fricCoeff,
