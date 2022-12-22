@@ -51,7 +51,6 @@ jobs:
           - mpc-method: PreviewControlZmp
             mpc-framework: OfflineMpc
             motion-type: WalkingOnPlaneVel
-        include:
           - mpc-method: PreviewControlZmp
             mpc-framework: OfflineMpc
             motion-type: WalkingWithFootstepPlanner
