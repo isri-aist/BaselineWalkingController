@@ -63,6 +63,10 @@ install(FILES ${CONFIG_OUT} DESTINATION ${MC_RTC_LIBDIR}/mc_controller/etc/)
 
 add_subdirectory(src)
 
+if(BUILD_TESTING OR CATKIN_ENABLE_TESTING)
+  add_subdirectory(tests)
+endif()
+
 if(INSTALL_DOCUMENTATION)
   add_subdirectory(doc)
 endif()

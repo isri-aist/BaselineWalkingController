@@ -11,4 +11,4 @@ else
 fi
 
 # Find all source files in the project minus those that are auto-generated or we do not maintain
-src_files=`find src include -name '*.cpp' -or -name '*.h' -or -name '*.hpp'`
+src_files=`find src include tests -name '*.cpp' -or -name '*.h' -or -name '*.hpp'`
