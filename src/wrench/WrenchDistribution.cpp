@@ -19,7 +19,7 @@ WrenchDistribution::WrenchDistribution(const std::unordered_map<Foot, std::share
   int colNum = 0;
   for(const auto & contactKV : contactList_)
   {
-    colNum += contactKV.second->graspMat_.cols();
+    colNum += static_cast<int>(contactKV.second->graspMat_.cols());
   }
   resultWrenchRatio_ = Eigen::VectorXd::Zero(colNum);
 
@@ -49,7 +49,7 @@ sva::ForceVecd WrenchDistribution::run(const sva::ForceVecd & desiredTotalWrench
     for(const auto & contactKV : contactList_)
     {
       totalGraspMat.middleCols(colNum, contactKV.second->graspMat_.cols()) = contactKV.second->graspMat_;
-      colNum += contactKV.second->graspMat_.cols();
+      colNum += static_cast<int>(contactKV.second->graspMat_.cols());
     }
     if(momentOrigin.norm() > 0)
     {
@@ -63,7 +63,7 @@ sva::ForceVecd WrenchDistribution::run(const sva::ForceVecd & desiredTotalWrench
 
   // Solve QP
   {
-    int varDim = resultWrenchRatio_.size();
+    int varDim = static_cast<int>(resultWrenchRatio_.size());
     if(qpCoeff_.dim_var_ != varDim)
     {
       qpCoeff_.setup(varDim, 0, 0);
@@ -93,7 +93,7 @@ std::unordered_map<Foot, sva::ForceVecd> WrenchDistribution::calcWrenchList(cons
         contactKV.first,
         contactKV.second->calcWrench(resultWrenchRatio_.segment(wrenchRatioIdx, contactKV.second->graspMat_.cols()),
                                      momentOrigin));
-    wrenchRatioIdx += contactKV.second->graspMat_.cols();
+    wrenchRatioIdx += static_cast<int>(contactKV.second->graspMat_.cols());
   }
   return wrenchList;
 }

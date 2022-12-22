@@ -235,7 +235,7 @@ public:
   }
 
   /** \brief Get the support phase. */
-  inline const SupportPhase supportPhase() const noexcept
+  inline SupportPhase supportPhase() const noexcept
   {
     return supportPhase_;
   }

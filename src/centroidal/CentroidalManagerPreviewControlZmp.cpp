@@ -62,4 +62,4 @@ void CentroidalManagerPreviewControlZmp::runMpc()
 Eigen::Vector2d CentroidalManagerPreviewControlZmp::calcRefData(double t) const
 {
   return ctl().footManager_->calcRefZmp(t).head<2>();
-};
+}

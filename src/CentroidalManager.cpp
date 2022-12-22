@@ -31,7 +31,8 @@ void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcC
   mcRtcConfig("wrenchDistConfig", wrenchDistConfig);
 }
 
-CentroidalManager::CentroidalManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
+CentroidalManager::CentroidalManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & // mcRtcConfig
+                                     )
 : ctlPtr_(ctlPtr)
 {
 }

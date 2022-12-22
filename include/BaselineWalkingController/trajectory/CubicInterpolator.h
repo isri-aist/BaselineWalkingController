@@ -60,7 +60,10 @@ inline sva::PTransformd interpolate(const sva::PTransformd & start, const sva::P
     \param order derivative order
 */
 template<class T, class U = T>
-inline U interpolateDerivative(const T & start, const T & end, double ratio, int order = 1)
+inline U interpolateDerivative(const T & start,
+                               const T & end,
+                               double, // ratio
+                               int order = 1)
 {
   if(order == 1)
   {
@@ -82,7 +85,10 @@ inline U interpolateDerivative(const T & start, const T & end, double ratio, int
     \param order derivative order
 */
 template<>
-inline double interpolateDerivative(const double & start, const double & end, double ratio, int order)
+inline double interpolateDerivative(const double & start,
+                                    const double & end,
+                                    double, // ratio
+                                    int order)
 {
   if(order == 1)
   {
@@ -103,7 +109,7 @@ inline double interpolateDerivative(const double & start, const double & end, do
 template<>
 inline Eigen::Vector3d interpolateDerivative(const Eigen::Quaterniond & start,
                                              const Eigen::Quaterniond & end,
-                                             double ratio,
+                                             double, // ratio
                                              int order)
 {
   if(order == 1)
@@ -126,7 +132,7 @@ inline Eigen::Vector3d interpolateDerivative(const Eigen::Quaterniond & start,
 template<>
 inline Eigen::Vector3d interpolateDerivative(const Eigen::Matrix3d & start,
                                              const Eigen::Matrix3d & end,
-                                             double ratio,
+                                             double, // ratio
                                              int order)
 {
   if(order == 1)
@@ -149,7 +155,7 @@ inline Eigen::Vector3d interpolateDerivative(const Eigen::Matrix3d & start,
 template<>
 inline sva::MotionVecd interpolateDerivative(const sva::PTransformd & start,
                                              const sva::PTransformd & end,
-                                             double ratio,
+                                             double, // ratio
                                              int order)
 {
   if(order == 1)

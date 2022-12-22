@@ -25,7 +25,7 @@ public:
   /** \brief Number of ridges. */
   inline int ridgeNum() const
   {
-    return localRidgeList_.size();
+    return static_cast<int>(localRidgeList_.size());
   }
 
 public:

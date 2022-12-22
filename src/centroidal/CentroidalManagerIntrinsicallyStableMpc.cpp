@@ -95,4 +95,4 @@ CCC::IntrinsicallyStableMpc::RefData CentroidalManagerIntrinsicallyStableMpc::ca
   refData.zmp_limits[0] = minPos;
   refData.zmp_limits[1] = maxPos;
   return refData;
-};
+}

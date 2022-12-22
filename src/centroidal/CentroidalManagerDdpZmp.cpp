@@ -49,7 +49,7 @@ void CentroidalManagerDdpZmp::runMpc()
   CCC::DdpZmp::InitialParam initialParam;
   initialParam.pos = mpcCom_;
   initialParam.vel = mpcComVel_;
-  if(ddp_->ddp_solver_->controlData().u_list.size() == ddp_->ddp_solver_->config().horizon_steps)
+  if(static_cast<int>(ddp_->ddp_solver_->controlData().u_list.size()) == ddp_->ddp_solver_->config().horizon_steps)
   {
     initialParam.u_list = ddp_->ddp_solver_->controlData().u_list;
   }
@@ -72,4 +72,4 @@ CCC::DdpZmp::RefData CentroidalManagerDdpZmp::calcRefData(double t) const
   refData.zmp = ctl().footManager_->calcRefZmp(t);
   refData.com_z = config_.refComZ + ctl().footManager_->calcRefGroundPosZ(t);
   return refData;
-};
+}

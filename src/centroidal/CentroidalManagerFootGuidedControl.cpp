@@ -138,4 +138,4 @@ CCC::FootGuidedControl::RefData CentroidalManagerFootGuidedControl::calcRefData(
   }
 
   return refData;
-};
+}

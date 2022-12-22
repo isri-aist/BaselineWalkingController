@@ -38,11 +38,11 @@ Contact::Contact(const std::string & name,
 
   const auto & globalRidgeList = fricPyramid.calcGlobalRidgeList(pose.rotation().transpose());
 
-  for(int vertexIdx = 0; vertexIdx < localVertexList.size(); vertexIdx++)
+  for(size_t vertexIdx = 0; vertexIdx < localVertexList.size(); vertexIdx++)
   {
     Eigen::Vector3d globalVertex = (sva::PTransformd(localVertexList[vertexIdx]) * pose).translation();
 
-    for(int ridgeIdx = 0; ridgeIdx < globalRidgeList.size(); ridgeIdx++)
+    for(size_t ridgeIdx = 0; ridgeIdx < globalRidgeList.size(); ridgeIdx++)
     {
       const auto & globalRidge = globalRidgeList[ridgeIdx];
       // The top 3 rows are moment, the bottom 3 rows are force.

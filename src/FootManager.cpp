@@ -951,7 +951,7 @@ void FootManager::updateZmpTraj()
         sva::PTransformd overwriteLandingPose = targetFootPoses_.at(foot);
         overwriteLandingMeanPos += overwriteLandingPose.translation() - originalLandingPose.translation();
       }
-      overwriteLandingMeanPos /= currentContactFootPoses.size();
+      overwriteLandingMeanPos /= static_cast<double>(currentContactFootPoses.size());
     }
     overwriteLandingPosLowPass_.update(overwriteLandingMeanPos);
   }
