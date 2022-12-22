@@ -50,6 +50,10 @@ jobs:
         include:
           - mpc-method: PreviewControlZmp
             mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlaneVel
+        include:
+          - mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
             motion-type: WalkingWithFootstepPlanner
     runs-on: ubuntu-20.04
     container:
@@ -127,7 +131,9 @@ jobs:
             EXPECTED_BASE_POS="1.34 -0.41 0.8"
           elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
             EXPECTED_BASE_POS="1.75 0.0 1.68"
-          else
+          elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
+            EXPECTED_BASE_POS="0.74 -0.53 0.8"
+          else # if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
             EXPECTED_BASE_POS="2.5 -0.25 0.8"
           fi
           python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}

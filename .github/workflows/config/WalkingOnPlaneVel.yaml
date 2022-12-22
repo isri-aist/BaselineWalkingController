@@ -1,0 +1,15 @@
+transitions:
+  - [BWC::Initial_, OK, BWC::ConfigWalk_, Auto]
+
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 8.0
+
+  BWC::ConfigWalk_:
+    base: BWC::ConfigWalk
+    configs:
+      walkAtRelativeVel:
+        velocity: [0.1, 0.0, -0.15707963267948966]
+        duration: 15.0 # [sec]

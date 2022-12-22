@@ -50,7 +50,7 @@ bool ConfigWalkState::run(mc_control::fsm::Controller &)
   }
   else if(config_.has("configs") && config_("configs").has("walkAtRelativeVel"))
   {
-    if(ctl().t() > velModeEndTime_)
+    if(ctl().t() > velModeEndTime_ && ctl().footManager_->velMode())
     {
       ctl().footManager_->endWalkAtRelativeVel();
     }
