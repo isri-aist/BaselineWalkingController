@@ -131,16 +131,16 @@ jobs:
           . devel/setup.bash
           set -x
           catkin build baseline_walking_controller --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DENABLE_QLD=ON -DINSTALL_DOCUMENTATION=ON
-      # - name: Run tests
-      #   run: |
-      #     set -e
-      #     set -x
-      #     cd ${GITHUB_WORKSPACE}/catkin_ws
-      #     set +x
-      #     . devel/setup.bash
-      #     set -x
-      #     catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- baseline_walking_controller --no-deps
-      #     catkin_test_results --verbose --all build
+      - name: Run tests
+        run: |
+          set -e
+          set -x
+          cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
+          . devel/setup.bash
+          set -x
+          catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- baseline_walking_controller --no-deps
+          catkin_test_results --verbose --all build
       - name: Run simulation
         # Only run for one configuration
         if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'ON'
