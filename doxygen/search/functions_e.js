@@ -10,6 +10,6 @@ var searchData=
   ['startwalkatrelativevel_429',['startWalkAtRelativeVel',['../classBWC_1_1FootManager.html#a8a213f7085b521f543cac428bc5a6e68',1,'BWC::FootManager']]],
   ['stop_430',['stop',['../structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f',1,'BWC::BaselineWalkingController::stop()'],['../classBWC_1_1CentroidalManager.html#a59fa7af2a5f2906b914384f30d99ae2b',1,'BWC::CentroidalManager::stop()'],['../classBWC_1_1FootManager.html#a6f2e097039d3edb428928eb086948d82',1,'BWC::FootManager::stop()']]],
   ['strtofoot_431',['strToFoot',['../namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c',1,'BWC']]],
-  ['supportphase_432',['supportPhase',['../classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e',1,'BWC::FootManager']]],
+  ['supportphase_432',['supportPhase',['../classBWC_1_1FootManager.html#acaced205a89dd3d0cb17faa493485cbb',1,'BWC::FootManager']]],
   ['surfacename_433',['surfaceName',['../classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf',1,'BWC::FootManager']]]
 ];

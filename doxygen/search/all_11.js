@@ -15,7 +15,7 @@ var searchData=
   ['stop_218',['stop',['../structBWC_1_1BaselineWalkingController.html#a28e77ed39808d42b0aa358a3cfb7456f',1,'BWC::BaselineWalkingController::stop()'],['../classBWC_1_1CentroidalManager.html#a59fa7af2a5f2906b914384f30d99ae2b',1,'BWC::CentroidalManager::stop()'],['../classBWC_1_1FootManager.html#a6f2e097039d3edb428928eb086948d82',1,'BWC::FootManager::stop()']]],
   ['stopswingtrajfortouchdownfoot_219',['stopSwingTrajForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c',1,'BWC::FootManager::Configuration']]],
   ['strtofoot_220',['strToFoot',['../namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c',1,'BWC']]],
-  ['supportphase_221',['supportPhase',['../classBWC_1_1FootManager.html#a543f5ed6aaee9754629cb038198c113e',1,'BWC::FootManager::supportPhase()'],['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900',1,'BWC::SupportPhase()']]],
+  ['supportphase_221',['supportPhase',['../classBWC_1_1FootManager.html#acaced205a89dd3d0cb17faa493485cbb',1,'BWC::FootManager::supportPhase()'],['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900',1,'BWC::SupportPhase()']]],
   ['supportphase_5f_222',['supportPhase_',['../classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f',1,'BWC::FootManager']]],
   ['surfacename_223',['surfaceName',['../classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf',1,'BWC::FootManager']]],
   ['swingendtime_224',['swingEndTime',['../structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509',1,'BWC::Footstep']]],
