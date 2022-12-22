@@ -88,7 +88,7 @@ jobs:
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
             CNOID_FILE=sim_mc.cnoid
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid
