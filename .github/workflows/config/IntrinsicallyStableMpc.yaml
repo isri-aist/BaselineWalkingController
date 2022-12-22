@@ -1,4 +1,4 @@
 CentroidalManager:
   method: IntrinsicallyStableMpc
   horizonDuration: 2.0 # [sec]
-  horizonDt: 0.02 # [sec]
+  horizonDt: 0.05 # [sec]
