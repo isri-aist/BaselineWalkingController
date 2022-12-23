@@ -58,7 +58,7 @@ init: BWC::Initial_
 
 ObserverPipelines:
   name: MainObserverPipeline
-  gui: false
+  gui: true
   observers:
     - type: Encoder
     - type: Attitude
