@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include <mc_filter/LowPass.h>
+#include <mc_rtc/constants.h>
 #include <mc_rtc/gui/StateBuilder.h>
 #include <mc_rtc/log/Logger.h>
 #include <mc_tasks/ImpedanceGains.h>
