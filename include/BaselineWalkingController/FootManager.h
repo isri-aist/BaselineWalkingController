@@ -248,24 +248,23 @@ public:
    */
   bool walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum = 0);
 
-  /** \brief Start sending footstep sequence to walk at the relative target velocity.
+  /** \brief Start velocity mode.
       \return whether it is successfully started
-
-      This enables the velocity mode.
    */
-  bool startWalkAtRelativeVel();
+  bool startVelMode();
 
-  /** \brief End sending footstep sequence to walk at the relative target velocity.
+  /** \brief End velocity mode.
       \return whether it is successfully ended
-
-      This disables the velocity mode.
    */
-  bool endWalkAtRelativeVel();
+  bool endVelMode();
 
   /** \brief Set the relative target velocity
       \param targetVel relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s])
    */
-  void setRelativeVel(const Eigen::Vector3d & targetVel);
+  inline void setRelativeVel(const Eigen::Vector3d & targetVel)
+  {
+    targetVel_ = targetVel;
+  }
 
   /** \brief Whether the velocity mode (i.e., walking at the relative target velocity) is enabled. */
   inline bool velMode() const

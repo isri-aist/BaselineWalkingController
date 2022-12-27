@@ -525,17 +525,17 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
   return true;
 }
 
-bool FootManager::startWalkAtRelativeVel()
+bool FootManager::startVelMode()
 {
   if(velMode_)
   {
-    mc_rtc::log::warning("[FootManager] It is already in velocity mode, but startWalkAtRelativeVel is called.");
+    mc_rtc::log::warning("[FootManager] It is already in velocity mode, but startVelMode is called.");
     return false;
   }
 
   if(footstepQueue_.size() > 0)
   {
-    mc_rtc::log::error("[FootManager] startWalkAtRelativeVel is available only when the footstep queue is empty: {}",
+    mc_rtc::log::error("[FootManager] startVelMode is available only when the footstep queue is empty: {}",
                        footstepQueue_.size());
     return false;
   }
@@ -560,11 +560,11 @@ bool FootManager::startWalkAtRelativeVel()
   return true;
 }
 
-bool FootManager::endWalkAtRelativeVel()
+bool FootManager::endVelMode()
 {
   if(!velMode_)
   {
-    mc_rtc::log::warning("[FootManager] It is not in velocity mode, but endWalkAtRelativeVel is called.");
+    mc_rtc::log::warning("[FootManager] It is not in velocity mode, but endVelMode is called.");
     return false;
   }
 
@@ -579,11 +579,6 @@ bool FootManager::endWalkAtRelativeVel()
   lastFootstep2.pose = config_.midToFootTranss.at(lastFootstep2.foot) * footMidpose;
 
   return true;
-}
-
-void FootManager::setRelativeVel(const Eigen::Vector3d & targetVel)
-{
-  targetVel_ = targetVel;
 }
 
 void FootManager::updateFootTraj()

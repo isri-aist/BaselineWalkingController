@@ -34,7 +34,7 @@ void ConfigWalkState::start(mc_control::fsm::Controller & _ctl)
   }
   else if(config_.has("configs") && config_("configs").has("walkAtRelativeVel"))
   {
-    ctl().footManager_->startWalkAtRelativeVel();
+    ctl().footManager_->startVelMode();
     ctl().footManager_->setRelativeVel(config_("configs")("walkAtRelativeVel")("velocity"));
     velModeEndTime_ = ctl().t() + static_cast<double>(config_("configs")("walkAtRelativeVel")("duration"));
   }
@@ -52,7 +52,7 @@ bool ConfigWalkState::run(mc_control::fsm::Controller &)
   {
     if(ctl().t() > velModeEndTime_ && ctl().footManager_->velMode())
     {
-      ctl().footManager_->endWalkAtRelativeVel();
+      ctl().footManager_->endVelMode();
     }
     return !ctl().footManager_->velMode() && ctl().footManager_->footstepQueue().empty();
   }

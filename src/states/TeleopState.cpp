@@ -39,9 +39,8 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   twistSub_ = nh_->subscribe<geometry_msgs::Twist>(twistTopicName, 1, &TeleopState::twistCallback, this);
 
   // Setup GUI
-  ctl().gui()->addElement({ctl().name(), "Teleop"}, mc_rtc::gui::Button("StartTeleop", [this]() {
-                            ctl().footManager_->startWalkAtRelativeVel();
-                          }));
+  ctl().gui()->addElement({ctl().name(), "Teleop"},
+                          mc_rtc::gui::Button("StartTeleop", [this]() { ctl().footManager_->startVelMode(); }));
   ctl().gui()->addElement({ctl().name(), "Teleop", "State"},
                           mc_rtc::gui::ArrayInput(
                               "targetVel", {"x", "y", "theta"},
@@ -72,14 +71,13 @@ bool TeleopState::run(mc_control::fsm::Controller &)
   if(velMode && ctl().gui()->hasElement({ctl().name(), "Teleop"}, "StartTeleop"))
   {
     ctl().gui()->addElement({ctl().name(), "Teleop"},
-                            mc_rtc::gui::Button("EndTeleop", [this]() { ctl().footManager_->endWalkAtRelativeVel(); }));
+                            mc_rtc::gui::Button("EndTeleop", [this]() { ctl().footManager_->endVelMode(); }));
     ctl().gui()->removeElement({ctl().name(), "Teleop"}, "StartTeleop");
   }
   else if(!velMode && ctl().gui()->hasElement({ctl().name(), "Teleop"}, "EndTeleop"))
   {
-    ctl().gui()->addElement({ctl().name(), "Teleop"}, mc_rtc::gui::Button("StartTeleop", [this]() {
-                              ctl().footManager_->startWalkAtRelativeVel();
-                            }));
+    ctl().gui()->addElement({ctl().name(), "Teleop"},
+                            mc_rtc::gui::Button("StartTeleop", [this]() { ctl().footManager_->startVelMode(); }));
     ctl().gui()->removeElement({ctl().name(), "Teleop"}, "EndTeleop");
   }
 
