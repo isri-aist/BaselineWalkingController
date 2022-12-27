@@ -3,7 +3,6 @@
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
-#include <BaselineWalkingController/MathUtils.h>
 #include <BaselineWalkingController/states/TeleopState.h>
 
 using namespace BWC;
