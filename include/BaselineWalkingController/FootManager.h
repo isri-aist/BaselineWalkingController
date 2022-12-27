@@ -291,8 +291,8 @@ protected:
   /** \brief Update ZMP trajectory. */
   virtual void updateZmpTraj();
 
-  /** \brief Update footstep sequence to walk at the relative target velocity. */
-  void updateWalkAtRelativeVel();
+  /** \brief Update footstep sequence for the velocity mode. */
+  void updateVelMode();
 
   /** \brief Get the remaining duration for next touch down.
 

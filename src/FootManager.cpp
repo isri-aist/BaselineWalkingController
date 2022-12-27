@@ -123,7 +123,7 @@ void FootManager::update()
   updateZmpTraj();
   if(velMode_)
   {
-    updateWalkAtRelativeVel();
+    updateVelMode();
   }
 }
 
@@ -956,7 +956,7 @@ void FootManager::updateZmpTraj()
   }
 }
 
-void FootManager::updateWalkAtRelativeVel()
+void FootManager::updateVelMode()
 {
   auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
     return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
