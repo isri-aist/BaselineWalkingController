@@ -24,12 +24,12 @@ args.log_filename = sys.argv[1]
 print("[checkSimulationResults.py] Load {}".format(args.log_filename))
 log = mc_log_ui.read_log(args.log_filename)
 
+# Check tilting angle
 quat_data_list = np.array([log["FloatingBase_orientation_w"],
                            log["FloatingBase_orientation_x"],
                            log["FloatingBase_orientation_y"],
                            log["FloatingBase_orientation_z"]]).T
 
-# Check tilting angle
 tilting_angle_list = []
 for quat_data in quat_data_list:
     # Inverse is required because the left-hand system is used in mc_rtc
