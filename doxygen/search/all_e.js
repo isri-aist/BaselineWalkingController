@@ -14,5 +14,5 @@ var searchData=
   ['pose_179',['pose',['../structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541',1,'BWC::Footstep']]],
   ['prevfootstep_180',['prevFootstep',['../classBWC_1_1FootManager.html#a3c2e1e4940e5f3b1bd982ae02d8098eb',1,'BWC::FootManager']]],
   ['prevfootstep_5f_181',['prevFootstep_',['../classBWC_1_1FootManager.html#a58efca782b66a22fb6ac90d427a6cec4',1,'BWC::FootManager']]],
-  ['projground_182',['projGround',['../namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb',1,'BWC']]]
+  ['projground_182',['projGround',['../namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb',1,'BWC::projGround(const sva::PTransformd &amp;pose, bool projectZ=true)'],['../namespaceBWC.html#a2f63adef1bd86608cdf9589904356dae',1,'BWC::projGround(const sva::MotionVecd &amp;vel, bool projectZ=true)']]]
 ];

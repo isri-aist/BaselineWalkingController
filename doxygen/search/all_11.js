@@ -7,7 +7,7 @@ var searchData=
   ['sign_210',['sign',['../namespaceBWC.html#abdb0dc30ffa63846aa16cb53d8daa3a0',1,'BWC']]],
   ['start_211',['start',['../structBWC_1_1State.html#ad36346aecd0c247a3f4dab333081e399',1,'BWC::State::start()'],['../structBWC_1_1ConfigWalkState.html#a1048525b714c4df27f37c927b2e9c990',1,'BWC::ConfigWalkState::start()'],['../structBWC_1_1FootstepPlannerState.html#a334227dfa03bc0b6a5b4774d87e7cd47',1,'BWC::FootstepPlannerState::start()'],['../structBWC_1_1GuiWalkState.html#acefa659fa8826ef143471cd721ead3a5',1,'BWC::GuiWalkState::start()'],['../structBWC_1_1InitialState.html#acda27e7e5352dc8b255d64bfb04d1dab',1,'BWC::InitialState::start()'],['../structBWC_1_1TeleopState.html#ae8256d901bc464709f3cf460a0ca9fd6',1,'BWC::TeleopState::start()']]],
   ['starttime_212',['startTime',['../classBWC_1_1CubicInterpolator.html#a2aa6919c6075c32aeaea96fb7a229788',1,'BWC::CubicInterpolator']]],
-  ['startwalkatrelativevel_213',['startWalkAtRelativeVel',['../classBWC_1_1FootManager.html#a8a213f7085b521f543cac428bc5a6e68',1,'BWC::FootManager']]],
+  ['startvelmode_213',['startVelMode',['../classBWC_1_1FootManager.html#a09ca18d90407430ccdc2abbb2ff400fc',1,'BWC::FootManager']]],
   ['state_214',['State',['../structBWC_1_1State.html',1,'BWC']]],
   ['state_2eh_215',['State.h',['../State_8h.html',1,'']]],
   ['std_216',['std',['../namespacestd.html',1,'']]],
