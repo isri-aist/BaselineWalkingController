@@ -197,7 +197,43 @@ CentroidalManager:
   # horizonDt: 0.02 # [sec]
 
 
+# OverwriteConfigKeys: [NoSensors]
+
 OverwriteConfigList:
+  NoSensors:
+    FootManager:
+      impedanceGains:
+        singleSupport:
+          damper:
+            linear: [300, 300, 300]
+            angular: [40, 40, 40]
+          spring:
+            linear: [2250, 2250, 2250]
+            angular: [400, 400, 400]
+          wrench:
+            linear: [0, 0, 0]
+            angular: [0, 0, 0]
+        doubleSupport:
+          damper:
+            linear: [300, 300, 300]
+            angular: [40, 40, 40]
+          spring:
+            linear: [2250, 2250, 2250]
+            angular: [400, 400, 400]
+          wrench:
+            linear: [0, 0, 0]
+            angular: [0, 0, 0]
+        swing:
+          damper:
+            linear: [300, 300, 300]
+            angular: [40, 40, 40]
+          spring:
+            linear: [2250, 2250, 2250]
+            angular: [400, 400, 400]
+          wrench:
+            linear: [0, 0, 0]
+            angular: [0, 0, 0]
+
   hrp5_p:
     CoMTask:
       activeJoints: [
