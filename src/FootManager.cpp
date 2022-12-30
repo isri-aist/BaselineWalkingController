@@ -236,6 +236,9 @@ void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 void FootManager::addToLogger(mc_rtc::Logger & logger)
 {
   logger.addLogEntry(config_.name + "_footstepQueueSize", this, [this]() { return footstepQueue_.size(); });
+  logger.addLogEntry(config_.name + "_walking", this, [this]() {
+    return static_cast<int>(!footstepQueue_.empty() && footstepQueue_.front().transitStartTime <= ctl().t());
+  });
 
   for(const auto & foot : Feet::Both)
   {
