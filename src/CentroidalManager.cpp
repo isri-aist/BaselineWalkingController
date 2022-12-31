@@ -1,3 +1,5 @@
+#include <RBDyn/Momentum.h>
+
 #include <mc_rtc/gui/Checkbox.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
@@ -249,6 +251,10 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
       }
     }
     return maxPos;
+  });
+
+  logger.addLogEntry(config().name + "_CentroidalMomentum_controlRobot", this, [this]() {
+    return rbd::computeCentroidalMomentum(ctl().robot().mb(), ctl().robot().mbc(), ctl().robot().com());
   });
 }
 
