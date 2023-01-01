@@ -1,14 +1,12 @@
 #pragma once
 
+#include <mc_rtc/Configuration.h>
+
 #include <BaselineWalkingController/SwingTraj.h>
+#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 
 namespace BWC
 {
-template<class T>
-class PiecewiseFunc;
-template<class T, class U>
-class CubicInterpolator;
-
 /** \brief Simple foot swing trajectory with cubic spline.
 
     The position is interpolated by a single 3D cubic spline. The rotation is interpolated by a single cubic

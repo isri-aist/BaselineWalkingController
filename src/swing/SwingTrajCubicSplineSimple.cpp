@@ -1,5 +1,4 @@
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
-#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 using namespace BWC;
