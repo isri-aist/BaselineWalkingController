@@ -1,5 +1,6 @@
 #pragma once
 
+#include <mc_rtc/Configuration.h>
 #include <SpaceVecAlg/SpaceVecAlg>
 
 namespace BWC
@@ -8,15 +9,34 @@ namespace BWC
 class SwingTraj
 {
 public:
+  /** \brief Configuration. */
+  struct Configuration
+  {
+    /** \brief Load mc_rtc configuration.
+        \param mcRtcConfig mc_rtc configuration
+    */
+    virtual void load(const mc_rtc::Configuration & // mcRtcConfig
+    )
+    {
+    }
+  };
+
+public:
   /** \brief Constructor.
       \param startPose start pose
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param mcRtcConfig mc_rtc configuration
   */
-  SwingTraj(const sva::PTransformd & startPose, const sva::PTransformd & goalPose, double startTime, double goalTime)
+  SwingTraj(const sva::PTransformd & startPose,
+            const sva::PTransformd & goalPose,
+            double startTime,
+            double goalTime,
+            const mc_rtc::Configuration & mcRtcConfig = {})
   : startPose_(startPose), goalPose_(goalPose), startTime_(startTime), goalTime_(goalTime)
   {
+    config_.load(mcRtcConfig);
   }
 
   /** \brief Calculate the pose of the swing trajectory at a specified time.
@@ -34,7 +54,16 @@ public:
   */
   virtual sva::MotionVecd accel(double t) const = 0;
 
+  /** \brief Const accessor to the configuration. */
+  inline virtual const Configuration & config() const
+  {
+    return config_;
+  }
+
 public:
+  //! Configuration
+  Configuration config_;
+
   //! Start pose
   sva::PTransformd startPose_ = sva::PTransformd::Identity();
 

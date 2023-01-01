@@ -12,9 +12,8 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
-#include <BaselineWalkingController/SwingTraj.h>
+#include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
 using namespace BWC;
@@ -284,14 +283,12 @@ const std::string & FootManager::surfaceName(const Foot & foot) const
 Footstep FootManager::makeFootstep(const Foot & foot,
                                    const sva::PTransformd & footMidpose,
                                    double startTime,
-                                   const mc_rtc::Configuration & mcRtcConfig) const
+                                   const mc_rtc::Configuration & swingTrajConfig) const
 {
-  Footstep footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
-                    startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
-                    startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
-                    startTime + config_.footstepDuration);
-  footstep.config.load(mcRtcConfig);
-  return footstep;
+  return Footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
+                  startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
+                  startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
+                  startTime + config_.footstepDuration, swingTrajConfig);
 }
 
 bool FootManager::appendFootstep(const Footstep & newFootstep)
@@ -623,13 +620,28 @@ void FootManager::updateFootTraj()
         if(config_.overwriteLandingPose && prevFootstep_)
         {
           sva::PTransformd swingRelPose = swingFootstep_->pose * prevFootstep_->pose.inv();
-          swingGoalPose = swingRelPose * targetFootPoses_.at(prevFootstep_->foot);
+          swingGoalPose.translation() = (swingRelPose * targetFootPoses_.at(prevFootstep_->foot)).translation();
         }
 
-        swingFootstep_->swingStartTime;
-        swingFootstep_->swingEndTime;
+        std::string swingTrajType = swingFootstep_->swingTrajConfig("type", std::string(""));
+        if(swingTrajType == "CubicSplineSimple")
+        {
+          swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
+              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingFootstep_->swingTrajConfig);
+        }
+        else
+        {
+          if(!swingTrajType.empty())
+          {
+            mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}.", swingTrajType);
+          }
 
-        // \todo Set swingTraj_
+          using DefaultSwingTrajClass = SwingTrajCubicSplineSimple;
+          swingTraj_ =
+              std::make_shared<DefaultSwingTrajClass>(swingStartPose, swingGoalPose, swingFootstep_->swingStartTime,
+                                                      swingFootstep_->swingEndTime, swingFootstep_->swingTrajConfig);
+        }
       }
 
       // Set baseYawFunc_

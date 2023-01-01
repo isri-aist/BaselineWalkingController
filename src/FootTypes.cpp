@@ -44,15 +44,6 @@ int BWC::sign(const Foot & foot)
   }
 }
 
-void Footstep::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
-{
-  mcRtcConfig("withdrawDurationRatio", withdrawDurationRatio);
-  mcRtcConfig("withdrawOffset", withdrawOffset);
-  mcRtcConfig("approachDurationRatio", approachDurationRatio);
-  mcRtcConfig("approachOffset", approachOffset);
-  mcRtcConfig("swingOffset", swingOffset);
-}
-
 std::string std::to_string(const Foot & foot)
 {
   if(foot == Foot::Left)

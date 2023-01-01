@@ -13,6 +13,7 @@ add_library(${CONTROLLER_NAME} SHARED
   wrench/WrenchDistribution.cpp
   trajectory/CubicHermiteSpline.cpp
   trajectory/CubicSpline.cpp
+  swing/SwingTrajCubicSplineSimple.cpp
   tasks/FirstOrderImpedanceTask.cpp
   State.cpp
   )

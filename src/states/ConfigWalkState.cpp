@@ -24,8 +24,8 @@ void ConfigWalkState::start(mc_control::fsm::Controller & _ctl)
       {
         startTime = ctl().t() + static_cast<double>(footstepConfig("startTime"));
       }
-      const auto & footstep = ctl().footManager_->makeFootstep(foot, footstepConfig("footMidpose"), startTime,
-                                                               (footstepConfig("config", mc_rtc::Configuration())));
+      const auto & footstep = ctl().footManager_->makeFootstep(
+          foot, footstepConfig("footMidpose"), startTime, footstepConfig("swingTrajConfig", mc_rtc::Configuration()));
       ctl().footManager_->appendFootstep(footstep);
 
       foot = opposite(foot);
