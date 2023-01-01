@@ -17,6 +17,7 @@ namespace BWC
 {
 class BaselineWalkingController;
 class Contact;
+class SwingTraj;
 
 /** \brief Foot manager.
 

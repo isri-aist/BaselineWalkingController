@@ -12,6 +12,7 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
+#include <BaselineWalkingController/SwingTraj.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 #include <BaselineWalkingController/wrench/Contact.h>
