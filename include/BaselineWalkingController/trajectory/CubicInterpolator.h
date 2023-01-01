@@ -254,7 +254,7 @@ public:
                                    points_.size() - 2);
     }
     return interpolate<T>(std::next(points_.begin(), idx)->second, std::next(points_.begin(), idx + 1)->second,
-                          std::min(std::max(ratio - static_cast<double>(idx), 0.0), 1.0));
+                          std::clamp(ratio - static_cast<double>(idx), 0.0, 1.0));
   }
 
   /** \brief Calculate the derivative of interpolated value.
@@ -270,7 +270,7 @@ public:
     return func_->derivative(t, order)[0]
            * interpolateDerivative<T, U>(std::next(points_.begin(), idx)->second,
                                          std::next(points_.begin(), idx + 1)->second,
-                                         std::min(std::max(ratio - static_cast<double>(idx), 0.0), 1.0), 1);
+                                         std::clamp(ratio - static_cast<double>(idx), 0.0, 1.0), 1);
   }
 
   /** \brief Get ratio of interpolation points.
