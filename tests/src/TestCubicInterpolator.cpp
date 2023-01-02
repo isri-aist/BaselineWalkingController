@@ -39,7 +39,9 @@ TEST(TestCubicInterpolator, Test1)
     double t0 = point.first;
     const Eigen::Vector3d & x0 = point.second;
     Eigen::Vector3d x = interp(t0);
+    Eigen::Vector3d v = interp.derivative(t0, 1);
     EXPECT_TRUE((x - x0).norm() < 1e-10);
+    EXPECT_TRUE(v.norm() < 1e-10);
   }
 }
 
