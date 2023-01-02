@@ -641,15 +641,16 @@ void FootManager::updateFootTraj()
         }
         else
         {
-          if(!swingTrajType.empty())
-          {
-            mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}.", swingTrajType);
-          }
-
-          using DefaultSwingTrajClass = SwingTrajCubicSplineSimple;
+          using DefaultSwingTrajClass = SwingTrajIndHorizontalVertical;
           swingTraj_ =
               std::make_shared<DefaultSwingTrajClass>(swingStartPose, swingGoalPose, swingFootstep_->swingStartTime,
                                                       swingFootstep_->swingEndTime, swingFootstep_->swingTrajConfig);
+
+          if(!swingTrajType.empty())
+          {
+            mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}. Use {} instead.", swingTrajType,
+                               swingTraj_->type());
+          }
         }
       }
 
