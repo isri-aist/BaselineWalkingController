@@ -19,7 +19,7 @@ public:
       \param dim dimension of value
       \param points times, positions, and velocities in way points
   */
-  CubicHermiteSpline(int dim, const std::map<double, std::pair<T, T>> & points) : dim_(dim), points_(points) {}
+  CubicHermiteSpline(int dim, const std::map<double, std::pair<T, T>> & points = {}) : dim_(dim), points_(points) {}
 
   /** \brief Access points. */
   const std::map<double, std::pair<T, T>> & points() const noexcept

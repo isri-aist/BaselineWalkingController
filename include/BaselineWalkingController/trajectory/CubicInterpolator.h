@@ -305,11 +305,9 @@ protected:
   */
   size_t getIdx(double ratio) const
   {
-    int idx = static_cast<int>(std::floor(ratio));
-    if(static_cast<size_t>(idx) == points_.size() - 1)
-    {
-      idx--;
-    }
+    // Use "std::ceil - 1" instead of "std::floor" for consistency of boundary conditions with std::map::lower_bound in
+    // PiecewiseFunc.
+    int idx = ratio == 0.0 ? 0 : static_cast<int>(std::ceil(ratio) - 1);
     if(idx < 0 || points_.size() - 2 < static_cast<size_t>(idx))
     {
       mc_rtc::log::error_and_throw<std::out_of_range>("[CubicInterpolator] Index {} is out of range [{}, {}].", idx, 0,
