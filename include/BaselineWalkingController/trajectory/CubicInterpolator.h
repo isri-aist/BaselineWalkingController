@@ -246,15 +246,10 @@ public:
   */
   T operator()(double t) const
   {
-    double ratio = getRatio(t);
-    size_t idx = getIdx(ratio);
-    if(!(idx + 1 <= points_.size() - 1))
-    {
-      mc_rtc::log::error_and_throw("[CubicInterpolator] Invalid idx {}. Should be {} <= idx <= {}", idx, 0,
-                                   points_.size() - 2);
-    }
+    size_t idx = func_->index(t);
+    double ratio = (*func_)(t)[0] - static_cast<double>(idx);
     return interpolate<T>(std::next(points_.begin(), idx)->second, std::next(points_.begin(), idx + 1)->second,
-                          std::clamp(ratio - static_cast<double>(idx), 0.0, 1.0));
+                          std::clamp(ratio, 0.0, 1.0));
   }
 
   /** \brief Calculate the derivative of interpolated value.
@@ -265,20 +260,11 @@ public:
   */
   virtual U derivative(double t, int order = 1) const
   {
-    double ratio = getRatio(t);
-    size_t idx = getIdx(ratio);
+    size_t idx = func_->index(t);
+    double ratio = (*func_)(t)[0] - static_cast<double>(idx);
     return func_->derivative(t, order)[0]
            * interpolateDerivative<T, U>(std::next(points_.begin(), idx)->second,
-                                         std::next(points_.begin(), idx + 1)->second,
-                                         std::clamp(ratio - static_cast<double>(idx), 0.0, 1.0), 1);
-  }
-
-  /** \brief Get ratio of interpolation points.
-      \param t time
-  */
-  double getRatio(double t) const
-  {
-    return std::clamp((*func_)(t)[0], 0.0, static_cast<double>(points_.size() - 1));
+                                         std::next(points_.begin(), idx + 1)->second, std::clamp(ratio, 0.0, 1.0), 1);
   }
 
   /** \brief Get start time. */
@@ -297,20 +283,6 @@ public:
   const std::map<double, T> & points() const
   {
     return points_;
-  }
-
-protected:
-  /** \brief Get index of interpolation points.
-      \param ratio Interpolation ratio
-  */
-  size_t getIdx(double ratio) const
-  {
-    // Use "std::ceil - 1" instead of "std::floor" for consistency of boundary conditions with std::map::lower_bound in
-    // PiecewiseFunc.
-    constexpr double boundary_eps = 1e-14;
-    int idx =
-        std::clamp(static_cast<int>(std::ceil(ratio - boundary_eps) - 1), 0, static_cast<int>(points_.size()) - 2);
-    return static_cast<size_t>(idx);
   }
 
 protected:

@@ -77,6 +77,15 @@ public:
     return (funcIt->second)->derivative(t, order);
   }
 
+  /** \brief Get the index of piecewise functions.
+      \param t arugment of function
+  */
+  virtual size_t index(double t) const
+  {
+    checkArg(t);
+    return std::distance(funcs_.begin(), funcs_.lower_bound(t));
+  }
+
   /** \brief Get lower limit of domain. */
   virtual double domainLowerLimit() const override
   {
