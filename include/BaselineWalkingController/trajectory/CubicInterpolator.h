@@ -278,7 +278,7 @@ public:
   */
   double getRatio(double t) const
   {
-    return (*func_)(t)[0];
+    return std::clamp((*func_)(t)[0], 0.0, static_cast<double>(points_.size() - 1));
   }
 
   /** \brief Get start time. */
@@ -307,12 +307,9 @@ protected:
   {
     // Use "std::ceil - 1" instead of "std::floor" for consistency of boundary conditions with std::map::lower_bound in
     // PiecewiseFunc.
-    int idx = ratio == 0.0 ? 0 : static_cast<int>(std::ceil(ratio) - 1);
-    if(idx < 0 || points_.size() - 2 < static_cast<size_t>(idx))
-    {
-      mc_rtc::log::error_and_throw<std::out_of_range>("[CubicInterpolator] Index {} is out of range [{}, {}].", idx, 0,
-                                                      points_.size() - 2);
-    }
+    constexpr double boundary_eps = 1e-14;
+    int idx =
+        std::clamp(static_cast<int>(std::ceil(ratio - boundary_eps) - 1), 0, static_cast<int>(points_.size()) - 2);
     return static_cast<size_t>(idx);
   }
 
