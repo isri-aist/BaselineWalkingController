@@ -13,6 +13,7 @@
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
+#include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
@@ -627,6 +628,12 @@ void FootManager::updateFootTraj()
         if(swingTrajType == "CubicSplineSimple")
         {
           swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
+              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingFootstep_->swingTrajConfig);
+        }
+        else if(swingTrajType == "IndHorizontalVertical")
+        {
+          swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               swingFootstep_->swingTrajConfig);
         }
