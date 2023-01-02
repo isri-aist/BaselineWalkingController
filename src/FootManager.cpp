@@ -247,6 +247,8 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
     logger.addLogEntry(config_.name + "_targetFootAccel_" + std::to_string(foot), this,
                        [this, foot]() -> const sva::MotionVecd & { return targetFootAccels_.at(foot); });
   }
+  logger.addLogEntry(config_.name + "_swingTrajType", this,
+                     [this]() -> std::string { return swingTraj_ ? swingTraj_->type() : "None"; });
 
   logger.addLogEntry(config_.name + "_supportPhase", this, [this]() { return std::to_string(supportPhase_); });
 

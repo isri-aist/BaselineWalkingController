@@ -39,6 +39,9 @@ public:
     config_.load(mcRtcConfig);
   }
 
+  /** \brief Get type of foot swing trajectory. */
+  virtual std::string type() const = 0;
+
   /** \brief Calculate the pose of the swing trajectory at a specified time.
       \param t time
   */

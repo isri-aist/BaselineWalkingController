@@ -53,6 +53,12 @@ public:
                              double goalTime,
                              const mc_rtc::Configuration & mcRtcConfig = {});
 
+  /** \brief Get type of foot swing trajectory. */
+  inline virtual std::string type() const override
+  {
+    return "CubicSplineSimple";
+  }
+
   /** \brief Calculate the pose of the swing trajectory at a specified time.
       \param t time
   */
