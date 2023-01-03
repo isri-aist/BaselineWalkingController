@@ -224,6 +224,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                        }));
   }
 
+  SwingTrajCubicSplineSimple::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
 }
 
@@ -231,6 +232,7 @@ void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.removeCategory({ctl().name(), config_.name});
 
+  SwingTrajCubicSplineSimple::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
 }
 

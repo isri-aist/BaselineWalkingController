@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mc_rtc/Configuration.h>
+#include <mc_rtc/gui/StateBuilder.h>
 
 #include <BaselineWalkingController/SwingTraj.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
@@ -33,11 +33,33 @@ public:
     //! Position offset to swing foot [m]
     Eigen::Vector3d swingOffset = Eigen::Vector3d(0, 0, 0.05);
 
+    /** \brief Constructor.
+
+        This is necessary for https://stackoverflow.com/q/53408962
+    */
+    Configuration() {}
+
     /** \brief Load mc_rtc configuration.
         \param mcRtcConfig mc_rtc configuration
     */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
   };
+
+public:
+  //! Default configuration
+  static inline Configuration defaultConfig_;
+
+  /** \brief Add entries of default configuration to the GUI.
+      \param gui GUI
+      \param category category of GUI entries
+   */
+  static void addConfigToGUI(mc_rtc::gui::StateBuilder & gui, const std::vector<std::string> & category);
+
+  /** \brief Remove entries of default configuration from the GUI.
+      \param gui GUI
+      \param category category of GUI entries
+   */
+  static void removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui, const std::vector<std::string> & category);
 
 public:
   /** \brief Constructor.
@@ -82,7 +104,7 @@ public:
 
 protected:
   //! Configuration
-  Configuration config_;
+  Configuration config_ = defaultConfig_;
 
   //! Position function
   std::shared_ptr<PiecewiseFunc<Eigen::Vector3d>> posFunc_;

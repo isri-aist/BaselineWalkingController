@@ -1,3 +1,6 @@
+#include <mc_rtc/gui/ArrayInput.h>
+#include <mc_rtc/gui/NumberInput.h>
+
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 
@@ -12,6 +15,34 @@ void SwingTrajCubicSplineSimple::Configuration::load(const mc_rtc::Configuration
   mcRtcConfig("approachDurationRatio", approachDurationRatio);
   mcRtcConfig("approachOffset", approachOffset);
   mcRtcConfig("swingOffset", swingOffset);
+}
+
+void SwingTrajCubicSplineSimple::addConfigToGUI(mc_rtc::gui::StateBuilder & gui,
+                                                const std::vector<std::string> & category)
+{
+  gui.addElement(
+      category,
+      mc_rtc::gui::NumberInput(
+          "withdrawDurationRatio", []() { return defaultConfig_.withdrawDurationRatio; },
+          [](double v) { defaultConfig_.withdrawDurationRatio = v; }),
+      mc_rtc::gui::ArrayInput(
+          "withdrawOffset", {"x", "y", "z"}, []() -> const Eigen::Vector3d & { return defaultConfig_.withdrawOffset; },
+          [](const Eigen::Vector3d & v) { defaultConfig_.withdrawOffset = v; }),
+      mc_rtc::gui::NumberInput(
+          "approachDurationRatio", []() { return defaultConfig_.approachDurationRatio; },
+          [](double v) { defaultConfig_.approachDurationRatio = v; }),
+      mc_rtc::gui::ArrayInput(
+          "approachOffset", {"x", "y", "z"}, []() -> const Eigen::Vector3d & { return defaultConfig_.approachOffset; },
+          [](const Eigen::Vector3d & v) { defaultConfig_.approachOffset = v; }),
+      mc_rtc::gui::ArrayInput(
+          "swingOffset", {"x", "y", "z"}, []() -> const Eigen::Vector3d & { return defaultConfig_.swingOffset; },
+          [](const Eigen::Vector3d & v) { defaultConfig_.swingOffset = v; }));
+}
+
+void SwingTrajCubicSplineSimple::removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui,
+                                                     const std::vector<std::string> & category)
+{
+  gui.removeCategory(category);
 }
 
 SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & startPose,
