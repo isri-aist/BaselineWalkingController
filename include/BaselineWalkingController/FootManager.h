@@ -51,6 +51,9 @@ public:
     //! ZMP offset of each foot (positive for x-forward, y-outside, z-upward) [m]
     Eigen::Vector3d zmpOffset = Eigen::Vector3d::Zero();
 
+    //! Default swing trajectory type
+    std::string defaultSwingTrajType = "IndHorizontalVertical";
+
     //! Queue size of footsteps to be sent in the velocity mode (must be at least 3)
     int footstepQueueSizeInVelMode = 3;
 

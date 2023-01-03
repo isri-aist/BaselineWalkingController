@@ -3,6 +3,7 @@
 #include <mc_filter/utils/clamp.h>
 #include <mc_rtc/gui/ArrayInput.h>
 #include <mc_rtc/gui/Checkbox.h>
+#include <mc_rtc/gui/ComboInput.h>
 #include <mc_rtc/gui/IntegerInput.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
@@ -39,6 +40,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
+  mcRtcConfig("defaultSwingTrajType", defaultSwingTrajType);
   mcRtcConfig("footstepQueueSizeInVelMode", footstepQueueSizeInVelMode);
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
@@ -162,6 +164,10 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
+      mc_rtc::gui::ComboInput(
+          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical"},
+          [this]() { return config_.defaultSwingTrajType; },
+          [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
       mc_rtc::gui::IntegerInput(
           "footstepQueueSizeInVelMode", [this]() { return config_.footstepQueueSizeInVelMode; },
           [this](int footstepQueueSizeInVelMode) { config_.footstepQueueSizeInVelMode = footstepQueueSizeInVelMode; }),
@@ -628,26 +634,25 @@ void FootManager::updateFootTraj()
           swingGoalPose.translation() = (swingRelPose * targetFootPoses_.at(prevFootstep_->foot)).translation();
         }
 
-        std::string swingTrajType = swingFootstep_->swingTrajConfig("type", std::string(""));
+        std::string swingTrajType =
+            swingFootstep_->swingTrajConfig("type", static_cast<std::string>(config_.defaultSwingTrajType));
         if(swingTrajType == "CubicSplineSimple")
         {
           swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               swingFootstep_->swingTrajConfig);
         }
-        else // if(swingTrajType == "IndHorizontalVertical")
+        else if(swingTrajType == "IndHorizontalVertical")
         {
           swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
                                     sva::PTransformd::Identity()),
               swingFootstep_->swingTrajConfig);
-
-          if(!(swingTrajType == swingTraj_->type() || swingTrajType.empty()))
-          {
-            mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}. Use {} instead.", swingTrajType,
-                               swingTraj_->type());
-          }
+        }
+        else
+        {
+          mc_rtc::log::error_and_throw("[FootManager] Invalid swingTrajType: {}.", swingTrajType);
         }
       }
 
