@@ -19,6 +19,7 @@ set(BWC_gtest_list
   TestCubicHermiteSpline
   TestCubicInterpolator
   TestWrenchDistribution
+  TestSwingTraj
   )
 
 foreach(NAME IN LISTS BWC_gtest_list)

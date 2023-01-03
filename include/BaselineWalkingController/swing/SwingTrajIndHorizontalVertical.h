@@ -78,7 +78,7 @@ public:
                                  const sva::PTransformd & goalPose,
                                  double startTime,
                                  double goalTime,
-                                 const std::vector<Eigen::Vector3d> & localVertexList,
+                                 const std::vector<Eigen::Vector3d> & localVertexList = {},
                                  const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
