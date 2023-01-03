@@ -54,7 +54,7 @@ public:
     double tiltCenterApproachDurationRatio = 0.25;
 
     //! Threshold distance between start pose and goal pose to enable tilt [m]
-    double tiltDistThre = 0.1;
+    double tiltDistThre = 0.2;
 
     //! Threshold of forward angle between start pose and goal pose to enable tilt [rad]
     double tiltForwardAngleThre = mc_rtc::constants::toRad(10);
