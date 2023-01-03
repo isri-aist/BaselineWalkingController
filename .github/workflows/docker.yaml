@@ -104,7 +104,7 @@ jobs:
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
           sleep 1s
-          kill -9 ${CNOID_PID}
+          kill -9 ${CNOID_PID} || true
           sleep 10s
           mkdir -p /tmp/results
           ffmpeg -nostats -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
