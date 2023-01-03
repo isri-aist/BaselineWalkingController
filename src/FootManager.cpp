@@ -223,11 +223,15 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                          requireImpGainUpdate_ = true;
                        }));
   }
+
+  SwingTrajIndHorizontalVertical::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
 }
 
 void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.removeCategory({ctl().name(), config_.name});
+
+  SwingTrajIndHorizontalVertical::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
 }
 
 void FootManager::addToLogger(mc_rtc::Logger & logger)

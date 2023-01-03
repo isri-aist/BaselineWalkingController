@@ -1,3 +1,6 @@
+#include <mc_rtc/gui/ArrayInput.h>
+#include <mc_rtc/gui/NumberInput.h>
+
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 
 using namespace BWC;
@@ -27,6 +30,56 @@ void SwingTrajIndHorizontalVertical::Configuration::load(const mc_rtc::Configura
   {
     tiltForwardAngleThre = mc_rtc::constants::toRad(mcRtcConfig("tiltForwardAngleThre"));
   }
+}
+
+void SwingTrajIndHorizontalVertical::addConfigToGUI(mc_rtc::gui::StateBuilder & gui,
+                                                    const std::vector<std::string> & category)
+{
+  gui.addElement(category,
+                 mc_rtc::gui::NumberInput(
+                     "withdrawDurationRatio", []() { return defaultConfig_.withdrawDurationRatio; },
+                     [](double v) { defaultConfig_.withdrawDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "approachDurationRatio", []() { return defaultConfig_.approachDurationRatio; },
+                     [](double v) { defaultConfig_.approachDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "verticalTopDurationRatio", []() { return defaultConfig_.verticalTopDurationRatio; },
+                     [](double v) { defaultConfig_.verticalTopDurationRatio = v; }),
+                 mc_rtc::gui::ArrayInput(
+                     "verticalTopOffset", {"x", "y", "z"},
+                     []() -> const Eigen::Vector3d & { return defaultConfig_.verticalTopOffset; },
+                     [](const Eigen::Vector3d & v) { defaultConfig_.verticalTopOffset = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltAngleWithdraw", []() { return mc_rtc::constants::toDeg(defaultConfig_.tiltAngleWithdraw); },
+                     [](double v) { defaultConfig_.tiltAngleWithdraw = mc_rtc::constants::toRad(v); }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltAngleApproach", []() { return mc_rtc::constants::toDeg(defaultConfig_.tiltAngleApproach); },
+                     [](double v) { defaultConfig_.tiltAngleApproach = mc_rtc::constants::toRad(v); }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltAngleWithdrawDurationRatio", []() { return defaultConfig_.tiltAngleWithdrawDurationRatio; },
+                     [](double v) { defaultConfig_.tiltAngleWithdrawDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltAngleApproachDurationRatio", []() { return defaultConfig_.tiltAngleApproachDurationRatio; },
+                     [](double v) { defaultConfig_.tiltAngleApproachDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltCenterWithdrawDurationRatio", []() { return defaultConfig_.tiltCenterWithdrawDurationRatio; },
+                     [](double v) { defaultConfig_.tiltCenterWithdrawDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltCenterApproachDurationRatio", []() { return defaultConfig_.tiltCenterApproachDurationRatio; },
+                     [](double v) { defaultConfig_.tiltCenterApproachDurationRatio = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltDistThre", []() { return defaultConfig_.tiltDistThre; },
+                     [](double v) { defaultConfig_.tiltDistThre = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "tiltForwardAngleThre",
+                     []() { return mc_rtc::constants::toDeg(defaultConfig_.tiltForwardAngleThre); },
+                     [](double v) { defaultConfig_.tiltForwardAngleThre = mc_rtc::constants::toRad(v); }));
+}
+
+void SwingTrajIndHorizontalVertical::removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui,
+                                                         const std::vector<std::string> & category)
+{
+  gui.removeCategory(category);
 }
 
 SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTransformd & startPose,

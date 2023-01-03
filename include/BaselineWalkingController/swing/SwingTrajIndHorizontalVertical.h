@@ -1,6 +1,7 @@
 #pragma once
 
 #include <mc_rtc/constants.h>
+#include <mc_rtc/gui/StateBuilder.h>
 
 #include <BaselineWalkingController/SwingTraj.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
@@ -59,11 +60,33 @@ public:
     //! Threshold of forward angle between start pose and goal pose to enable tilt [rad]
     double tiltForwardAngleThre = mc_rtc::constants::toRad(10);
 
+    /** \brief Constructor.
+
+        This is necessary for https://stackoverflow.com/q/53408962
+    */
+    Configuration() {}
+
     /** \brief Load mc_rtc configuration.
         \param mcRtcConfig mc_rtc configuration
     */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
   };
+
+public:
+  //! Default configuration
+  static inline Configuration defaultConfig_;
+
+  /** \brief Add entries of default configuration to the GUI.
+      \param gui GUI
+      \param category category of GUI entries
+   */
+  static void addConfigToGUI(mc_rtc::gui::StateBuilder & gui, const std::vector<std::string> & category);
+
+  /** \brief Remove entries of default configuration from the GUI.
+      \param gui GUI
+      \param category category of GUI entries
+   */
+  static void removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui, const std::vector<std::string> & category);
 
 public:
   /** \brief Constructor.
@@ -110,7 +133,7 @@ public:
 
 protected:
   //! Configuration
-  Configuration config_;
+  Configuration config_ = defaultConfig_;
 
   //! Horizontal position function
   std::shared_ptr<CubicInterpolator<Eigen::Vector2d>> horizontalPosFunc_;
