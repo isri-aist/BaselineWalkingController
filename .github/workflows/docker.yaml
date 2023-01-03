@@ -96,9 +96,9 @@ jobs:
           choreonoid --start-simulation ${CNOID_FILE} &
           CNOID_PID=$!
           if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
-            SLEEP_DURATION="60s"
+            SLEEP_DURATION="70s"
           else
-            SLEEP_DURATION="40s"
+            SLEEP_DURATION="50s"
           fi
           sleep ${SLEEP_DURATION}
           kill -2 ${CNOID_PID}
