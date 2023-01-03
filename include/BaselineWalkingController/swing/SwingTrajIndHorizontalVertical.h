@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mc_rtc/constants.h>
+
 #include <BaselineWalkingController/SwingTraj.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
@@ -33,6 +35,24 @@ public:
     //! Position offset of vertical top [m]
     Eigen::Vector3d verticalTopOffset = Eigen::Vector3d(0, 0, 0.05);
 
+    //! Tilt angle in withdraw [rad]
+    double withdrawTiltAngle = mc_rtc::constants::toRad(20);
+
+    //! Tilt angle in approach [rad]
+    double approachTiltAngle = mc_rtc::constants::toRad(-10);
+
+    //! Duration ratio to set tilt angle in withdraw
+    double tiltAngleWithdrawDurationRatio = 0.25;
+
+    //! Duration ratio to set tilt angle in approach
+    double tiltAngleApproachDurationRatio = 0.25;
+
+    //! Duration ratio at which the tilt center starts to change
+    double tiltCenterWithdrawDurationRatio = 0.25;
+
+    //! Duration ratio at which the tilt center ends to change
+    double tiltCenterApproachDurationRatio = 0.25;
+
     /** \brief Load mc_rtc configuration.
         \param mcRtcConfig mc_rtc configuration
     */
@@ -45,12 +65,14 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param localVertexList vertices of surface in local coordinates
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajIndHorizontalVertical(const sva::PTransformd & startPose,
                                  const sva::PTransformd & goalPose,
                                  double startTime,
                                  double goalTime,
+                                 const std::vector<Eigen::Vector3d> & localVertexList,
                                  const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
@@ -92,5 +114,11 @@ protected:
 
   //! Rotation function
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
+
+  //! Tilt angle function
+  std::shared_ptr<CubicInterpolator<Vector1d>> tiltAngleFunc_;
+
+  //! Tilt center function
+  std::shared_ptr<CubicInterpolator<sva::PTransformd, sva::MotionVecd>> tiltCenterFunc_;
 };
 } // namespace BWC

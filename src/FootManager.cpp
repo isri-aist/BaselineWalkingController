@@ -12,6 +12,7 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
+#include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
@@ -390,14 +391,9 @@ std::unordered_map<Foot, std::shared_ptr<Contact>> FootManager::calcCurrentConta
   std::unordered_map<Foot, std::shared_ptr<Contact>> contactList;
   for(const auto & foot : getCurrentContactFeet())
   {
-    std::vector<Eigen::Vector3d> localVertexList;
     const auto & surface = ctl().robot().surface(surfaceName(foot));
-    for(const auto & point : surface.points())
-    {
-      // Surface points are represented in body frame, not surface frame
-      localVertexList.push_back((point * surface.X_b_s().inv()).translation());
-    }
-    contactList.emplace(foot, std::make_shared<Contact>(std::to_string(foot), config_.fricCoeff, localVertexList,
+    contactList.emplace(foot, std::make_shared<Contact>(std::to_string(foot), config_.fricCoeff,
+                                                        calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
                                                         targetFootPoses_.at(foot)));
   }
 
@@ -633,20 +629,15 @@ void FootManager::updateFootTraj()
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               swingFootstep_->swingTrajConfig);
         }
-        else if(swingTrajType == "IndHorizontalVertical")
+        else // if(swingTrajType == "IndHorizontalVertical")
         {
           swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
+                                    sva::PTransformd::Identity()),
               swingFootstep_->swingTrajConfig);
-        }
-        else
-        {
-          using DefaultSwingTrajClass = SwingTrajIndHorizontalVertical;
-          swingTraj_ =
-              std::make_shared<DefaultSwingTrajClass>(swingStartPose, swingGoalPose, swingFootstep_->swingStartTime,
-                                                      swingFootstep_->swingEndTime, swingFootstep_->swingTrajConfig);
 
-          if(!swingTrajType.empty())
+          if(!(swingTrajType == swingTraj_->type() || swingTrajType.empty()))
           {
             mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}. Use {} instead.", swingTrajType,
                                swingTraj_->type());
@@ -811,14 +802,8 @@ void FootManager::updateFootTraj()
   std::vector<std::vector<Eigen::Vector3d>> footstepPolygonList;
   for(const auto & footstep : footstepQueue_)
   {
-    std::vector<Eigen::Vector3d> footstepPolygon;
     const auto & surface = ctl().robot().surface(surfaceName(footstep.foot));
-    for(const auto & point : surface.points())
-    {
-      // Surface points are represented in body frame, not surface frame
-      footstepPolygon.push_back((point * surface.X_b_s().inv() * footstep.pose).translation());
-    }
-    footstepPolygonList.push_back(footstepPolygon);
+    footstepPolygonList.push_back(calcSurfaceVertexList(surface, footstep.pose));
   }
 
   ctl().gui()->removeCategory({ctl().name(), config_.name, "FootstepMarker"});
