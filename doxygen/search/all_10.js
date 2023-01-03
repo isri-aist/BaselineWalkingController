@@ -4,7 +4,7 @@ var searchData=
   ['refcomz_195',['refComZ',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a7cd2c2d2bca99f7b679da4900501cbcd',1,'BWC::CentroidalManager::Configuration']]],
   ['refzmp_5f_196',['refZmp_',['../classBWC_1_1CentroidalManager.html#a28c2e717ae3c5b4200630fbbae32b6c9',1,'BWC::CentroidalManager']]],
   ['regularweight_197',['regularWeight',['../structBWC_1_1WrenchDistribution_1_1Configuration.html#addb8c33e01f86d9738a9cb1aeb0fac52',1,'BWC::WrenchDistribution::Configuration']]],
-  ['removeconfigfromgui_198',['removeConfigFromGUI',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a9e72e12cd9597fd30ecdf1ce0a2e51de',1,'BWC::SwingTrajIndHorizontalVertical']]],
+  ['removeconfigfromgui_198',['removeConfigFromGUI',['../classBWC_1_1SwingTrajCubicSplineSimple.html#a0f3615857e353279aa6a7a9112a98f54',1,'BWC::SwingTrajCubicSplineSimple::removeConfigFromGUI()'],['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a9e72e12cd9597fd30ecdf1ce0a2e51de',1,'BWC::SwingTrajIndHorizontalVertical::removeConfigFromGUI()']]],
   ['removefromgui_199',['removeFromGUI',['../classBWC_1_1CentroidalManager.html#a4e0c8e2badfdec63bb123dad5c460eb9',1,'BWC::CentroidalManager::removeFromGUI()'],['../classBWC_1_1FootManager.html#a171e623e8a5708e9a4ca24da36a6f309',1,'BWC::FootManager::removeFromGUI()']]],
   ['removefromlogger_200',['removeFromLogger',['../classBWC_1_1CentroidalManager.html#ac81fa3a6a01d0655ca6bc22a312f73b0',1,'BWC::CentroidalManager::removeFromLogger()'],['../classBWC_1_1FootManager.html#a0dc00f7a52b0d325838f4b4ac9a66748',1,'BWC::FootManager::removeFromLogger()']]],
   ['requireimpgainupdate_5f_201',['requireImpGainUpdate_',['../classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e',1,'BWC::FootManager']]],
