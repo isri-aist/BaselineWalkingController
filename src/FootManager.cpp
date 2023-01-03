@@ -681,14 +681,6 @@ void FootManager::updateFootTraj()
       }
     }
 
-    // Update target
-    if(!(config_.stopSwingTrajForTouchDownFoot && touchDown_))
-    {
-      targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->pose(ctl().t());
-      targetFootVels_.at(swingFootstep_->foot) = swingTraj_->vel(ctl().t());
-      targetFootAccels_.at(swingFootstep_->foot) = swingTraj_->accel(ctl().t());
-    }
-
     // Update touchDown_
     if(!touchDown_ && detectTouchDown())
     {
@@ -696,9 +688,15 @@ void FootManager::updateFootTraj()
 
       if(config_.stopSwingTrajForTouchDownFoot)
       {
-        targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
-        targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
+        swingTraj_->touchDown(ctl().t());
       }
+    }
+
+    // Update target
+    {
+      targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->pose(ctl().t());
+      targetFootVels_.at(swingFootstep_->foot) = swingTraj_->vel(ctl().t());
+      targetFootAccels_.at(swingFootstep_->foot) = swingTraj_->accel(ctl().t());
     }
   }
   else

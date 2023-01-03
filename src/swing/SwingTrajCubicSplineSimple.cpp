@@ -78,15 +78,33 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
 
 sva::PTransformd SwingTrajCubicSplineSimple::pose(double t) const
 {
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    t = touchDownTime_;
+  }
   return sva::PTransformd((*rotFunc_)(t).transpose(), (*posFunc_)(t));
 }
 
 sva::MotionVecd SwingTrajCubicSplineSimple::vel(double t) const
 {
-  return sva::MotionVecd(rotFunc_->derivative(t, 1), posFunc_->derivative(t, 1));
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    return sva::MotionVecd::Zero();
+  }
+  else
+  {
+    return sva::MotionVecd(rotFunc_->derivative(t, 1), posFunc_->derivative(t, 1));
+  }
 }
 
 sva::MotionVecd SwingTrajCubicSplineSimple::accel(double t) const
 {
-  return sva::MotionVecd(rotFunc_->derivative(t, 2), posFunc_->derivative(t, 2));
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    return sva::MotionVecd::Zero();
+  }
+  else
+  {
+    return sva::MotionVecd(rotFunc_->derivative(t, 2), posFunc_->derivative(t, 2));
+  }
 }

@@ -57,6 +57,14 @@ public:
   */
   virtual sva::MotionVecd accel(double t) const = 0;
 
+  /** \brief Notify touch down detection.
+      \param t time
+  */
+  inline virtual void touchDown(double t)
+  {
+    touchDownTime_ = t;
+  }
+
   /** \brief Const accessor to the configuration. */
   inline virtual const Configuration & config() const
   {
@@ -78,5 +86,9 @@ public:
 
   //! Goal time [sec]
   double goalTime_ = 0.0;
+
+protected:
+  //! Time when touch down is detected (-1 if not detected)
+  double touchDownTime_ = -1;
 };
 } // namespace BWC

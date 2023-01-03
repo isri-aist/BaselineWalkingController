@@ -171,22 +171,42 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
 
 sva::PTransformd SwingTrajIndHorizontalVertical::pose(double t) const
 {
+  double nominalTime = t;
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    nominalTime = touchDownTime_;
+  }
   sva::PTransformd nominalPose = sva::PTransformd(
-      (*rotFunc_)(t).transpose(), (Eigen::Vector3d() << (*horizontalPosFunc_)(t), (*verticalPosFunc_)(t)).finished());
+      (*rotFunc_)(nominalTime).transpose(),
+      (Eigen::Vector3d() << (*horizontalPosFunc_)(nominalTime), (*verticalPosFunc_)(nominalTime)).finished());
   sva::PTransformd tiltCenterTrans = (*tiltCenterFunc_)(t);
   return tiltCenterTrans.inv() * sva::PTransformd(sva::RotY((*tiltAngleFunc_)(t)[0])) * tiltCenterTrans * nominalPose;
 }
 
 sva::MotionVecd SwingTrajIndHorizontalVertical::vel(double t) const
 {
-  return sva::MotionVecd(
-      rotFunc_->derivative(t, 1),
-      (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 1), verticalPosFunc_->derivative(t, 1)).finished());
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    return sva::MotionVecd::Zero();
+  }
+  else
+  {
+    return sva::MotionVecd(
+        rotFunc_->derivative(t, 1),
+        (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 1), verticalPosFunc_->derivative(t, 1)).finished());
+  }
 }
 
 sva::MotionVecd SwingTrajIndHorizontalVertical::accel(double t) const
 {
-  return sva::MotionVecd(
-      rotFunc_->derivative(t, 2),
-      (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 2), verticalPosFunc_->derivative(t, 2)).finished());
+  if(touchDownTime_ > 0 && t >= touchDownTime_)
+  {
+    return sva::MotionVecd::Zero();
+  }
+  else
+  {
+    return sva::MotionVecd(
+        rotFunc_->derivative(t, 2),
+        (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 2), verticalPosFunc_->derivative(t, 2)).finished());
+  }
 }
