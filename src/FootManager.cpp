@@ -12,8 +12,10 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
+#include <BaselineWalkingController/RobotUtils.h>
+#include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
+#include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
 using namespace BWC;
@@ -57,8 +59,6 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
 : ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
   groundPosZFunc_(std::make_shared<CubicInterpolator<double>>()),
-  swingPosFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
-  swingRotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>()),
   baseYawFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
@@ -95,9 +95,6 @@ void FootManager::reset()
   contactFootPosesList_.emplace(ctl().t(), targetFootPoses_);
 
   swingFootstep_ = nullptr;
-
-  swingPosFunc_->clearFuncs();
-  swingRotFunc_->clearPoints();
 
   baseYawFunc_->clearPoints();
 
@@ -251,6 +248,8 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
     logger.addLogEntry(config_.name + "_targetFootAccel_" + std::to_string(foot), this,
                        [this, foot]() -> const sva::MotionVecd & { return targetFootAccels_.at(foot); });
   }
+  logger.addLogEntry(config_.name + "_swingTrajType", this,
+                     [this]() -> std::string { return swingTraj_ ? swingTraj_->type() : "None"; });
 
   logger.addLogEntry(config_.name + "_supportPhase", this, [this]() { return std::to_string(supportPhase_); });
 
@@ -288,14 +287,12 @@ const std::string & FootManager::surfaceName(const Foot & foot) const
 Footstep FootManager::makeFootstep(const Foot & foot,
                                    const sva::PTransformd & footMidpose,
                                    double startTime,
-                                   const mc_rtc::Configuration & mcRtcConfig) const
+                                   const mc_rtc::Configuration & swingTrajConfig) const
 {
-  Footstep footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
-                    startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
-                    startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
-                    startTime + config_.footstepDuration);
-  footstep.config.load(mcRtcConfig);
-  return footstep;
+  return Footstep(foot, config_.midToFootTranss.at(foot) * footMidpose, startTime,
+                  startTime + 0.5 * config_.doubleSupportRatio * config_.footstepDuration,
+                  startTime + (1.0 - 0.5 * config_.doubleSupportRatio) * config_.footstepDuration,
+                  startTime + config_.footstepDuration, swingTrajConfig);
 }
 
 bool FootManager::appendFootstep(const Footstep & newFootstep)
@@ -394,14 +391,9 @@ std::unordered_map<Foot, std::shared_ptr<Contact>> FootManager::calcCurrentConta
   std::unordered_map<Foot, std::shared_ptr<Contact>> contactList;
   for(const auto & foot : getCurrentContactFeet())
   {
-    std::vector<Eigen::Vector3d> localVertexList;
     const auto & surface = ctl().robot().surface(surfaceName(foot));
-    for(const auto & point : surface.points())
-    {
-      // Surface points are represented in body frame, not surface frame
-      localVertexList.push_back((point * surface.X_b_s().inv()).translation());
-    }
-    contactList.emplace(foot, std::make_shared<Contact>(std::to_string(foot), config_.fricCoeff, localVertexList,
+    contactList.emplace(foot, std::make_shared<Contact>(std::to_string(foot), config_.fricCoeff,
+                                                        calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
                                                         targetFootPoses_.at(foot)));
   }
 
@@ -616,80 +608,41 @@ void FootManager::updateFootTraj()
       // Set swingFootstep_
       swingFootstep_ = &(footstepQueue_.front());
 
-      // Set swingPosFunc_ and swingRotFunc_
-      {
-        // Enable hold mode to prevent IK target pose from jumping
-        // https://github.com/jrl-umi3218/mc_rtc/pull/143
-        ctl().footTasks_.at(swingFootstep_->foot)->hold(true);
+      // Enable hold mode to prevent IK target pose from jumping
+      // https://github.com/jrl-umi3218/mc_rtc/pull/143
+      ctl().footTasks_.at(swingFootstep_->foot)->hold(true);
 
+      // Set swingTraj_
+      {
         const sva::PTransformd & swingStartPose = ctl().robot().surfacePose(surfaceName(swingFootstep_->foot));
         sva::PTransformd swingGoalPose = swingFootstep_->pose;
         if(config_.overwriteLandingPose && prevFootstep_)
         {
           sva::PTransformd swingRelPose = swingFootstep_->pose * prevFootstep_->pose.inv();
-          swingGoalPose = swingRelPose * targetFootPoses_.at(prevFootstep_->foot);
+          swingGoalPose.translation() = (swingRelPose * targetFootPoses_.at(prevFootstep_->foot)).translation();
         }
-        double withdrawDuration = swingFootstep_->config.withdrawDurationRatio
-                                  * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
-        double approachDuration = swingFootstep_->config.approachDurationRatio
-                                  * (swingFootstep_->swingEndTime - swingFootstep_->swingStartTime);
 
-        BoundaryConstraint<Eigen::Vector3d> zeroVelBC(BoundaryConstraintType::Velocity, Eigen::Vector3d::Zero());
-        BoundaryConstraint<Eigen::Vector3d> zeroAccelBC(BoundaryConstraintType::Acceleration, Eigen::Vector3d::Zero());
+        std::string swingTrajType = swingFootstep_->swingTrajConfig("type", std::string(""));
+        if(swingTrajType == "CubicSplineSimple")
+        {
+          swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
+              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingFootstep_->swingTrajConfig);
+        }
+        else // if(swingTrajType == "IndHorizontalVertical")
+        {
+          swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
+              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
+                                    sva::PTransformd::Identity()),
+              swingFootstep_->swingTrajConfig);
 
-        // Spline to withdraw foot
-        // Pos
-        std::map<double, Eigen::Vector3d> withdrawPosWaypoints = {
-            {swingFootstep_->swingStartTime, swingStartPose.translation()},
-            {swingFootstep_->swingStartTime + withdrawDuration,
-             (sva::PTransformd(swingFootstep_->config.withdrawOffset) * swingStartPose).translation()}};
-        auto withdrawPosSpline =
-            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, withdrawPosWaypoints, zeroVelBC, zeroAccelBC);
-        withdrawPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingStartTime + withdrawDuration, withdrawPosSpline);
-        // Rot
-        swingRotFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingStartTime, swingStartPose.rotation().transpose()));
-        swingRotFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingStartTime + withdrawDuration, swingStartPose.rotation().transpose()));
-
-        // Spline to approach foot
-        // Pos
-        std::map<double, Eigen::Vector3d> approachPosWaypoints = {
-            {swingFootstep_->swingEndTime - approachDuration,
-             (sva::PTransformd(swingFootstep_->config.approachOffset) * swingGoalPose).translation()},
-            {swingFootstep_->swingEndTime, swingGoalPose.translation()}};
-        auto approachPosSpline =
-            std::make_shared<CubicSpline<Eigen::Vector3d>>(3, approachPosWaypoints, zeroAccelBC, zeroVelBC);
-        approachPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime, approachPosSpline);
-        // Rot
-        swingRotFunc_->appendPoint(std::make_pair(swingFootstep_->swingEndTime - approachDuration,
-                                                  swingFootstep_->pose.rotation().transpose()));
-        swingRotFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingEndTime, swingFootstep_->pose.rotation().transpose()));
-
-        // Spline to swing foot
-        // Pos
-        std::map<double, Eigen::Vector3d> swingPosWaypoints = {
-            *withdrawPosWaypoints.rbegin(),
-            {0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime),
-             (sva::PTransformd(swingFootstep_->config.swingOffset)
-              * sva::interpolate(swingStartPose, swingGoalPose, 0.5))
-                 .translation()},
-            *approachPosWaypoints.begin()};
-        auto swingPosSpline = std::make_shared<CubicSpline<Eigen::Vector3d>>(
-            3, swingPosWaypoints,
-            BoundaryConstraint<Eigen::Vector3d>(
-                BoundaryConstraintType::Velocity,
-                withdrawPosSpline->derivative(swingFootstep_->swingStartTime + withdrawDuration, 1)),
-            BoundaryConstraint<Eigen::Vector3d>(
-                BoundaryConstraintType::Velocity,
-                approachPosSpline->derivative(swingFootstep_->swingEndTime - approachDuration, 1)));
-        swingPosSpline->calcCoeff();
-        swingPosFunc_->appendFunc(swingFootstep_->swingEndTime - approachDuration, swingPosSpline);
-        // Rot
-        swingRotFunc_->calcCoeff();
+          if(!(swingTrajType == swingTraj_->type() || swingTrajType.empty()))
+          {
+            mc_rtc::log::error("[FootManager] Invalid swingTrajType: {}. Use {} instead.", swingTrajType,
+                               swingTraj_->type());
+          }
+        }
       }
 
       // Set baseYawFunc_
@@ -728,17 +681,6 @@ void FootManager::updateFootTraj()
       }
     }
 
-    // Update target
-    if(!(config_.stopSwingTrajForTouchDownFoot && touchDown_))
-    {
-      targetFootPoses_.at(swingFootstep_->foot) =
-          sva::PTransformd((*swingRotFunc_)(ctl().t()).transpose(), (*swingPosFunc_)(ctl().t()));
-      targetFootVels_.at(swingFootstep_->foot) =
-          sva::MotionVecd(swingRotFunc_->derivative(ctl().t(), 1), swingPosFunc_->derivative(ctl().t(), 1));
-      targetFootAccels_.at(swingFootstep_->foot) =
-          sva::MotionVecd(swingRotFunc_->derivative(ctl().t(), 2), swingPosFunc_->derivative(ctl().t(), 2));
-    }
-
     // Update touchDown_
     if(!touchDown_ && detectTouchDown())
     {
@@ -746,9 +688,15 @@ void FootManager::updateFootTraj()
 
       if(config_.stopSwingTrajForTouchDownFoot)
       {
-        targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
-        targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
+        swingTraj_->touchDown(ctl().t());
       }
+    }
+
+    // Update target
+    {
+      targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->pose(ctl().t());
+      targetFootVels_.at(swingFootstep_->foot) = swingTraj_->vel(ctl().t());
+      targetFootAccels_.at(swingFootstep_->foot) = swingTraj_->accel(ctl().t());
     }
   }
   else
@@ -759,8 +707,7 @@ void FootManager::updateFootTraj()
       // Update target
       if(!(config_.keepSupportFootPoseForTouchDownFoot && touchDown_))
       {
-        targetFootPoses_.at(swingFootstep_->foot) = sva::PTransformd(
-            (*swingRotFunc_)(swingFootstep_->swingEndTime).transpose(), (*swingPosFunc_)(swingFootstep_->swingEndTime));
+        targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->goalPose_;
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
@@ -770,9 +717,8 @@ void FootManager::updateFootTraj()
       // Set supportPhase_
       supportPhase_ = SupportPhase::DoubleSupport;
 
-      // Clear swingPosFunc_ and swingRotFunc_
-      swingPosFunc_->clearFuncs();
-      swingRotFunc_->clearPoints();
+      // Clear swingTraj_
+      swingTraj_.reset();
 
       // Clear baseYawFunc_
       baseYawFunc_->clearPoints();
@@ -854,14 +800,8 @@ void FootManager::updateFootTraj()
   std::vector<std::vector<Eigen::Vector3d>> footstepPolygonList;
   for(const auto & footstep : footstepQueue_)
   {
-    std::vector<Eigen::Vector3d> footstepPolygon;
     const auto & surface = ctl().robot().surface(surfaceName(footstep.foot));
-    for(const auto & point : surface.points())
-    {
-      // Surface points are represented in body frame, not surface frame
-      footstepPolygon.push_back((point * surface.X_b_s().inv() * footstep.pose).translation());
-    }
-    footstepPolygonList.push_back(footstepPolygon);
+    footstepPolygonList.push_back(calcSurfaceVertexList(surface, footstep.pose));
   }
 
   ctl().gui()->removeCategory({ctl().name(), config_.name, "FootstepMarker"});
@@ -1027,7 +967,8 @@ bool FootManager::detectTouchDown() const
 
   // False if the position error does not meet the threshold
   Foot swingFoot = (supportPhase_ == SupportPhase::LeftSupport ? Foot::Right : Foot::Left);
-  if(((*swingPosFunc_)(swingFootstep_->swingEndTime) - (*swingPosFunc_)(ctl().t())).norm() > config_.touchDownPosError)
+  if((swingTraj_->goalPose_.translation() - swingTraj_->pose(ctl().t()).translation()).norm()
+     > config_.touchDownPosError)
   {
     return false;
   }

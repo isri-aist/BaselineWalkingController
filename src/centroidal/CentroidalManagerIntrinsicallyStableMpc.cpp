@@ -4,6 +4,7 @@
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
+#include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerIntrinsicallyStableMpc.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
@@ -84,12 +85,10 @@ CCC::IntrinsicallyStableMpc::RefData CentroidalManagerIntrinsicallyStableMpc::ca
   for(const auto & footPoseKV : ctl().footManager_->calcContactFootPoses(t))
   {
     const auto & surface = ctl().robot().surface(ctl().footManager_->surfaceName(footPoseKV.first));
-    for(const auto & point : surface.points())
+    for(const auto & pos : calcSurfaceVertexList(surface, footPoseKV.second))
     {
-      // Surface points are represented in body frame, not surface frame
-      Eigen::Vector2d pos = (point * surface.X_b_s().inv() * footPoseKV.second).translation().head<2>();
-      minPos = minPos.cwiseMin(pos);
-      maxPos = maxPos.cwiseMax(pos);
+      minPos = minPos.cwiseMin(pos.head<2>());
+      maxPos = maxPos.cwiseMax(pos.head<2>());
     }
   }
   refData.zmp_limits[0] = minPos;

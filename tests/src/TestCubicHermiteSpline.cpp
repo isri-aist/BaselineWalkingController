@@ -5,6 +5,7 @@
 #include <Eigen/Core>
 
 #include <BaselineWalkingController/trajectory/CubicHermiteSpline.h>
+#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 TEST(TestCubicHermiteSpline, CubicHermiteSpline)
 {
@@ -38,6 +39,42 @@ TEST(TestCubicHermiteSpline, CubicHermiteSpline)
     double t = it->first;
     EXPECT_TRUE(((sp(t - t_eps) - sp(t + t_eps)).array() < y_eps).all());
     EXPECT_TRUE(((sp.derivative(t - t_eps, 1) - sp.derivative(t + t_eps, 1)).array() < yd_eps).all());
+  }
+}
+
+TEST(TestCubicHermiteSpline, CompareCubicSplineAndCubicHermiteSpline)
+{
+  for(int i = 0; i < 100; i++)
+  {
+    Eigen::Vector2d times = Eigen::Vector2d::Random();
+    double start_time = times.minCoeff();
+    double end_time = times.maxCoeff();
+    Eigen::Vector3d start_pos = Eigen::Vector3d::Random();
+    Eigen::Vector3d end_pos = Eigen::Vector3d::Random();
+    Eigen::Vector3d start_vel = Eigen::Vector3d::Random();
+    Eigen::Vector3d end_vel = Eigen::Vector3d::Random();
+
+    BWC::CubicSpline<Eigen::Vector3d> cubicSpline(
+        3, std::map<double, Eigen::Vector3d>{{start_time, start_pos}, {end_time, end_pos}},
+        BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, start_vel),
+        BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, end_vel));
+    cubicSpline.calcCoeff();
+
+    BWC::CubicHermiteSpline<Eigen::Vector3d> cubicHermiteSpline(
+        3, std::map<double, std::pair<Eigen::Vector3d, Eigen::Vector3d>>{{start_time, {start_pos, start_vel}},
+                                                                         {end_time, {end_pos, end_vel}}});
+    cubicHermiteSpline.calcCoeff();
+
+    const int divideNum = 100;
+    for(int j = 0; j <= divideNum; j++)
+    {
+      double ratio = static_cast<double>(j) / divideNum;
+      double t = (1.0 - ratio) * start_time + ratio * end_time;
+      EXPECT_TRUE(cubicSpline(t).isApprox(cubicHermiteSpline(t)));
+      EXPECT_TRUE(cubicSpline.derivative(t, 1).isApprox(cubicHermiteSpline.derivative(t, 1)));
+      EXPECT_TRUE(cubicSpline.derivative(t, 2).isApprox(cubicHermiteSpline.derivative(t, 2)));
+      EXPECT_TRUE(cubicSpline.derivative(t, 3).isApprox(cubicHermiteSpline.derivative(t, 3)));
+    }
   }
 }
 

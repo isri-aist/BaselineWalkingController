@@ -19,7 +19,7 @@ public:
       \param dim dimension of value
       \param points times, positions, and velocities in way points
   */
-  CubicHermiteSpline(int dim, const std::map<double, std::pair<T, T>> & points) : dim_(dim), points_(points) {}
+  CubicHermiteSpline(int dim, const std::map<double, std::pair<T, T>> & points = {}) : dim_(dim), points_(points) {}
 
   /** \brief Access points. */
   const std::map<double, std::pair<T, T>> & points() const noexcept
@@ -106,7 +106,7 @@ public:
 
     const auto & seg = argSegment(t);
     double scaledT = (t - seg.first) / (seg.second - seg.first);
-    return (funcIt->second)->derivative(scaledT, order) / (seg.second - seg.first);
+    return (funcIt->second)->derivative(scaledT, order) / std::pow(seg.second - seg.first, order);
   }
 
   /** \brief Overwrite the velocity with keeping the time and position for making cubic Hermite spline monotone.

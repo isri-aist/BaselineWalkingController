@@ -11,12 +11,12 @@
 
 #include <BaselineWalkingController/FootTypes.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
-#include <BaselineWalkingController/trajectory/Func.h>
 
 namespace BWC
 {
 class BaselineWalkingController;
 class Contact;
+class SwingTraj;
 
 /** \brief Foot manager.
 
@@ -138,12 +138,12 @@ public:
       \param foot foot
       \param footMidpose middle pose of both feet
       \param startTime time to start the footstep
-      \param mcRtcConfig mc_rtc configuration
+      \param swingTrajConfig configuration for swing trajectory
   */
   Footstep makeFootstep(const Foot & foot,
                         const sva::PTransformd & footMidpose,
                         double startTime,
-                        const mc_rtc::Configuration & mcRtcConfig = {}) const;
+                        const mc_rtc::Configuration & swingTrajConfig = {}) const;
 
   /** \brief Append a target footstep to the queue.
       \param newFootstep footstep to append
@@ -344,11 +344,8 @@ protected:
   //! Footstep during swing
   const Footstep * swingFootstep_ = nullptr;
 
-  //! Swing foot trajectory
-  //! @{
-  std::shared_ptr<PiecewiseFunc<Eigen::Vector3d>> swingPosFunc_;
-  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> swingRotFunc_;
-  //! @}
+  //! Foot swing trajectory
+  std::shared_ptr<SwingTraj> swingTraj_ = nullptr;
 
   //! Base link Yaw trajectory
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;

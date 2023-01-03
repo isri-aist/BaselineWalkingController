@@ -22,61 +22,71 @@ states:
           footMidpose:
             translation: [0.34, 0.0, 0.185]
           startTime: 2.0
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [0.34, 0.0, 0.185]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [0.58, 0.0, 0.37]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [0.58, 0.0, 0.37]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [0.82, 0.0, 0.555]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [0.82, 0.0, 0.555]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [1.06, 0.0, 0.74]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [1.06, 0.0, 0.74]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.14]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.13]
         - footMidpose:
             translation: [1.3, 0.0, 0.885]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.11]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.12]
         - footMidpose:
             translation: [1.3, 0.0, 0.885]
-          config:
+          swingTrajConfig:
+            type: CubicSplineSimple
             withdrawOffset: [0, 0, 0.11]
             approachOffset: [0, 0, 0.02]
             swingOffset: [0, 0, 0.12]

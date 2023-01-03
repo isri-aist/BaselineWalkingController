@@ -50,30 +50,6 @@ enum class SupportPhase
 /** \brief Footstep. */
 struct Footstep
 {
-  /** \brief Configuration. */
-  struct Configuration
-  {
-    //! Duration ratio to withdraw foot
-    double withdrawDurationRatio = 0.25;
-
-    //! Position offset to withdraw foot [m]
-    Eigen::Vector3d withdrawOffset = Eigen::Vector3d(0, 0, 0.015);
-
-    //! Duration ratio to approach foot
-    double approachDurationRatio = 0.25;
-
-    //! Position offset to approach foot [m]
-    Eigen::Vector3d approachOffset = Eigen::Vector3d(0, 0, 0.015);
-
-    //! Position offset to swing foot [m]
-    Eigen::Vector3d swingOffset = Eigen::Vector3d(0, 0, 0.05);
-
-    /** \brief Load mc_rtc configuration.
-        \param mcRtcConfig mc_rtc configuration
-    */
-    void load(const mc_rtc::Configuration & mcRtcConfig);
-  };
-
   /** \brief Constructor.
       \param _foot foot
       \param _pose foot pose
@@ -81,6 +57,7 @@ struct Footstep
       \param _swingStartTime time to start swinging the foot
       \param _swingEndTime time to end swinging the foot
       \param _transitEndTime time to end ZMP transition
+      \param _swingTrajConfig configuration for swing trajectory
 
       \note The following relation must hold: _transitStartTime < _swingStartTime < _swingEndTime < _transitEndTime.
   */
@@ -89,9 +66,10 @@ struct Footstep
            double _transitStartTime = 0,
            double _swingStartTime = 0,
            double _swingEndTime = 0,
-           double _transitEndTime = 0)
+           double _transitEndTime = 0,
+           const mc_rtc::Configuration & _swingTrajConfig = {})
   : foot(_foot), pose(_pose), transitStartTime(_transitStartTime), swingStartTime(_swingStartTime),
-    swingEndTime(_swingEndTime), transitEndTime(_transitEndTime){};
+    swingEndTime(_swingEndTime), transitEndTime(_transitEndTime), swingTrajConfig(_swingTrajConfig){};
 
   //! Foot
   Foot foot;
@@ -111,8 +89,8 @@ struct Footstep
   //! Time to end ZMP transition
   double transitEndTime;
 
-  //! Configuration
-  Configuration config;
+  //! Configuration for swing trajectory
+  mc_rtc::Configuration swingTrajConfig = {};
 };
 } // namespace BWC
 
