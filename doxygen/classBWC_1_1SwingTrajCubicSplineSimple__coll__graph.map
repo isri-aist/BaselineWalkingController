@@ -1,0 +1,6 @@
+<map id="BWC::SwingTrajCubicSplineSimple" name="BWC::SwingTrajCubicSplineSimple">
+<area shape="rect" id="node1" title="Simple foot swing trajectory with cubic spline." alt="" coords="59,199,259,240"/>
+<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="5,102,129,129"/>
+<area shape="rect" id="node3" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="51,5,271,32"/>
+<area shape="rect" id="node4" href="$structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html" title="Configuration." alt="" coords="154,95,354,136"/>
+</map>

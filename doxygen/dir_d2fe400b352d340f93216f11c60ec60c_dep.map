@@ -1,10 +1,12 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController">
-<area shape="rect" id="node5" href="dir_05143b77bd3718fb6f82256e79de7698.html" title="trajectory" alt="" coords="492,159,577,207"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000004_000008.html" title="2" alt="" coords="538,133,548,148"/>
-<area shape="rect" id="node2" href="dir_dc2a6c12081d852ba85c8455619bc8e8.html" title="centroidal" alt="" coords="326,63,413,111"/>
-<area shape="rect" id="node3" href="dir_f9a8a481d1244741d3bb5fc6f5776354.html" title="states" alt="" coords="229,63,301,111"/>
-<area shape="rect" id="node4" href="dir_7b7596affaaa46f14160d65297e4dfb9.html" title="tasks" alt="" coords="133,63,205,111"/>
-<area shape="rect" id="node6" href="dir_a3dae312eb6e2115d7d20228cf5f33ec.html" title="wrench" alt="" coords="37,63,109,111"/>
-<area shape="rect" id="clust2" href="dir_d2fe400b352d340f93216f11c60ec60c.html" alt="" coords="27,52,643,217"/>
-<area shape="rect" id="clust1" href="dir_672980c4978a15c45dfee98c71cd13bb.html" title="include" alt="" coords="16,16,653,228"/>
+<area shape="rect" id="node6" href="dir_05143b77bd3718fb6f82256e79de7698.html" title="trajectory" alt="" coords="405,159,491,207"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000004_000009.html" title="4" alt="" coords="506,151,516,166"/>
+<area shape="rect" id="node2" href="dir_dc2a6c12081d852ba85c8455619bc8e8.html" title="centroidal" alt="" coords="422,63,509,111"/>
+<area shape="rect" id="node3" href="dir_f9a8a481d1244741d3bb5fc6f5776354.html" title="states" alt="" coords="325,63,397,111"/>
+<area shape="rect" id="node4" href="dir_58238aa87c367d56f4614a05ba7706e0.html" title="swing" alt="" coords="229,63,301,111"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000007_000009.html" title="3" alt="" coords="388,136,397,151"/>
+<area shape="rect" id="node5" href="dir_7b7596affaaa46f14160d65297e4dfb9.html" title="tasks" alt="" coords="133,63,205,111"/>
+<area shape="rect" id="node7" href="dir_a3dae312eb6e2115d7d20228cf5f33ec.html" title="wrench" alt="" coords="37,63,109,111"/>
+<area shape="rect" id="clust2" href="dir_d2fe400b352d340f93216f11c60ec60c.html" alt="" coords="27,52,739,217"/>
+<area shape="rect" id="clust1" href="dir_672980c4978a15c45dfee98c71cd13bb.html" title="include" alt="" coords="16,16,749,228"/>
 </map>

@@ -92,12 +92,11 @@ Collaboration diagram for BWC::FootManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classBWC_1_1FootManager__coll__graph.png" border="0" usemap="#BWC_1_1FootManager_coll__map" alt="Collaboration graph"/></div>
 <map name="BWC_1_1FootManager_coll__map" id="BWC_1_1FootManager_coll__map">
-<area shape="rect" title="Foot manager." alt="" coords="316,184,463,211"/>
-<area shape="rect" href="structBWC_1_1FootManager_1_1Configuration.html" title="Configuration." alt="" coords="5,95,248,121"/>
-<area shape="rect" href="structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="272,95,507,121"/>
-<area shape="rect" title=" " alt="" coords="282,5,481,32"/>
-<area shape="rect" href="structBWC_1_1Footstep.html" title="Footstep." alt="" coords="539,95,656,121"/>
-<area shape="rect" href="structBWC_1_1Footstep_1_1Configuration.html" title="Configuration." alt="" coords="505,5,719,32"/>
+<area shape="rect" title="Foot manager." alt="" coords="316,171,463,197"/>
+<area shape="rect" href="structBWC_1_1FootManager_1_1Configuration.html" title="Configuration." alt="" coords="5,81,248,108"/>
+<area shape="rect" href="structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="272,81,507,108"/>
+<area shape="rect" title=" " alt="" coords="290,5,489,32"/>
+<area shape="rect" href="structBWC_1_1Footstep.html" title="Footstep." alt="" coords="531,81,648,108"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -139,9 +138,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9932f084d59dd79cb515fc93218bcdcf"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf">surfaceName</a> (const <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> &amp;foot) const</td></tr>
 <tr class="memdesc:a9932f084d59dd79cb515fc93218bcdcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get foot surface name.  <a href="classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf">More...</a><br /></td></tr>
 <tr class="separator:a9932f084d59dd79cb515fc93218bcdcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef27d93a76fc28bb62f3e1f8816d861f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1Footstep.html">Footstep</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#aef27d93a76fc28bb62f3e1f8816d861f">makeFootstep</a> (const <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> &amp;foot, const sva::PTransformd &amp;footMidpose, double startTime, const mc_rtc::Configuration &amp;mcRtcConfig={}) const</td></tr>
-<tr class="memdesc:aef27d93a76fc28bb62f3e1f8816d861f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a footstep.  <a href="classBWC_1_1FootManager.html#aef27d93a76fc28bb62f3e1f8816d861f">More...</a><br /></td></tr>
-<tr class="separator:aef27d93a76fc28bb62f3e1f8816d861f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade15c65018f3121e93907769cc88df45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1Footstep.html">Footstep</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ade15c65018f3121e93907769cc88df45">makeFootstep</a> (const <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a> &amp;foot, const sva::PTransformd &amp;footMidpose, double startTime, const mc_rtc::Configuration &amp;swingTrajConfig={}) const</td></tr>
+<tr class="memdesc:ade15c65018f3121e93907769cc88df45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a footstep.  <a href="classBWC_1_1FootManager.html#ade15c65018f3121e93907769cc88df45">More...</a><br /></td></tr>
+<tr class="separator:ade15c65018f3121e93907769cc88df45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e78b6268c5b6a360224c2d6e5038e92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92">appendFootstep</a> (const <a class="el" href="structBWC_1_1Footstep.html">Footstep</a> &amp;newFootstep)</td></tr>
 <tr class="memdesc:a1e78b6268c5b6a360224c2d6e5038e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append a target footstep to the queue.  <a href="classBWC_1_1FootManager.html#a1e78b6268c5b6a360224c2d6e5038e92">More...</a><br /></td></tr>
 <tr class="separator:a1e78b6268c5b6a360224c2d6e5038e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -268,6 +267,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structBWC_1_1Footstep.html">Footstep</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">swingFootstep_</a> = nullptr</td></tr>
 <tr class="memdesc:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1Footstep.html" title="Footstep.">Footstep</a> during swing.  <a href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">More...</a><br /></td></tr>
 <tr class="separator:a219ebee4d0e5e3a84318b91f7ec9b3e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15c1d805cbfee08f13ee97be9c0d129"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1SwingTraj.html">SwingTraj</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ac15c1d805cbfee08f13ee97be9c0d129">swingTraj_</a> = nullptr</td></tr>
+<tr class="memdesc:ac15c1d805cbfee08f13ee97be9c0d129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Foot swing trajectory.  <a href="classBWC_1_1FootManager.html#ac15c1d805cbfee08f13ee97be9c0d129">More...</a><br /></td></tr>
+<tr class="separator:ac15c1d805cbfee08f13ee97be9c0d129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a874dee9b58837127d95334fa57164ddf"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; Eigen::Matrix3d, Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a874dee9b58837127d95334fa57164ddf">baseYawFunc_</a></td></tr>
 <tr class="memdesc:a874dee9b58837127d95334fa57164ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base link Yaw trajectory.  <a href="classBWC_1_1FootManager.html#a874dee9b58837127d95334fa57164ddf">More...</a><br /></td></tr>
 <tr class="separator:a874dee9b58837127d95334fa57164ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -289,11 +291,6 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a13edc7feca7c6031864ba51e0b022cf6"><td class="memItemLeft" align="right" valign="top">mc_filter::LowPass&lt; Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#a13edc7feca7c6031864ba51e0b022cf6">overwriteLandingPosLowPass_</a> = mc_filter::LowPass&lt;Eigen::Vector3d&gt;(0.005, 1.0)</td></tr>
 <tr class="memdesc:a13edc7feca7c6031864ba51e0b022cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Low-pass filter for the overwrite amount of landing position.  <a href="classBWC_1_1FootManager.html#a13edc7feca7c6031864ba51e0b022cf6">More...</a><br /></td></tr>
 <tr class="separator:a13edc7feca7c6031864ba51e0b022cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:ab04709356a75d2dde491ea57ece986a9"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1PiecewiseFunc.html">PiecewiseFunc</a>&lt; Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9">swingPosFunc_</a></td></tr>
-<tr class="separator:ab04709356a75d2dde491ea57ece986a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01f917d1b16835a5ab415ba51165727"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt; Eigen::Matrix3d, Eigen::Vector3d &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727">swingRotFunc_</a></td></tr>
-<tr class="separator:ac01f917d1b16835a5ab415ba51165727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Foot manager. </p>
@@ -797,8 +794,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aef27d93a76fc28bb62f3e1f8816d861f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef27d93a76fc28bb62f3e1f8816d861f">&#9670;&nbsp;</a></span>makeFootstep()</h2>
+<a id="ade15c65018f3121e93907769cc88df45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade15c65018f3121e93907769cc88df45">&#9670;&nbsp;</a></span>makeFootstep()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -825,7 +822,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const mc_rtc::Configuration &amp;&#160;</td>
-          <td class="paramname"><em>mcRtcConfig</em> = <code>{}</code>&#160;</td>
+          <td class="paramname"><em>swingTrajConfig</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -841,7 +838,7 @@ Protected Attributes</h2></td></tr>
     <tr><td class="paramname">foot</td><td>foot </td></tr>
     <tr><td class="paramname">footMidpose</td><td>middle pose of both feet </td></tr>
     <tr><td class="paramname">startTime</td><td>time to start the footstep </td></tr>
-    <tr><td class="paramname">mcRtcConfig</td><td>mc_rtc configuration </td></tr>
+    <tr><td class="paramname">swingTrajConfig</td><td>configuration for swing trajectory </td></tr>
   </table>
   </dd>
 </dl>
@@ -1379,7 +1376,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base link Yaw trajectory. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00354">354</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00351">351</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1535,7 +1532,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Types of impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00366">366</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00363">363</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1587,7 +1584,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Low-pass filter for the overwrite amount of landing position. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00372">372</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00369">369</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1639,7 +1636,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether to require updating impedance gains. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00369">369</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00366">366</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1695,8 +1692,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab04709356a75d2dde491ea57ece986a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab04709356a75d2dde491ea57ece986a9">&#9670;&nbsp;</a></span>swingPosFunc_</h2>
+<a id="ac15c1d805cbfee08f13ee97be9c0d129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac15c1d805cbfee08f13ee97be9c0d129">&#9670;&nbsp;</a></span>swingTraj_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1705,7 +1702,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1PiecewiseFunc.html">PiecewiseFunc</a>&lt;Eigen::Vector3d&gt; &gt; BWC::FootManager::swingPosFunc_</td>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1SwingTraj.html">SwingTraj</a>&gt; BWC::FootManager::swingTraj_ = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1714,34 +1711,10 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Swing foot trajectory </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00349">349</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p>Foot swing trajectory. </p>
 
-</div>
-</div>
-<a id="ac01f917d1b16835a5ab415ba51165727"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac01f917d1b16835a5ab415ba51165727">&#9670;&nbsp;</a></span>swingRotFunc_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicInterpolator.html">CubicInterpolator</a>&lt;Eigen::Matrix3d, Eigen::Vector3d&gt; &gt; BWC::FootManager::swingRotFunc_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Swing foot trajectory </p>
-
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00350">350</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00348">348</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1845,7 +1818,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s]) </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00360">360</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00357">357</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1871,7 +1844,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether touch down is detected during swing. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00363">363</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00360">360</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -1897,7 +1870,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether the velocity mode (i.e., walking at the relative target velocity) is enabled. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00357">357</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00354">354</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>

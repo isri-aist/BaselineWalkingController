@@ -1,4 +1,6 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/trajectory/CubicInterpolator.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/trajectory/CubicInterpolator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,257,105"/>
+<area shape="rect" id="node1" title=" " alt="" coords="288,5,540,105"/>
 <area shape="rect" id="node2" href="$FootManager_8h.html" title=" " alt="" coords="5,153,257,253"/>
+<area shape="rect" id="node3" href="$SwingTrajCubicSplineSimple_8h.html" title=" " alt="" coords="282,153,546,253"/>
+<area shape="rect" id="node4" href="$SwingTrajIndHorizontalVertical_8h.html" title=" " alt="" coords="570,153,850,253"/>
 </map>

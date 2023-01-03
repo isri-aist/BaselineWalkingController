@@ -158,6 +158,15 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1State.html">State</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FSM <a class="el" href="structBWC_1_1State.html" title="FSM State with utility functions.">State</a> with utility functions.  <a href="structBWC_1_1State.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTraj.html">SwingTraj</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Foot swing trajectory.  <a href="classBWC_1_1SwingTraj.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html">SwingTrajCubicSplineSimple</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple foot swing trajectory with cubic spline.  <a href="classBWC_1_1SwingTrajCubicSplineSimple.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html">SwingTrajIndHorizontalVertical</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple foot swing trajectory with cubic spline.  <a href="classBWC_1_1SwingTrajIndHorizontalVertical.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html">TeleopState</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FSM state to walk with teleoperation.  <a href="structBWC_1_1TeleopState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +228,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a2f63adef1bd86608cdf9589904356dae"><td class="memItemLeft" align="right" valign="top">sva::MotionVecd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a2f63adef1bd86608cdf9589904356dae">projGround</a> (const sva::MotionVecd &amp;vel, bool projectZ=true)</td></tr>
 <tr class="memdesc:a2f63adef1bd86608cdf9589904356dae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the velocity projected on to the ground.  <a href="namespaceBWC.html#a2f63adef1bd86608cdf9589904356dae">More...</a><br /></td></tr>
 <tr class="separator:a2f63adef1bd86608cdf9589904356dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa565b607fc33e0142571b5c90a99bc0a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; Eigen::Vector3d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">calcSurfaceVertexList</a> (const mc_rbdyn::Surface &amp;surface, const sva::PTransformd &amp;surfaceOrigin)</td></tr>
+<tr class="memdesc:aa565b607fc33e0142571b5c90a99bc0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the vertices of surface.  <a href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">More...</a><br /></td></tr>
+<tr class="separator:aa565b607fc33e0142571b5c90a99bc0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a6c6026f61cf91b6c619bfef5868929"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a9a6c6026f61cf91b6c619bfef5868929"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceBWC.html#a9a6c6026f61cf91b6c619bfef5868929">interpolate</a> (const T &amp;start, const T &amp;end, double ratio)</td></tr>
 <tr class="memdesc:a9a6c6026f61cf91b6c619bfef5868929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the value interpolating from start to end.  <a href="namespaceBWC.html#a9a6c6026f61cf91b6c619bfef5868929">More...</a><br /></td></tr>
@@ -273,7 +285,7 @@ template&lt;class T &gt; </div>
 
 <p>Cubic polynomial function. </p>
 
-<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00246">246</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00255">255</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
 
 </div>
 </div>
@@ -293,7 +305,7 @@ template&lt;class T &gt; </div>
 
 <p>Linear polynomial function. </p>
 
-<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00238">238</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00247">247</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
 
 </div>
 </div>
@@ -313,7 +325,7 @@ template&lt;class T &gt; </div>
 
 <p>Quadratic polynomial function. </p>
 
-<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00242">242</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Func_8h_source.html#l00251">251</a> of file <a class="el" href="Func_8h_source.html">Func.h</a>.</p>
 
 </div>
 </div>
@@ -415,6 +427,53 @@ template&lt;class T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aa565b607fc33e0142571b5c90a99bc0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa565b607fc33e0142571b5c90a99bc0a">&#9670;&nbsp;</a></span>calcSurfaceVertexList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;Eigen::Vector3d&gt; BWC::calcSurfaceVertexList </td>
+          <td>(</td>
+          <td class="paramtype">const mc_rbdyn::Surface &amp;&#160;</td>
+          <td class="paramname"><em>surface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sva::PTransformd &amp;&#160;</td>
+          <td class="paramname"><em>surfaceOrigin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the vertices of surface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">surface</td><td>surface </td></tr>
+    <tr><td class="paramname">surfaceOrigin</td><td>surface origin </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="RobotUtils_8h_source.html#l00011">11</a> of file <a class="el" href="RobotUtils_8h_source.html">RobotUtils.h</a>.</p>
+
+</div>
+</div>
 <a id="a82cf8f9f922cfab277d210fd5b896934"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82cf8f9f922cfab277d210fd5b896934">&#9670;&nbsp;</a></span>interpolate() <span class="overload">[1/4]</span></h2>
 

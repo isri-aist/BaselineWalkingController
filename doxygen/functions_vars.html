@@ -72,10 +72,11 @@ $(function() {
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>approachDurationRatio
-: <a class="el" href="structBWC_1_1Footstep_1_1Configuration.html#a41418411ca83b8f24aff4bc26aad93ae">BWC::Footstep::Configuration</a>
+: <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a4a033502b7c3bf3ed2cf0d1d6c9c424c">BWC::SwingTrajCubicSplineSimple::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#ad666c2dc73fc8ccb5b629e2fc9bf60c5">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
 </li>
 <li>approachOffset
-: <a class="el" href="structBWC_1_1Footstep_1_1Configuration.html#aba325a1da32b81c214299b7e3ff9690c">BWC::Footstep::Configuration</a>
+: <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a3c37bb0f5e9edc1f108787bf2fdee5b6">BWC::SwingTrajCubicSplineSimple::Configuration</a>
 </li>
 </ul>
 
@@ -121,15 +122,15 @@ $(function() {
 <li>comZGainP
 : <a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab939397cc9b53938ab9ae3892aa55244">BWC::CentroidalManager::Configuration</a>
 </li>
-<li>config
-: <a class="el" href="structBWC_1_1Footstep.html#aace239634710da95c96be51e40ce8b2b">BWC::Footstep</a>
-</li>
 <li>config_
 : <a class="el" href="classBWC_1_1CentroidalManagerDdpZmp.html#abe1bceefd21b38a92c4bd9f93a982197">BWC::CentroidalManagerDdpZmp</a>
 , <a class="el" href="classBWC_1_1CentroidalManagerFootGuidedControl.html#a0636710c1827d7c7c805fb7e960d351e">BWC::CentroidalManagerFootGuidedControl</a>
 , <a class="el" href="classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html#a45095174f2a2165f0507c0d6238f8cc4">BWC::CentroidalManagerIntrinsicallyStableMpc</a>
 , <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#af23554cf500e3513982160701f4625ca">BWC::CentroidalManagerPreviewControlZmp</a>
 , <a class="el" href="classBWC_1_1FootManager.html#abad5017b4fa073bf5bde3bb6e42d7ce5">BWC::FootManager</a>
+, <a class="el" href="classBWC_1_1SwingTraj.html#aba6eeda0f8e87bf628661d8bc9967511">BWC::SwingTraj</a>
+, <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a8b489843b3fb059dcc812330b0fe1310">BWC::SwingTrajCubicSplineSimple</a>
+, <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#af5d380dd98bb44712c8263e90f75b7f5">BWC::SwingTrajIndHorizontalVertical</a>
 , <a class="el" href="classBWC_1_1WrenchDistribution.html#a3f50e84a78978169a0c3821fa081faac">BWC::WrenchDistribution</a>
 </li>
 <li>contactFootPosesList_
@@ -243,6 +244,12 @@ $(function() {
 <li>goalFootMidpose_
 : <a class="el" href="structBWC_1_1FootstepPlannerState.html#a155e31c7e17832ee1500df51119cb673">BWC::FootstepPlannerState</a>
 </li>
+<li>goalPose_
+: <a class="el" href="classBWC_1_1SwingTraj.html#a08b133b9c212e8582492a20ea46b58c1">BWC::SwingTraj</a>
+</li>
+<li>goalTime_
+: <a class="el" href="classBWC_1_1SwingTraj.html#a4082ffbbf507a098a6a966583718253a">BWC::SwingTraj</a>
+</li>
 <li>graspMat_
 : <a class="el" href="classBWC_1_1Contact.html#af0dc624fc22936afa29f60e5c2eac1f7">BWC::Contact</a>
 </li>
@@ -262,6 +269,9 @@ $(function() {
 : <a class="el" href="structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#aa31a5dccfb877a9ee0a87a9483a72d7c">BWC::CentroidalManagerDdpZmp::Configuration</a>
 , <a class="el" href="structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html#a7b26c0955f522d4de23ff31d701cb586">BWC::CentroidalManagerIntrinsicallyStableMpc::Configuration</a>
 , <a class="el" href="structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a7277a05f6d0028f91d5829990f43faea">BWC::CentroidalManagerPreviewControlZmp::Configuration</a>
+</li>
+<li>horizontalPosFunc_
+: <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a0e409e7a8fd3bf1255c5d6aa0c2eabb2">BWC::SwingTrajIndHorizontalVertical</a>
 </li>
 </ul>
 
@@ -367,6 +377,9 @@ $(function() {
 <li>pose
 : <a class="el" href="structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541">BWC::Footstep</a>
 </li>
+<li>posFunc_
+: <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#ac66ded285e6ffb4ec32e6dec418af98f">BWC::SwingTrajCubicSplineSimple</a>
+</li>
 <li>prevFootstep_
 : <a class="el" href="classBWC_1_1FootManager.html#a58efca782b66a22fb6ac90d427a6cec4">BWC::FootManager</a>
 </li>
@@ -414,6 +427,10 @@ $(function() {
 <li>robotMass_
 : <a class="el" href="classBWC_1_1CentroidalManager.html#a73798dded16013c2186d63a5b4591033">BWC::CentroidalManager</a>
 </li>
+<li>rotFunc_
+: <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a80d9cd4a0c5d69451ab2fe8e5fd85fa7">BWC::SwingTrajCubicSplineSimple</a>
+, <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a8491a9290badae1003c26bab880f2a9b">BWC::SwingTrajIndHorizontalVertical</a>
+</li>
 <li>running_
 : <a class="el" href="structBWC_1_1FootstepPlannerState.html#ae5fdf5d556dc87e0428286f06e24b721">BWC::FootstepPlannerState</a>
 </li>
@@ -421,6 +438,12 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>startPose_
+: <a class="el" href="classBWC_1_1SwingTraj.html#a5acf2228712f2208df583f56f35ce774">BWC::SwingTraj</a>
+</li>
+<li>startTime_
+: <a class="el" href="classBWC_1_1SwingTraj.html#ae66ce9e19daab7deb547695f3f0fd673">BWC::SwingTraj</a>
+</li>
 <li>stiffnessRatioFunc_
 : <a class="el" href="structBWC_1_1InitialState.html#a5960b4127a8a6e34175531ceb34eddec">BWC::InitialState</a>
 </li>
@@ -437,16 +460,16 @@ $(function() {
 : <a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">BWC::FootManager</a>
 </li>
 <li>swingOffset
-: <a class="el" href="structBWC_1_1Footstep_1_1Configuration.html#abf7dbcc84c1c7a29e6cc764cf079ca50">BWC::Footstep::Configuration</a>
-</li>
-<li>swingPosFunc_
-: <a class="el" href="classBWC_1_1FootManager.html#ab04709356a75d2dde491ea57ece986a9">BWC::FootManager</a>
-</li>
-<li>swingRotFunc_
-: <a class="el" href="classBWC_1_1FootManager.html#ac01f917d1b16835a5ab415ba51165727">BWC::FootManager</a>
+: <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a03b62c4ab3ff502cf3c13b6df1feaf54">BWC::SwingTrajCubicSplineSimple::Configuration</a>
 </li>
 <li>swingStartTime
 : <a class="el" href="structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b">BWC::Footstep</a>
+</li>
+<li>swingTraj_
+: <a class="el" href="classBWC_1_1FootManager.html#ac15c1d805cbfee08f13ee97be9c0d129">BWC::FootManager</a>
+</li>
+<li>swingTrajConfig
+: <a class="el" href="structBWC_1_1Footstep.html#a17d37c7d7cdfbf53c77e0a18dbd3e0e0">BWC::Footstep</a>
 </li>
 </ul>
 
@@ -471,6 +494,36 @@ $(function() {
 : <a class="el" href="classBWC_1_1FootManager.html#ab9eba0156a088e0636e9f7f18a291b05">BWC::FootManager</a>
 , <a class="el" href="structBWC_1_1TeleopState.html#a6b30d6cd1bece9942600deafceb0e398">BWC::TeleopState</a>
 </li>
+<li>tiltAngleApproach
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#ac83da3f2ccba9effcd756416268dff3a">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltAngleApproachDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aec9a388c2e909c9c72e7234aaeddc963">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltAngleFunc_
+: <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#ab339d8baa399384ec2027662816ae4ed">BWC::SwingTrajIndHorizontalVertical</a>
+</li>
+<li>tiltAngleWithdraw
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a58ed495f2e6d081921f1d38f903a05d0">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltAngleWithdrawDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa85e16215f21003b9e43c04912c133b7">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltCenterApproachDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a75872cb7b1a00be7efc4da9b3c7829b9">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltCenterFunc_
+: <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#abc34f6df99620c1bb615b899ce52ee3d">BWC::SwingTrajIndHorizontalVertical</a>
+</li>
+<li>tiltCenterWithdrawDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a17b28815ecf2ec609b119cf3f1c0166b">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltDistThre
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#ae782b435462e26f2abf55270778e8d84">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>tiltForwardAngleThre
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a96b62a8be0181f1dd54d7c7a63363180">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
 <li>tLowerLimit_
 : <a class="el" href="classBWC_1_1PiecewiseFunc.html#acaa49f064b50fce751ce7f3131d31f9a">BWC::PiecewiseFunc&lt; T &gt;</a>
 </li>
@@ -485,6 +538,9 @@ $(function() {
 </li>
 <li>touchDownRemainingDuration
 : <a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a5739f7d815815acfe4b3f3c144b93220">BWC::FootManager::Configuration</a>
+</li>
+<li>touchDownTime_
+: <a class="el" href="classBWC_1_1SwingTraj.html#aca5e0b326e23262f08b1c9e2f58a3601">BWC::SwingTraj</a>
 </li>
 <li>transitEndTime
 : <a class="el" href="structBWC_1_1Footstep.html#aee102d7d6bc2d90c643512fb79372e8c">BWC::Footstep</a>
@@ -536,6 +592,15 @@ $(function() {
 <li>vertexWithRidgeList_
 : <a class="el" href="classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247">BWC::Contact</a>
 </li>
+<li>verticalPosFunc_
+: <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a0c0304e58de37acb71fa191c47da3bd1">BWC::SwingTrajIndHorizontalVertical</a>
+</li>
+<li>verticalTopDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aacda1c795dd5f3d9f4d8266a64111613">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
+<li>verticalTopOffset
+: <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a4e7592ffa5d3ddce50d750d55af9f7a1">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+</li>
 </ul>
 
 
@@ -544,10 +609,11 @@ $(function() {
 : <a class="el" href="structBWC_1_1GuiWalkState.html#accbbb30e56b2f4efee64b6bd7681a084">BWC::GuiWalkState</a>
 </li>
 <li>withdrawDurationRatio
-: <a class="el" href="structBWC_1_1Footstep_1_1Configuration.html#ae65efd30dcafdc803d0e3cd554a82061">BWC::Footstep::Configuration</a>
+: <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a477be3fd662113e652d15d0d1e1a9cc7">BWC::SwingTrajCubicSplineSimple::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa2693d9c975220b46642535e19365976">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
 </li>
 <li>withdrawOffset
-: <a class="el" href="structBWC_1_1Footstep_1_1Configuration.html#a9b1982057fb942618ed31fcec6a5fe3b">BWC::Footstep::Configuration</a>
+: <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a109260fa8fbeef50c7cab90c4e935797">BWC::SwingTrajCubicSplineSimple::Configuration</a>
 </li>
 <li>wrenchDist_
 : <a class="el" href="classBWC_1_1CentroidalManager.html#a541d5d02c6977bd755aa7cd592aa6e56">BWC::CentroidalManager</a>

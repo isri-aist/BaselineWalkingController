@@ -75,7 +75,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-types">Protected Types</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classBWC_1_1CubicInterpolator-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -111,9 +110,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a71108781d7d8f6ce6764986fb6f0dee5"><td class="memItemLeft" align="right" valign="top">virtual U&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CubicInterpolator.html#a71108781d7d8f6ce6764986fb6f0dee5">derivative</a> (double t, int order=1) const</td></tr>
 <tr class="memdesc:a71108781d7d8f6ce6764986fb6f0dee5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the derivative of interpolated value.  <a href="classBWC_1_1CubicInterpolator.html#a71108781d7d8f6ce6764986fb6f0dee5">More...</a><br /></td></tr>
 <tr class="separator:a71108781d7d8f6ce6764986fb6f0dee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d7654bdf179f3bf130bb558697f65a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CubicInterpolator.html#a13d7654bdf179f3bf130bb558697f65a">getRatio</a> (double t) const</td></tr>
-<tr class="memdesc:a13d7654bdf179f3bf130bb558697f65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ratio of interpolation points.  <a href="classBWC_1_1CubicInterpolator.html#a13d7654bdf179f3bf130bb558697f65a">More...</a><br /></td></tr>
-<tr class="separator:a13d7654bdf179f3bf130bb558697f65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aa6919c6075c32aeaea96fb7a229788"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CubicInterpolator.html#a2aa6919c6075c32aeaea96fb7a229788">startTime</a> () const</td></tr>
 <tr class="memdesc:a2aa6919c6075c32aeaea96fb7a229788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get start time.  <a href="classBWC_1_1CubicInterpolator.html#a2aa6919c6075c32aeaea96fb7a229788">More...</a><br /></td></tr>
 <tr class="separator:a2aa6919c6075c32aeaea96fb7a229788"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,12 +125,6 @@ Protected Types</h2></td></tr>
 <tr class="memitem:a71ad9662f442446f47dae5715adf1967"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CubicInterpolator.html#a71ad9662f442446f47dae5715adf1967">Vector1d</a> = Eigen::Matrix&lt; double, 1, 1 &gt;</td></tr>
 <tr class="memdesc:a71ad9662f442446f47dae5715adf1967"><td class="mdescLeft">&#160;</td><td class="mdescRight">1D vector  <a href="classBWC_1_1CubicInterpolator.html#a71ad9662f442446f47dae5715adf1967">More...</a><br /></td></tr>
 <tr class="separator:a71ad9662f442446f47dae5715adf1967"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:acb76a02718c066cb8702bc6746010870"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CubicInterpolator.html#acb76a02718c066cb8702bc6746010870">getIdx</a> (double ratio) const</td></tr>
-<tr class="memdesc:acb76a02718c066cb8702bc6746010870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get index of interpolation points.  <a href="classBWC_1_1CubicInterpolator.html#acb76a02718c066cb8702bc6746010870">More...</a><br /></td></tr>
-<tr class="separator:acb76a02718c066cb8702bc6746010870"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -408,7 +398,7 @@ template&lt;class T , class U  = T&gt; </div>
 </dl>
 <p>It is assumed that <a class="el" href="namespaceBWC.html#a8752903e9c169f41360c7a2cd73e274e" title="Calculate the derivative value interpolating from start to end.">interpolateDerivative()</a> returns zero if derivative order is greater than or equal to 2. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00266">266</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00261">261</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -439,83 +429,7 @@ template&lt;class T , class U  = T&gt; </div>
 
 <p>Get end time. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00291">291</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
-
-</div>
-</div>
-<a id="acb76a02718c066cb8702bc6746010870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb76a02718c066cb8702bc6746010870">&#9670;&nbsp;</a></span>getIdx()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T , class U  = T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t <a class="el" href="classBWC_1_1CubicInterpolator.html">BWC::CubicInterpolator</a>&lt; T, U &gt;::getIdx </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>ratio</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get index of interpolation points. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ratio</td><td>Interpolation ratio </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00306">306</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
-
-</div>
-</div>
-<a id="a13d7654bdf179f3bf130bb558697f65a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d7654bdf179f3bf130bb558697f65a">&#9670;&nbsp;</a></span>getRatio()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T , class U  = T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double <a class="el" href="classBWC_1_1CubicInterpolator.html">BWC::CubicInterpolator</a>&lt; T, U &gt;::getRatio </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get ratio of interpolation points. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>time </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00279">279</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00277">277</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -584,7 +498,7 @@ template&lt;class T , class U  = T&gt; </div>
 
 <p>Get points. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00297">297</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00283">283</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -615,7 +529,7 @@ template&lt;class T , class U  = T&gt; </div>
 
 <p>Get start time. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00285">285</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00271">271</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -644,7 +558,7 @@ template&lt;class T , class U  = T&gt; </div>
 
 <p>Function to calculate the ratio of interpolation points. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00326">326</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00293">293</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
@@ -672,7 +586,7 @@ template&lt;class T , class U  = T&gt; </div>
 
 <p>Times and values to be interpolated. </p>
 
-<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00323">323</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CubicInterpolator_8h_source.html#l00290">290</a> of file <a class="el" href="CubicInterpolator_8h_source.html">CubicInterpolator.h</a>.</p>
 
 </div>
 </div>
