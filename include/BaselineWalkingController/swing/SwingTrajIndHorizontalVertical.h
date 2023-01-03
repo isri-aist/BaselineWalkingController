@@ -36,10 +36,10 @@ public:
     Eigen::Vector3d verticalTopOffset = Eigen::Vector3d(0, 0, 0.05);
 
     //! Tilt angle in withdraw [rad]
-    double withdrawTiltAngle = mc_rtc::constants::toRad(20);
+    double tiltAngleWithdraw = mc_rtc::constants::toRad(20);
 
     //! Tilt angle in approach [rad]
-    double approachTiltAngle = mc_rtc::constants::toRad(-10);
+    double tiltAngleApproach = mc_rtc::constants::toRad(10);
 
     //! Duration ratio to set tilt angle in withdraw
     double tiltAngleWithdrawDurationRatio = 0.25;
@@ -52,6 +52,12 @@ public:
 
     //! Duration ratio at which the tilt center ends to change
     double tiltCenterApproachDurationRatio = 0.25;
+
+    //! Threshold distance between start pose and goal pose to enable tilt [m]
+    double tiltDistThre = 0.1;
+
+    //! Threshold of forward angle between start pose and goal pose to enable tilt [rad]
+    double tiltForwardAngleThre = mc_rtc::constants::toRad(10);
 
     /** \brief Load mc_rtc configuration.
         \param mcRtcConfig mc_rtc configuration

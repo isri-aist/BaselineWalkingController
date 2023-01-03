@@ -10,18 +10,23 @@ void SwingTrajIndHorizontalVertical::Configuration::load(const mc_rtc::Configura
   mcRtcConfig("approachDurationRatio", approachDurationRatio);
   mcRtcConfig("verticalTopDurationRatio", verticalTopDurationRatio);
   mcRtcConfig("verticalTopOffset", verticalTopOffset);
-  if(mcRtcConfig.has("withdrawTiltAngle"))
+  if(mcRtcConfig.has("tiltAngleWithdraw"))
   {
-    withdrawTiltAngle = mc_rtc::constants::toRad(mcRtcConfig("withdrawTiltAngle"));
+    tiltAngleWithdraw = mc_rtc::constants::toRad(mcRtcConfig("tiltAngleWithdraw"));
   }
-  if(mcRtcConfig.has("approachTiltAngle"))
+  if(mcRtcConfig.has("tiltAngleApproach"))
   {
-    approachTiltAngle = mc_rtc::constants::toRad(mcRtcConfig("approachTiltAngle"));
+    tiltAngleApproach = mc_rtc::constants::toRad(mcRtcConfig("tiltAngleApproach"));
   }
   mcRtcConfig("tiltAngleWithdrawDurationRatio", tiltAngleWithdrawDurationRatio);
   mcRtcConfig("tiltAngleApproachDurationRatio", tiltAngleApproachDurationRatio);
   mcRtcConfig("tiltCenterWithdrawDurationRatio", tiltCenterWithdrawDurationRatio);
   mcRtcConfig("tiltCenterApproachDurationRatio", tiltCenterApproachDurationRatio);
+  mcRtcConfig("tiltDistThre", tiltDistThre);
+  if(mcRtcConfig.has("tiltForwardAngleThre"))
+  {
+    tiltForwardAngleThre = mc_rtc::constants::toRad(mcRtcConfig("tiltForwardAngleThre"));
+  }
 }
 
 SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTransformd & startPose,
@@ -52,6 +57,7 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
     double verticalTopTime =
         (1.0 - config_.verticalTopDurationRatio) * startTime + config_.verticalTopDurationRatio * goalTime;
     BoundaryConstraint<Vector1d> zeroVelBC(BoundaryConstraintType::Velocity, Vector1d::Zero());
+
     verticalPosFunc_ = std::make_shared<CubicSpline<Vector1d>>(1, std::map<double, Vector1d>{}, zeroVelBC, zeroVelBC);
     verticalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().tail<1>()));
     verticalPosFunc_->appendPoint(std::make_pair(
@@ -72,16 +78,53 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
     rotFunc_->calcCoeff();
   }
 
+  // Determine whether to enable tilt
+  int enableTiltWithdraw = 0;
+  int enableTiltApproach = 0;
+  {
+    sva::PTransformd startToGoalTrans = goalPose * startPose.inv();
+    sva::PTransformd goalToStartTrans = startPose * goalPose.inv();
+    if(startToGoalTrans.translation().norm() > config_.tiltDistThre)
+    {
+      double forwardAngle =
+          std::abs(std::atan2(startToGoalTrans.translation().y(), startToGoalTrans.translation().x()));
+      if(forwardAngle < config_.tiltForwardAngleThre)
+      {
+        enableTiltWithdraw = 1;
+      }
+      else if(mc_rtc::constants::PI - forwardAngle < config_.tiltForwardAngleThre)
+      {
+        enableTiltWithdraw = -1;
+      }
+    }
+    if(goalToStartTrans.translation().norm() > config_.tiltDistThre)
+    {
+      double forwardAngle =
+          std::abs(std::atan2(goalToStartTrans.translation().y(), goalToStartTrans.translation().x()));
+      if(forwardAngle < config_.tiltForwardAngleThre)
+      {
+        enableTiltApproach = 1;
+      }
+      else if(mc_rtc::constants::PI - forwardAngle < config_.tiltForwardAngleThre)
+      {
+        enableTiltApproach = -1;
+      }
+    }
+  }
+
   // Tilt angle
   {
     double tiltAngleWithdrawDuration = config_.tiltAngleWithdrawDurationRatio * (goalTime - startTime);
     double tiltAngleApproachDuration = config_.tiltAngleApproachDurationRatio * (goalTime - startTime);
+    double tiltAngleWithdraw = (enableTiltWithdraw == 0 ? 0.0 : enableTiltWithdraw * config_.tiltAngleWithdraw);
+    double tiltAngleApproach = (enableTiltApproach == 0 ? 0.0 : enableTiltApproach * config_.tiltAngleApproach);
+
     tiltAngleFunc_ = std::make_shared<CubicInterpolator<Vector1d>>();
     tiltAngleFunc_->appendPoint(std::make_pair(startTime, (Vector1d() << 0.0).finished()));
     tiltAngleFunc_->appendPoint(
-        std::make_pair(startTime + tiltAngleWithdrawDuration, (Vector1d() << config_.withdrawTiltAngle).finished()));
+        std::make_pair(startTime + tiltAngleWithdrawDuration, (Vector1d() << tiltAngleWithdraw).finished()));
     tiltAngleFunc_->appendPoint(
-        std::make_pair(goalTime - tiltAngleApproachDuration, (Vector1d() << config_.approachTiltAngle).finished()));
+        std::make_pair(goalTime - tiltAngleApproachDuration, (Vector1d() << tiltAngleApproach).finished()));
     tiltAngleFunc_->appendPoint(std::make_pair(goalTime, (Vector1d() << 0.0).finished()));
     tiltAngleFunc_->calcCoeff();
   }
@@ -90,6 +133,7 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
   {
     double tiltCenterWithdrawDuration = config_.tiltCenterWithdrawDurationRatio * (goalTime - startTime);
     double tiltCenterApproachDuration = config_.tiltCenterApproachDurationRatio * (goalTime - startTime);
+
     Eigen::Vector3d minLocalVertex = Eigen::Vector3d::Zero();
     Eigen::Vector3d maxLocalVertex = Eigen::Vector3d::Zero();
     for(const auto & localVertex : localVertexList)
@@ -97,28 +141,40 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
       minLocalVertex = minLocalVertex.cwiseMin(localVertex);
       maxLocalVertex = maxLocalVertex.cwiseMax(localVertex);
     }
-    // \todo
-    sva::PTransformd withdrawTiltCenter = sva::PTransformd(Eigen::Vector3d(maxLocalVertex.x(), 0, 0));
-    sva::PTransformd approachTiltCenter = sva::PTransformd(Eigen::Vector3d(minLocalVertex.x(), 0, 0));
+    sva::PTransformd tiltCenterWithdraw = sva::PTransformd::Identity();
+    if(enableTiltWithdraw == 1)
+    {
+      tiltCenterWithdraw = sva::PTransformd(Eigen::Vector3d(maxLocalVertex.x(), 0, 0));
+    }
+    else if(enableTiltWithdraw == -1)
+    {
+      tiltCenterWithdraw = sva::PTransformd(Eigen::Vector3d(minLocalVertex.x(), 0, 0));
+    }
+    sva::PTransformd tiltCenterApproach = sva::PTransformd::Identity();
+    if(enableTiltApproach == 1)
+    {
+      tiltCenterApproach = sva::PTransformd(Eigen::Vector3d(maxLocalVertex.x(), 0, 0));
+    }
+    else if(enableTiltApproach == -1)
+    {
+      tiltCenterApproach = sva::PTransformd(Eigen::Vector3d(minLocalVertex.x(), 0, 0));
+    }
+
     tiltCenterFunc_ = std::make_shared<CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
-    tiltCenterFunc_->appendPoint(std::make_pair(startTime, withdrawTiltCenter));
-    tiltCenterFunc_->appendPoint(std::make_pair(startTime + withdrawTiltCenterDuration, withdrawTiltCenter));
-    tiltCenterFunc_->appendPoint(std::make_pair(goalTime - approachTiltCenterDuration, approachTiltCenter));
-    tiltCenterFunc_->appendPoint(std::make_pair(goalTime, approachTiltCenter));
+    tiltCenterFunc_->appendPoint(std::make_pair(startTime, tiltCenterWithdraw));
+    tiltCenterFunc_->appendPoint(std::make_pair(startTime + tiltCenterWithdrawDuration, tiltCenterWithdraw));
+    tiltCenterFunc_->appendPoint(std::make_pair(goalTime - tiltCenterApproachDuration, tiltCenterApproach));
+    tiltCenterFunc_->appendPoint(std::make_pair(goalTime, tiltCenterApproach));
     tiltCenterFunc_->calcCoeff();
   }
 }
 
 sva::PTransformd SwingTrajIndHorizontalVertical::pose(double t) const
 {
-  sva::PTransformd pose = sva::PTransformd(
+  sva::PTransformd nominalPose = sva::PTransformd(
       (*rotFunc_)(t).transpose(), (Eigen::Vector3d() << (*horizontalPosFunc_)(t), (*verticalPosFunc_)(t)).finished());
-  if(tiltAngleFunc_ && tiltCenterFunc_)
-  {
-    sva::PTransformd tiltCenterTrans = (*tiltCenterFunc_)(t);
-    pose = tiltCenterTrans.inv() * sva::PTransformd(sva::RotY((*tiltAngleFunc_)(t)[0])) * tiltCenterTrans * pose;
-  }
-  return pose;
+  sva::PTransformd tiltCenterTrans = (*tiltCenterFunc_)(t);
+  return tiltCenterTrans.inv() * sva::PTransformd(sva::RotY((*tiltAngleFunc_)(t)[0])) * tiltCenterTrans * nominalPose;
 }
 
 sva::MotionVecd SwingTrajIndHorizontalVertical::vel(double t) const
