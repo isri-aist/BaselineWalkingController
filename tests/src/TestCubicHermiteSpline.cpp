@@ -55,9 +55,9 @@ TEST(TestCubicHermiteSpline, CompareCubicSplineAndCubicHermiteSpline)
     Eigen::Vector3d end_vel = Eigen::Vector3d::Random();
 
     BWC::CubicSpline<Eigen::Vector3d> cubicSpline(
-        3, std::map<double, Eigen::Vector3d>{{start_time, start_pos}, {end_time, end_pos}},
-        BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, start_vel),
-        BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, end_vel));
+        3, BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, start_vel),
+        BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, end_vel),
+        std::map<double, Eigen::Vector3d>{{start_time, start_pos}, {end_time, end_pos}});
     cubicSpline.calcCoeff();
 
     BWC::CubicHermiteSpline<Eigen::Vector3d> cubicHermiteSpline(

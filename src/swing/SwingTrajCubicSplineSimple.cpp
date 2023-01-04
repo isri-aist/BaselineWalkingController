@@ -68,7 +68,7 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
       {startTime, startPose.translation()},
       {startTime + withdrawDuration, (sva::PTransformd(config_.withdrawOffset) * startPose).translation()}};
   auto withdrawPosSpline =
-      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, withdrawPosWaypoints, zeroVelBC, zeroAccelBC);
+      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, zeroVelBC, zeroAccelBC, withdrawPosWaypoints);
   withdrawPosSpline->calcCoeff();
   posFunc_->appendFunc(startTime + withdrawDuration, withdrawPosSpline);
   // Rot
@@ -81,7 +81,7 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
       {goalTime - approachDuration, (sva::PTransformd(config_.approachOffset) * goalPose).translation()},
       {goalTime, goalPose.translation()}};
   auto approachPosSpline =
-      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, approachPosWaypoints, zeroAccelBC, zeroVelBC);
+      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, zeroAccelBC, zeroVelBC, approachPosWaypoints);
   approachPosSpline->calcCoeff();
   posFunc_->appendFunc(goalTime, approachPosSpline);
   // Rot
@@ -96,11 +96,12 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
        (sva::PTransformd(config_.swingOffset) * sva::interpolate(startPose, goalPose, 0.5)).translation()},
       *approachPosWaypoints.begin()};
   auto swingPosSpline = std::make_shared<CubicSpline<Eigen::Vector3d>>(
-      3, swingPosWaypoints,
+      3,
       BoundaryConstraint<Eigen::Vector3d>(BoundaryConstraintType::Velocity,
                                           withdrawPosSpline->derivative(startTime + withdrawDuration, 1)),
       BoundaryConstraint<Eigen::Vector3d>(BoundaryConstraintType::Velocity,
-                                          approachPosSpline->derivative(goalTime - approachDuration, 1)));
+                                          approachPosSpline->derivative(goalTime - approachDuration, 1)),
+      swingPosWaypoints);
   swingPosSpline->calcCoeff();
   posFunc_->appendFunc(goalTime - approachDuration, swingPosSpline);
   // Rot

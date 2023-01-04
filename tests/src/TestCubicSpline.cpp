@@ -18,8 +18,8 @@ TEST(TestCubicSpline, Test1)
 
   // setup spline
   BWC::CubicSpline<Eigen::Vector3d> sp(
-      3, points, BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, start_vel),
-      BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Acceleration, end_accel));
+      3, BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Velocity, start_vel),
+      BWC::BoundaryConstraint<Eigen::Vector3d>(BWC::BoundaryConstraintType::Acceleration, end_accel), points);
   sp.calcCoeff();
 
   // check position of waypoints

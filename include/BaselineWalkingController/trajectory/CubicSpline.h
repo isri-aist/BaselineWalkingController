@@ -43,15 +43,15 @@ class CubicSpline : public PiecewiseFunc<T>
 public:
   /** \brief Constructor.
       \param dim dimension of value
-      \param points way points
       \param bcStart boundary constraint of start point
       \param bcEnd boundary constraint of end point
+      \param points way points
   */
   CubicSpline(int dim,
-              const std::map<double, T> & points,
               const BoundaryConstraint<T> & bcStart,
-              const BoundaryConstraint<T> & bcEnd)
-  : dim_(dim), points_(points), bcStart_(bcStart), bcEnd_(bcEnd)
+              const BoundaryConstraint<T> & bcEnd,
+              const std::map<double, T> & points = {})
+  : dim_(dim), bcStart_(bcStart), bcEnd_(bcEnd), points_(points)
   {
   }
 
@@ -209,13 +209,13 @@ protected:
   //! Dimension of value
   int dim_;
 
-  //! Way points
-  std::map<double, T> points_;
-
   //! Boundary constraint of start point
   BoundaryConstraint<T> bcStart_;
 
   //! Boundary constraint of end point
   BoundaryConstraint<T> bcEnd_;
+
+  //! Way points
+  std::map<double, T> points_;
 };
 } // namespace BWC

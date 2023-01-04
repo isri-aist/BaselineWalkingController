@@ -111,7 +111,7 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
         (1.0 - config_.verticalTopDurationRatio) * startTime + config_.verticalTopDurationRatio * goalTime;
     BoundaryConstraint<Vector1d> zeroVelBC(BoundaryConstraintType::Velocity, Vector1d::Zero());
 
-    verticalPosFunc_ = std::make_shared<CubicSpline<Vector1d>>(1, std::map<double, Vector1d>{}, zeroVelBC, zeroVelBC);
+    verticalPosFunc_ = std::make_shared<CubicSpline<Vector1d>>(1, zeroVelBC, zeroVelBC);
     verticalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().tail<1>()));
     verticalPosFunc_->appendPoint(std::make_pair(
         verticalTopTime, (sva::PTransformd(config_.verticalTopOffset) * sva::interpolate(startPose, goalPose, 0.5))
