@@ -1,13 +1,10 @@
 var searchData=
 [
-  ['makefootstep_156',['makeFootstep',['../classBWC_1_1FootManager.html#ade15c65018f3121e93907769cc88df45',1,'BWC::FootManager']]],
-  ['mathutils_2eh_157',['MathUtils.h',['../MathUtils_8h.html',1,'']]],
-  ['maxplanningduration_5f_158',['maxPlanningDuration_',['../structBWC_1_1FootstepPlannerState.html#a8fc51646ff142ca8c667e970382b0e25',1,'BWC::FootstepPlannerState']]],
-  ['mc_5frbdyn_159',['mc_rbdyn',['../namespacemc__rbdyn.html',1,'']]],
-  ['mc_5ftasks_160',['mc_tasks',['../namespacemc__tasks.html',1,'']]],
-  ['method_161',['method',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a09788972104ce4dd911fb58580687ca8',1,'BWC::CentroidalManager::Configuration']]],
-  ['midtofoottranss_162',['midToFootTranss',['../structBWC_1_1FootManager_1_1Configuration.html#a9021ca2b4aec11898c6471db329cca49',1,'BWC::FootManager::Configuration']]],
-  ['mpc_5f_163',['mpc_',['../classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html#aa4af1de5464f07b00577bfc3bafecdca',1,'BWC::CentroidalManagerIntrinsicallyStableMpc']]],
-  ['mpccom_5f_164',['mpcCom_',['../classBWC_1_1CentroidalManager.html#a237706c5428660b4fbb31b48833c9f4d',1,'BWC::CentroidalManager']]],
-  ['mpccomvel_5f_165',['mpcComVel_',['../classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62',1,'BWC::CentroidalManager']]]
+  ['lastdoublesupportfootposes_5f_151',['lastDoubleSupportFootPoses_',['../classBWC_1_1FootManager.html#aae5b5f7462b935e547947c924d37edbb',1,'BWC::FootManager']]],
+  ['left_152',['Left',['../namespaceBWC.html#a162f2376799a8c471d7d68a528d23190a945d5e233cf7d6240f6b783b36a374ff',1,'BWC']]],
+  ['leftfootsupportratio_153',['leftFootSupportRatio',['../classBWC_1_1FootManager.html#a28c6861fdda40e99e54098d80799e4b2',1,'BWC::FootManager']]],
+  ['leftsupport_154',['LeftSupport',['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900a8f78e507e2f52dbdaf1f66d5b2ddb7e0',1,'BWC']]],
+  ['linearpolynomial_155',['LinearPolynomial',['../namespaceBWC.html#a5803fd6e0414635c444a1c34c32f1d8c',1,'BWC']]],
+  ['load_156',['load',['../structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html#a8d43188ee1d2e9e76fbb755d1541bd96',1,'BWC::CentroidalManagerDdpZmp::Configuration::load()'],['../structBWC_1_1CentroidalManagerFootGuidedControl_1_1Configuration.html#aa4c57f1c58dfb05e27dea9de967f537a',1,'BWC::CentroidalManagerFootGuidedControl::Configuration::load()'],['../structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html#ad63be79e98bc333ed64237fe12518e93',1,'BWC::CentroidalManagerIntrinsicallyStableMpc::Configuration::load()'],['../structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a0037fee8aa433ba890543abbf0f45253',1,'BWC::CentroidalManagerPreviewControlZmp::Configuration::load()'],['../structBWC_1_1CentroidalManager_1_1Configuration.html#aa4a7e0d4aa616f1a64d78860515b6058',1,'BWC::CentroidalManager::Configuration::load()'],['../structBWC_1_1FootManager_1_1Configuration.html#a0829cae7554f578367b829dbd51390ee',1,'BWC::FootManager::Configuration::load()'],['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#ac624800f70ce6bd5fdc24abf781bde7f',1,'BWC::SwingTrajCubicSplineSimple::Configuration::load()'],['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa42bc4373680a90e4520c83e2cfa2e23',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::load()'],['../structBWC_1_1SwingTraj_1_1Configuration.html#ab099dceb5120be8875e0346da4d34d70',1,'BWC::SwingTraj::Configuration::load()'],['../structBWC_1_1WrenchDistribution_1_1Configuration.html#a00ec7830acaa737660656452f5f7c9fd',1,'BWC::WrenchDistribution::Configuration::load()']]],
+  ['localridgelist_5f_157',['localRidgeList_',['../classBWC_1_1FrictionPyramid.html#a5c356a0deb397c33c7355030e4ec2f97',1,'BWC::FrictionPyramid']]]
 ];

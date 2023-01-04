@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['operator_28_29_169',['operator()',['../classBWC_1_1CubicHermiteSpline.html#a5dbd438a9887ff5ccde26d25ef636214',1,'BWC::CubicHermiteSpline::operator()()'],['../classBWC_1_1CubicInterpolator.html#abe588829d84bff2505a4e3c301d431c6',1,'BWC::CubicInterpolator::operator()()'],['../classBWC_1_1Func.html#aa6eb8e5f95ca7defb276a70b3bde818b',1,'BWC::Func::operator()()'],['../classBWC_1_1PiecewiseFunc.html#a83c55eaeca7ed8b804bbdcf5cf905534',1,'BWC::PiecewiseFunc::operator()()'],['../classBWC_1_1Polynomial.html#a72ae15cd451d8de42492d0f0103eb3d6',1,'BWC::Polynomial::operator()()'],['../classBWC_1_1Constant.html#accf72bf8da15bef2663dc9bb4a15df11',1,'BWC::Constant::operator()()']]],
-  ['opposite_170',['opposite',['../namespaceBWC.html#af15efed8fd3cff90b911c2187042f58b',1,'BWC']]],
-  ['order_171',['order',['../classBWC_1_1Polynomial.html#a13da663fb883bf75937e82bd955a6a32',1,'BWC::Polynomial']]],
-  ['overwriteconfig_172',['overwriteConfig',['../namespaceBWC.html#ad986c4e677b689504691b2566ef66414',1,'BWC']]],
-  ['overwritelandingpose_173',['overwriteLandingPose',['../structBWC_1_1FootManager_1_1Configuration.html#aae2a8a121beb7a041aa3cd2bffd128c5',1,'BWC::FootManager::Configuration']]],
-  ['overwritelandingposlowpass_5f_174',['overwriteLandingPosLowPass_',['../classBWC_1_1FootManager.html#a13edc7feca7c6031864ba51e0b022cf6',1,'BWC::FootManager']]]
+  ['name_168',['name',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0',1,'BWC::CentroidalManager::Configuration::name()'],['../structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f',1,'BWC::FootManager::Configuration::name()'],['../structBWC_1_1BaselineWalkingController.html#afe59c56d8e9a715cff31b0ea490b6427',1,'BWC::BaselineWalkingController::name()']]],
+  ['name_5f_169',['name_',['../structBWC_1_1BaselineWalkingController.html#ae160fd8ca32bd6acf3aa78234aeb9cfc',1,'BWC::BaselineWalkingController::name_()'],['../classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062',1,'BWC::Contact::name_()']]],
+  ['nh_5f_170',['nh_',['../structBWC_1_1TeleopState.html#a5792f944f4b394347a30808ae46aa76b',1,'BWC::TeleopState']]]
 ];

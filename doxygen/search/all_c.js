@@ -1,6 +1,13 @@
 var searchData=
 [
-  ['name_166',['name',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9fd23d9c826f536d135d0021d3af78b0',1,'BWC::CentroidalManager::Configuration::name()'],['../structBWC_1_1FootManager_1_1Configuration.html#a8c28733fdca3236e9605a963542def1f',1,'BWC::FootManager::Configuration::name()'],['../structBWC_1_1BaselineWalkingController.html#afe59c56d8e9a715cff31b0ea490b6427',1,'BWC::BaselineWalkingController::name()']]],
-  ['name_5f_167',['name_',['../structBWC_1_1BaselineWalkingController.html#ae160fd8ca32bd6acf3aa78234aeb9cfc',1,'BWC::BaselineWalkingController::name_()'],['../classBWC_1_1Contact.html#a833a2d22f5e08a8138830c6573245062',1,'BWC::Contact::name_()']]],
-  ['nh_5f_168',['nh_',['../structBWC_1_1TeleopState.html#a5792f944f4b394347a30808ae46aa76b',1,'BWC::TeleopState']]]
+  ['makefootstep_158',['makeFootstep',['../classBWC_1_1FootManager.html#ade15c65018f3121e93907769cc88df45',1,'BWC::FootManager']]],
+  ['mathutils_2eh_159',['MathUtils.h',['../MathUtils_8h.html',1,'']]],
+  ['maxplanningduration_5f_160',['maxPlanningDuration_',['../structBWC_1_1FootstepPlannerState.html#a8fc51646ff142ca8c667e970382b0e25',1,'BWC::FootstepPlannerState']]],
+  ['mc_5frbdyn_161',['mc_rbdyn',['../namespacemc__rbdyn.html',1,'']]],
+  ['mc_5ftasks_162',['mc_tasks',['../namespacemc__tasks.html',1,'']]],
+  ['method_163',['method',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a09788972104ce4dd911fb58580687ca8',1,'BWC::CentroidalManager::Configuration']]],
+  ['midtofoottranss_164',['midToFootTranss',['../structBWC_1_1FootManager_1_1Configuration.html#a9021ca2b4aec11898c6471db329cca49',1,'BWC::FootManager::Configuration']]],
+  ['mpc_5f_165',['mpc_',['../classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html#aa4af1de5464f07b00577bfc3bafecdca',1,'BWC::CentroidalManagerIntrinsicallyStableMpc']]],
+  ['mpccom_5f_166',['mpcCom_',['../classBWC_1_1CentroidalManager.html#a237706c5428660b4fbb31b48833c9f4d',1,'BWC::CentroidalManager']]],
+  ['mpccomvel_5f_167',['mpcComVel_',['../classBWC_1_1CentroidalManager.html#a93e93d996197a3bde9f6388aa7978d62',1,'BWC::CentroidalManager']]]
 ];

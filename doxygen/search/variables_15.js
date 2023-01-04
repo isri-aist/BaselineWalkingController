@@ -1,9 +1,12 @@
 var searchData=
 [
-  ['walkconfigkeys_5f_648',['walkConfigKeys_',['../structBWC_1_1GuiWalkState.html#accbbb30e56b2f4efee64b6bd7681a084',1,'BWC::GuiWalkState']]],
-  ['withdrawdurationratio_649',['withdrawDurationRatio',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a477be3fd662113e652d15d0d1e1a9cc7',1,'BWC::SwingTrajCubicSplineSimple::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa2693d9c975220b46642535e19365976',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::withdrawDurationRatio()']]],
-  ['withdrawoffset_650',['withdrawOffset',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a109260fa8fbeef50c7cab90c4e935797',1,'BWC::SwingTrajCubicSplineSimple::Configuration']]],
-  ['wrenchdist_5f_651',['wrenchDist_',['../classBWC_1_1CentroidalManager.html#a541d5d02c6977bd755aa7cd592aa6e56',1,'BWC::CentroidalManager']]],
-  ['wrenchdistconfig_652',['wrenchDistConfig',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc',1,'BWC::CentroidalManager::Configuration']]],
-  ['wrenchweight_653',['wrenchWeight',['../structBWC_1_1WrenchDistribution_1_1Configuration.html#ab4c70191fd878560cf0b0514b2937637',1,'BWC::WrenchDistribution::Configuration']]]
+  ['value_643',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
+  ['velmode_5f_644',['velMode_',['../classBWC_1_1FootManager.html#a503cc42713658e83a95770ea617d066c',1,'BWC::FootManager']]],
+  ['velmodeendtime_5f_645',['velModeEndTime_',['../structBWC_1_1ConfigWalkState.html#a1a76d52594dae49615b12e71837df909',1,'BWC::ConfigWalkState']]],
+  ['velscale_5f_646',['velScale_',['../structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13',1,'BWC::TeleopState']]],
+  ['vertex_647',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
+  ['vertexwithridgelist_5f_648',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]],
+  ['verticalposfunc_5f_649',['verticalPosFunc_',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a0c0304e58de37acb71fa191c47da3bd1',1,'BWC::SwingTrajIndHorizontalVertical']]],
+  ['verticaltopdurationratio_650',['verticalTopDurationRatio',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aacda1c795dd5f3d9f4d8266a64111613',1,'BWC::SwingTrajIndHorizontalVertical::Configuration']]],
+  ['verticaltopoffset_651',['verticalTopOffset',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a4e7592ffa5d3ddce50d750d55af9f7a1',1,'BWC::SwingTrajIndHorizontalVertical::Configuration']]]
 ];

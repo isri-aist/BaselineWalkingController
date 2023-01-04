@@ -139,6 +139,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae97d85eb6df4cba328c029bcd9469675"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, mc_tasks::force::ImpedanceGains &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#ae97d85eb6df4cba328c029bcd9469675">impGains</a></td></tr>
 <tr class="memdesc:ae97d85eb6df4cba328c029bcd9469675"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impedance gains for foot tasks.  <a href="structBWC_1_1FootManager_1_1Configuration.html#ae97d85eb6df4cba328c029bcd9469675">More...</a><br /></td></tr>
 <tr class="separator:ae97d85eb6df4cba328c029bcd9469675"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4be0f2f82ddc7af1e760af6afbd7115"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::map&lt; std::string, std::vector&lt; double &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#ad4be0f2f82ddc7af1e760af6afbd7115">jointAnglesForArmSwing</a></td></tr>
+<tr class="memdesc:ad4be0f2f82ddc7af1e760af6afbd7115"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arm swing joint angles.  <a href="structBWC_1_1FootManager_1_1Configuration.html#ad4be0f2f82ddc7af1e760af6afbd7115">More...</a><br /></td></tr>
+<tr class="separator:ad4be0f2f82ddc7af1e760af6afbd7115"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a5739f7d815815acfe4b3f3c144b93220"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html#a5739f7d815815acfe4b3f3c144b93220">touchDownRemainingDuration</a> = 0.2</td></tr>
 <tr class="separator:a5739f7d815815acfe4b3f3c144b93220"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +153,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structBWC_1_1FootManager_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00029">29</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00030">30</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0829cae7554f578367b829dbd51390ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0829cae7554f578367b829dbd51390ee">&#9670;&nbsp;</a></span>load()</h2>
@@ -193,7 +196,7 @@ Public Attributes</h2></td></tr>
 
 <p>Default swing trajectory type. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00055">55</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00056">56</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -211,7 +214,7 @@ Public Attributes</h2></td></tr>
 
 <p>Limit of foot midpose transformation for one footstep (x [m], y [m], theta [rad]) </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00041">41</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00042">42</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -229,7 +232,7 @@ Public Attributes</h2></td></tr>
 
 <p>Duration ratio of double support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00038">38</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00039">39</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +250,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to enable wrench distribution for touch down foot. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00070">70</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00071">71</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -265,7 +268,7 @@ Public Attributes</h2></td></tr>
 
 <p>Duration of one footstep. [sec]. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00035">35</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00036">36</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -283,7 +286,7 @@ Public Attributes</h2></td></tr>
 
 <p>Queue size of footsteps to be sent in the velocity mode (must be at least 3) </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00058">58</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00059">59</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -301,7 +304,7 @@ Public Attributes</h2></td></tr>
 
 <p>Friction coefficient of foot contact. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00073">73</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00074">74</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -323,7 +326,29 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 <p>Impedance gains for foot tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00083">83</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00084">84</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+
+</div>
+</div>
+<a id="ad4be0f2f82ddc7af1e760af6afbd7115"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4be0f2f82ddc7af1e760af6afbd7115">&#9670;&nbsp;</a></span>jointAnglesForArmSwing</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;std::string, std::map&lt;std::string, std::vector&lt;double&gt; &gt; &gt; BWC::FootManager::Configuration::jointAnglesForArmSwing</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        {<span class="stringliteral">&quot;Nominal&quot;</span>, {}},</div>
+<div class="line">        {<span class="stringliteral">&quot;Left&quot;</span>, {}},</div>
+<div class="line">        {<span class="stringliteral">&quot;Right&quot;</span>, {}}}</div>
+</div><!-- fragment -->
+<p>Arm swing joint angles. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00090">90</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -341,7 +366,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to keep foot pose of touch down foot during support phase. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00067">67</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00068">68</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -362,7 +387,7 @@ Public Attributes</h2></td></tr>
 </div><!-- fragment -->
 <p>Transformation from foot midpose to each foot pose. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00044">44</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00045">45</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -380,7 +405,7 @@ Public Attributes</h2></td></tr>
 
 <p>Name. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00032">32</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00033">33</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +423,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to overwrite landing pose so that the relative pose from support foot to swing foot is retained. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00061">61</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00062">62</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -416,7 +441,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to stop swing trajectory for touch down foot. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00064">64</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00065">65</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -433,7 +458,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Thresholds for touch down detection </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00079">79</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00080">80</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -450,7 +475,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Thresholds for touch down detection </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00078">78</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00079">79</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -467,7 +492,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Thresholds for touch down detection </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00077">77</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00078">78</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -485,7 +510,7 @@ Public Attributes</h2></td></tr>
 
 <p>Horizon of ZMP trajectory [sec]. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00049">49</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00050">50</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>
@@ -503,7 +528,7 @@ Public Attributes</h2></td></tr>
 
 <p>ZMP offset of each foot (positive for x-forward, y-outside, z-upward) [m]. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00052">52</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootManager_8h_source.html#l00053">53</a> of file <a class="el" href="FootManager_8h_source.html">FootManager.h</a>.</p>
 
 </div>
 </div>

@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['value_293',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
-  ['vector1d_294',['Vector1d',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#af687cc596ff461992016dfa8d432f8d3',1,'BWC::SwingTrajIndHorizontalVertical::Vector1d()'],['../classBWC_1_1CubicInterpolator.html#a71ad9662f442446f47dae5715adf1967',1,'BWC::CubicInterpolator::Vector1d()']]],
-  ['vel_295',['vel',['../classBWC_1_1SwingTrajCubicSplineSimple.html#a0cb9ab96c15feb7c454978083e8e16b2',1,'BWC::SwingTrajCubicSplineSimple::vel()'],['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a8faa26025ce20f0ee6110973c3e3c0f5',1,'BWC::SwingTrajIndHorizontalVertical::vel()'],['../classBWC_1_1SwingTraj.html#a11c4dc8b4dd9a6377cd44493e7a8919a',1,'BWC::SwingTraj::vel()']]],
-  ['velmode_296',['velMode',['../classBWC_1_1FootManager.html#a4663cea6a5c7167b7ada69e7611d04ea',1,'BWC::FootManager']]],
-  ['velmode_5f_297',['velMode_',['../classBWC_1_1FootManager.html#a503cc42713658e83a95770ea617d066c',1,'BWC::FootManager']]],
-  ['velmodeendtime_5f_298',['velModeEndTime_',['../structBWC_1_1ConfigWalkState.html#a1a76d52594dae49615b12e71837df909',1,'BWC::ConfigWalkState']]],
-  ['velocity_299',['Velocity',['../namespaceBWC.html#a650a366862dfae39ce46c5028e90b3bea88156d46910a2d733443c339a9231d12',1,'BWC']]],
-  ['velscale_5f_300',['velScale_',['../structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13',1,'BWC::TeleopState']]],
-  ['vertex_301',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
-  ['vertexwithridge_302',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact::VertexWithRidge'],['../structBWC_1_1Contact_1_1VertexWithRidge.html#a67b41dec5669fb70a179fcb3d976aaf6',1,'BWC::Contact::VertexWithRidge::VertexWithRidge()']]],
-  ['vertexwithridgelist_5f_303',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]],
-  ['verticalposfunc_5f_304',['verticalPosFunc_',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a0c0304e58de37acb71fa191c47da3bd1',1,'BWC::SwingTrajIndHorizontalVertical']]],
-  ['verticaltopdurationratio_305',['verticalTopDurationRatio',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aacda1c795dd5f3d9f4d8266a64111613',1,'BWC::SwingTrajIndHorizontalVertical::Configuration']]],
-  ['verticaltopoffset_306',['verticalTopOffset',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a4e7592ffa5d3ddce50d750d55af9f7a1',1,'BWC::SwingTrajIndHorizontalVertical::Configuration']]]
+  ['update_288',['update',['../classBWC_1_1CentroidalManager.html#ae7381f23abe55de2a5f6814b0228b6f8',1,'BWC::CentroidalManager::update()'],['../classBWC_1_1FootManager.html#ae993f4095846c482056c688e9443e340',1,'BWC::FootManager::update()'],['../structBWC_1_1FirstOrderImpedanceTask.html#ada301f576b5e5a2364914c16d71292e2',1,'BWC::FirstOrderImpedanceTask::update()']]],
+  ['updatefoottraj_289',['updateFootTraj',['../classBWC_1_1FootManager.html#a6b6516e377feb329b5683d8fc70e3650',1,'BWC::FootManager']]],
+  ['updatevelmode_290',['updateVelMode',['../classBWC_1_1FootManager.html#a28b0295a82acf276af0856890901b200',1,'BWC::FootManager']]],
+  ['updatezmptraj_291',['updateZmpTraj',['../classBWC_1_1FootManager.html#af4a25307dba3da51d6a16af65f083d2a',1,'BWC::FootManager']]],
+  ['useactualcomforwrenchdist_292',['useActualComForWrenchDist',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb',1,'BWC::CentroidalManager::Configuration']]],
+  ['useactualstateformpc_293',['useActualStateForMpc',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a2ca257faee34e51bbd5145eb0d82875a',1,'BWC::CentroidalManager::Configuration']]],
+  ['usetargetposeforcontrolrobotanchorframe_294',['useTargetPoseForControlRobotAnchorFrame',['../structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316',1,'BWC::CentroidalManager::Configuration']]]
 ];
