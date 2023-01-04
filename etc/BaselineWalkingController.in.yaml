@@ -166,11 +166,11 @@ FootManager:
         angular: [0, 0, 0]
   jointAnglesForArmSwing:
     Left:
-      R_SHOULDER_P: [0.08726646259971647] # 5
-      L_SHOULDER_P: [0.4363323129985824] # 25
+      R_SHOULDER_P: [-0.13962634015954636] # -8
+      L_SHOULDER_P: [0.06981317007977318] # 4
     Right:
-      R_SHOULDER_P: [0.4363323129985824] # 25
-      L_SHOULDER_P: [0.08726646259971647] # 5
+      R_SHOULDER_P: [0.06981317007977318] # 4
+      L_SHOULDER_P: [-0.13962634015954636] # -8
 
 CentroidalManager:
   name: CentroidalManager

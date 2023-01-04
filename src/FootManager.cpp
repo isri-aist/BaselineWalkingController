@@ -732,8 +732,8 @@ void FootManager::updateFootTraj()
             jointAnglesMapToVec(config_.jointAnglesForArmSwing.at(std::to_string(swingFootstep_->foot)));
         Eigen::VectorXd nominalJointAnglesVec = jointAnglesMapToVec(config_.jointAnglesForArmSwing.at("Nominal"));
         armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, currentJointAnglesVec));
-        armSwingFunc_->appendPoint(std::make_pair(
-            0.3 * swingFootstep_->swingStartTime + 0.7 * swingFootstep_->swingEndTime, swingJointAnglesVec));
+        armSwingFunc_->appendPoint(
+            std::make_pair(0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime), swingJointAnglesVec));
         armSwingFunc_->appendPoint(
             std::make_pair(swingFootstep_->swingEndTime, 0.5 * (nominalJointAnglesVec + swingJointAnglesVec)));
         armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->transitEndTime, nominalJointAnglesVec));
