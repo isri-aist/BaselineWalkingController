@@ -75,12 +75,6 @@ controllerName: BWC
 
 PostureTask:
   stiffness: 10
-  jointGains:
-    # For arm swing
-    - jointName: R_SHOULDER_P
-      stiffness: 400
-    - jointName: L_SHOULDER_P
-      stiffness: 400
 
 CoMTask:
   type: com
@@ -243,6 +237,14 @@ OverwriteConfigList:
             angular: [0, 0, 0]
 
   jvrc1:
+    # For arm swing
+    PostureTask:
+      jointGains:
+        - jointName: R_SHOULDER_P
+          stiffness: 400
+        - jointName: L_SHOULDER_P
+          stiffness: 400
+
     FootManager:
       jointAnglesForArmSwing:
         Left:
