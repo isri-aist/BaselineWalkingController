@@ -75,6 +75,12 @@ controllerName: BWC
 
 PostureTask:
   stiffness: 10
+  jointGains:
+    # For arm swing
+    - jointName: R_SHOULDER_P
+      stiffness: 400
+    - jointName: L_SHOULDER_P
+      stiffness: 400
 
 CoMTask:
   type: com
@@ -117,6 +123,7 @@ FootManager:
       translation: [0, -0.105, 0] # [m]
   zmpHorizon: 2.0 # [sec]
   zmpOffset: [0, -0.02, 0] # (positive for x-forward, y-outside, z-upward) [m]
+  defaultSwingTrajType: IndHorizontalVertical
   footstepQueueSizeInVelMode: 3
   overwriteLandingPose: false
   stopSwingTrajForTouchDownFoot: true
@@ -157,6 +164,13 @@ FootManager:
       wrench:
         linear: [0, 0, 0]
         angular: [0, 0, 0]
+  jointAnglesForArmSwing:
+    Left:
+      R_SHOULDER_P: [0.08726646259971647] # 5
+      L_SHOULDER_P: [0.4363323129985824] # 25
+    Right:
+      R_SHOULDER_P: [0.4363323129985824] # 25
+      L_SHOULDER_P: [0.08726646259971647] # 5
 
 CentroidalManager:
   name: CentroidalManager

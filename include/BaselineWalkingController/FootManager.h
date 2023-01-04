@@ -11,6 +11,7 @@
 
 #include <BaselineWalkingController/FootTypes.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
+#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 namespace BWC
 {
@@ -84,6 +85,12 @@ public:
         {"singleSupport", mc_tasks::force::ImpedanceGains::Default()},
         {"doubleSupport", mc_tasks::force::ImpedanceGains::Default()},
         {"swing", mc_tasks::force::ImpedanceGains::Default()}};
+
+    //! Arm swing joint angles
+    std::unordered_map<std::string, std::map<std::string, std::vector<double>>> jointAnglesForArmSwing = {
+        {"Nominal", {}},
+        {"Left", {}},
+        {"Right", {}}};
 
     /** \brief Load mc_rtc configuration.
         \param mcRtcConfig mc_rtc configuration
@@ -352,6 +359,9 @@ protected:
 
   //! Base link Yaw trajectory
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;
+
+  //! Arm swing joint angles trajectory
+  std::shared_ptr<CubicSpline<Eigen::VectorXd>> armSwingFunc_;
 
   //! Whether the velocity mode (i.e., walking at the relative target velocity) is enabled
   bool velMode_ = false;

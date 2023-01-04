@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <limits>
 
 #include <mc_filter/utils/clamp.h>
@@ -55,6 +56,12 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
     mcRtcConfig("impedanceGains")("singleSupport", impGains.at("singleSupport"));
     mcRtcConfig("impedanceGains")("doubleSupport", impGains.at("doubleSupport"));
     mcRtcConfig("impedanceGains")("swing", impGains.at("swing"));
+  }
+  if(mcRtcConfig.has("jointAnglesForArmSwing"))
+  {
+    mcRtcConfig("jointAnglesForArmSwing")("Nominal", jointAnglesForArmSwing.at("Nominal"));
+    mcRtcConfig("jointAnglesForArmSwing")("Left", jointAnglesForArmSwing.at("Left"));
+    mcRtcConfig("jointAnglesForArmSwing")("Right", jointAnglesForArmSwing.at("Right"));
   }
 }
 
@@ -114,6 +121,16 @@ void FootManager::reset()
 
   overwriteLandingPosLowPass_.dt(ctl().solver().dt());
   overwriteLandingPosLowPass_.reset(Eigen::Vector3d::Zero());
+
+  if(config_.jointAnglesForArmSwing.at("Nominal").empty() && config_.jointAnglesForArmSwing.at("Left").size() > 0)
+  {
+    auto postureTask = ctl().getPostureTask(ctl().robot().name());
+    for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Left"))
+    {
+      config_.jointAnglesForArmSwing.at("Nominal")[jointAngleKV.first] =
+          postureTask->posture()[ctl().robot().jointIndexByName(jointAngleKV.first)];
+    }
+  }
 }
 
 void FootManager::update()
@@ -681,6 +698,48 @@ void FootManager::updateFootTraj()
         baseYawFunc_->calcCoeff();
       }
 
+      // Set armSwingFunc_
+      {
+        int totalSize = 0;
+        std::for_each(
+            config_.jointAnglesForArmSwing.at("Nominal").begin(), config_.jointAnglesForArmSwing.at("Nominal").end(),
+            [&totalSize](const auto & jointAngleKV) { totalSize += static_cast<int>(jointAngleKV.second.size()); });
+        auto jointAnglesMapToVec =
+            [totalSize](const std::map<std::string, std::vector<double>> & jointAnglesMap) -> Eigen::VectorXd {
+          Eigen::VectorXd jointAnglesVec(totalSize);
+          int vecIdx = 0;
+          for(const auto & jointAngleKV : jointAnglesMap)
+          {
+            jointAnglesVec.segment(vecIdx, jointAngleKV.second.size()) =
+                Eigen::Map<const Eigen::VectorXd>(jointAngleKV.second.data(), jointAngleKV.second.size());
+            vecIdx += static_cast<int>(jointAngleKV.second.size());
+          }
+          return jointAnglesVec;
+        };
+        BoundaryConstraint<Eigen::VectorXd> zeroVelBC(BoundaryConstraintType::Velocity,
+                                                      Eigen::VectorXd::Zero(totalSize));
+        armSwingFunc_ = std::make_shared<CubicSpline<Eigen::VectorXd>>(totalSize, std::map<double, Eigen::VectorXd>{},
+                                                                       zeroVelBC, zeroVelBC);
+        std::map<std::string, std::vector<double>> currentJointAnglesMap;
+        auto postureTask = ctl().getPostureTask(ctl().robot().name());
+        for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
+        {
+          currentJointAnglesMap[jointAngleKV.first] =
+              postureTask->posture()[ctl().robot().jointIndexByName(jointAngleKV.first)];
+        }
+        Eigen::VectorXd currentJointAnglesVec = jointAnglesMapToVec(currentJointAnglesMap);
+        Eigen::VectorXd swingJointAnglesVec =
+            jointAnglesMapToVec(config_.jointAnglesForArmSwing.at(std::to_string(swingFootstep_->foot)));
+        Eigen::VectorXd nominalJointAnglesVec = jointAnglesMapToVec(config_.jointAnglesForArmSwing.at("Nominal"));
+        armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, currentJointAnglesVec));
+        armSwingFunc_->appendPoint(std::make_pair(
+            0.3 * swingFootstep_->swingStartTime + 0.7 * swingFootstep_->swingEndTime, swingJointAnglesVec));
+        armSwingFunc_->appendPoint(
+            std::make_pair(swingFootstep_->swingEndTime, 0.5 * (nominalJointAnglesVec + swingJointAnglesVec)));
+        armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->transitEndTime, nominalJointAnglesVec));
+        armSwingFunc_->calcCoeff();
+      }
+
       // Set supportPhase_
       if(swingFootstep_->foot == Foot::Left)
       {
@@ -805,6 +864,32 @@ void FootManager::updateFootTraj()
     ctl().baseOriTask_->orientation((*baseYawFunc_)(ctl().t()).transpose());
     ctl().baseOriTask_->refVel(baseYawFunc_->derivative(ctl().t(), 1));
     ctl().baseOriTask_->refAccel(baseYawFunc_->derivative(ctl().t(), 2));
+  }
+
+  // Update arm swing
+  if(armSwingFunc_)
+  {
+    if(armSwingFunc_->domainUpperLimit() < ctl().t())
+    {
+      armSwingFunc_.reset();
+    }
+    else
+    {
+      auto jointAnglesVecToMap =
+          [this](const Eigen::VectorXd & jointAnglesVec) -> std::map<std::string, std::vector<double>> {
+        std::map<std::string, std::vector<double>> jointAnglesMap;
+        int vecIdx = 0;
+        for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
+        {
+          jointAnglesMap[jointAngleKV.first] = std::vector<double>(
+              jointAnglesVec.data() + vecIdx, jointAnglesVec.data() + vecIdx + jointAngleKV.second.size());
+          vecIdx += static_cast<int>(jointAngleKV.second.size());
+        }
+        return jointAnglesMap;
+      };
+      auto postureTask = ctl().getPostureTask(ctl().robot().name());
+      postureTask->target(jointAnglesVecToMap((*armSwingFunc_)(ctl().t())));
+    }
   }
 
   // Update footstep visualization
