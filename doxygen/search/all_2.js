@@ -55,6 +55,6 @@ var searchData=
   ['cubicinterpolator_77',['CubicInterpolator',['../classBWC_1_1CubicInterpolator.html',1,'BWC::CubicInterpolator&lt; T, U &gt;'],['../classBWC_1_1CubicInterpolator.html#a510db61fe0c098c36cddee2f753d684b',1,'BWC::CubicInterpolator::CubicInterpolator(const std::map&lt; double, T &gt; &amp;points={})'],['../classBWC_1_1CubicInterpolator.html#a3bb45b89e29e4698dbb5dfa6b8a7f3f4',1,'BWC::CubicInterpolator::CubicInterpolator(const CubicInterpolator &amp;inst)']]],
   ['cubicinterpolator_2eh_78',['CubicInterpolator.h',['../CubicInterpolator_8h.html',1,'']]],
   ['cubicpolynomial_79',['CubicPolynomial',['../namespaceBWC.html#aafe00c4e60c440c036f5ab37a474eba0',1,'BWC']]],
-  ['cubicspline_80',['CubicSpline',['../classBWC_1_1CubicSpline.html',1,'BWC::CubicSpline&lt; T &gt;'],['../classBWC_1_1CubicSpline.html#aeaf2d72e3847d22aa5a295a2532d55d8',1,'BWC::CubicSpline::CubicSpline()']]],
+  ['cubicspline_80',['CubicSpline',['../classBWC_1_1CubicSpline.html',1,'BWC::CubicSpline&lt; T &gt;'],['../classBWC_1_1CubicSpline.html#a275877ce822226359f7cb43be1aea16c',1,'BWC::CubicSpline::CubicSpline()']]],
   ['cubicspline_2eh_81',['CubicSpline.h',['../CubicSpline_8h.html',1,'']]]
 ];
