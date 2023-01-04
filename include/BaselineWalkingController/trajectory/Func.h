@@ -188,8 +188,7 @@ public:
   {
     if(derivativeOrder > Order)
     {
-      T ret;
-      // \todo Rows and cols are necessary for matrix with dynamic size.
+      T ret = coeff_[0]; // Dummy initialization for dynamic size class
       ret.setZero();
       return ret;
     }

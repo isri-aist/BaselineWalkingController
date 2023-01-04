@@ -71,8 +71,7 @@ inline U interpolateDerivative(const T & start,
   }
   else
   {
-    T ret;
-    // \todo Rows and cols are necessary for matrix with dynamic size.
+    T ret = start; // Dummy initialization for dynamic size class
     ret.setZero();
     return ret;
   }
