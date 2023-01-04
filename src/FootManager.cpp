@@ -47,6 +47,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
   mcRtcConfig("enableWrenchDistForTouchDownFoot", enableWrenchDistForTouchDownFoot);
+  mcRtcConfig("enableArmSwing", enableArmSwing);
   mcRtcConfig("fricCoeff", fricCoeff);
   mcRtcConfig("touchDownRemainingDuration", touchDownRemainingDuration);
   mcRtcConfig("touchDownPosError", touchDownPosError);
@@ -200,6 +201,9 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::Checkbox(
           "enableWrenchDistForTouchDownFoot", [this]() { return config_.enableWrenchDistForTouchDownFoot; },
           [this]() { config_.enableWrenchDistForTouchDownFoot = !config_.enableWrenchDistForTouchDownFoot; }),
+      mc_rtc::gui::Checkbox(
+          "enableArmSwing", [this]() { return config_.enableArmSwing; },
+          [this]() { config_.enableArmSwing = !config_.enableArmSwing; }),
       mc_rtc::gui::NumberInput(
           "fricCoeff", [this]() { return config_.fricCoeff; }, [this](double v) { config_.fricCoeff = v; }),
       mc_rtc::gui::NumberInput(
@@ -210,7 +214,19 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           [this](double v) { config_.touchDownPosError = v; }),
       mc_rtc::gui::NumberInput(
           "touchDownForceZ", [this]() { return config_.touchDownForceZ; },
-          [this](double v) { config_.touchDownForceZ = v; }));
+          [this](double v) { config_.touchDownForceZ = v; }),
+      mc_rtc::gui::Label("jointsForArmSwing", [this]() {
+        std::string s;
+        for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
+        {
+          if(!s.empty())
+          {
+            s += " / ";
+          }
+          s += jointAngleKV.first;
+        }
+        return s;
+      }));
 
   for(const auto & impGainKV : config_.impGains)
   {
@@ -699,6 +715,7 @@ void FootManager::updateFootTraj()
       }
 
       // Set armSwingFunc_
+      if(config_.enableArmSwing)
       {
         int totalSize = 0;
         for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))

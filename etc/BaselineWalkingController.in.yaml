@@ -129,6 +129,7 @@ FootManager:
   stopSwingTrajForTouchDownFoot: true
   keepSupportFootPoseForTouchDownFoot: false
   enableWrenchDistForTouchDownFoot: true
+  enableArmSwing: true
   fricCoeff: 0.5
   touchDownRemainingDuration: 0.2 # [sec]
   touchDownPosError: 0.02 # [m]
@@ -164,13 +165,6 @@ FootManager:
       wrench:
         linear: [0, 0, 0]
         angular: [0, 0, 0]
-  jointAnglesForArmSwing:
-    Left:
-      R_SHOULDER_P: [-0.13962634015954636] # -8
-      L_SHOULDER_P: [0.06981317007977318] # 4
-    Right:
-      R_SHOULDER_P: [0.06981317007977318] # 4
-      L_SHOULDER_P: [-0.13962634015954636] # -8
 
 CentroidalManager:
   name: CentroidalManager
@@ -247,6 +241,16 @@ OverwriteConfigList:
           wrench:
             linear: [0, 0, 0]
             angular: [0, 0, 0]
+
+  jvrc1:
+    FootManager:
+      jointAnglesForArmSwing:
+        Left:
+          R_SHOULDER_P: [-0.13962634015954636] # -8
+          L_SHOULDER_P: [0.06981317007977318] # 4
+        Right:
+          R_SHOULDER_P: [0.06981317007977318] # 4
+          L_SHOULDER_P: [-0.13962634015954636] # -8
 
   hrp5_p:
     CoMTask:
