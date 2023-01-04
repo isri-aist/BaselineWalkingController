@@ -722,7 +722,13 @@ void FootManager::updateFootTraj()
         {
           totalSize += static_cast<int>(jointAngleKV.second.size());
         }
-        if(totalSize > 0)
+        sva::PTransformd startToGoalTrans = swingTraj_->goalPose_ * swingTraj_->startPose_.inv();
+        double forwardDist = startToGoalTrans.translation().x();
+        double forwardAngle =
+            std::abs(std::atan2(startToGoalTrans.translation().y(), startToGoalTrans.translation().x()));
+        constexpr double forwardDistThre = 0.1; // [m]
+        constexpr double forwardAngleThre = mc_rtc::constants::toRad(30.0); // [rad]
+        if(totalSize > 0 && forwardDist > forwardDistThre && forwardAngle < forwardAngleThre)
         {
           auto jointAnglesMapToVec =
               [totalSize](const std::map<std::string, std::vector<double>> & jointAnglesMap) -> Eigen::VectorXd {
