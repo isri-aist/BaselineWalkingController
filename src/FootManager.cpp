@@ -701,43 +701,46 @@ void FootManager::updateFootTraj()
       // Set armSwingFunc_
       {
         int totalSize = 0;
-        std::for_each(
-            config_.jointAnglesForArmSwing.at("Nominal").begin(), config_.jointAnglesForArmSwing.at("Nominal").end(),
-            [&totalSize](const auto & jointAngleKV) { totalSize += static_cast<int>(jointAngleKV.second.size()); });
-        auto jointAnglesMapToVec =
-            [totalSize](const std::map<std::string, std::vector<double>> & jointAnglesMap) -> Eigen::VectorXd {
-          Eigen::VectorXd jointAnglesVec(totalSize);
-          int vecIdx = 0;
-          for(const auto & jointAngleKV : jointAnglesMap)
-          {
-            jointAnglesVec.segment(vecIdx, jointAngleKV.second.size()) =
-                Eigen::Map<const Eigen::VectorXd>(jointAngleKV.second.data(), jointAngleKV.second.size());
-            vecIdx += static_cast<int>(jointAngleKV.second.size());
-          }
-          return jointAnglesVec;
-        };
-        BoundaryConstraint<Eigen::VectorXd> zeroVelBC(BoundaryConstraintType::Velocity,
-                                                      Eigen::VectorXd::Zero(totalSize));
-        armSwingFunc_ = std::make_shared<CubicSpline<Eigen::VectorXd>>(totalSize, std::map<double, Eigen::VectorXd>{},
-                                                                       zeroVelBC, zeroVelBC);
-        std::map<std::string, std::vector<double>> currentJointAnglesMap;
-        auto postureTask = ctl().getPostureTask(ctl().robot().name());
         for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
         {
-          currentJointAnglesMap[jointAngleKV.first] =
-              postureTask->posture()[ctl().robot().jointIndexByName(jointAngleKV.first)];
+          totalSize += static_cast<int>(jointAngleKV.second.size());
         }
-        Eigen::VectorXd currentJointAnglesVec = jointAnglesMapToVec(currentJointAnglesMap);
-        Eigen::VectorXd swingJointAnglesVec =
-            jointAnglesMapToVec(config_.jointAnglesForArmSwing.at(std::to_string(swingFootstep_->foot)));
-        Eigen::VectorXd nominalJointAnglesVec = jointAnglesMapToVec(config_.jointAnglesForArmSwing.at("Nominal"));
-        armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, currentJointAnglesVec));
-        armSwingFunc_->appendPoint(
-            std::make_pair(0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime), swingJointAnglesVec));
-        armSwingFunc_->appendPoint(
-            std::make_pair(swingFootstep_->swingEndTime, 0.5 * (nominalJointAnglesVec + swingJointAnglesVec)));
-        armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->transitEndTime, nominalJointAnglesVec));
-        armSwingFunc_->calcCoeff();
+        if(totalSize > 0)
+        {
+          auto jointAnglesMapToVec =
+              [totalSize](const std::map<std::string, std::vector<double>> & jointAnglesMap) -> Eigen::VectorXd {
+            Eigen::VectorXd jointAnglesVec(totalSize);
+            int vecIdx = 0;
+            for(const auto & jointAngleKV : jointAnglesMap)
+            {
+              jointAnglesVec.segment(vecIdx, jointAngleKV.second.size()) =
+                  Eigen::Map<const Eigen::VectorXd>(jointAngleKV.second.data(), jointAngleKV.second.size());
+              vecIdx += static_cast<int>(jointAngleKV.second.size());
+            }
+            return jointAnglesVec;
+          };
+          BoundaryConstraint<Eigen::VectorXd> zeroVelBC(BoundaryConstraintType::Velocity,
+                                                        Eigen::VectorXd::Zero(totalSize));
+          std::map<std::string, std::vector<double>> currentJointAnglesMap;
+          auto postureTask = ctl().getPostureTask(ctl().robot().name());
+          for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
+          {
+            currentJointAnglesMap[jointAngleKV.first] =
+                postureTask->posture()[ctl().robot().jointIndexByName(jointAngleKV.first)];
+          }
+          Eigen::VectorXd currentJointAnglesVec = jointAnglesMapToVec(currentJointAnglesMap);
+          Eigen::VectorXd swingJointAnglesVec =
+              jointAnglesMapToVec(config_.jointAnglesForArmSwing.at(std::to_string(swingFootstep_->foot)));
+          Eigen::VectorXd nominalJointAnglesVec = jointAnglesMapToVec(config_.jointAnglesForArmSwing.at("Nominal"));
+          armSwingFunc_ = std::make_shared<CubicSpline<Eigen::VectorXd>>(totalSize, zeroVelBC, zeroVelBC);
+          armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, currentJointAnglesVec));
+          armSwingFunc_->appendPoint(std::make_pair(
+              0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime), swingJointAnglesVec));
+          armSwingFunc_->appendPoint(
+              std::make_pair(swingFootstep_->swingEndTime, 0.5 * (nominalJointAnglesVec + swingJointAnglesVec)));
+          armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->transitEndTime, nominalJointAnglesVec));
+          armSwingFunc_->calcCoeff();
+        }
       }
 
       // Set supportPhase_
