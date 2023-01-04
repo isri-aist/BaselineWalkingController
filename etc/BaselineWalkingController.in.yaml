@@ -255,6 +255,17 @@ OverwriteConfigList:
           L_SHOULDER_P: [-0.13962634015954636] # -8
 
   hrp5_p:
+    PostureTask:
+      jointWeights:
+        WP: 50
+        WR: 50
+      # For arm swing
+      jointGains:
+        - jointName: RSP
+          stiffness: 400
+        - jointName: LSP
+          stiffness: 400
+
     CoMTask:
       activeJoints: [
       "Root",
@@ -271,6 +282,13 @@ OverwriteConfigList:
         singleSupport:
           spring:
             linear: [2250, 2250, 450] # Weaken Z-component spring to avoid a too fast recovery for mass errors
+      jointAnglesForArmSwing:
+        Left:
+          RSP: [0.08726646259971647] # 5
+          LSP: [0.5235987755982988] # 30
+        Right:
+          RSP: [0.5235987755982988] # 30
+          LSP: [0.08726646259971647] # 5
 
     CentroidalManager:
       dcmGainP: 2.0 # It must be greater than 1 to be stable
@@ -282,11 +300,15 @@ OverwriteConfigList:
 
   hrp2_drc:
     PostureTask:
+      jointWeights:
+        CHEST_JOINT0: 50
+        CHEST_JOINT1: 50
+      # For arm swing
       jointGains:
-        - jointName: CHEST_JOINT0
-          stiffness: 1000.0
-        - jointName: CHEST_JOINT1
-          stiffness: 1000.0
+        - jointName: RARM_JOINT0
+          stiffness: 400
+        - jointName: LARM_JOINT0
+          stiffness: 400
 
     CoMTask:
       activeJoints: [
@@ -302,6 +324,13 @@ OverwriteConfigList:
       footstepDuration: 1.2 # [sec]
       doubleSupportRatio: 0.2 # []
       zmpOffset: [0, -0.03, 0] # (positive for x-forward, y-outside, z-upward) [m]
+      jointAnglesForArmSwing:
+        Left:
+          RARM_JOINT0: [0.6108652381980153] # 35
+          LARM_JOINT0: [0.7853981633974483] # 45
+        Right:
+          RARM_JOINT0: [0.7853981633974483] # 45
+          LARM_JOINT0: [0.6108652381980153] # 35
 
     CentroidalManager:
       dcmGainP: 2.0 # It must be greater than 1 to be stable
