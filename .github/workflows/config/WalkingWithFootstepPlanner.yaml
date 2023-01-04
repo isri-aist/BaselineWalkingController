@@ -1,3 +1,6 @@
+FootManager:
+  enableArmSwing: false
+
 transitions:
   - [BWC::Initial_, OK, BWC::FootstepPlanner_, Auto]
 
