@@ -71,7 +71,7 @@ public:
     bool enableWrenchDistForTouchDownFoot = true;
 
     //! Whether to enable arm swing
-    bool enableArmSwing = true;
+    bool enableArmSwing = false;
 
     //! Friction coefficient of foot contact
     double fricCoeff = 0.5;
