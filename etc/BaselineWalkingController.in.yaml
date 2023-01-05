@@ -123,7 +123,7 @@ FootManager:
   stopSwingTrajForTouchDownFoot: true
   keepSupportFootPoseForTouchDownFoot: false
   enableWrenchDistForTouchDownFoot: true
-  enableArmSwing: true
+  enableArmSwing: false
   fricCoeff: 0.5
   touchDownRemainingDuration: 0.2 # [sec]
   touchDownPosError: 0.02 # [m]
@@ -246,6 +246,7 @@ OverwriteConfigList:
           stiffness: 400
 
     FootManager:
+      enableArmSwing: true
       jointAnglesForArmSwing:
         Left:
           R_SHOULDER_P: [-0.13962634015954636] # -8
@@ -278,7 +279,6 @@ OverwriteConfigList:
     FootManager:
       footstepDuration: 0.9 # [sec]
       doubleSupportRatio: 0.15 # []
-      enableArmSwing: false
       impedanceGains:
         singleSupport:
           spring:
