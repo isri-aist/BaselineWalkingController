@@ -276,8 +276,9 @@ OverwriteConfigList:
       body: Chest_Link2
 
     FootManager:
-      footstepDuration: 1.2 # [sec]
-      doubleSupportRatio: 0.2 # []
+      footstepDuration: 0.9 # [sec]
+      doubleSupportRatio: 0.15 # []
+      enableArmSwing: false
       impedanceGains:
         singleSupport:
           spring:
