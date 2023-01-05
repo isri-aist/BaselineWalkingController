@@ -109,7 +109,7 @@ FootManager:
   name: FootManager
   footstepDuration: 0.8 # [sec]
   doubleSupportRatio: 0.125 # []
-  deltaTransLimit: [0.125, 0.1, 12.5] # (x [m], y [m], theta [deg])
+  deltaTransLimit: [0.15, 0.1, 12.5] # (x [m], y [m], theta [deg])
   midToFootTranss:
     Left:
       translation: [0, 0.105, 0] # [m]
