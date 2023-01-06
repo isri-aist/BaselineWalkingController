@@ -10,12 +10,12 @@ namespace BWC
  */
 inline sva::PTransformd projGround(const sva::PTransformd & pose, bool projectZ = true)
 {
-  Eigen::Vector3d pos = pose.translation();
+  sva::PTransformd projectedPose(sva::RotZ(mc_rbdyn::rpyFromMat(pose.rotation())[2]), pose.translation());
   if(projectZ)
   {
-    pos.z() = 0;
+    projectedPose.translation().z() = 0;
   }
-  return sva::PTransformd(sva::RotZ(mc_rbdyn::rpyFromMat(pose.rotation())[2]), pos);
+  return projectedPose;
 }
 
 /** \brief Calculate the velocity projected on to the ground.
@@ -24,11 +24,11 @@ inline sva::PTransformd projGround(const sva::PTransformd & pose, bool projectZ 
  */
 inline sva::MotionVecd projGround(const sva::MotionVecd & vel, bool projectZ = true)
 {
-  Eigen::Vector3d linear = vel.linear();
+  sva::MotionVecd projectedVel(Eigen::Vector3d(0, 0, vel.angular().z()), vel.linear());
   if(projectZ)
   {
-    linear.z() = 0;
+    projectedVel.linear().z() = 0;
   }
-  return sva::MotionVecd(Eigen::Vector3d(0, 0, vel.angular().z()), linear);
+  return projectedVel;
 }
 } // namespace BWC
