@@ -285,11 +285,11 @@ OverwriteConfigList:
             linear: [2250, 2250, 450] # Weaken Z-component spring to avoid a too fast recovery for mass errors
       jointAnglesForArmSwing:
         Left:
-          RSP: [0.08726646259971647] # 5
-          LSP: [0.5235987755982988] # 30
+          RSP: [0.9599310885968813] # 55
+          LSP: [1.1344640137963142] # 65
         Right:
-          RSP: [0.5235987755982988] # 30
-          LSP: [0.08726646259971647] # 5
+          RSP: [1.1344640137963142] # 65
+          LSP: [0.9599310885968813] # 55
 
     CentroidalManager:
       dcmGainP: 2.0 # It must be greater than 1 to be stable
