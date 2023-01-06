@@ -84,22 +84,22 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb">   11</a></span>&#160;<span class="keyword">inline</span> sva::PTransformd <a class="code" href="namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb">projGround</a>(<span class="keyword">const</span> sva::PTransformd &amp; pose, <span class="keywordtype">bool</span> projectZ = <span class="keyword">true</span>)</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  Eigen::Vector3d pos = pose.translation();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  sva::PTransformd projectedPose(sva::RotZ(mc_rbdyn::rpyFromMat(pose.rotation())[2]), pose.translation());</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordflow">if</span>(projectZ)</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    pos.z() = 0;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    projectedPose.translation().z() = 0;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  }</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">return</span> sva::PTransformd(sva::RotZ(mc_rbdyn::rpyFromMat(pose.rotation())[2]), pos);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordflow">return</span> projectedPose;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="namespaceBWC.html#a2f63adef1bd86608cdf9589904356dae">   25</a></span>&#160;<span class="keyword">inline</span> sva::MotionVecd <a class="code" href="namespaceBWC.html#a5753385f8e2d7a40123756e9019f19cb">projGround</a>(<span class="keyword">const</span> sva::MotionVecd &amp; vel, <span class="keywordtype">bool</span> projectZ = <span class="keyword">true</span>)</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  Eigen::Vector3d linear = vel.linear();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  sva::MotionVecd projectedVel(Eigen::Vector3d(0, 0, vel.angular().z()), vel.linear());</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  <span class="keywordflow">if</span>(projectZ)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  {</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    linear.z() = 0;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    projectedVel.linear().z() = 0;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">return</span> sva::MotionVecd(Eigen::Vector3d(0, 0, vel.angular().z()), linear);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordflow">return</span> projectedVel;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;} <span class="comment">// namespace BWC</span></div>
 </div><!-- fragment --></div><!-- contents -->
