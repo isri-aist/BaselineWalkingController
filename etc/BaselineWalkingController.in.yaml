@@ -80,16 +80,11 @@ CoMTask:
   type: com
   stiffness: [1000.0, 1000.0, 100.0]
   weight: 1000.0
-  activeJoints: [
-  "Root",
-  "R_HIP_Y", "R_HIP_R", "R_HIP_P", "R_KNEE", "R_ANKLE_P", "R_ANKLE_R",
-  "L_HIP_Y", "L_HIP_R", "L_HIP_P", "L_KNEE", "L_ANKLE_P", "L_ANKLE_R"]
 
 BaseOrientationTask:
   type: orientation
   stiffness: 300.0
   weight: 500.0
-  body: WAIST_R_S
 
 FootTaskList:
   - type: firstOrderImpedance
@@ -237,13 +232,26 @@ OverwriteConfigList:
             angular: [0, 0, 0]
 
   jvrc1:
-    # For arm swing
     PostureTask:
+      jointWeights:
+        WAIST_R: 100
+        WAIST_P: 100
+        WAIST_Y: 100
+      # For arm swing
       jointGains:
         - jointName: R_SHOULDER_P
           stiffness: 400
         - jointName: L_SHOULDER_P
           stiffness: 400
+
+    CoMTask:
+      activeJoints: [
+      "Root",
+      "R_HIP_Y", "R_HIP_R", "R_HIP_P", "R_KNEE", "R_ANKLE_P", "R_ANKLE_R",
+      "L_HIP_Y", "L_HIP_R", "L_HIP_P", "L_KNEE", "L_ANKLE_P", "L_ANKLE_R"]
+
+    BaseOrientationTask:
+      body: WAIST_R_S
 
     FootManager:
       enableArmSwing: true
