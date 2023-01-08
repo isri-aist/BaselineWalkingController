@@ -322,8 +322,8 @@ OverwriteConfigList:
       body: CHEST_LINK1
 
     FootManager:
-      footstepDuration: 1.2 # [sec]
-      doubleSupportRatio: 0.2 # []
+      footstepDuration: 0.9 # [sec]
+      doubleSupportRatio: 0.15 # []
       zmpOffset: [0, -0.03, 0] # (positive for x-forward, y-outside, z-upward) [m]
       jointAnglesForArmSwing:
         Left:
