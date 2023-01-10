@@ -366,7 +366,7 @@ bool FootManager::appendFootstep(const Footstep & newFootstep)
   return true;
 }
 
-Eigen::Vector3d FootManager::clampDeltaTrans(const Eigen::Vector3d & deltaTrans, Foot foot)
+Eigen::Vector3d FootManager::clampDeltaTrans(const Eigen::Vector3d & deltaTrans, const Foot & foot)
 {
   Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
   Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
