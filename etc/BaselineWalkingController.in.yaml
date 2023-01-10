@@ -236,7 +236,6 @@ OverwriteConfigList:
       jointWeights:
         WAIST_R: 100
         WAIST_P: 100
-        WAIST_Y: 100
       # For arm swing
       jointGains:
         - jointName: R_SHOULDER_P
@@ -310,7 +309,6 @@ OverwriteConfigList:
   hrp2_drc:
     PostureTask:
       jointWeights:
-        CHEST_JOINT0: 50
         CHEST_JOINT1: 50
       # For arm swing
       jointGains:
@@ -322,7 +320,6 @@ OverwriteConfigList:
     CoMTask:
       activeJoints: [
       "Root",
-      "CHEST_JOINT0", "CHEST_JOINT1",
       "RLEG_JOINT0", "RLEG_JOINT1", "RLEG_JOINT2", "RLEG_JOINT3", "RLEG_JOINT4", "RLEG_JOINT5",
       "LLEG_JOINT0", "LLEG_JOINT1", "LLEG_JOINT2", "LLEG_JOINT3", "LLEG_JOINT4", "LLEG_JOINT5"]
 
