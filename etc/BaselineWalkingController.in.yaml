@@ -78,7 +78,7 @@ PostureTask:
 
 CoMTask:
   type: com
-  stiffness: [1000.0, 1000.0, 100.0]
+  stiffness: [1000.0, 1000.0, 1000.0]
   weight: 1000.0
 
 BaseOrientationTask:
