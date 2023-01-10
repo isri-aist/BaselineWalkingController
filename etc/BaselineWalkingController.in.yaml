@@ -154,6 +154,26 @@ FootManager:
       wrench:
         linear: [0, 0, 0]
         angular: [0, 0, 0]
+  SwingTraj:
+    CubicSplineSimple:
+      withdrawDurationRatio: 0.25
+      withdrawOffset: [0, 0, 0.015] # [m]
+      approachDurationRatio: 0.25
+      approachOffset: [0, 0, 0.015] # [m]
+      swingOffset: [0, 0, 0.05] # [m]
+    IndHorizontalVertical:
+      withdrawDurationRatio: 0.25
+      approachDurationRatio: 0.25
+      verticalTopDurationRatio: 0.5
+      verticalTopOffset: [0, 0, 0.05] # [m]
+      tiltAngleWithdraw: 20 # [deg]
+      tiltAngleApproach: 10 # [deg]
+      tiltAngleWithdrawDurationRatio: 0.25
+      tiltAngleApproachDurationRatio: 0.25
+      tiltCenterWithdrawDurationRatio: 0.25
+      tiltCenterApproachDurationRatio: 0.25
+      tiltDistThre: 0.2 # [m]
+      tiltForwardAngleThre: 10 # [deg]
 
 CentroidalManager:
   name: CentroidalManager

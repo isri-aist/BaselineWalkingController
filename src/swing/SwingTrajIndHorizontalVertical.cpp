@@ -32,6 +32,11 @@ void SwingTrajIndHorizontalVertical::Configuration::load(const mc_rtc::Configura
   }
 }
 
+void SwingTrajIndHorizontalVertical::loadDefaultConfig(const mc_rtc::Configuration & mcRtcConfig)
+{
+  defaultConfig_.load(mcRtcConfig);
+}
+
 void SwingTrajIndHorizontalVertical::addConfigToGUI(mc_rtc::gui::StateBuilder & gui,
                                                     const std::vector<std::string> & category)
 {

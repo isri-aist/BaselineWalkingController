@@ -76,6 +76,11 @@ public:
   //! Default configuration
   static inline Configuration defaultConfig_;
 
+  /** \brief Load mc_rtc configuration to the default configuration.
+      \param mcRtcConfig mc_rtc configuration
+  */
+  static void loadDefaultConfig(const mc_rtc::Configuration & mcRtcConfig);
+
   /** \brief Add entries of default configuration to the GUI.
       \param gui GUI
       \param category category of GUI entries

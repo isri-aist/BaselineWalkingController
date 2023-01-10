@@ -72,6 +72,14 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
   baseYawFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
+
+  if(mcRtcConfig.has("SwingTraj"))
+  {
+    SwingTrajCubicSplineSimple::loadDefaultConfig(
+        mcRtcConfig("SwingTraj")("CubicSplineSimple", mc_rtc::Configuration{}));
+    SwingTrajIndHorizontalVertical::loadDefaultConfig(
+        mcRtcConfig("SwingTraj")("IndHorizontalVertical", mc_rtc::Configuration{}));
+  }
 }
 
 void FootManager::reset()
