@@ -366,6 +366,21 @@ bool FootManager::appendFootstep(const Footstep & newFootstep)
   return true;
 }
 
+Eigen::Vector3d FootManager::clampDeltaTrans(const Eigen::Vector3d & deltaTrans, Foot foot)
+{
+  Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
+  Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
+  if(foot == Foot::Left)
+  {
+    deltaTransMin.y() = 0;
+  }
+  else
+  {
+    deltaTransMax.y() = 0;
+  }
+  return mc_filter::utils::clamp(deltaTrans, deltaTransMin, deltaTransMax);
+}
+
 Eigen::Vector3d FootManager::calcRefZmp(double t, int derivOrder) const
 {
   if(derivOrder == 0)
@@ -532,19 +547,8 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
 
   while(convertTo2d(goalFootMidpose * footMidpose.inv()).norm() > 1e-6)
   {
-    Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
-    Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
-    if(foot == Foot::Left)
-    {
-      deltaTransMin.y() = 0;
-    }
-    else
-    {
-      deltaTransMax.y() = 0;
-    }
     Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * footMidpose.inv());
-    mc_filter::utils::clampInPlace(deltaTrans, deltaTransMin, deltaTransMax);
-    footMidpose = convertTo3d(deltaTrans) * footMidpose;
+    footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
 
     const auto & footstep = makeFootstep(foot, footMidpose, startTime);
     appendFootstep(footstep);
@@ -1039,19 +1043,8 @@ void FootManager::updateVelMode()
   double startTime = nextFootstep.transitEndTime;
   for(int i = 0; i < config_.footstepQueueSizeInVelMode - 1; i++)
   {
-    Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;
-    Eigen::Vector3d deltaTransMin = -1 * config_.deltaTransLimit;
-    if(foot == Foot::Left)
-    {
-      deltaTransMin.y() = 0;
-    }
-    else
-    {
-      deltaTransMax.y() = 0;
-    }
-    Eigen::Vector3d targetDeltaTrans = config_.footstepDuration * targetVel_;
-    Eigen::Vector3d deltaTrans = mc_filter::utils::clamp(targetDeltaTrans, deltaTransMin, deltaTransMax);
-    footMidpose = convertTo3d(deltaTrans) * footMidpose;
+    Eigen::Vector3d deltaTrans = config_.footstepDuration * targetVel_;
+    footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
 
     const auto & footstep = makeFootstep(foot, footMidpose, startTime);
     footstepQueue_.push_back(footstep);

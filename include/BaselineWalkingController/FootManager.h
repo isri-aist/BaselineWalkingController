@@ -170,6 +170,12 @@ public:
   */
   Eigen::Vector3d calcRefZmp(double t, int derivOrder = 0) const;
 
+  /** \brief Clamp a foot midpose transformation with limit
+      \param deltaTrans foot midpose transformation
+      \param foot foot
+  */
+  Eigen::Vector3d clampDeltaTrans(const Eigen::Vector3d & deltaTrans, const Foot & foot);
+
   /** \brief Calculate reference ground Z position.
       \param t time
       \param derivOrder derivative order (0 for original value, 1 for velocity)
