@@ -9,10 +9,11 @@
 
 namespace BWC
 {
-/** \brief Simple foot swing trajectory with cubic spline.
+/** \brief Foot swing trajectory with independent interpolation of horizontal and vertical positions
 
     The horizontal position is interpolated by a cubic interpolator. The vertical position is interpolated by a cubic
-   spline. The rotation is interpolated by a cubic interpolator.
+   spline. The rotation is interpolated by a cubic interpolator. The tilt angle of the foot during withdraw and approach
+   can be specified.
  */
 class SwingTrajIndHorizontalVertical : public SwingTraj
 {
