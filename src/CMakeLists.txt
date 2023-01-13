@@ -15,6 +15,7 @@ add_library(${CONTROLLER_NAME} SHARED
   trajectory/CubicSpline.cpp
   swing/SwingTrajCubicSplineSimple.cpp
   swing/SwingTrajIndHorizontalVertical.cpp
+  swing/SwingTrajVariableTaskStiffness.cpp
   tasks/FirstOrderImpedanceTask.cpp
   State.cpp
   )
