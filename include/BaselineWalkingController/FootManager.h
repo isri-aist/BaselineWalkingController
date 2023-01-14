@@ -381,10 +381,10 @@ protected:
   //! Whether touch down is detected during swing
   bool touchDown_ = false;
 
-  //! Types of impedance gains
+  //! Types of impedance gains for foot tasks
   std::unordered_map<Foot, std::string> impGainTypes_;
 
-  //! Whether to require updating impedance gains
+  //! Whether to require updating impedance gains for foot tasks
   bool requireImpGainUpdate_ = true;
 
   //! Low-pass filter for the overwrite amount of landing position
