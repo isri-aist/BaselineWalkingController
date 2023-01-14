@@ -4,7 +4,7 @@
 
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
-#include <BaselineWalkingController/swing/SwingTrajVariableTaskStiffness.h>
+#include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 
 template<class SwingTrajType>
 void testSwingTraj()
@@ -49,9 +49,9 @@ TEST(TestSwingTraj, SwingTrajIndHorizontalVertical)
   testSwingTraj<BWC::SwingTrajIndHorizontalVertical>();
 }
 
-TEST(TestSwingTraj, SwingTrajVariableTaskStiffness)
+TEST(TestSwingTraj, SwingTrajVariableTaskGain)
 {
-  testSwingTraj<BWC::SwingTrajVariableTaskStiffness>();
+  testSwingTraj<BWC::SwingTrajVariableTaskGain>();
 }
 
 int main(int argc, char ** argv)

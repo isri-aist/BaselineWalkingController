@@ -14,7 +14,7 @@ namespace BWC
     IK task gains (stiffness and damping) of horizontal position are determined by optimal control. The vertical
    position is interpolated by a cubic spline. The rotation is interpolated by a cubic interpolator.
  */
-class SwingTrajVariableTaskStiffness : public SwingTraj
+class SwingTrajVariableTaskGain : public SwingTraj
 {
 protected:
   //! 1D vector
@@ -77,16 +77,16 @@ public:
       \param goalTime goal time
       \param mcRtcConfig mc_rtc configuration
   */
-  SwingTrajVariableTaskStiffness(const sva::PTransformd & startPose,
-                                 const sva::PTransformd & goalPose,
-                                 double startTime,
-                                 double goalTime,
-                                 const mc_rtc::Configuration & mcRtcConfig = {});
+  SwingTrajVariableTaskGain(const sva::PTransformd & startPose,
+                            const sva::PTransformd & goalPose,
+                            double startTime,
+                            double goalTime,
+                            const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
   inline virtual std::string type() const override
   {
-    return "VariableTaskStiffness";
+    return "VariableTaskGain";
   }
 
   /** \brief Calculate the pose of the swing trajectory at a specified time.

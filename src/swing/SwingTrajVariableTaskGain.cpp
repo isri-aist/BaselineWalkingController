@@ -1,11 +1,11 @@
 #include <mc_rtc/gui/ArrayInput.h>
 #include <mc_rtc/gui/NumberInput.h>
 
-#include <BaselineWalkingController/swing/SwingTrajVariableTaskStiffness.h>
+#include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 
 using namespace BWC;
 
-void SwingTrajVariableTaskStiffness::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
+void SwingTrajVariableTaskGain::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
   SwingTraj::Configuration::load(mcRtcConfig);
 
@@ -15,13 +15,13 @@ void SwingTrajVariableTaskStiffness::Configuration::load(const mc_rtc::Configura
   mcRtcConfig("verticalTopOffset", verticalTopOffset);
 }
 
-void SwingTrajVariableTaskStiffness::loadDefaultConfig(const mc_rtc::Configuration & mcRtcConfig)
+void SwingTrajVariableTaskGain::loadDefaultConfig(const mc_rtc::Configuration & mcRtcConfig)
 {
   defaultConfig_.load(mcRtcConfig);
 }
 
-void SwingTrajVariableTaskStiffness::addConfigToGUI(mc_rtc::gui::StateBuilder & gui,
-                                                    const std::vector<std::string> & category)
+void SwingTrajVariableTaskGain::addConfigToGUI(mc_rtc::gui::StateBuilder & gui,
+                                               const std::vector<std::string> & category)
 {
   gui.addElement(category,
                  mc_rtc::gui::NumberInput(
@@ -39,17 +39,17 @@ void SwingTrajVariableTaskStiffness::addConfigToGUI(mc_rtc::gui::StateBuilder & 
                      [](const Eigen::Vector3d & v) { defaultConfig_.verticalTopOffset = v; }));
 }
 
-void SwingTrajVariableTaskStiffness::removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui,
-                                                         const std::vector<std::string> & category)
+void SwingTrajVariableTaskGain::removeConfigFromGUI(mc_rtc::gui::StateBuilder & gui,
+                                                    const std::vector<std::string> & category)
 {
   gui.removeCategory(category);
 }
 
-SwingTrajVariableTaskStiffness::SwingTrajVariableTaskStiffness(const sva::PTransformd & startPose,
-                                                               const sva::PTransformd & goalPose,
-                                                               double startTime,
-                                                               double goalTime,
-                                                               const mc_rtc::Configuration & mcRtcConfig)
+SwingTrajVariableTaskGain::SwingTrajVariableTaskGain(const sva::PTransformd & startPose,
+                                                     const sva::PTransformd & goalPose,
+                                                     double startTime,
+                                                     double goalTime,
+                                                     const mc_rtc::Configuration & mcRtcConfig)
 : SwingTraj(startPose, goalPose, startTime, goalTime, mcRtcConfig)
 {
   config_.load(mcRtcConfig);
@@ -94,7 +94,7 @@ SwingTrajVariableTaskStiffness::SwingTrajVariableTaskStiffness(const sva::PTrans
   }
 }
 
-sva::PTransformd SwingTrajVariableTaskStiffness::pose(double t) const
+sva::PTransformd SwingTrajVariableTaskGain::pose(double t) const
 {
   double nominalTime = t;
   if(touchDownTime_ > 0 && t >= touchDownTime_)
@@ -107,7 +107,7 @@ sva::PTransformd SwingTrajVariableTaskStiffness::pose(double t) const
   return nominalPose;
 }
 
-sva::MotionVecd SwingTrajVariableTaskStiffness::vel(double t) const
+sva::MotionVecd SwingTrajVariableTaskGain::vel(double t) const
 {
   if(touchDownTime_ > 0 && t >= touchDownTime_)
   {
@@ -121,7 +121,7 @@ sva::MotionVecd SwingTrajVariableTaskStiffness::vel(double t) const
   }
 }
 
-sva::MotionVecd SwingTrajVariableTaskStiffness::accel(double t) const
+sva::MotionVecd SwingTrajVariableTaskGain::accel(double t) const
 {
   if(touchDownTime_ > 0 && t >= touchDownTime_)
   {

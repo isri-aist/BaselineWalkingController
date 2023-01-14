@@ -17,7 +17,7 @@
 #include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
-#include <BaselineWalkingController/swing/SwingTrajVariableTaskStiffness.h>
+#include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
@@ -80,8 +80,7 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
         mcRtcConfig("SwingTraj")("CubicSplineSimple", mc_rtc::Configuration{}));
     SwingTrajIndHorizontalVertical::loadDefaultConfig(
         mcRtcConfig("SwingTraj")("IndHorizontalVertical", mc_rtc::Configuration{}));
-    SwingTrajVariableTaskStiffness::loadDefaultConfig(
-        mcRtcConfig("SwingTraj")("VariableTaskStiffness", mc_rtc::Configuration{}));
+    SwingTrajVariableTaskGain::loadDefaultConfig(mcRtcConfig("SwingTraj")("VariableTaskGain", mc_rtc::Configuration{}));
   }
 }
 
@@ -194,7 +193,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
       mc_rtc::gui::ComboInput(
-          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskStiffness"},
+          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskGain"},
           [this]() { return config_.defaultSwingTrajType; },
           [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
       mc_rtc::gui::IntegerInput(
@@ -276,7 +275,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 
   SwingTrajCubicSplineSimple::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
-  SwingTrajVariableTaskStiffness::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskStiffness"});
+  SwingTrajVariableTaskGain::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
 }
 
 void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -285,7 +284,7 @@ void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 
   SwingTrajCubicSplineSimple::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
-  SwingTrajVariableTaskStiffness::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskStiffness"});
+  SwingTrajVariableTaskGain::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
 }
 
 void FootManager::addToLogger(mc_rtc::Logger & logger)
@@ -700,9 +699,9 @@ void FootManager::updateFootTraj()
                                     sva::PTransformd::Identity()),
               swingFootstep_->swingTrajConfig);
         }
-        else if(swingTrajType == "VariableTaskStiffness")
+        else if(swingTrajType == "VariableTaskGain")
         {
-          swingTraj_ = std::make_shared<SwingTrajVariableTaskStiffness>(
+          swingTraj_ = std::make_shared<SwingTrajVariableTaskGain>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
                                     sva::PTransformd::Identity()),
