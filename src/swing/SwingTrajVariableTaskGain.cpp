@@ -57,16 +57,6 @@ SwingTrajVariableTaskGain::SwingTrajVariableTaskGain(const sva::PTransformd & st
   double withdrawDuration = config_.withdrawDurationRatio * (goalTime - startTime);
   double approachDuration = config_.approachDurationRatio * (goalTime - startTime);
 
-  // Horizontal position
-  {
-    horizontalPosFunc_ = std::make_shared<CubicInterpolator<Eigen::Vector2d>>();
-    horizontalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(startTime + withdrawDuration, startPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(goalTime - approachDuration, goalPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(goalTime, goalPose.translation().head<2>()));
-    horizontalPosFunc_->calcCoeff();
-  }
-
   // Vertical position
   {
     double verticalTopTime =
@@ -102,8 +92,7 @@ sva::PTransformd SwingTrajVariableTaskGain::pose(double t) const
     nominalTime = touchDownTime_;
   }
   sva::PTransformd nominalPose = sva::PTransformd(
-      (*rotFunc_)(nominalTime).transpose(),
-      (Eigen::Vector3d() << (*horizontalPosFunc_)(nominalTime), (*verticalPosFunc_)(nominalTime)).finished());
+      (*rotFunc_)(nominalTime).transpose(), (Eigen::Vector3d() << 0, 0, (*verticalPosFunc_)(nominalTime)).finished());
   return nominalPose;
 }
 
@@ -115,9 +104,8 @@ sva::MotionVecd SwingTrajVariableTaskGain::vel(double t) const
   }
   else
   {
-    return sva::MotionVecd(
-        rotFunc_->derivative(t, 1),
-        (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 1), verticalPosFunc_->derivative(t, 1)).finished());
+    return sva::MotionVecd(rotFunc_->derivative(t, 1),
+                           (Eigen::Vector3d() << 0, 0, verticalPosFunc_->derivative(t, 1)).finished());
   }
 }
 
@@ -129,8 +117,7 @@ sva::MotionVecd SwingTrajVariableTaskGain::accel(double t) const
   }
   else
   {
-    return sva::MotionVecd(
-        rotFunc_->derivative(t, 2),
-        (Eigen::Vector3d() << horizontalPosFunc_->derivative(t, 2), verticalPosFunc_->derivative(t, 2)).finished());
+    return sva::MotionVecd(rotFunc_->derivative(t, 2),
+                           (Eigen::Vector3d() << 0, 0, verticalPosFunc_->derivative(t, 2)).finished());
   }
 }
