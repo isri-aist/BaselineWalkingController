@@ -9,10 +9,10 @@
 
 namespace BWC
 {
-/** \brief Simple foot swing trajectory with cubic spline.
+/** \brief Foot swing trajectory that makes the horizontal position converge by determining the variable IK task gains.
 
-    The horizontal position is interpolated by a cubic interpolator. The vertical position is interpolated by a cubic
-   spline. The rotation is interpolated by a cubic interpolator.
+    IK task gains (stiffness and damping) of horizontal position are determined by optimal control. The vertical
+   position is interpolated by a cubic spline. The rotation is interpolated by a cubic interpolator.
  */
 class SwingTrajVariableTaskStiffness : public SwingTraj
 {
@@ -35,30 +35,6 @@ public:
 
     //! Position offset of vertical top [m]
     Eigen::Vector3d verticalTopOffset = Eigen::Vector3d(0, 0, 0.05);
-
-    //! Tilt angle in withdraw [rad]
-    double tiltAngleWithdraw = mc_rtc::constants::toRad(20);
-
-    //! Tilt angle in approach [rad]
-    double tiltAngleApproach = mc_rtc::constants::toRad(10);
-
-    //! Duration ratio to set tilt angle in withdraw
-    double tiltAngleWithdrawDurationRatio = 0.25;
-
-    //! Duration ratio to set tilt angle in approach
-    double tiltAngleApproachDurationRatio = 0.25;
-
-    //! Duration ratio at which the tilt center starts to change
-    double tiltCenterWithdrawDurationRatio = 0.25;
-
-    //! Duration ratio at which the tilt center ends to change
-    double tiltCenterApproachDurationRatio = 0.25;
-
-    //! Threshold distance between start pose and goal pose to enable tilt [m]
-    double tiltDistThre = 0.2;
-
-    //! Threshold of forward angle between start pose and goal pose to enable tilt [rad]
-    double tiltForwardAngleThre = mc_rtc::constants::toRad(10);
 
     /** \brief Constructor.
 
@@ -99,14 +75,12 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
-      \param localVertexList vertices of surface in local coordinates
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajVariableTaskStiffness(const sva::PTransformd & startPose,
                                  const sva::PTransformd & goalPose,
                                  double startTime,
                                  double goalTime,
-                                 const std::vector<Eigen::Vector3d> & localVertexList = {},
                                  const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
@@ -140,19 +114,10 @@ protected:
   //! Configuration
   Configuration config_ = defaultConfig_;
 
-  //! Horizontal position function
-  std::shared_ptr<CubicInterpolator<Eigen::Vector2d>> horizontalPosFunc_;
-
   //! Vertical position function
   std::shared_ptr<CubicSpline<Vector1d>> verticalPosFunc_;
 
   //! Rotation function
   std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
-
-  //! Tilt angle function
-  std::shared_ptr<CubicInterpolator<Vector1d>> tiltAngleFunc_;
-
-  //! Tilt center function
-  std::shared_ptr<CubicInterpolator<sva::PTransformd, sva::MotionVecd>> tiltCenterFunc_;
 };
 } // namespace BWC
