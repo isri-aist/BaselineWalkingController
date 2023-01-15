@@ -54,10 +54,7 @@ bool InitialState::run(mc_control::fsm::Controller &)
     // Setup task stiffness interpolation
     comTaskStiffness_ = ctl().comTask_->dimStiffness();
     baseOriTaskStiffness_ = ctl().baseOriTask_->dimStiffness();
-    for(const auto & foot : Feet::Both)
-    {
-      footTasksStiffness_.emplace(foot, ctl().footTasks_.at(foot)->dimStiffness());
-    }
+    footTasksStiffness_ = ctl().footManager_->config().footTaskGain.stiffness;
     constexpr double stiffnessInterpDuration = 1.0; // [sec]
     stiffnessRatioFunc_ = std::make_shared<CubicInterpolator<double>>(
         std::map<double, double>{{ctl().t(), 0.0}, {ctl().t() + stiffnessInterpDuration, 1.0}});
@@ -95,7 +92,7 @@ bool InitialState::run(mc_control::fsm::Controller &)
       ctl().baseOriTask_->stiffness(stiffnessRatio * baseOriTaskStiffness_);
       for(const auto & foot : Feet::Both)
       {
-        ctl().footTasks_.at(foot)->stiffness(stiffnessRatio * footTasksStiffness_.at(foot));
+        ctl().footTasks_.at(foot)->stiffness(stiffnessRatio * footTasksStiffness_);
       }
     }
     else

@@ -100,6 +100,7 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param taskGain IK task gain
       \param localVertexList vertices of surface in local coordinates
       \param mcRtcConfig mc_rtc configuration
   */
@@ -107,6 +108,7 @@ public:
                                  const sva::PTransformd & goalPose,
                                  double startTime,
                                  double goalTime,
+                                 const TaskGain & taskGain,
                                  const std::vector<Eigen::Vector3d> & localVertexList = {},
                                  const mc_rtc::Configuration & mcRtcConfig = {});
 

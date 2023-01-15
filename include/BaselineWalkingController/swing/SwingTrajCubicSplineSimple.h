@@ -72,12 +72,14 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param taskGain IK task gain
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajCubicSplineSimple(const sva::PTransformd & startPose,
                              const sva::PTransformd & goalPose,
                              double startTime,
                              double goalTime,
+                             const TaskGain & taskGain,
                              const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */

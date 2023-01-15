@@ -54,8 +54,9 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
                                                        const sva::PTransformd & goalPose,
                                                        double startTime,
                                                        double goalTime,
+                                                       const TaskGain & taskGain,
                                                        const mc_rtc::Configuration & mcRtcConfig)
-: SwingTraj(startPose, goalPose, startTime, goalTime, mcRtcConfig),
+: SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig),
   posFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
   rotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {

@@ -91,9 +91,10 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
                                                                const sva::PTransformd & goalPose,
                                                                double startTime,
                                                                double goalTime,
+                                                               const TaskGain & taskGain,
                                                                const std::vector<Eigen::Vector3d> & localVertexList,
                                                                const mc_rtc::Configuration & mcRtcConfig)
-: SwingTraj(startPose, goalPose, startTime, goalTime, mcRtcConfig)
+: SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig)
 {
   config_.load(mcRtcConfig);
 

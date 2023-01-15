@@ -10,6 +10,7 @@
 #include <mc_tasks/ImpedanceGains.h>
 
 #include <BaselineWalkingController/FootTypes.h>
+#include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 
@@ -45,6 +46,9 @@ public:
     std::unordered_map<Foot, sva::PTransformd> midToFootTranss = {
         {Foot::Left, sva::PTransformd(Eigen::Vector3d(0, 0.1, 0))},
         {Foot::Right, sva::PTransformd(Eigen::Vector3d(0, -0.1, 0))}};
+
+    //! Foot task gains
+    TaskGain footTaskGain = TaskGain(sva::MotionVecd(Eigen::Vector6d::Constant(1000)));
 
     //! Horizon of ZMP trajectory [sec]
     double zmpHorizon = 2.0;
@@ -344,6 +348,9 @@ protected:
 
   //! Target foot acceleration represented in world frame
   std::unordered_map<Foot, sva::MotionVecd> targetFootAccels_;
+
+  //! Foot task gains
+  std::unordered_map<Foot, TaskGain> footTaskGains_;
 
   //! Foot poses in the last double support phase
   std::unordered_map<Foot, sva::PTransformd> lastDoubleSupportFootPoses_;

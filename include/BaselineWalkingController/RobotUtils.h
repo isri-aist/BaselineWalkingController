@@ -2,26 +2,31 @@
 
 #include <SpaceVecAlg/SpaceVecAlg>
 
-namespace mc_tasks
+namespace mc_rtc
 {
-class TransformTask;
+class Configuration;
+}
+namespace mc_rbdyn
+{
+class Surface;
 }
 
 namespace BWC
 {
+/** \brief IK task gains. */
 struct TaskGain
 {
   /** \brief Constructor.
       \param _stiffness stiffness
-      \param _damping damping
+      \param _damping damping (if omitted, the critical damping value will be set)
   */
   TaskGain(const sva::MotionVecd & _stiffness = sva::MotionVecd::Zero(),
            const sva::MotionVecd & _damping = sva::MotionVecd::Zero());
 
   /** \brief Constructor.
-      \param task transform task
+      \param mcRtcConfig mc_rtc configuration
   */
-  TaskGain(const std::shared_ptr<mc_tasks::TransformTask> & task);
+  TaskGain(const mc_rtc::Configuration & mcRtcConfig);
 
   //! Stiffness
   sva::MotionVecd stiffness;

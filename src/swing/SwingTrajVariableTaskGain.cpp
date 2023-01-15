@@ -49,13 +49,14 @@ SwingTrajVariableTaskGain::SwingTrajVariableTaskGain(const sva::PTransformd & st
                                                      const sva::PTransformd & goalPose,
                                                      double startTime,
                                                      double goalTime,
+                                                     const TaskGain & taskGain,
                                                      const mc_rtc::Configuration & mcRtcConfig)
-: SwingTraj(startPose, goalPose, startTime, goalTime, mcRtcConfig)
+: SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig)
 {
   config_.load(mcRtcConfig);
 
-  double withdrawDuration = config_.withdrawDurationRatio * (goalTime - startTime);
-  double approachDuration = config_.approachDurationRatio * (goalTime - startTime);
+  withdrawTime_ = (1 - config_.withdrawDurationRatio) * startTime + config_.withdrawDurationRatio * goalTime;
+  approachTime_ = config_.approachDurationRatio * startTime + (1 - config_.approachDurationRatio) * goalTime;
 
   // Vertical position
   {
@@ -72,28 +73,17 @@ SwingTrajVariableTaskGain::SwingTrajVariableTaskGain(const sva::PTransformd & st
     verticalPosFunc_->appendPoint(std::make_pair(goalTime, goalPose.translation().tail<1>()));
     verticalPosFunc_->calcCoeff();
   }
-
-  // Rotation
-  {
-    rotFunc_ = std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>();
-    rotFunc_->appendPoint(std::make_pair(startTime, startPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(startTime + withdrawDuration, startPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(goalTime - approachDuration, goalPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(goalTime, goalPose.rotation().transpose()));
-    rotFunc_->calcCoeff();
-  }
 }
 
 sva::PTransformd SwingTrajVariableTaskGain::pose(double t) const
 {
-  double nominalTime = t;
+  sva::PTransformd pose = (t <= withdrawTime_ ? startPose_ : goalPose_);
   if(touchDownTime_ > 0 && t >= touchDownTime_)
   {
-    nominalTime = touchDownTime_;
+    t = touchDownTime_;
   }
-  sva::PTransformd nominalPose = sva::PTransformd(
-      (*rotFunc_)(nominalTime).transpose(), (Eigen::Vector3d() << 0, 0, (*verticalPosFunc_)(nominalTime)).finished());
-  return nominalPose;
+  pose.translation().tail<1>() = (*verticalPosFunc_)(t);
+  return pose;
 }
 
 sva::MotionVecd SwingTrajVariableTaskGain::vel(double t) const
@@ -104,8 +94,9 @@ sva::MotionVecd SwingTrajVariableTaskGain::vel(double t) const
   }
   else
   {
-    return sva::MotionVecd(rotFunc_->derivative(t, 1),
-                           (Eigen::Vector3d() << 0, 0, verticalPosFunc_->derivative(t, 1)).finished());
+    return sva::MotionVecd(
+        Eigen::Vector3d::Zero(),
+        (Eigen::Vector3d() << Eigen::Vector2d::Zero(), verticalPosFunc_->derivative(t, 1)).finished());
   }
 }
 
@@ -117,7 +108,27 @@ sva::MotionVecd SwingTrajVariableTaskGain::accel(double t) const
   }
   else
   {
-    return sva::MotionVecd(rotFunc_->derivative(t, 2),
-                           (Eigen::Vector3d() << 0, 0, verticalPosFunc_->derivative(t, 2)).finished());
+    return sva::MotionVecd(
+        Eigen::Vector3d::Zero(),
+        (Eigen::Vector3d() << Eigen::Vector2d::Zero(), verticalPosFunc_->derivative(t, 2)).finished());
+  }
+}
+
+TaskGain SwingTrajVariableTaskGain::taskGain(double t) const
+{
+  if(t <= withdrawTime_ || approachTime_ <= t)
+  {
+    return taskGain_;
+  }
+  else
+  {
+    double remainingDuration = std::max(approachTime_ - t, 1e-6);
+    double stiffness = 6.0 / std::pow(remainingDuration, 2);
+    double damping = 4.0 / remainingDuration;
+    TaskGain taskGain = TaskGain(sva::MotionVecd(taskGain_.stiffness.vector().cwiseMin(stiffness)),
+                                 sva::MotionVecd(taskGain_.damping.vector().cwiseMin(damping)));
+    taskGain.stiffness.linear().z() = taskGain_.stiffness.linear().z();
+    taskGain.damping.linear().z() = taskGain_.damping.linear().z();
+    return taskGain;
   }
 }

@@ -9,9 +9,9 @@
 
 namespace BWC
 {
-/** \brief Foot swing trajectory that makes the horizontal position converge by determining the variable IK task gains.
+/** \brief Foot swing trajectory that makes the horizontal position converge by determining the variable IK task gain.
 
-    IK task gains (stiffness and damping) of horizontal position are determined by optimal control. The vertical
+    IK task gain (stiffness and damping) of horizontal position are determined by optimal control. The vertical
    position is interpolated by a cubic spline. The rotation is interpolated by a cubic interpolator.
  */
 class SwingTrajVariableTaskGain : public SwingTraj
@@ -75,12 +75,14 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param taskGain IK task gain
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajVariableTaskGain(const sva::PTransformd & startPose,
                             const sva::PTransformd & goalPose,
                             double startTime,
                             double goalTime,
+                            const TaskGain & taskGain,
                             const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
@@ -104,6 +106,11 @@ public:
   */
   virtual sva::MotionVecd accel(double t) const override;
 
+  /** \brief Calculate the IK task gain of the swing trajectory at a specified time.
+      \param t time
+  */
+  virtual TaskGain taskGain(double t) const override;
+
   /** \brief Const accessor to the configuration. */
   inline virtual const Configuration & config() const override
   {
@@ -117,7 +124,10 @@ protected:
   //! Vertical position function
   std::shared_ptr<CubicSpline<Vector1d>> verticalPosFunc_;
 
-  //! Rotation function
-  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
+  //! Withdraw time
+  double withdrawTime_ = 0;
+
+  //! Approach time
+  double approachTime_ = 0;
 };
 } // namespace BWC
