@@ -1,9 +1,10 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/trajectory/Func.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/trajectory/Func.h">
-<area shape="rect" id="node1" title=" " alt="" coords="171,5,423,105"/>
-<area shape="rect" id="node2" href="$CubicHermiteSpline_8h.html" title=" " alt="" coords="282,153,534,253"/>
-<area shape="rect" id="node7" href="$CubicSpline_8h.html" title=" " alt="" coords="34,301,286,401"/>
-<area shape="rect" id="node3" href="$CubicInterpolator_8h.html" title=" " alt="" coords="310,301,562,401"/>
-<area shape="rect" id="node4" href="$FootManager_8h.html" title=" " alt="" coords="310,449,562,549"/>
-<area shape="rect" id="node5" href="$SwingTrajCubicSplineSimple_8h.html" title=" " alt="" coords="587,449,851,549"/>
-<area shape="rect" id="node6" href="$SwingTrajIndHorizontalVertical_8h.html" title=" " alt="" coords="5,449,285,549"/>
+<area shape="rect" id="node1" title=" " alt="" coords="433,5,685,105"/>
+<area shape="rect" id="node2" href="$CubicHermiteSpline_8h.html" title=" " alt="" coords="544,153,796,253"/>
+<area shape="rect" id="node8" href="$CubicSpline_8h.html" title=" " alt="" coords="296,301,548,401"/>
+<area shape="rect" id="node3" href="$CubicInterpolator_8h.html" title=" " alt="" coords="572,301,824,401"/>
+<area shape="rect" id="node4" href="$FootManager_8h.html" title=" " alt="" coords="5,449,257,549"/>
+<area shape="rect" id="node5" href="$SwingTrajCubicSplineSimple_8h.html" title=" " alt="" coords="866,449,1130,549"/>
+<area shape="rect" id="node6" href="$SwingTrajIndHorizontalVertical_8h.html" title=" " alt="" coords="282,449,562,549"/>
+<area shape="rect" id="node7" href="$SwingTrajVariableTaskGain_8h.html" title=" " alt="" coords="586,449,842,549"/>
 </map>

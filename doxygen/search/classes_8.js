@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vertexwithridge_356',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact']]]
+  ['vertexwithridge_369',['VertexWithRidge',['../structBWC_1_1Contact_1_1VertexWithRidge.html',1,'BWC::Contact']]]
 ];

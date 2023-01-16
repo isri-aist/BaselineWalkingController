@@ -1,5 +1,6 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/SwingTraj.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/SwingTraj.h">
-<area shape="rect" id="node1" title=" " alt="" coords="159,5,411,105"/>
+<area shape="rect" id="node1" title=" " alt="" coords="307,5,559,105"/>
 <area shape="rect" id="node2" href="$SwingTrajCubicSplineSimple_8h.html" title=" " alt="" coords="5,153,269,253"/>
 <area shape="rect" id="node3" href="$SwingTrajIndHorizontalVertical_8h.html" title=" " alt="" coords="293,153,573,253"/>
+<area shape="rect" id="node4" href="$SwingTrajVariableTaskGain_8h.html" title=" " alt="" coords="597,153,853,253"/>
 </map>

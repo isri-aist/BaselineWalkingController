@@ -165,7 +165,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple foot swing trajectory with cubic spline.  <a href="classBWC_1_1SwingTrajCubicSplineSimple.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html">SwingTrajIndHorizontalVertical</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple foot swing trajectory with cubic spline.  <a href="classBWC_1_1SwingTrajIndHorizontalVertical.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Foot swing trajectory with independent interpolation of horizontal and vertical positions.  <a href="classBWC_1_1SwingTrajIndHorizontalVertical.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html">SwingTrajVariableTaskGain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Foot swing trajectory that makes the horizontal position converge by determining the variable IK task gain.  <a href="classBWC_1_1SwingTrajVariableTaskGain.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TaskGain.html">TaskGain</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">IK task gains.  <a href="structBWC_1_1TaskGain.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1TeleopState.html">TeleopState</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">FSM state to walk with teleoperation.  <a href="structBWC_1_1TeleopState.html#details">More...</a><br /></td></tr>
@@ -432,9 +438,6 @@ template&lt;class T &gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;Eigen::Vector3d&gt; BWC::calcSurfaceVertexList </td>
@@ -454,11 +457,6 @@ template&lt;class T &gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Calculate the vertices of surface. </p>
@@ -469,8 +467,6 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="RobotUtils_8h_source.html#l00011">11</a> of file <a class="el" href="RobotUtils_8h_source.html">RobotUtils.h</a>.</p>
 
 </div>
 </div>
@@ -1099,9 +1095,6 @@ template&lt;class T , class U  = T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">sva::MotionVecd BWC::projGround </td>
@@ -1121,11 +1114,6 @@ template&lt;class T , class U  = T&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Calculate the velocity projected on to the ground. </p>
@@ -1137,8 +1125,6 @@ template&lt;class T , class U  = T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="MathUtils_8h_source.html#l00025">25</a> of file <a class="el" href="MathUtils_8h_source.html">MathUtils.h</a>.</p>
-
 </div>
 </div>
 <a id="a5753385f8e2d7a40123756e9019f19cb"></a>
@@ -1146,9 +1132,6 @@ template&lt;class T , class U  = T&gt; </div>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">sva::PTransformd BWC::projGround </td>
@@ -1168,11 +1151,6 @@ template&lt;class T , class U  = T&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Calculate the pose projected on to the ground. </p>
@@ -1183,8 +1161,6 @@ template&lt;class T , class U  = T&gt; </div>
   </table>
   </dd>
 </dl>
-
-<p class="definition">Definition at line <a class="el" href="MathUtils_8h_source.html#l00011">11</a> of file <a class="el" href="MathUtils_8h_source.html">MathUtils.h</a>.</p>
 
 </div>
 </div>

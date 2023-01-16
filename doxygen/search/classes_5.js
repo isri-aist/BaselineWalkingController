@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['piecewisefunc_348',['PiecewiseFunc',['../classBWC_1_1PiecewiseFunc.html',1,'BWC']]],
-  ['polynomial_349',['Polynomial',['../classBWC_1_1Polynomial.html',1,'BWC']]],
-  ['polynomial_3c_20t_2c_200_20_3e_350',['Polynomial&lt; T, 0 &gt;',['../classBWC_1_1Polynomial.html',1,'BWC']]]
+  ['piecewisefunc_359',['PiecewiseFunc',['../classBWC_1_1PiecewiseFunc.html',1,'BWC']]],
+  ['polynomial_360',['Polynomial',['../classBWC_1_1Polynomial.html',1,'BWC']]],
+  ['polynomial_3c_20t_2c_200_20_3e_361',['Polynomial&lt; T, 0 &gt;',['../classBWC_1_1Polynomial.html',1,'BWC']]]
 ];

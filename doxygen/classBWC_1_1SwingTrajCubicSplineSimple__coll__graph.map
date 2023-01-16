@@ -1,6 +1,7 @@
 <map id="BWC::SwingTrajCubicSplineSimple" name="BWC::SwingTrajCubicSplineSimple">
-<area shape="rect" id="node1" title="Simple foot swing trajectory with cubic spline." alt="" coords="59,213,259,255"/>
-<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="5,102,129,129"/>
-<area shape="rect" id="node3" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="51,5,271,32"/>
-<area shape="rect" id="node4" href="$structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html" title="Configuration." alt="" coords="154,95,354,136"/>
+<area shape="rect" id="node1" title="Simple foot swing trajectory with cubic spline." alt="" coords="117,213,317,255"/>
+<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="239,102,363,129"/>
+<area shape="rect" id="node3" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="5,5,225,32"/>
+<area shape="rect" id="node5" href="$structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html" title="Configuration." alt="" coords="15,95,215,136"/>
+<area shape="rect" id="node4" href="$structBWC_1_1TaskGain.html" title="IK task gains." alt="" coords="250,5,370,32"/>
 </map>

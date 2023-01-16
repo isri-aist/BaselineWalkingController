@@ -138,9 +138,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:af77ef0e68b0fb94f51a0b45ec12fba43"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1InitialState.html#af77ef0e68b0fb94f51a0b45ec12fba43">baseOriTaskStiffness_</a> = Eigen::Vector3d::Zero()</td></tr>
 <tr class="memdesc:af77ef0e68b0fb94f51a0b45ec12fba43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiffness of base link orientation task.  <a href="structBWC_1_1InitialState.html#af77ef0e68b0fb94f51a0b45ec12fba43">More...</a><br /></td></tr>
 <tr class="separator:af77ef0e68b0fb94f51a0b45ec12fba43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6106eab02774db58932ee19819135e05"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, Eigen::Vector6d &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1InitialState.html#a6106eab02774db58932ee19819135e05">footTasksStiffness_</a></td></tr>
-<tr class="memdesc:a6106eab02774db58932ee19819135e05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiffness of foot tasks.  <a href="structBWC_1_1InitialState.html#a6106eab02774db58932ee19819135e05">More...</a><br /></td></tr>
-<tr class="separator:a6106eab02774db58932ee19819135e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d50e269be4dd6d30caaf4fb8d4d9b1"><td class="memItemLeft" align="right" valign="top">sva::MotionVecd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1InitialState.html#a65d50e269be4dd6d30caaf4fb8d4d9b1">footTasksStiffness_</a> = sva::MotionVecd::Zero()</td></tr>
+<tr class="memdesc:a65d50e269be4dd6d30caaf4fb8d4d9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stiffness of foot tasks.  <a href="structBWC_1_1InitialState.html#a65d50e269be4dd6d30caaf4fb8d4d9b1">More...</a><br /></td></tr>
+<tr class="separator:a65d50e269be4dd6d30caaf4fb8d4d9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_structBWC_1_1State"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_structBWC_1_1State')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="structBWC_1_1State.html">BWC::State</a></td></tr>
 <tr class="memitem:ab654b4115b1d8ceda1e69d6271165dc5 inherit pro_attribs_structBWC_1_1State"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1BaselineWalkingController.html">BaselineWalkingController</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1State.html#ab654b4115b1d8ceda1e69d6271165dc5">ctlPtr_</a> = nullptr</td></tr>
 <tr class="memdesc:ab654b4115b1d8ceda1e69d6271165dc5 inherit pro_attribs_structBWC_1_1State"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to controller.  <a href="structBWC_1_1State.html#ab654b4115b1d8ceda1e69d6271165dc5">More...</a><br /></td></tr>
@@ -298,8 +298,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a6106eab02774db58932ee19819135e05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6106eab02774db58932ee19819135e05">&#9670;&nbsp;</a></span>footTasksStiffness_</h2>
+<a id="a65d50e269be4dd6d30caaf4fb8d4d9b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65d50e269be4dd6d30caaf4fb8d4d9b1">&#9670;&nbsp;</a></span>footTasksStiffness_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -308,7 +308,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt;<a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, Eigen::Vector6d&gt; BWC::InitialState::footTasksStiffness_</td>
+          <td class="memname">sva::MotionVecd BWC::InitialState::footTasksStiffness_ = sva::MotionVecd::Zero()</td>
         </tr>
       </table>
   </td>

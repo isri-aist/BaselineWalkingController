@@ -1,5 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="5,46,225,73"/>
+<area shape="rect" id="node1" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="5,78,225,105"/>
 <area shape="rect" id="node2" href="$structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html" title="Configuration." alt="" coords="279,5,479,47"/>
 <area shape="rect" id="node3" href="$structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html" title="Configuration." alt="" coords="273,71,484,112"/>
+<area shape="rect" id="node4" href="$structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html" title="Configuration." alt="" coords="275,136,482,177"/>
 </map>

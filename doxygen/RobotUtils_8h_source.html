@@ -78,25 +78,43 @@ $(function() {
 <div class="contents">
 <a href="RobotUtils_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;mc_rbdyn/Surface.h&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;SpaceVecAlg/SpaceVecAlg&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceBWC.html">BWC</a></div>
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacemc__rtc.html">    5</a></span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacemc__rtc.html">mc_rtc</a></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">   11</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;Eigen::Vector3d&gt; <a class="code" href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">calcSurfaceVertexList</a>(<span class="keyword">const</span> mc_rbdyn::Surface &amp; surface,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                                                          <span class="keyword">const</span> sva::PTransformd &amp; surfaceOrigin)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  std::vector&lt;Eigen::Vector3d&gt; localVertexList;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;  <span class="keywordflow">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span> &amp; point : surface.points())</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// Surface points are represented in body frame, not surface frame</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    localVertexList.push_back((point * surface.X_b_s().inv() * surfaceOrigin).translation());</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  }</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keywordflow">return</span> localVertexList;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;} <span class="comment">// namespace BWC</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">class </span>Configuration;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacemc__rbdyn.html">mc_rbdyn</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">class </span>Surface;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceBWC.html">BWC</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structBWC_1_1TaskGain.html">   17</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structBWC_1_1TaskGain.html">TaskGain</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <a class="code" href="structBWC_1_1TaskGain.html#a528aa5c660ccfaabf15d1ac7b6325f91">TaskGain</a>(<span class="keyword">const</span> sva::MotionVecd &amp; _stiffness = sva::MotionVecd::Zero(),</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;           <span class="keyword">const</span> sva::MotionVecd &amp; _damping = sva::MotionVecd::Zero());</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <a class="code" href="structBWC_1_1TaskGain.html#a528aa5c660ccfaabf15d1ac7b6325f91">TaskGain</a>(<span class="keyword">const</span> mc_rtc::Configuration &amp; mcRtcConfig);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="structBWC_1_1TaskGain.html#a7d407f3c876c9324e8a4192a2d31bb5b">   32</a></span>&#160;  sva::MotionVecd <a class="code" href="structBWC_1_1TaskGain.html#a7d407f3c876c9324e8a4192a2d31bb5b">stiffness</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="structBWC_1_1TaskGain.html#a8d963a7ee1061d6a3e5c63a66e1b3ce1">   35</a></span>&#160;  sva::MotionVecd <a class="code" href="structBWC_1_1TaskGain.html#a8d963a7ee1061d6a3e5c63a66e1b3ce1">damping</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;};</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;std::vector&lt;Eigen::Vector3d&gt; <a class="code" href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">calcSurfaceVertexList</a>(<span class="keyword">const</span> mc_rbdyn::Surface &amp; surface,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                                   <span class="keyword">const</span> sva::PTransformd &amp; surfaceOrigin);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace BWC</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespaceBWC_html_aa565b607fc33e0142571b5c90a99bc0a"><div class="ttname"><a href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">BWC::calcSurfaceVertexList</a></div><div class="ttdeci">std::vector&lt; Eigen::Vector3d &gt; calcSurfaceVertexList(const mc_rbdyn::Surface &amp;surface, const sva::PTransformd &amp;surfaceOrigin)</div><div class="ttdoc">Calculate the vertices of surface.</div><div class="ttdef"><b>Definition:</b> <a href="RobotUtils_8h_source.html#l00011">RobotUtils.h:11</a></div></div>
+<div class="ttc" id="astructBWC_1_1TaskGain_html_a528aa5c660ccfaabf15d1ac7b6325f91"><div class="ttname"><a href="structBWC_1_1TaskGain.html#a528aa5c660ccfaabf15d1ac7b6325f91">BWC::TaskGain::TaskGain</a></div><div class="ttdeci">TaskGain(const sva::MotionVecd &amp;_stiffness=sva::MotionVecd::Zero(), const sva::MotionVecd &amp;_damping=sva::MotionVecd::Zero())</div><div class="ttdoc">Constructor.</div></div>
+<div class="ttc" id="anamespaceBWC_html_aa565b607fc33e0142571b5c90a99bc0a"><div class="ttname"><a href="namespaceBWC.html#aa565b607fc33e0142571b5c90a99bc0a">BWC::calcSurfaceVertexList</a></div><div class="ttdeci">std::vector&lt; Eigen::Vector3d &gt; calcSurfaceVertexList(const mc_rbdyn::Surface &amp;surface, const sva::PTransformd &amp;surfaceOrigin)</div><div class="ttdoc">Calculate the vertices of surface.</div></div>
+<div class="ttc" id="astructBWC_1_1TaskGain_html_a7d407f3c876c9324e8a4192a2d31bb5b"><div class="ttname"><a href="structBWC_1_1TaskGain.html#a7d407f3c876c9324e8a4192a2d31bb5b">BWC::TaskGain::stiffness</a></div><div class="ttdeci">sva::MotionVecd stiffness</div><div class="ttdoc">Stiffness.</div><div class="ttdef"><b>Definition:</b> <a href="RobotUtils_8h_source.html#l00032">RobotUtils.h:32</a></div></div>
 <div class="ttc" id="anamespaceBWC_html"><div class="ttname"><a href="namespaceBWC.html">BWC</a></div><div class="ttdef"><b>Definition:</b> <a href="BaselineWalkingController_8h_source.html#l00013">BaselineWalkingController.h:13</a></div></div>
+<div class="ttc" id="astructBWC_1_1TaskGain_html_a8d963a7ee1061d6a3e5c63a66e1b3ce1"><div class="ttname"><a href="structBWC_1_1TaskGain.html#a8d963a7ee1061d6a3e5c63a66e1b3ce1">BWC::TaskGain::damping</a></div><div class="ttdeci">sva::MotionVecd damping</div><div class="ttdoc">Damping.</div><div class="ttdef"><b>Definition:</b> <a href="RobotUtils_8h_source.html#l00035">RobotUtils.h:35</a></div></div>
+<div class="ttc" id="astructBWC_1_1TaskGain_html"><div class="ttname"><a href="structBWC_1_1TaskGain.html">BWC::TaskGain</a></div><div class="ttdoc">IK task gains.</div><div class="ttdef"><b>Definition:</b> <a href="RobotUtils_8h_source.html#l00017">RobotUtils.h:17</a></div></div>
+<div class="ttc" id="anamespacemc__rbdyn_html"><div class="ttname"><a href="namespacemc__rbdyn.html">mc_rbdyn</a></div><div class="ttdef"><b>Definition:</b> <a href="CentroidalManager_8h_source.html#l00008">CentroidalManager.h:8</a></div></div>
+<div class="ttc" id="anamespacemc__rtc_html"><div class="ttname"><a href="namespacemc__rtc.html">mc_rtc</a></div><div class="ttdef"><b>Definition:</b> <a href="RobotUtils_8h_source.html#l00005">RobotUtils.h:5</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

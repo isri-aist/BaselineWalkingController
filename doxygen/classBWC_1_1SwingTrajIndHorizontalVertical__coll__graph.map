@@ -1,6 +1,7 @@
 <map id="BWC::SwingTrajIndHorizontalVertical" name="BWC::SwingTrajIndHorizontalVertical">
-<area shape="rect" id="node1" title="Simple foot swing trajectory with cubic spline." alt="" coords="57,213,267,255"/>
-<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="5,102,129,129"/>
-<area shape="rect" id="node3" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="53,5,273,32"/>
-<area shape="rect" id="node4" href="$structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html" title="Configuration." alt="" coords="154,95,365,136"/>
+<area shape="rect" id="node1" title="Foot swing trajectory with independent interpolation of horizontal and vertical positions." alt="" coords="114,213,325,255"/>
+<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="244,102,368,129"/>
+<area shape="rect" id="node3" href="$structBWC_1_1SwingTraj_1_1Configuration.html" title="Configuration." alt="" coords="5,5,225,32"/>
+<area shape="rect" id="node5" href="$structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html" title="Configuration." alt="" coords="10,95,221,136"/>
+<area shape="rect" id="node4" href="$structBWC_1_1TaskGain.html" title="IK task gains." alt="" coords="250,5,370,32"/>
 </map>
