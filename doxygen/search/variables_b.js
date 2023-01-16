@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['localridgelist_5f_593',['localRidgeList_',['../classBWC_1_1FrictionPyramid.html#a5c356a0deb397c33c7355030e4ec2f97',1,'BWC::FrictionPyramid']]]
+  ['localridgelist_5f_595',['localRidgeList_',['../classBWC_1_1FrictionPyramid.html#a5c356a0deb397c33c7355030e4ec2f97',1,'BWC::FrictionPyramid']]]
 ];
