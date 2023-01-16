@@ -1101,7 +1101,7 @@ void FootManager::updateVelMode()
       Eigen::Vector3d footstepTransMax =
           remainingDurationRatio * Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
       Eigen::Vector3d footstepTransMin = -1 * footstepTransMax;
-      svsa::PTransformd footstepPoseNewClamped =
+      sva::PTransformd footstepPoseNewClamped =
           convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
       footstepQueue_.front().pose = footstepPoseNewClamped;
       swingTraj_->goalPose_ = footstepPoseNewClamped;
