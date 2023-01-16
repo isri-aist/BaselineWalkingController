@@ -134,9 +134,6 @@ void FootManager::reset()
 
   requireImpGainUpdate_ = true;
 
-  overwriteLandingPosLowPass_.dt(ctl().solver().dt());
-  overwriteLandingPosLowPass_.reset(Eigen::Vector3d::Zero());
-
   if(config_.jointAnglesForArmSwing.at("Nominal").empty() && config_.jointAnglesForArmSwing.at("Left").size() > 0)
   {
     auto postureTask = ctl().getPostureTask(ctl().robot().name());
@@ -415,7 +412,7 @@ Eigen::Vector3d FootManager::calcRefZmp(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*zmpFunc_)(t) + overwriteLandingPosLowPass_.eval();
+    return (*zmpFunc_)(t);
   }
   else
   {
@@ -427,7 +424,7 @@ double FootManager::calcRefGroundPosZ(double t, int derivOrder) const
 {
   if(derivOrder == 0)
   {
-    return (*groundPosZFunc_)(t) + overwriteLandingPosLowPass_.eval().z();
+    return (*groundPosZFunc_)(t);
   }
   else
   {
@@ -1010,8 +1007,8 @@ void FootManager::updateZmpTraj()
 
       zmpFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
       groundPosZFunc_->appendPoint(std::make_pair(footstep.swingStartTime, calcFootMidposZ(footPoses)));
-      contactFootPosesList_.emplace(footstep.swingStartTime,
-                                    std::unordered_map<Foot, sva::PTransformd>{{supportFoot, footPoses.at(supportFoot)}});
+      contactFootPosesList_.emplace(footstep.swingStartTime, std::unordered_map<Foot, sva::PTransformd>{
+                                                                 {supportFoot, footPoses.at(supportFoot)}});
 
       // Update footPoses
       footPoses.at(footstep.foot) = footstep.pose;
@@ -1040,33 +1037,6 @@ void FootManager::updateZmpTraj()
 
   zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
-
-  // Update low-pass filter for the overwrite amount of landing position
-  if(config_.overwriteLandingPose)
-  {
-    Eigen::Vector3d overwriteLandingMeanPos = Eigen::Vector3d::Zero();
-    const auto & currentContactFootPoses = calcContactFootPoses(ctl().t());
-    if(currentContactFootPoses.size() == 0)
-    {
-      overwriteLandingMeanPos.setZero();
-    }
-    else
-    {
-      for(const auto & contactFootPosesKV : currentContactFootPoses)
-      {
-        const Foot & foot = contactFootPosesKV.first;
-        const sva::PTransformd & originalLandingPose = contactFootPosesKV.second;
-        sva::PTransformd overwriteLandingPose = targetFootPoses_.at(foot);
-        overwriteLandingMeanPos += overwriteLandingPose.translation() - originalLandingPose.translation();
-      }
-      overwriteLandingMeanPos /= static_cast<double>(currentContactFootPoses.size());
-    }
-    overwriteLandingPosLowPass_.update(overwriteLandingMeanPos);
-  }
-  else
-  {
-    overwriteLandingPosLowPass_.update(Eigen::Vector3d::Zero());
-  }
 }
 
 void FootManager::updateVelMode()
