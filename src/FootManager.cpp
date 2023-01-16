@@ -1002,17 +1002,20 @@ void FootManager::updateZmpTraj()
     Foot supportFoot = opposite(footstep.foot);
     Eigen::Vector3d supportFootZmp = calcZmpWithOffset(supportFoot, footPoses.at(supportFoot));
 
-    zmpFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcZmpWithOffset(footPoses)));
-    groundPosZFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcFootMidposZ(footPoses)));
-    contactFootPosesList_.emplace(footstep.transitStartTime, footPoses);
+    if(ctl().t() <= footstep.swingEndTime)
+    {
+      zmpFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcZmpWithOffset(footPoses)));
+      groundPosZFunc_->appendPoint(std::make_pair(footstep.transitStartTime, calcFootMidposZ(footPoses)));
+      contactFootPosesList_.emplace(footstep.transitStartTime, footPoses);
 
-    zmpFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
-    groundPosZFunc_->appendPoint(std::make_pair(footstep.swingStartTime, calcFootMidposZ(footPoses)));
-    contactFootPosesList_.emplace(footstep.swingStartTime,
-                                  std::unordered_map<Foot, sva::PTransformd>{{supportFoot, footPoses.at(supportFoot)}});
+      zmpFunc_->appendPoint(std::make_pair(footstep.swingStartTime, supportFootZmp));
+      groundPosZFunc_->appendPoint(std::make_pair(footstep.swingStartTime, calcFootMidposZ(footPoses)));
+      contactFootPosesList_.emplace(footstep.swingStartTime,
+                                    std::unordered_map<Foot, sva::PTransformd>{{supportFoot, footPoses.at(supportFoot)}});
 
-    // Update footPoses
-    footPoses.at(footstep.foot) = footstep.pose;
+      // Update footPoses
+      footPoses.at(footstep.foot) = footstep.pose;
+    }
 
     zmpFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));
     groundPosZFunc_->appendPoint(std::make_pair(footstep.swingEndTime, calcFootMidposZ(footPoses)));
