@@ -51,6 +51,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
   mcRtcConfig("enableWrenchDistForTouchDownFoot", enableWrenchDistForTouchDownFoot);
+  mcRtcConfig("enableOnlineFootstepUpdateInVelMode", enableOnlineFootstepUpdateInVelMode);
   mcRtcConfig("enableArmSwing", enableArmSwing);
   mcRtcConfig("fricCoeff", fricCoeff);
   mcRtcConfig("touchDownRemainingDuration", touchDownRemainingDuration);
@@ -221,6 +222,9 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::Checkbox(
           "enableWrenchDistForTouchDownFoot", [this]() { return config_.enableWrenchDistForTouchDownFoot; },
           [this]() { config_.enableWrenchDistForTouchDownFoot = !config_.enableWrenchDistForTouchDownFoot; }),
+      mc_rtc::gui::Checkbox(
+          "enableOnlineFootstepUpdateInVelMode", [this]() { return config_.enableOnlineFootstepUpdateInVelMode; },
+          [this]() { config_.enableOnlineFootstepUpdateInVelMode = !config_.enableOnlineFootstepUpdateInVelMode; }),
       mc_rtc::gui::Checkbox(
           "enableArmSwing", [this]() { return config_.enableArmSwing; },
           [this]() { config_.enableArmSwing = !config_.enableArmSwing; }),
@@ -1065,23 +1069,50 @@ void FootManager::updateZmpTraj()
 
 void FootManager::updateVelMode()
 {
+  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
+  };
   auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
     return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
   };
 
-  // Do not change the next footstep
-  // Delete the second and subsequent footsteps, and add new ones
+  // Keep the next footstep and delete the second and subsequent footsteps
   footstepQueue_.erase(footstepQueue_.begin() + 1, footstepQueue_.end());
   const auto & nextFootstep = footstepQueue_.front();
-
-  // Append new footstep
-  Foot foot = opposite(nextFootstep.foot);
   sva::PTransformd footMidpose =
       projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
+  Eigen::Vector3d deltaTrans = config_.footstepDuration * targetVel_;
+
+  // Update footstep online during swing
+  if(config_.enableOnlineFootstepUpdateInVelMode && swingTraj_ && swingTraj_->type() == "VariableTaskGain")
+  {
+    double updateEndTimeRatio = 0.9;
+    double approachTime = std::dynamic_pointer_cast<SwingTrajVariableTaskGain>(swingTraj_)->approachTime_;
+    double updateEndTime = updateEndTimeRatio * (approachTime - swingTraj_->startTime_) + swingTraj_->startTime_;
+    if(swingTraj_->startTime_ <= ctl().t() && ctl().t() <= updateEndTime)
+    {
+      sva::PTransformd prevFootMidpose = projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)),
+                                                                     trajStartFootPoses_.at(nextFootstep.foot), 0.5));
+      footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, nextFootstep.foot)) * prevFootMidpose;
+      const sva::PTransformd & footstepPoseOrig = footstepQueue_.front().pose;
+      sva::PTransformd footstepPoseNew = config_.midToFootTranss.at(nextFootstep.foot) * footMidpose;
+      Eigen::Vector3d footstepTrans = convertTo2d(footstepPoseNew * footstepPoseOrig.inv());
+      double remainingDurationRatio = (updateEndTime - ctl().t()) / (updateEndTime - swingTraj_->startTime_);
+      Eigen::Vector3d footstepTransMax =
+          remainingDurationRatio * Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
+      Eigen::Vector3d footstepTransMin = -1 * footstepTransMax;
+      svsa::PTransformd footstepPoseNewClamped =
+          convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
+      footstepQueue_.front().pose = footstepPoseNewClamped;
+      swingTraj_->goalPose_ = footstepPoseNewClamped;
+    }
+  }
+
+  // Append new footsteps
+  Foot foot = opposite(nextFootstep.foot);
   double startTime = nextFootstep.transitEndTime;
   for(int i = 0; i < config_.footstepQueueSizeInVelMode - 1; i++)
   {
-    Eigen::Vector3d deltaTrans = config_.footstepDuration * targetVel_;
     footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
 
     const auto & footstep = makeFootstep(foot, footMidpose, startTime);

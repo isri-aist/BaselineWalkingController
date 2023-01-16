@@ -117,17 +117,18 @@ public:
     return config_;
   }
 
+public:
+  //! Withdraw time
+  double withdrawTime_ = 0;
+
+  //! Approach time
+  double approachTime_ = 0;
+
 protected:
   //! Configuration
   Configuration config_ = defaultConfig_;
 
   //! Vertical position function
   std::shared_ptr<CubicSpline<Vector1d>> verticalPosFunc_;
-
-  //! Withdraw time
-  double withdrawTime_ = 0;
-
-  //! Approach time
-  double approachTime_ = 0;
 };
 } // namespace BWC

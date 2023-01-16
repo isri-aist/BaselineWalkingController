@@ -117,6 +117,7 @@ FootManager:
   stopSwingTrajForTouchDownFoot: true
   keepSupportFootPoseForTouchDownFoot: false
   enableWrenchDistForTouchDownFoot: true
+  enableOnlineFootstepUpdateInVelMode: true
   enableArmSwing: false
   fricCoeff: 0.5
   touchDownRemainingDuration: 0.2 # [sec]
