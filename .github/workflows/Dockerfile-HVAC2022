@@ -5,9 +5,7 @@ MAINTAINER m-murooka@aist.go.jp
 
 # Build HVAC2022 branch
 RUN cd ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController && \
-    git remote add mmurooka https://github.com/mmurooka/BaselineWalkingController && \
-    git fetch mmurooka && \
-    git checkout -b HVAC2022 -t mmurooka/HVAC2022
+    git checkout -b HVAC2022 -t origin/HVAC2022
 RUN source ${HOME}/catkin_ws/devel/setup.bash && \
     cd ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController && \
     catkin bt --no-deps --force-cmake
