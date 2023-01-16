@@ -1097,9 +1097,10 @@ void FootManager::updateVelMode()
       const sva::PTransformd & footstepPoseOrig = footstepQueue_.front().pose;
       sva::PTransformd footstepPoseNew = config_.midToFootTranss.at(nextFootstep.foot) * footMidpose;
       Eigen::Vector3d footstepTrans = convertTo2d(footstepPoseNew * footstepPoseOrig.inv());
-      double remainingDurationRatio = (updateEndTime - ctl().t()) / (updateEndTime - swingTraj_->startTime_);
+      double remainingDurationRatio =
+          std::clamp((updateEndTime - ctl().t()) / (updateEndTime - swingTraj_->startTime_), 0.0, 1.0);
       Eigen::Vector3d footstepTransMax =
-          remainingDurationRatio * Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
+          std::pow(remainingDurationRatio, 2) * Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
       Eigen::Vector3d footstepTransMin = -1 * footstepTransMax;
       sva::PTransformd footstepPoseNewClamped =
           convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
