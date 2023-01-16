@@ -258,8 +258,8 @@ OverwriteConfigList:
   jvrc1:
     PostureTask:
       jointWeights:
-        WAIST_R: 100
-        WAIST_P: 100
+        WAIST_R: 10
+        WAIST_P: 10
       # For arm swing
       jointGains:
         - jointName: R_SHOULDER_P
