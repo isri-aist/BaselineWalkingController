@@ -31,6 +31,6 @@ protected:
   Eigen::Vector3d baseOriTaskStiffness_ = Eigen::Vector3d::Zero();
 
   //! Stiffness of foot tasks
-  std::unordered_map<Foot, Eigen::Vector6d> footTasksStiffness_;
+  sva::MotionVecd footTasksStiffness_ = sva::MotionVecd::Zero();
 };
 } // namespace BWC

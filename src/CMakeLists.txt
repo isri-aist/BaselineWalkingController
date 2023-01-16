@@ -2,6 +2,8 @@ set(CONTROLLER_NAME BaselineWalkingController)
 
 add_library(${CONTROLLER_NAME} SHARED
   BaselineWalkingController.cpp
+  MathUtils.cpp
+  RobotUtils.cpp
   FootTypes.cpp
   FootManager.cpp
   CentroidalManager.cpp
@@ -15,6 +17,7 @@ add_library(${CONTROLLER_NAME} SHARED
   trajectory/CubicSpline.cpp
   swing/SwingTrajCubicSplineSimple.cpp
   swing/SwingTrajIndHorizontalVertical.cpp
+  swing/SwingTrajVariableTaskGain.cpp
   tasks/FirstOrderImpedanceTask.cpp
   State.cpp
   )

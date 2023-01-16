@@ -4,6 +4,7 @@
 
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
+#include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 
 template<class SwingTrajType>
 void testSwingTraj()
@@ -12,7 +13,9 @@ void testSwingTraj()
   sva::PTransformd goalPose = sva::PTransformd(sva::RotZ(0.5), Eigen::Vector3d(1.1, 0.2, 0.3));
   double startTime = 1.0;
   double goalTime = 2.5;
-  std::shared_ptr<BWC::SwingTraj> swingTraj = std::make_shared<SwingTrajType>(startPose, goalPose, startTime, goalTime);
+  BWC::TaskGain taskGain = BWC::TaskGain(sva::MotionVecd(Eigen::Vector6d::Constant(100)));
+  std::shared_ptr<BWC::SwingTraj> swingTraj =
+      std::make_shared<SwingTrajType>(startPose, goalPose, startTime, goalTime, taskGain);
 
   const int divideNum = 100;
   for(int i = 0; i <= divideNum; i++)
@@ -22,10 +25,15 @@ void testSwingTraj()
     const auto & pose = swingTraj->pose(t);
     const auto & vel = swingTraj->vel(t);
     const auto & accel = swingTraj->accel(t);
+    const auto & taskGain = swingTraj->taskGain(t);
+    const auto & stiffness = taskGain.stiffness;
+    const auto & damping = taskGain.damping;
     EXPECT_FALSE(pose.translation().array().isNaN().any() || pose.translation().array().isInf().any());
     EXPECT_FALSE(pose.rotation().array().isNaN().any() || pose.rotation().array().isInf().any());
     EXPECT_FALSE(vel.vector().array().isNaN().any() || vel.vector().array().isInf().any());
     EXPECT_FALSE(accel.vector().array().isNaN().any() || accel.vector().array().isInf().any());
+    EXPECT_FALSE(stiffness.vector().array().isNaN().any() || stiffness.vector().array().isInf().any());
+    EXPECT_FALSE(damping.vector().array().isNaN().any() || damping.vector().array().isInf().any());
 
     if(i == 0)
     {
@@ -46,6 +54,11 @@ TEST(TestSwingTraj, SwingTrajCubicSplineSimple)
 TEST(TestSwingTraj, SwingTrajIndHorizontalVertical)
 {
   testSwingTraj<BWC::SwingTrajIndHorizontalVertical>();
+}
+
+TEST(TestSwingTraj, SwingTrajVariableTaskGain)
+{
+  testSwingTraj<BWC::SwingTrajVariableTaskGain>();
 }
 
 int main(int argc, char ** argv)

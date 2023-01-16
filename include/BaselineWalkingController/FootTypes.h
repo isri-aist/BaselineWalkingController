@@ -69,7 +69,9 @@ struct Footstep
            double _transitEndTime = 0,
            const mc_rtc::Configuration & _swingTrajConfig = {})
   : foot(_foot), pose(_pose), transitStartTime(_transitStartTime), swingStartTime(_swingStartTime),
-    swingEndTime(_swingEndTime), transitEndTime(_transitEndTime), swingTrajConfig(_swingTrajConfig){};
+    swingEndTime(_swingEndTime), transitEndTime(_transitEndTime), swingTrajConfig(_swingTrajConfig)
+  {
+  }
 
   //! Foot
   Foot foot;

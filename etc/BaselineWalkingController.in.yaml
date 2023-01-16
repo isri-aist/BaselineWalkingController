@@ -91,13 +91,11 @@ FootTaskList:
     foot: Left
     surface: LeftFootCenter
     cutoffPeriod: 0.01
-    stiffness: 1000.0
     weight: 1000.0
   - type: firstOrderImpedance
     foot: Right
     surface: RightFootCenter
     cutoffPeriod: 0.01
-    stiffness: 1000.0
     weight: 1000.0
 
 FootManager:
@@ -110,6 +108,8 @@ FootManager:
       translation: [0, 0.105, 0] # [m]
     Right:
       translation: [0, -0.105, 0] # [m]
+  footTaskGain:
+    stiffness: 1000.0
   zmpHorizon: 2.0 # [sec]
   zmpOffset: [0, -0.02, 0] # (positive for x-forward, y-outside, z-upward) [m]
   defaultSwingTrajType: IndHorizontalVertical
@@ -174,6 +174,11 @@ FootManager:
       tiltCenterApproachDurationRatio: 0.25
       tiltDistThre: 0.2 # [m]
       tiltForwardAngleThre: 10 # [deg]
+    VariableTaskGain:
+      withdrawDurationRatio: 0.25
+      approachDurationRatio: 0.25
+      verticalTopDurationRatio: 0.5
+      verticalTopOffset: [0, 0, 0.05] # [m]
 
 CentroidalManager:
   name: CentroidalManager

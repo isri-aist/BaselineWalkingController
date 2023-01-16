@@ -14,9 +14,9 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
-#include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
+#include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 #include <BaselineWalkingController/wrench/Contact.h>
 
@@ -38,6 +38,10 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
     {
       mcRtcConfig("midToFootTranss")(std::to_string(foot), midToFootTranss.at(foot));
     }
+  }
+  if(mcRtcConfig.has("footTaskGain"))
+  {
+    footTaskGain = TaskGain(mcRtcConfig("footTaskGain"));
   }
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
@@ -79,6 +83,7 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
         mcRtcConfig("SwingTraj")("CubicSplineSimple", mc_rtc::Configuration{}));
     SwingTrajIndHorizontalVertical::loadDefaultConfig(
         mcRtcConfig("SwingTraj")("IndHorizontalVertical", mc_rtc::Configuration{}));
+    SwingTrajVariableTaskGain::loadDefaultConfig(mcRtcConfig("SwingTraj")("VariableTaskGain", mc_rtc::Configuration{}));
   }
 }
 
@@ -92,6 +97,7 @@ void FootManager::reset()
     targetFootPoses_.emplace(foot, ctl().robot().surfacePose(surfaceName(foot)));
     targetFootVels_.emplace(foot, sva::MotionVecd::Zero());
     targetFootAccels_.emplace(foot, sva::MotionVecd::Zero());
+    footTaskGains_.emplace(foot, config_.footTaskGain);
   }
   lastDoubleSupportFootPoses_ = targetFootPoses_;
 
@@ -188,10 +194,18 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
             config_.deltaTransLimit = Eigen::Vector3d(v[0], v[1], mc_rtc::constants::toRad(v[2]));
           }),
       mc_rtc::gui::ArrayInput(
+          "footTaskStiffness", {"ax", "ay", "az", "tx", "ty", "tz"},
+          [this]() -> const sva::MotionVecd & { return config_.footTaskGain.stiffness; },
+          [this](const Eigen::Vector6d & v) { config_.footTaskGain.stiffness = sva::MotionVecd(v); }),
+      mc_rtc::gui::ArrayInput(
+          "footTaskDamping", {"ax", "ay", "az", "tx", "ty", "tz"},
+          [this]() -> const sva::MotionVecd & { return config_.footTaskGain.damping; },
+          [this](const Eigen::Vector6d & v) { config_.footTaskGain.damping = sva::MotionVecd(v); }),
+      mc_rtc::gui::ArrayInput(
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
       mc_rtc::gui::ComboInput(
-          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical"},
+          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskGain"},
           [this]() { return config_.defaultSwingTrajType; },
           [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
       mc_rtc::gui::IntegerInput(
@@ -273,6 +287,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 
   SwingTrajCubicSplineSimple::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
+  SwingTrajVariableTaskGain::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
 }
 
 void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -281,6 +296,7 @@ void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
 
   SwingTrajCubicSplineSimple::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
+  SwingTrajVariableTaskGain::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
 }
 
 void FootManager::addToLogger(mc_rtc::Logger & logger)
@@ -300,6 +316,12 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
 
     logger.addLogEntry(config_.name + "_targetFootAccel_" + std::to_string(foot), this,
                        [this, foot]() -> const sva::MotionVecd & { return targetFootAccels_.at(foot); });
+
+    logger.addLogEntry(config_.name + "_footTaskStiffness_" + std::to_string(foot), this,
+                       [this, foot]() -> const sva::MotionVecd & { return footTaskGains_.at(foot).stiffness; });
+
+    logger.addLogEntry(config_.name + "_footTaskDamping_" + std::to_string(foot), this,
+                       [this, foot]() -> const sva::MotionVecd & { return footTaskGains_.at(foot).damping; });
   }
   logger.addLogEntry(config_.name + "_swingTrajType", this,
                      [this]() -> std::string { return swingTraj_ ? swingTraj_->type() : "None"; });
@@ -685,15 +707,22 @@ void FootManager::updateFootTraj()
         {
           swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
-              swingFootstep_->swingTrajConfig);
+              config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
         else if(swingTrajType == "IndHorizontalVertical")
         {
           swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
               swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              config_.footTaskGain,
               calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
                                     sva::PTransformd::Identity()),
               swingFootstep_->swingTrajConfig);
+        }
+        else if(swingTrajType == "VariableTaskGain")
+        {
+          swingTraj_ = std::make_shared<SwingTrajVariableTaskGain>(
+              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
         else
         {
@@ -805,6 +834,7 @@ void FootManager::updateFootTraj()
       targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->pose(ctl().t());
       targetFootVels_.at(swingFootstep_->foot) = swingTraj_->vel(ctl().t());
       targetFootAccels_.at(swingFootstep_->foot) = swingTraj_->accel(ctl().t());
+      footTaskGains_.at(swingFootstep_->foot) = swingTraj_->taskGain(ctl().t());
     }
   }
   else
@@ -819,6 +849,8 @@ void FootManager::updateFootTraj()
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
+
+      footTaskGains_.at(swingFootstep_->foot) = config_.footTaskGain;
 
       lastDoubleSupportFootPoses_.at(swingFootstep_->foot) = swingFootstep_->pose;
 
@@ -847,6 +879,7 @@ void FootManager::updateFootTraj()
     ctl().footTasks_.at(foot)->targetVel(targetFootVels_.at(foot));
     // ImpedanceTask::targetAccel receive the acceleration represented in the world frame
     ctl().footTasks_.at(foot)->targetAccel(targetFootAccels_.at(foot));
+    ctl().footTasks_.at(foot)->setGains(footTaskGains_.at(foot).stiffness, footTaskGains_.at(foot).damping);
   }
 
   // Update impGainTypes_ and requireImpGainUpdate_

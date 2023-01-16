@@ -3,6 +3,8 @@
 #include <mc_rtc/Configuration.h>
 #include <SpaceVecAlg/SpaceVecAlg>
 
+#include <BaselineWalkingController/RobotUtils.h>
+
 namespace BWC
 {
 /** \brief Foot swing trajectory. */
@@ -27,14 +29,16 @@ public:
       \param goalPose pose goal pose
       \param startTime start time
       \param goalTime goal time
+      \param taskGain IK task gain
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTraj(const sva::PTransformd & startPose,
             const sva::PTransformd & goalPose,
             double startTime,
             double goalTime,
+            const TaskGain & taskGain,
             const mc_rtc::Configuration & mcRtcConfig = {})
-  : startPose_(startPose), goalPose_(goalPose), startTime_(startTime), goalTime_(goalTime)
+  : startPose_(startPose), goalPose_(goalPose), startTime_(startTime), goalTime_(goalTime), taskGain_(taskGain)
   {
     config_.load(mcRtcConfig);
   }
@@ -56,6 +60,15 @@ public:
       \param t time
   */
   virtual sva::MotionVecd accel(double t) const = 0;
+
+  /** \brief Calculate the IK task gain of the swing trajectory at a specified time.
+      \param t time
+  */
+  inline virtual TaskGain taskGain(double // t
+  ) const
+  {
+    return taskGain_;
+  }
 
   /** \brief Notify touch down detection.
       \param t time
@@ -86,6 +99,9 @@ public:
 
   //! Goal time [sec]
   double goalTime_ = 0.0;
+
+  //! IK task gain
+  TaskGain taskGain_;
 
 protected:
   //! Time when touch down is detected (-1 if not detected)
