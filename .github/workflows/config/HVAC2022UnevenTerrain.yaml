@@ -25,6 +25,7 @@ FootTaskList:
 FootManager:
   footstepDuration: 2.5 # [sec]
   doubleSupportRatio: 0.5 # []
+  defaultSwingTrajType: CubicSplineSimple
   overwriteLandingPose: true
   keepSupportFootPoseForTouchDownFoot: true
   touchDownRemainingDuration: 0.4 # [sec]
@@ -44,7 +45,7 @@ CentroidalManager:
   refComZ: 0.775 # [m]
 
 transitions:
-  - [BWC::Initial_, OK, BWC::ConfigFootstep_, Auto]
+  - [BWC::Initial_, OK, BWC::ConfigWalk_, Auto]
 
 states:
   BWC::Initial_:
@@ -52,8 +53,8 @@ states:
     configs:
       autoStartTime: 8.0
 
-  BWC::ConfigFootstep_:
-    base: BWC::ConfigFootstep
+  BWC::ConfigWalk_:
+    base: BWC::ConfigWalk
     configs:
       footstepList:
         - foot: Left
@@ -72,7 +73,7 @@ states:
             translation: [1.8, 0.0, 0.0]
         - footMidpose:
             translation: [2.1, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -80,7 +81,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [2.4, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -88,7 +89,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [2.7, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -96,7 +97,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [3.0, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -104,7 +105,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [3.3, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -112,7 +113,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [3.6, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -120,7 +121,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [3.9, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -128,7 +129,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [4.2, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -136,7 +137,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [4.5, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -144,7 +145,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [4.8, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -152,7 +153,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [5.1, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
@@ -160,7 +161,7 @@ states:
             swingOffset: [0.1, 0, 0.18]
         - footMidpose:
             translation: [5.1, 0.0, 0.0]
-          config:
+          swingTrajConfig:
             withdrawDurationRatio: 0.05
             approachDurationRatio: 0.35
             withdrawOffset: [0, 0, 0.03]
