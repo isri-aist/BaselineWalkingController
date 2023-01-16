@@ -62,7 +62,6 @@ ObserverPipelines:
   observers:
     - type: Encoder
     - type: Attitude
-      required: false
       config:
         KalmanFilter:
           gyr_cov: 1e-6

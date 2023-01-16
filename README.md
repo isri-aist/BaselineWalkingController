@@ -137,7 +137,7 @@ $ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.con
 
 ### Simulator installation
 ```bash
-$ sudo apt-get install jvrc-choreonoid
+$ sudo apt-get install mc-state-observation jvrc-choreonoid
 ```
 
 ### Simulation execution
