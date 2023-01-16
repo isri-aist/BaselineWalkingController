@@ -98,8 +98,9 @@ void FootManager::reset()
     targetFootVels_.emplace(foot, sva::MotionVecd::Zero());
     targetFootAccels_.emplace(foot, sva::MotionVecd::Zero());
     footTaskGains_.emplace(foot, config_.footTaskGain);
+    trajStartFootPoseFuncs_.emplace(foot, nullptr);
   }
-  lastDoubleSupportFootPoses_ = targetFootPoses_;
+  trajStartFootPoses_ = targetFootPoses_;
 
   supportPhase_ = SupportPhase::DoubleSupport;
 
@@ -849,7 +850,15 @@ void FootManager::updateFootTraj()
 
       footTaskGains_.at(swingFootstep_->foot) = config_.footTaskGain;
 
-      lastDoubleSupportFootPoses_.at(swingFootstep_->foot) = swingFootstep_->pose;
+      // Set trajStartFootPoseFuncs_
+      {
+        auto trajStartFootPoseFunc = std::make_shared<CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
+        trajStartFootPoseFunc->appendPoint(std::make_pair(ctl().t(), swingTraj_->goalPose_));
+        trajStartFootPoseFunc->appendPoint(
+            std::make_pair(swingFootstep_->transitEndTime, targetFootPoses_.at(swingFootstep_->foot)));
+        trajStartFootPoseFunc->calcCoeff();
+        trajStartFootPoseFuncs_.at(swingFootstep_->foot) = trajStartFootPoseFunc;
+      }
 
       // Set supportPhase_
       supportPhase_ = SupportPhase::DoubleSupport;
@@ -980,7 +989,22 @@ void FootManager::updateZmpTraj()
   groundPosZFunc_->clearPoints();
   contactFootPosesList_.clear();
 
-  std::unordered_map<Foot, sva::PTransformd> footPoses = lastDoubleSupportFootPoses_;
+  // Update trajStartFootPoses_
+  for(auto & trajStartFootPoseFuncKV : trajStartFootPoseFuncs_)
+  {
+    auto & trajStartFootPoseFunc = trajStartFootPoseFuncKV.second;
+    if(!trajStartFootPoseFunc)
+    {
+      continue;
+    }
+    trajStartFootPoses_.at(trajStartFootPoseFuncKV.first) =
+        (*trajStartFootPoseFunc)(std::min(ctl().t(), trajStartFootPoseFunc->endTime()));
+    if(trajStartFootPoseFunc->endTime() <= ctl().t())
+    {
+      trajStartFootPoseFunc.reset();
+    }
+  }
+  std::unordered_map<Foot, sva::PTransformd> footPoses = trajStartFootPoses_;
 
   auto calcFootMidposZ = [](const std::unordered_map<Foot, sva::PTransformd> & _footPoses) {
     return 0.5 * (_footPoses.at(Foot::Left).translation().z() + _footPoses.at(Foot::Right).translation().z());
@@ -1011,7 +1035,7 @@ void FootManager::updateZmpTraj()
                                                                  {supportFoot, footPoses.at(supportFoot)}});
 
       // Update footPoses
-      footPoses.at(footstep.foot) = footstep.pose;
+      footPoses.at(footstep.foot) = (footstep.swingStartTime <= ctl().t() ? swingTraj_->goalPose_ : footstep.pose);
     }
 
     zmpFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));

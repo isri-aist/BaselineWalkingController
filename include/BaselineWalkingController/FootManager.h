@@ -351,8 +351,12 @@ protected:
   //! Foot task gains
   std::unordered_map<Foot, TaskGain> footTaskGains_;
 
-  //! Foot poses in the last double support phase
-  std::unordered_map<Foot, sva::PTransformd> lastDoubleSupportFootPoses_;
+  //! Foot poses of start of trajectory
+  std::unordered_map<Foot, sva::PTransformd> trajStartFootPoses_;
+
+  //! Functions for foot poses of start of trajectory
+  std::unordered_map<Foot, std::shared_ptr<CubicInterpolator<sva::PTransformd, sva::MotionVecd>>>
+      trajStartFootPoseFuncs_;
 
   //! Support phase
   SupportPhase supportPhase_ = SupportPhase::DoubleSupport;
