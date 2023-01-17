@@ -50,11 +50,11 @@ bool ConfigWalkState::run(mc_control::fsm::Controller &)
   }
   else if(config_.has("configs") && config_("configs").has("velocityMode"))
   {
-    if(ctl().t() > velModeEndTime_ && ctl().footManager_->velMode())
+    if(ctl().t() > velModeEndTime_ && ctl().footManager_->velModeEnabled())
     {
       ctl().footManager_->endVelMode();
     }
-    return !ctl().footManager_->velMode() && ctl().footManager_->footstepQueue().empty();
+    return !ctl().footManager_->velModeEnabled() && ctl().footManager_->footstepQueue().empty();
   }
 
   return true;

@@ -66,7 +66,7 @@ bool TeleopState::run(mc_control::fsm::Controller &)
   callbackQueue_.callAvailable(ros::WallDuration());
 
   // Update GUI
-  bool velMode = ctl().footManager_->velMode();
+  bool velMode = ctl().footManager_->velModeEnabled();
   if(velMode && ctl().gui()->hasElement({ctl().name(), "Teleop"}, "StartTeleop"))
   {
     ctl().gui()->addElement({ctl().name(), "Teleop"},
@@ -81,7 +81,7 @@ bool TeleopState::run(mc_control::fsm::Controller &)
   }
 
   // Set target velocity
-  if(ctl().footManager_->velMode())
+  if(ctl().footManager_->velModeEnabled())
   {
     ctl().footManager_->setRelativeVel(targetVel_);
   }

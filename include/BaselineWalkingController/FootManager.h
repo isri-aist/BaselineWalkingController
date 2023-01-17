@@ -334,7 +334,7 @@ public:
   }
 
   /** \brief Whether the velocity mode is enabled. */
-  inline bool velMode() const
+  inline bool velModeEnabled() const
   {
     return velModeData_.enabled_;
   }
