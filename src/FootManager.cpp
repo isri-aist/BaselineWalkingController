@@ -46,7 +46,15 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
   mcRtcConfig("defaultSwingTrajType", defaultSwingTrajType);
-  mcRtcConfig("footstepQueueSizeInVelMode", footstepQueueSizeInVelMode);
+  if(mcRtcConfig.has("footstepQueueSizeInVelMode"))
+  {
+    footstepQueueSizeInVelMode = mcRtcConfig("footstepQueueSizeInVelMode");
+    if(footstepQueueSizeInVelMode < 3)
+    {
+      footstepQueueSizeInVelMode = 3;
+      mc_rtc::log::warning("[FootManager] footstepQueueSizeInVelMode must be at least 3.");
+    }
+  }
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
@@ -209,7 +217,9 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
       mc_rtc::gui::IntegerInput(
           "footstepQueueSizeInVelMode", [this]() { return config_.footstepQueueSizeInVelMode; },
-          [this](int footstepQueueSizeInVelMode) { config_.footstepQueueSizeInVelMode = footstepQueueSizeInVelMode; }),
+          [this](int footstepQueueSizeInVelMode) {
+            config_.footstepQueueSizeInVelMode = std::max(footstepQueueSizeInVelMode, 3);
+          }),
       mc_rtc::gui::Checkbox(
           "overwriteLandingPose", [this]() { return config_.overwriteLandingPose; },
           [this]() { config_.overwriteLandingPose = !config_.overwriteLandingPose; }),
