@@ -1000,17 +1000,19 @@ void FootManager::updateFootTraj()
   }
 
   // Update footstep visualization
-  std::vector<std::vector<Eigen::Vector3d>> footstepPolygonList;
-  for(const auto & footstep : footstepQueue_)
   {
-    const auto & surface = ctl().robot().surface(surfaceName(footstep.foot));
-    footstepPolygonList.push_back(calcSurfaceVertexList(surface, footstep.pose));
-  }
+    std::vector<std::vector<Eigen::Vector3d>> footstepPolygonList;
+    for(const auto & footstep : footstepQueue_)
+    {
+      const auto & surface = ctl().robot().surface(surfaceName(footstep.foot));
+      footstepPolygonList.push_back(calcSurfaceVertexList(surface, footstep.pose));
+    }
 
-  ctl().gui()->removeCategory({ctl().name(), config_.name, "FootstepMarker"});
-  ctl().gui()->addElement({ctl().name(), config_.name, "FootstepMarker"},
-                          mc_rtc::gui::Polygon("Footstep", {mc_rtc::gui::Color::Blue, 0.02},
-                                               [footstepPolygonList]() { return footstepPolygonList; }));
+    ctl().gui()->removeCategory({ctl().name(), config_.name, "FootstepMarker"});
+    ctl().gui()->addElement({ctl().name(), config_.name, "FootstepMarker"},
+                            mc_rtc::gui::Polygon("Footstep", {mc_rtc::gui::Color::Blue, 0.02},
+                                                 [footstepPolygonList]() { return footstepPolygonList; }));
+  }
 }
 
 void FootManager::updateZmpTraj()
