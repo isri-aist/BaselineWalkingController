@@ -130,7 +130,7 @@ public:
     /** \brief Reset.
         \param enabled whether the velocity mode is enabled
      */
-    void reset(bool enabled = false);
+    void reset(bool enabled);
 
   public:
     //! Configuration

@@ -147,7 +147,7 @@ void FootManager::reset()
 
   baseYawFunc_->clearPoints();
 
-  velModeData_.reset();
+  velModeData_.reset(false);
 
   touchDown_ = false;
 
@@ -671,7 +671,7 @@ bool FootManager::endVelMode()
     return false;
   }
 
-  velModeData_.reset();
+  velModeData_.reset(false);
 
   // Update last footstep pose to align both feet
   // Note that this process assumes that velModeData_.config_.footstepQueueSize is at least 3
