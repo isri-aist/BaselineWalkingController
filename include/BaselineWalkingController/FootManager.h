@@ -101,7 +101,10 @@ public:
     void load(const mc_rtc::Configuration & mcRtcConfig);
   };
 
-  /** \brief Data of the velocity mode where the robot walks at the relative target velocity. */
+  /** \brief Velocity mode data.
+
+      In the velocity mode, the robot walks at the specified velocity.
+  */
   class VelModeData
   {
   public:
@@ -169,6 +172,12 @@ public:
   inline const Configuration & config() const noexcept
   {
     return config_;
+  }
+
+  /** \brief Const accessor to the velocity mode data. */
+  inline const VelModeData & velModeData() const noexcept
+  {
+    return velModeData_;
   }
 
   /** \brief Add entries to the GUI. */
