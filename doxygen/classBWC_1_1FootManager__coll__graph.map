@@ -1,8 +1,10 @@
 <map id="BWC::FootManager" name="BWC::FootManager">
-<area shape="rect" id="node1" title="Foot manager." alt="" coords="316,184,463,211"/>
-<area shape="rect" id="node2" href="$structBWC_1_1FootManager_1_1Configuration.html" title="Configuration." alt="" coords="5,95,248,121"/>
-<area shape="rect" id="node3" href="$structBWC_1_1TaskGain.html" title="IK task gains." alt="" coords="67,5,187,32"/>
-<area shape="rect" id="node4" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="272,95,507,121"/>
-<area shape="rect" id="node5" title=" " alt="" coords="290,5,489,32"/>
-<area shape="rect" id="node6" href="$structBWC_1_1Footstep.html" title="Footstep." alt="" coords="531,95,648,121"/>
+<area shape="rect" id="node1" title="Foot manager." alt="" coords="749,85,896,112"/>
+<area shape="rect" id="node2" href="$structBWC_1_1FootManager_1_1Configuration.html" title="Configuration." alt="" coords="353,7,596,33"/>
+<area shape="rect" id="node3" href="$structBWC_1_1TaskGain.html" title="IK task gains." alt="" coords="51,7,171,33"/>
+<area shape="rect" id="node4" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="357,57,592,84"/>
+<area shape="rect" id="node5" title=" " alt="" coords="11,57,210,84"/>
+<area shape="rect" id="node6" href="$structBWC_1_1Footstep.html" title="Footstep." alt="" coords="416,108,533,135"/>
+<area shape="rect" id="node7" href="$classBWC_1_1FootManager_1_1VelModeData.html" title="Data of the velocity mode where the robot walks at the relative target velocity." alt="" coords="353,159,596,185"/>
+<area shape="rect" id="node8" href="$structBWC_1_1FootManager_1_1VelModeData_1_1Configuration.html" title="Configuration." alt="" coords="5,151,216,193"/>
 </map>
