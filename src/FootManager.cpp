@@ -46,20 +46,10 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("zmpHorizon", zmpHorizon);
   mcRtcConfig("zmpOffset", zmpOffset);
   mcRtcConfig("defaultSwingTrajType", defaultSwingTrajType);
-  if(mcRtcConfig.has("footstepQueueSizeInVelMode"))
-  {
-    footstepQueueSizeInVelMode = mcRtcConfig("footstepQueueSizeInVelMode");
-    if(footstepQueueSizeInVelMode < 3)
-    {
-      footstepQueueSizeInVelMode = 3;
-      mc_rtc::log::warning("[FootManager] footstepQueueSizeInVelMode must be at least 3.");
-    }
-  }
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
   mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
   mcRtcConfig("enableWrenchDistForTouchDownFoot", enableWrenchDistForTouchDownFoot);
-  mcRtcConfig("enableOnlineFootstepUpdateInVelMode", enableOnlineFootstepUpdateInVelMode);
   mcRtcConfig("enableArmSwing", enableArmSwing);
   mcRtcConfig("fricCoeff", fricCoeff);
   mcRtcConfig("touchDownRemainingDuration", touchDownRemainingDuration);
@@ -79,12 +69,37 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
 }
 
+void FootManager::VelModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
+{
+  if(mcRtcConfig.has("footstepQueueSize"))
+  {
+    footstepQueueSize = mcRtcConfig("footstepQueueSize");
+    if(footstepQueueSize < 3)
+    {
+      footstepQueueSize = 3;
+      mc_rtc::log::warning("[FootManager::VelModeData] footstepQueueSize must be at least 3.");
+    }
+  }
+  mcRtcConfig("enableOnlineFootstepUpdate", enableOnlineFootstepUpdate);
+}
+
+void FootManager::VelModeData::reset(bool enabled)
+{
+  enabled_ = enabled;
+  targetVel_.setZero();
+}
+
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
 : ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
   groundPosZFunc_(std::make_shared<CubicInterpolator<double>>()),
   baseYawFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
+
+  if(mcRtcConfig.has("VelMode"))
+  {
+    velModeData_.config_.load(mcRtcConfig("VelMode"));
+  }
 
   if(mcRtcConfig.has("SwingTraj"))
   {
@@ -132,8 +147,7 @@ void FootManager::reset()
 
   baseYawFunc_->clearPoints();
 
-  velMode_ = false;
-  targetVel_.setZero();
+  velModeData_.reset();
 
   touchDown_ = false;
 
@@ -159,7 +173,7 @@ void FootManager::update()
 {
   updateFootTraj();
   updateZmpTraj();
-  if(velMode_)
+  if(velModeData_.enabled_)
   {
     updateVelMode();
   }
@@ -215,11 +229,6 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskGain"},
           [this]() { return config_.defaultSwingTrajType; },
           [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
-      mc_rtc::gui::IntegerInput(
-          "footstepQueueSizeInVelMode", [this]() { return config_.footstepQueueSizeInVelMode; },
-          [this](int footstepQueueSizeInVelMode) {
-            config_.footstepQueueSizeInVelMode = std::max(footstepQueueSizeInVelMode, 3);
-          }),
       mc_rtc::gui::Checkbox(
           "overwriteLandingPose", [this]() { return config_.overwriteLandingPose; },
           [this]() { config_.overwriteLandingPose = !config_.overwriteLandingPose; }),
@@ -232,9 +241,6 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::Checkbox(
           "enableWrenchDistForTouchDownFoot", [this]() { return config_.enableWrenchDistForTouchDownFoot; },
           [this]() { config_.enableWrenchDistForTouchDownFoot = !config_.enableWrenchDistForTouchDownFoot; }),
-      mc_rtc::gui::Checkbox(
-          "enableOnlineFootstepUpdateInVelMode", [this]() { return config_.enableOnlineFootstepUpdateInVelMode; },
-          [this]() { config_.enableOnlineFootstepUpdateInVelMode = !config_.enableOnlineFootstepUpdateInVelMode; }),
       mc_rtc::gui::Checkbox(
           "enableArmSwing", [this]() { return config_.enableArmSwing; },
           [this]() { config_.enableArmSwing = !config_.enableArmSwing; }),
@@ -261,6 +267,17 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
         }
         return s;
       }));
+
+  gui.addElement(
+      {ctl().name(), config_.name, "Config", "VelMode"},
+      mc_rtc::gui::IntegerInput(
+          "footstepQueueSize", [this]() { return velModeData_.config_.footstepQueueSize; },
+          [this](int footstepQueueSize) { velModeData_.config_.footstepQueueSize = std::max(footstepQueueSize, 3); }),
+      mc_rtc::gui::Checkbox(
+          "enableOnlineFootstepUpdate", [this]() { return velModeData_.config_.enableOnlineFootstepUpdate; },
+          [this]() {
+            velModeData_.config_.enableOnlineFootstepUpdate = !velModeData_.config_.enableOnlineFootstepUpdate;
+          }));
 
   for(const auto & impGainKV : config_.impGains)
   {
@@ -346,8 +363,9 @@ void FootManager::addToLogger(mc_rtc::Logger & logger)
 
   logger.addLogEntry(config_.name + "_leftFootSupportRatio", this, [this]() { return leftFootSupportRatio(); });
 
-  logger.addLogEntry(config_.name + "_velMode", this, [this]() -> std::string { return velMode_ ? "ON" : "OFF"; });
-  logger.addLogEntry(config_.name + "_targetVel", this, [this]() { return targetVel_; });
+  logger.addLogEntry(config_.name + "_velMode", this,
+                     [this]() -> std::string { return velModeData_.enabled_ ? "ON" : "OFF"; });
+  logger.addLogEntry(config_.name + "_targetVel", this, [this]() { return velModeData_.targetVel_; });
 
   logger.addLogEntry(config_.name + "_touchDown", this, [this]() { return touchDown_; });
 
@@ -613,7 +631,7 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
 
 bool FootManager::startVelMode()
 {
-  if(velMode_)
+  if(velModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is already in velocity mode, but startVelMode is called.");
     return false;
@@ -626,15 +644,14 @@ bool FootManager::startVelMode()
     return false;
   }
 
-  velMode_ = true;
-  targetVel_.setZero();
+  velModeData_.reset(true);
 
   // Add footsteps to queue for walking in place
   Foot foot = Foot::Left;
   const sva::PTransformd & footMidpose =
       projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
   double startTime = ctl().t() + 1.0;
-  for(int i = 0; i < config_.footstepQueueSizeInVelMode; i++)
+  for(int i = 0; i < velModeData_.config_.footstepQueueSize; i++)
   {
     const auto & footstep = makeFootstep(foot, footMidpose, startTime);
     appendFootstep(footstep);
@@ -648,17 +665,16 @@ bool FootManager::startVelMode()
 
 bool FootManager::endVelMode()
 {
-  if(!velMode_)
+  if(!velModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is not in velocity mode, but endVelMode is called.");
     return false;
   }
 
-  velMode_ = false;
-  targetVel_.setZero();
+  velModeData_.reset();
 
   // Update last footstep pose to align both feet
-  // Note that this process assumes that config_.footstepQueueSizeInVelMode is at least 3
+  // Note that this process assumes that velModeData_.config_.footstepQueueSize is at least 3
   const auto & lastFootstep1 = *(footstepQueue_.rbegin() + 1);
   auto & lastFootstep2 = *(footstepQueue_.rbegin());
   sva::PTransformd footMidpose = config_.midToFootTranss.at(lastFootstep1.foot).inv() * lastFootstep1.pose;
@@ -1090,10 +1106,10 @@ void FootManager::updateVelMode()
   footstepQueue_.erase(footstepQueue_.begin() + 1, footstepQueue_.end());
   const auto & nextFootstep = footstepQueue_.front();
   sva::PTransformd footMidpose = projGround(config_.midToFootTranss.at(nextFootstep.foot).inv() * nextFootstep.pose);
-  Eigen::Vector3d deltaTrans = config_.footstepDuration * targetVel_;
+  Eigen::Vector3d deltaTrans = config_.footstepDuration * velModeData_.targetVel_;
 
   // Update footstep online during swing
-  if(config_.enableOnlineFootstepUpdateInVelMode && swingTraj_ && swingTraj_->type() == "VariableTaskGain")
+  if(velModeData_.config_.enableOnlineFootstepUpdate && swingTraj_ && swingTraj_->type() == "VariableTaskGain")
   {
     constexpr double updateEndTimeRatio = 0.9;
     double approachTime = std::dynamic_pointer_cast<SwingTrajVariableTaskGain>(swingTraj_)->approachTime_;
@@ -1121,7 +1137,7 @@ void FootManager::updateVelMode()
   // Append new footsteps
   Foot foot = opposite(nextFootstep.foot);
   double startTime = nextFootstep.transitEndTime;
-  for(int i = 0; i < config_.footstepQueueSizeInVelMode - 1; i++)
+  for(int i = 0; i < velModeData_.config_.footstepQueueSize - 1; i++)
   {
     footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
 

@@ -112,12 +112,10 @@ FootManager:
   zmpHorizon: 2.0 # [sec]
   zmpOffset: [0, -0.02, 0] # (positive for x-forward, y-outside, z-upward) [m]
   defaultSwingTrajType: IndHorizontalVertical
-  footstepQueueSizeInVelMode: 3
   overwriteLandingPose: false
   stopSwingTrajForTouchDownFoot: true
   keepSupportFootPoseForTouchDownFoot: false
   enableWrenchDistForTouchDownFoot: true
-  enableOnlineFootstepUpdateInVelMode: true
   enableArmSwing: false
   fricCoeff: 0.5
   touchDownRemainingDuration: 0.2 # [sec]
@@ -154,6 +152,9 @@ FootManager:
       wrench:
         linear: [0, 0, 0]
         angular: [0, 0, 0]
+  VelMode:
+    footstepQueueSize: 3
+    enableOnlineFootstepUpdate: true
   SwingTraj:
     CubicSplineSimple:
       withdrawDurationRatio: 0.25

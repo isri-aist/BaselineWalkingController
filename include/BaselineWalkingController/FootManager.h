@@ -58,9 +58,6 @@ public:
     //! Default swing trajectory type
     std::string defaultSwingTrajType = "IndHorizontalVertical";
 
-    //! Queue size of footsteps to be sent in the velocity mode (must be at least 3)
-    int footstepQueueSizeInVelMode = 3;
-
     //! Whether to overwrite landing pose so that the relative pose from support foot to swing foot is retained
     bool overwriteLandingPose = false;
 
@@ -72,9 +69,6 @@ public:
 
     //! Whether to enable wrench distribution for touch down foot
     bool enableWrenchDistForTouchDownFoot = true;
-
-    //! Whether to enable online footstep update during swing in the velocity mode
-    bool enableOnlineFootstepUpdateInVelMode = true;
 
     //! Whether to enable arm swing
     bool enableArmSwing = false;
@@ -105,6 +99,45 @@ public:
         \param mcRtcConfig mc_rtc configuration
     */
     void load(const mc_rtc::Configuration & mcRtcConfig);
+  };
+
+  /** \brief Data of the velocity mode where the robot walks at the relative target velocity. */
+  class VelModeData
+  {
+  public:
+    /** \brief Configuration. */
+    struct Configuration
+    {
+      //! Queue size of footsteps to be sent in the velocity mode (must be at least 3)
+      int footstepQueueSize = 3;
+
+      //! Whether to enable online footstep update during swing in the velocity mode
+      bool enableOnlineFootstepUpdate = true;
+
+      /** \brief Load mc_rtc configuration.
+          \param mcRtcConfig mc_rtc configuration
+      */
+      void load(const mc_rtc::Configuration & mcRtcConfig);
+    };
+
+  public:
+    /** \brief Constructor. */
+    VelModeData() {}
+
+    /** \brief Reset.
+        \param enabled whether the velocity mode is enabled
+     */
+    void reset(bool enabled = false);
+
+  public:
+    //! Configuration
+    Configuration config_;
+
+    //! Whether the velocity mode is enabled
+    bool enabled_ = false;
+
+    //! Relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s])
+    Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
   };
 
 public:
@@ -288,13 +321,13 @@ public:
    */
   inline void setRelativeVel(const Eigen::Vector3d & targetVel)
   {
-    targetVel_ = targetVel;
+    velModeData_.targetVel_ = targetVel;
   }
 
-  /** \brief Whether the velocity mode (i.e., walking at the relative target velocity) is enabled. */
+  /** \brief Whether the velocity mode is enabled. */
   inline bool velMode() const
   {
-    return velMode_;
+    return velModeData_.enabled_;
   }
 
 protected:
@@ -332,6 +365,9 @@ protected:
 protected:
   //! Configuration
   Configuration config_;
+
+  //! Velocity mode data
+  VelModeData velModeData_;
 
   //! Pointer to controller
   BaselineWalkingController * ctlPtr_ = nullptr;
@@ -384,12 +420,6 @@ protected:
 
   //! Arm swing joint angles trajectory
   std::shared_ptr<CubicSpline<Eigen::VectorXd>> armSwingFunc_;
-
-  //! Whether the velocity mode (i.e., walking at the relative target velocity) is enabled
-  bool velMode_ = false;
-
-  //! Relative target velocity of foot midpose in the velocity mode (x [m/s], y [m/s], theta [rad/s])
-  Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;
