@@ -1,4 +1,4 @@
 <map id="BWC::FootManager::VelModeData" name="BWC::FootManager::VelModeData">
-<area shape="rect" id="node1" title="Data of the velocity mode where the robot walks at the relative target velocity." alt="" coords="5,109,248,136"/>
+<area shape="rect" id="node1" title="Velocity mode data." alt="" coords="5,109,248,136"/>
 <area shape="rect" id="node2" href="$structBWC_1_1FootManager_1_1VelModeData_1_1Configuration.html" title="Configuration." alt="" coords="21,5,232,47"/>
 </map>

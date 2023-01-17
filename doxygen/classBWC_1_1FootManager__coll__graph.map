@@ -5,6 +5,6 @@
 <area shape="rect" id="node4" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="357,57,592,84"/>
 <area shape="rect" id="node5" title=" " alt="" coords="11,57,210,84"/>
 <area shape="rect" id="node6" href="$structBWC_1_1Footstep.html" title="Footstep." alt="" coords="416,108,533,135"/>
-<area shape="rect" id="node7" href="$classBWC_1_1FootManager_1_1VelModeData.html" title="Data of the velocity mode where the robot walks at the relative target velocity." alt="" coords="353,159,596,185"/>
+<area shape="rect" id="node7" href="$classBWC_1_1FootManager_1_1VelModeData.html" title="Velocity mode data." alt="" coords="353,159,596,185"/>
 <area shape="rect" id="node8" href="$structBWC_1_1FootManager_1_1VelModeData_1_1Configuration.html" title="Configuration." alt="" coords="5,151,216,193"/>
 </map>
