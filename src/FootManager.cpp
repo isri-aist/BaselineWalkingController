@@ -1089,28 +1089,27 @@ void FootManager::updateVelMode()
   // Keep the next footstep and delete the second and subsequent footsteps
   footstepQueue_.erase(footstepQueue_.begin() + 1, footstepQueue_.end());
   const auto & nextFootstep = footstepQueue_.front();
-  sva::PTransformd footMidpose =
-      projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)), nextFootstep.pose, 0.5));
+  sva::PTransformd footMidpose = projGround(config_.midToFootTranss.at(nextFootstep.foot).inv() * nextFootstep.pose);
   Eigen::Vector3d deltaTrans = config_.footstepDuration * targetVel_;
 
   // Update footstep online during swing
   if(config_.enableOnlineFootstepUpdateInVelMode && swingTraj_ && swingTraj_->type() == "VariableTaskGain")
   {
-    double updateEndTimeRatio = 0.9;
+    constexpr double updateEndTimeRatio = 0.9;
     double approachTime = std::dynamic_pointer_cast<SwingTrajVariableTaskGain>(swingTraj_)->approachTime_;
     double updateEndTime = updateEndTimeRatio * (approachTime - swingTraj_->startTime_) + swingTraj_->startTime_;
     if(swingTraj_->startTime_ <= ctl().t() && ctl().t() <= updateEndTime)
     {
-      sva::PTransformd prevFootMidpose = projGround(sva::interpolate(targetFootPoses_.at(opposite(nextFootstep.foot)),
-                                                                     trajStartFootPoses_.at(nextFootstep.foot), 0.5));
-      footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, nextFootstep.foot)) * prevFootMidpose;
-      const sva::PTransformd & footstepPoseOrig = footstepQueue_.front().pose;
+      sva::PTransformd currentFootMidpose = projGround(config_.midToFootTranss.at(opposite(nextFootstep.foot)).inv()
+                                                       * targetFootPoses_.at(opposite(nextFootstep.foot)));
+      footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, nextFootstep.foot)) * currentFootMidpose;
+      const sva::PTransformd & footstepPoseOrig = nextFootstep.pose;
       sva::PTransformd footstepPoseNew = config_.midToFootTranss.at(nextFootstep.foot) * footMidpose;
       Eigen::Vector3d footstepTrans = convertTo2d(footstepPoseNew * footstepPoseOrig.inv());
       double remainingDurationRatio =
           std::clamp((updateEndTime - ctl().t()) / (updateEndTime - swingTraj_->startTime_), 0.0, 1.0);
       Eigen::Vector3d footstepTransMax =
-          std::pow(remainingDurationRatio, 2) * Eigen::Vector3d(0.15, 0.1, mc_rtc::constants::toRad(15));
+          std::pow(remainingDurationRatio, 2) * Eigen::Vector3d(0.1, 0.1, mc_rtc::constants::toRad(15));
       Eigen::Vector3d footstepTransMin = -1 * footstepTransMax;
       sva::PTransformd footstepPoseNewClamped =
           convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
