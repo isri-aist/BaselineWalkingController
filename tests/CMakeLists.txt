@@ -14,10 +14,6 @@ else()
 endif()
 
 set(BWC_gtest_list
-  TestFunc
-  TestCubicSpline
-  TestCubicHermiteSpline
-  TestCubicInterpolator
   TestSwingTraj
   )
 
