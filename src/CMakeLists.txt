@@ -11,8 +11,6 @@ add_library(${CONTROLLER_NAME} SHARED
   centroidal/CentroidalManagerDdpZmp.cpp
   centroidal/CentroidalManagerFootGuidedControl.cpp
   centroidal/CentroidalManagerIntrinsicallyStableMpc.cpp
-  trajectory/CubicHermiteSpline.cpp
-  trajectory/CubicSpline.cpp
   swing/SwingTrajCubicSplineSimple.cpp
   swing/SwingTrajIndHorizontalVertical.cpp
   swing/SwingTrajVariableTaskGain.cpp

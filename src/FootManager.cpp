@@ -91,9 +91,9 @@ void FootManager::VelModeData::reset(bool enabled)
 }
 
 FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & mcRtcConfig)
-: ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<CubicInterpolator<Eigen::Vector3d>>()),
-  groundPosZFunc_(std::make_shared<CubicInterpolator<double>>()),
-  baseYawFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
+: ctlPtr_(ctlPtr), zmpFunc_(std::make_shared<TrajColl::CubicInterpolator<Eigen::Vector3d>>()),
+  groundPosZFunc_(std::make_shared<TrajColl::CubicInterpolator<double>>()),
+  baseYawFunc_(std::make_shared<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
 
@@ -763,17 +763,17 @@ void FootManager::updateFootTraj()
       // Set baseYawFunc_
       {
         double swingStartBaseYaw =
-            mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(targetFootPoses_.at(Foot::Left).rotation().transpose(),
-                                                              targetFootPoses_.at(Foot::Right).rotation().transpose(),
-                                                              0.5)
-                                     .transpose())
+            mc_rbdyn::rpyFromMat(
+                TrajColl::interpolate<Eigen::Matrix3d>(targetFootPoses_.at(Foot::Left).rotation().transpose(),
+                                                       targetFootPoses_.at(Foot::Right).rotation().transpose(), 0.5)
+                    .transpose())
                 .z();
         baseYawFunc_->appendPoint(
             std::make_pair(swingFootstep_->swingStartTime,
                            Eigen::AngleAxisd(swingStartBaseYaw, Eigen::Vector3d::UnitZ()).toRotationMatrix()));
 
         double swingEndBaseYaw =
-            mc_rbdyn::rpyFromMat(interpolate<Eigen::Matrix3d>(
+            mc_rbdyn::rpyFromMat(TrajColl::interpolate<Eigen::Matrix3d>(
                                      swingFootstep_->pose.rotation().transpose(),
                                      targetFootPoses_.at(opposite(swingFootstep_->foot)).rotation().transpose(), 0.5)
                                      .transpose())
@@ -813,8 +813,8 @@ void FootManager::updateFootTraj()
             }
             return jointAnglesVec;
           };
-          BoundaryConstraint<Eigen::VectorXd> zeroVelBC(BoundaryConstraintType::Velocity,
-                                                        Eigen::VectorXd::Zero(totalSize));
+          TrajColl::BoundaryConstraint<Eigen::VectorXd> zeroVelBC(TrajColl::BoundaryConstraintType::Velocity,
+                                                                  Eigen::VectorXd::Zero(totalSize));
           std::map<std::string, std::vector<double>> currentJointAnglesMap;
           auto postureTask = ctl().getPostureTask(ctl().robot().name());
           for(const auto & jointAngleKV : config_.jointAnglesForArmSwing.at("Nominal"))
@@ -826,7 +826,7 @@ void FootManager::updateFootTraj()
           Eigen::VectorXd swingJointAnglesVec =
               jointAnglesMapToVec(config_.jointAnglesForArmSwing.at(std::to_string(swingFootstep_->foot)));
           Eigen::VectorXd nominalJointAnglesVec = jointAnglesMapToVec(config_.jointAnglesForArmSwing.at("Nominal"));
-          armSwingFunc_ = std::make_shared<CubicSpline<Eigen::VectorXd>>(totalSize, zeroVelBC, zeroVelBC);
+          armSwingFunc_ = std::make_shared<TrajColl::CubicSpline<Eigen::VectorXd>>(totalSize, zeroVelBC, zeroVelBC);
           armSwingFunc_->appendPoint(std::make_pair(swingFootstep_->swingStartTime, currentJointAnglesVec));
           armSwingFunc_->appendPoint(std::make_pair(
               0.5 * (swingFootstep_->swingStartTime + swingFootstep_->swingEndTime), swingJointAnglesVec));
@@ -884,7 +884,7 @@ void FootManager::updateFootTraj()
 
       // Set trajStartFootPoseFuncs_
       {
-        auto trajStartFootPoseFunc = std::make_shared<CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
+        auto trajStartFootPoseFunc = std::make_shared<TrajColl::CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
         trajStartFootPoseFunc->appendPoint(std::make_pair(ctl().t(), swingTraj_->goalPose_));
         trajStartFootPoseFunc->appendPoint(
             std::make_pair(swingFootstep_->transitEndTime, targetFootPoses_.at(swingFootstep_->foot)));

@@ -2,8 +2,9 @@
 
 #include <mc_rtc/gui/StateBuilder.h>
 
+#include <TrajColl/CubicInterpolator.h>
+
 #include <BaselineWalkingController/SwingTraj.h>
-#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 
 namespace BWC
 {
@@ -114,9 +115,9 @@ protected:
   Configuration config_ = defaultConfig_;
 
   //! Position function
-  std::shared_ptr<PiecewiseFunc<Eigen::Vector3d>> posFunc_;
+  std::shared_ptr<TrajColl::PiecewiseFunc<Eigen::Vector3d>> posFunc_;
 
   //! Rotation function
-  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
 };
 } // namespace BWC

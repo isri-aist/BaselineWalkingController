@@ -8,10 +8,11 @@
 #include <mc_rtc/log/Logger.h>
 #include <mc_tasks/ImpedanceGains.h>
 
+#include <TrajColl/CubicInterpolator.h>
+#include <TrajColl/CubicSpline.h>
+
 #include <BaselineWalkingController/FootTypes.h>
 #include <BaselineWalkingController/RobotUtils.h>
-#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 namespace ForceColl
 {
@@ -407,17 +408,17 @@ protected:
   std::unordered_map<Foot, sva::PTransformd> trajStartFootPoses_;
 
   //! Functions for foot poses of start of trajectory
-  std::unordered_map<Foot, std::shared_ptr<CubicInterpolator<sva::PTransformd, sva::MotionVecd>>>
+  std::unordered_map<Foot, std::shared_ptr<TrajColl::CubicInterpolator<sva::PTransformd, sva::MotionVecd>>>
       trajStartFootPoseFuncs_;
 
   //! Support phase
   SupportPhase supportPhase_ = SupportPhase::DoubleSupport;
 
   //! ZMP function
-  std::shared_ptr<CubicInterpolator<Eigen::Vector3d>> zmpFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Eigen::Vector3d>> zmpFunc_;
 
   //! Ground Z position function
-  std::shared_ptr<CubicInterpolator<double>> groundPosZFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<double>> groundPosZFunc_;
 
   //! Contact foot poses list
   std::map<double, std::unordered_map<Foot, sva::PTransformd>> contactFootPosesList_;
@@ -429,10 +430,10 @@ protected:
   std::shared_ptr<SwingTraj> swingTraj_ = nullptr;
 
   //! Base link Yaw trajectory
-  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> baseYawFunc_;
 
   //! Arm swing joint angles trajectory
-  std::shared_ptr<CubicSpline<Eigen::VectorXd>> armSwingFunc_;
+  std::shared_ptr<TrajColl::CubicSpline<Eigen::VectorXd>> armSwingFunc_;
 
   //! Whether touch down is detected during swing
   bool touchDown_ = false;
