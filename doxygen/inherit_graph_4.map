@@ -1,7 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="5,104,191,145"/>
-<area shape="rect" id="node2" href="$structBWC_1_1CentroidalManagerDdpZmp_1_1Configuration.html" title="Configuration." alt="" coords="264,5,475,47"/>
-<area shape="rect" id="node3" href="$structBWC_1_1CentroidalManagerFootGuidedControl_1_1Configuration.html" title="Configuration." alt="" coords="263,71,476,112"/>
-<area shape="rect" id="node4" href="$structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html" title="Configuration." alt="" coords="239,136,500,177"/>
-<area shape="rect" id="node5" href="$structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html" title="Configuration." alt="" coords="251,201,488,243"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,128,32"/>
+<area shape="rect" id="node2" href="$structBWC_1_1FirstOrderImpedanceTask.html" title="Impedance&#45;based damping control of the end&#45;effector." alt="" coords="176,5,401,32"/>
 </map>

@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['piecewisefunc_362',['PiecewiseFunc',['../classBWC_1_1PiecewiseFunc.html',1,'BWC']]],
-  ['polynomial_363',['Polynomial',['../classBWC_1_1Polynomial.html',1,'BWC']]],
-  ['polynomial_3c_20t_2c_200_20_3e_364',['Polynomial&lt; T, 0 &gt;',['../classBWC_1_1Polynomial.html',1,'BWC']]]
+  ['state_284',['State',['../structBWC_1_1State.html',1,'BWC']]],
+  ['swingtraj_285',['SwingTraj',['../classBWC_1_1SwingTraj.html',1,'BWC']]],
+  ['swingtrajcubicsplinesimple_286',['SwingTrajCubicSplineSimple',['../classBWC_1_1SwingTrajCubicSplineSimple.html',1,'BWC']]],
+  ['swingtrajindhorizontalvertical_287',['SwingTrajIndHorizontalVertical',['../classBWC_1_1SwingTrajIndHorizontalVertical.html',1,'BWC']]],
+  ['swingtrajvariabletaskgain_288',['SwingTrajVariableTaskGain',['../classBWC_1_1SwingTrajVariableTaskGain.html',1,'BWC']]]
 ];

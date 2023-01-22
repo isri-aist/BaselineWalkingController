@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['value_679',['value',['../structBWC_1_1BoundaryConstraint.html#a91c3353477b52162325ddf4fa65901c3',1,'BWC::BoundaryConstraint']]],
-  ['velmodedata_5f_680',['velModeData_',['../classBWC_1_1FootManager.html#aa279779a3172f41e6dddf3b044b0e3e4',1,'BWC::FootManager']]],
-  ['velmodeendtime_5f_681',['velModeEndTime_',['../structBWC_1_1ConfigWalkState.html#a1a76d52594dae49615b12e71837df909',1,'BWC::ConfigWalkState']]],
-  ['velscale_5f_682',['velScale_',['../structBWC_1_1TeleopState.html#a9f32a09ced2a2545e4d7e9701bdc8c13',1,'BWC::TeleopState']]],
-  ['vertex_683',['vertex',['../structBWC_1_1Contact_1_1VertexWithRidge.html#a9751e7d297391cfab94199c4b2da55a9',1,'BWC::Contact::VertexWithRidge']]],
-  ['vertexwithridgelist_5f_684',['vertexWithRidgeList_',['../classBWC_1_1Contact.html#a3b2ebc3803c4e9432a131ab93cca0247',1,'BWC::Contact']]],
-  ['verticalposfunc_5f_685',['verticalPosFunc_',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a0c0304e58de37acb71fa191c47da3bd1',1,'BWC::SwingTrajIndHorizontalVertical::verticalPosFunc_()'],['../classBWC_1_1SwingTrajVariableTaskGain.html#a409275d06a0807cd8ed9999ac9c530fa',1,'BWC::SwingTrajVariableTaskGain::verticalPosFunc_()']]],
-  ['verticaltopdurationratio_686',['verticalTopDurationRatio',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aacda1c795dd5f3d9f4d8266a64111613',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::verticalTopDurationRatio()'],['../structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#a9d75edcbf015b290a85143448cf27361',1,'BWC::SwingTrajVariableTaskGain::Configuration::verticalTopDurationRatio()']]],
-  ['verticaltopoffset_687',['verticalTopOffset',['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#a4e7592ffa5d3ddce50d750d55af9f7a1',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::verticalTopOffset()'],['../structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#ada0acb271c8f08314137e73207870547',1,'BWC::SwingTrajVariableTaskGain::Configuration::verticalTopOffset()']]]
+  ['walkconfigkeys_5f_542',['walkConfigKeys_',['../structBWC_1_1GuiWalkState.html#accbbb30e56b2f4efee64b6bd7681a084',1,'BWC::GuiWalkState']]],
+  ['withdrawdurationratio_543',['withdrawDurationRatio',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a477be3fd662113e652d15d0d1e1a9cc7',1,'BWC::SwingTrajCubicSplineSimple::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa2693d9c975220b46642535e19365976',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#a29976425d119eb43aefbc72ca60f5ec2',1,'BWC::SwingTrajVariableTaskGain::Configuration::withdrawDurationRatio()']]],
+  ['withdrawoffset_544',['withdrawOffset',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a109260fa8fbeef50c7cab90c4e935797',1,'BWC::SwingTrajCubicSplineSimple::Configuration']]],
+  ['withdrawtime_5f_545',['withdrawTime_',['../classBWC_1_1SwingTrajVariableTaskGain.html#a721e3c3ddf0720b7787cb232f78bb6d8',1,'BWC::SwingTrajVariableTaskGain']]],
+  ['wrenchdist_5f_546',['wrenchDist_',['../classBWC_1_1CentroidalManager.html#abad8e131852b397974b39ecbc2cb334f',1,'BWC::CentroidalManager']]],
+  ['wrenchdistconfig_547',['wrenchDistConfig',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc',1,'BWC::CentroidalManager::Configuration']]]
 ];

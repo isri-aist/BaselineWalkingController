@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['foot_704',['Foot',['../namespaceBWC.html#a162f2376799a8c471d7d68a528d23190',1,'BWC']]]
+  ['supportphase_554',['SupportPhase',['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900',1,'BWC']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['acceleration_706',['Acceleration',['../namespaceBWC.html#a650a366862dfae39ce46c5028e90b3bea3b926d163371fd620b09b63219b12f52',1,'BWC']]]
+  ['doublesupport_555',['DoubleSupport',['../namespaceBWC.html#ac3fd95620cff314072d2d1c881753900a80ed5c215daa223b859dbbb79343805f',1,'BWC']]]
 ];

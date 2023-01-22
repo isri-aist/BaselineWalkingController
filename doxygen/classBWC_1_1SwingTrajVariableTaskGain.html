@@ -206,9 +206,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:aa1bc63bf7938d4b19787034f2785feb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html">Configuration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#aa1bc63bf7938d4b19787034f2785feb4">config_</a> = <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a14fc0721660ba57dfeffcf934906d88f">defaultConfig_</a></td></tr>
 <tr class="memdesc:aa1bc63bf7938d4b19787034f2785feb4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html" title="Configuration.">Configuration</a>.  <a href="classBWC_1_1SwingTrajVariableTaskGain.html#aa1bc63bf7938d4b19787034f2785feb4">More...</a><br /></td></tr>
 <tr class="separator:aa1bc63bf7938d4b19787034f2785feb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a409275d06a0807cd8ed9999ac9c530fa"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classBWC_1_1CubicSpline.html">CubicSpline</a>&lt; <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab9d06a9248bf9d2fab38817288dcff2d">Vector1d</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a409275d06a0807cd8ed9999ac9c530fa">verticalPosFunc_</a></td></tr>
-<tr class="memdesc:a409275d06a0807cd8ed9999ac9c530fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertical position function.  <a href="classBWC_1_1SwingTrajVariableTaskGain.html#a409275d06a0807cd8ed9999ac9c530fa">More...</a><br /></td></tr>
-<tr class="separator:a409275d06a0807cd8ed9999ac9c530fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42f4e3563c2a368e9eef3348785c27b6"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; TrajColl::CubicSpline&lt; <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab9d06a9248bf9d2fab38817288dcff2d">Vector1d</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a42f4e3563c2a368e9eef3348785c27b6">verticalPosFunc_</a></td></tr>
+<tr class="memdesc:a42f4e3563c2a368e9eef3348785c27b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vertical position function.  <a href="classBWC_1_1SwingTrajVariableTaskGain.html#a42f4e3563c2a368e9eef3348785c27b6">More...</a><br /></td></tr>
+<tr class="separator:a42f4e3563c2a368e9eef3348785c27b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classBWC_1_1SwingTraj"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBWC_1_1SwingTraj')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBWC_1_1SwingTraj.html">BWC::SwingTraj</a></td></tr>
 <tr class="memitem:aca5e0b326e23262f08b1c9e2f58a3601 inherit pro_attribs_classBWC_1_1SwingTraj"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTraj.html#aca5e0b326e23262f08b1c9e2f58a3601">touchDownTime_</a> = -1</td></tr>
 <tr class="memdesc:aca5e0b326e23262f08b1c9e2f58a3601 inherit pro_attribs_classBWC_1_1SwingTraj"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time when touch down is detected (-1 if not detected)  <a href="classBWC_1_1SwingTraj.html#aca5e0b326e23262f08b1c9e2f58a3601">More...</a><br /></td></tr>
@@ -218,7 +218,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>Foot swing trajectory that makes the horizontal position converge by determining the variable IK task gain. </p>
 <p>IK task gain (stiffness and damping) of horizontal position are determined by optimal control. The vertical position is interpolated by a cubic spline. The rotation is interpolated by a cubic interpolator. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00017">17</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00018">18</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ab9d06a9248bf9d2fab38817288dcff2d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab9d06a9248bf9d2fab38817288dcff2d">&#9670;&nbsp;</a></span>Vector1d</h2>
@@ -242,7 +242,7 @@ Protected Attributes</h2></td></tr>
 
 <p>1D vector </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00021">21</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00022">22</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -421,7 +421,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classBWC_1_1SwingTraj.html#af11926e262228eb23d18eff71d171714">BWC::SwingTraj</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00115">115</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00116">116</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -603,7 +603,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classBWC_1_1SwingTraj.html#a23ff2bfb2bcebb1cfa76595bbd5866c9">BWC::SwingTraj</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00089">89</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00090">90</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -658,7 +658,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Approach time. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00125">125</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00126">126</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -684,7 +684,7 @@ Protected Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00129">129</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00130">130</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -710,12 +710,12 @@ Protected Attributes</h2></td></tr>
 
 <p>Default configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00053">53</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00054">54</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
-<a id="a409275d06a0807cd8ed9999ac9c530fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a409275d06a0807cd8ed9999ac9c530fa">&#9670;&nbsp;</a></span>verticalPosFunc_</h2>
+<a id="a42f4e3563c2a368e9eef3348785c27b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42f4e3563c2a368e9eef3348785c27b6">&#9670;&nbsp;</a></span>verticalPosFunc_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -724,7 +724,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;<a class="el" href="classBWC_1_1CubicSpline.html">CubicSpline</a>&lt;<a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab9d06a9248bf9d2fab38817288dcff2d">Vector1d</a>&gt; &gt; BWC::SwingTrajVariableTaskGain::verticalPosFunc_</td>
+          <td class="memname">std::shared_ptr&lt;TrajColl::CubicSpline&lt;<a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab9d06a9248bf9d2fab38817288dcff2d">Vector1d</a>&gt; &gt; BWC::SwingTrajVariableTaskGain::verticalPosFunc_</td>
         </tr>
       </table>
   </td>
@@ -736,7 +736,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Vertical position function. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00132">132</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00133">133</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>
@@ -754,7 +754,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Withdraw time. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00122">122</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTrajVariableTaskGain_8h_source.html#l00123">123</a> of file <a class="el" href="SwingTrajVariableTaskGain_8h_source.html">SwingTrajVariableTaskGain.h</a>.</p>
 
 </div>
 </div>

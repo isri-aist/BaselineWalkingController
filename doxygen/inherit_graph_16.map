@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,61,133"/>
-<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="109,107,204,133"/>
-<area shape="rect" id="node3" href="$structBWC_1_1ConfigWalkState.html" title="FSM state to send footstep from configuration." alt="" coords="267,5,437,32"/>
-<area shape="rect" id="node4" href="$structBWC_1_1FootstepPlannerState.html" title="FSM state to walk with footstep planner." alt="" coords="252,56,452,83"/>
-<area shape="rect" id="node5" href="$structBWC_1_1GuiWalkState.html" title="FSM state to send footstep from GUI." alt="" coords="277,107,427,133"/>
-<area shape="rect" id="node6" href="$structBWC_1_1InitialState.html" title="FSM state to initialize." alt="" coords="286,157,418,184"/>
-<area shape="rect" id="node7" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="283,208,421,235"/>
-</map>
