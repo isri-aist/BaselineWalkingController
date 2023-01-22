@@ -5,8 +5,14 @@
     local-name: isri-aist/CentroidalControlCollection
     uri: https://github.com/isri-aist/CentroidalControlCollection
 - git:
+    local-name: isri-aist/ForceControlCollection
+    uri: https://github.com/isri-aist/ForceControlCollection
+- git:
     local-name: isri-aist/NMPC
     uri: https://github.com/isri-aist/NMPC
 - git:
     local-name: isri-aist/QpSolverCollection
     uri: https://github.com/isri-aist/QpSolverCollection
+- git:
+    local-name: isri-aist/TrajectoryCollection
+    uri: https://github.com/isri-aist/TrajectoryCollection
