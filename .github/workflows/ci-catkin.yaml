@@ -59,7 +59,7 @@ jobs:
           sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
           wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
           sudo apt-get update -y -qq
-          sudo apt-get install -y -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
+          sudo apt-get install -y -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep ${PYTHON_PACKAGE_PREFIX}-wstool doxygen graphviz
       - name: Install mc_rtc
         run: |
           set -e
@@ -68,68 +68,48 @@ jobs:
           sudo apt install -y -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin libeigen-qld-dev
       - name: Setup catkin workspace
         run: |
+          set -e
+          set -x
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
           cd ${GITHUB_WORKSPACE}/catkin_ws
-          set +x
-          . /opt/ros/${ROS_DISTRO}/setup.bash
-          set -x
-          catkin init
-          catkin build --limit-status-rate 0.1
-      - name: Checkout repository code
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          path: catkin_ws/src/isri-aist/BaselineWalkingController
-      - name: Checkout QpSolverCollection
-        uses: actions/checkout@v3
-        with:
-          repository: isri-aist/QpSolverCollection
-          submodules: recursive
-          path: catkin_ws/src/isri-aist/QpSolverCollection
-      - name: Checkout NMPC
-        uses: actions/checkout@v3
-        with:
-          repository: isri-aist/NMPC
-          submodules: recursive
-          path: catkin_ws/src/isri-aist/NMPC
-      - name: Checkout CentroidalControlCollection
-        uses: actions/checkout@v3
-        with:
-          repository: isri-aist/CentroidalControlCollection
-          submodules: recursive
-          path: catkin_ws/src/isri-aist/CentroidalControlCollection
-      - name: Checkout BaselineFootstepPlanner
-        if: matrix.footstep-planner == 'ON'
-        uses: actions/checkout@v3
-        with:
-          repository: isri-aist/BaselineFootstepPlanner
-          submodules: recursive
-          path: catkin_ws/src/isri-aist/BaselineFootstepPlanner
+          wstool init src
+          wstool set -t src isri-aist/BaselineWalkingController https://github.com/isri-aist/BaselineWalkingController --git -y
+          wstool update -t src isri-aist/BaselineWalkingController
+          wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall -y
+          wstool update -t src
       - name: Rosdep install
         run: |
           set -e
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
           set +x
-          . devel/setup.bash
+          . /opt/ros/${ROS_DISTRO}/setup.bash
           set -x
           sudo rosdep init
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
+      - name: Remove BaselineFootstepPlanner
+        if: matrix.footstep-planner == 'OFF'
+        run: |
+          set -e
+          set -x
+          cd ${GITHUB_WORKSPACE}/catkin_ws
+          wstool remove -t src isri-aist/BaselineFootstepPlanner
+          rm -rf isri-aist/BaselineFootstepPlanner
       - name: Catkin build
         run: |
           set -e
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
           set +x
-          . devel/setup.bash
+          . /opt/ros/${ROS_DISTRO}/setup.bash
           set -x
           if [ "${{ matrix.footstep-planner }}" == "ON" ]; then
             catkin build baseline_footstep_planner --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
+            set +x
+            . devel/setup.bash
+            set -x
           fi
-          set +x
-          . devel/setup.bash
-          set -x
           catkin build baseline_walking_controller --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DENABLE_QLD=ON -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
         run: |
@@ -139,7 +119,7 @@ jobs:
           set +x
           . devel/setup.bash
           set -x
-          catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- baseline_walking_controller --no-deps
+          catkin build baseline_walking_controller --no-deps --limit-status-rate 0.1 --catkin-make-args run_tests
           catkin_test_results --verbose --all build
       - name: Run simulation
         # Only run for one configuration

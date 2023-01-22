@@ -1,8 +1,9 @@
 #include <mc_rtc/gui/ArrayInput.h>
 #include <mc_rtc/gui/NumberInput.h>
 
+#include <TrajColl/CubicSpline.h>
+
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 using namespace BWC;
 
@@ -57,16 +58,18 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
                                                        const TaskGain & taskGain,
                                                        const mc_rtc::Configuration & mcRtcConfig)
 : SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig),
-  posFunc_(std::make_shared<PiecewiseFunc<Eigen::Vector3d>>()),
-  rotFunc_(std::make_shared<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
+  posFunc_(std::make_shared<TrajColl::PiecewiseFunc<Eigen::Vector3d>>()),
+  rotFunc_(std::make_shared<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
 
   double withdrawDuration = config_.withdrawDurationRatio * (goalTime - startTime);
   double approachDuration = config_.approachDurationRatio * (goalTime - startTime);
 
-  BoundaryConstraint<Eigen::Vector3d> zeroVelBC(BoundaryConstraintType::Velocity, Eigen::Vector3d::Zero());
-  BoundaryConstraint<Eigen::Vector3d> zeroAccelBC(BoundaryConstraintType::Acceleration, Eigen::Vector3d::Zero());
+  TrajColl::BoundaryConstraint<Eigen::Vector3d> zeroVelBC(TrajColl::BoundaryConstraintType::Velocity,
+                                                          Eigen::Vector3d::Zero());
+  TrajColl::BoundaryConstraint<Eigen::Vector3d> zeroAccelBC(TrajColl::BoundaryConstraintType::Acceleration,
+                                                            Eigen::Vector3d::Zero());
 
   // Spline to withdraw foot
   // Pos
@@ -74,7 +77,7 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
       {startTime, startPose.translation()},
       {startTime + withdrawDuration, (sva::PTransformd(config_.withdrawOffset) * startPose).translation()}};
   auto withdrawPosSpline =
-      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, zeroVelBC, zeroAccelBC, withdrawPosWaypoints);
+      std::make_shared<TrajColl::CubicSpline<Eigen::Vector3d>>(3, zeroVelBC, zeroAccelBC, withdrawPosWaypoints);
   withdrawPosSpline->calcCoeff();
   posFunc_->appendFunc(startTime + withdrawDuration, withdrawPosSpline);
   // Rot
@@ -87,7 +90,7 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
       {goalTime - approachDuration, (sva::PTransformd(config_.approachOffset) * goalPose).translation()},
       {goalTime, goalPose.translation()}};
   auto approachPosSpline =
-      std::make_shared<CubicSpline<Eigen::Vector3d>>(3, zeroAccelBC, zeroVelBC, approachPosWaypoints);
+      std::make_shared<TrajColl::CubicSpline<Eigen::Vector3d>>(3, zeroAccelBC, zeroVelBC, approachPosWaypoints);
   approachPosSpline->calcCoeff();
   posFunc_->appendFunc(goalTime, approachPosSpline);
   // Rot
@@ -101,12 +104,12 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
       {0.5 * (startTime + goalTime),
        (sva::PTransformd(config_.swingOffset) * sva::interpolate(startPose, goalPose, 0.5)).translation()},
       *approachPosWaypoints.begin()};
-  auto swingPosSpline = std::make_shared<CubicSpline<Eigen::Vector3d>>(
+  auto swingPosSpline = std::make_shared<TrajColl::CubicSpline<Eigen::Vector3d>>(
       3,
-      BoundaryConstraint<Eigen::Vector3d>(BoundaryConstraintType::Velocity,
-                                          withdrawPosSpline->derivative(startTime + withdrawDuration, 1)),
-      BoundaryConstraint<Eigen::Vector3d>(BoundaryConstraintType::Velocity,
-                                          approachPosSpline->derivative(goalTime - approachDuration, 1)),
+      TrajColl::BoundaryConstraint<Eigen::Vector3d>(TrajColl::BoundaryConstraintType::Velocity,
+                                                    withdrawPosSpline->derivative(startTime + withdrawDuration, 1)),
+      TrajColl::BoundaryConstraint<Eigen::Vector3d>(TrajColl::BoundaryConstraintType::Velocity,
+                                                    approachPosSpline->derivative(goalTime - approachDuration, 1)),
       swingPosWaypoints);
   swingPosSpline->calcCoeff();
   posFunc_->appendFunc(goalTime - approachDuration, swingPosSpline);

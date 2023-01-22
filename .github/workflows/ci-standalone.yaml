@@ -36,6 +36,11 @@ jobs:
           apt: cmake libcentroidalcontrolcollection-dev libmc-rtc-dev
           ros:
             apt: mc-rtc-plugin
+        github: |
+          - path: isri-aist/ForceControlCollection # TODO: Install via apt when apt packages are released
+            ref: master
+          - path: isri-aist/TrajectoryCollection # TODO: Install via apt when apt packages are released
+            ref: master
     - name: Install BaselineFootstepPlanner
       if: ${{ matrix.planner  == 'with-planner' }}
       uses: jrl-umi3218/github-actions/install-dependencies@master

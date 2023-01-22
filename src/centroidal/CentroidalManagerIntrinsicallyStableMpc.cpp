@@ -6,7 +6,6 @@
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/RobotUtils.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerIntrinsicallyStableMpc.h>
-#include <BaselineWalkingController/wrench/Contact.h>
 
 using namespace BWC;
 

@@ -3,9 +3,10 @@
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/StateBuilder.h>
 
+#include <TrajColl/CubicInterpolator.h>
+#include <TrajColl/CubicSpline.h>
+
 #include <BaselineWalkingController/SwingTraj.h>
-#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 namespace BWC
 {
@@ -129,6 +130,6 @@ protected:
   Configuration config_ = defaultConfig_;
 
   //! Vertical position function
-  std::shared_ptr<CubicSpline<Vector1d>> verticalPosFunc_;
+  std::shared_ptr<TrajColl::CubicSpline<Vector1d>> verticalPosFunc_;
 };
 } // namespace BWC

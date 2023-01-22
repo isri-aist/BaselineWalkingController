@@ -14,7 +14,8 @@
 
   <depend>roscpp</depend>
   <depend>geometry_msgs</depend>
-  <depend>qp_solver_collection</depend>
+  <depend>trajectory_collection</depend>
+  <depend>force_control_collection</depend>
   <depend>centroidal_control_collection</depend>
 
   <build_depend>eigen</build_depend>

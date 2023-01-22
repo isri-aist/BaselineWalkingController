@@ -3,9 +3,10 @@
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/StateBuilder.h>
 
+#include <TrajColl/CubicInterpolator.h>
+#include <TrajColl/CubicSpline.h>
+
 #include <BaselineWalkingController/SwingTraj.h>
-#include <BaselineWalkingController/trajectory/CubicInterpolator.h>
-#include <BaselineWalkingController/trajectory/CubicSpline.h>
 
 namespace BWC
 {
@@ -144,18 +145,18 @@ protected:
   Configuration config_ = defaultConfig_;
 
   //! Horizontal position function
-  std::shared_ptr<CubicInterpolator<Eigen::Vector2d>> horizontalPosFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Eigen::Vector2d>> horizontalPosFunc_;
 
   //! Vertical position function
-  std::shared_ptr<CubicSpline<Vector1d>> verticalPosFunc_;
+  std::shared_ptr<TrajColl::CubicSpline<Vector1d>> verticalPosFunc_;
 
   //! Rotation function
-  std::shared_ptr<CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>> rotFunc_;
 
   //! Tilt angle function
-  std::shared_ptr<CubicInterpolator<Vector1d>> tiltAngleFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<Vector1d>> tiltAngleFunc_;
 
   //! Tilt center function
-  std::shared_ptr<CubicInterpolator<sva::PTransformd, sva::MotionVecd>> tiltCenterFunc_;
+  std::shared_ptr<TrajColl::CubicInterpolator<sva::PTransformd, sva::MotionVecd>> tiltCenterFunc_;
 };
 } // namespace BWC
