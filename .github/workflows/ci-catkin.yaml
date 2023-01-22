@@ -77,6 +77,11 @@ jobs:
           wstool update -t src isri-aist/BaselineWalkingController
           wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall -y
           wstool update -t src
+      - name: Rosdep install
+        run: |
+          set -e
+          set -x
+          cd ${GITHUB_WORKSPACE}/catkin_ws
           set +x
           . /opt/ros/${ROS_DISTRO}/setup.bash
           set -x
