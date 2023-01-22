@@ -26,7 +26,11 @@ target_link_libraries(${CONTROLLER_NAME} PUBLIC mc_rtc::mc_control_fsm mc_rtc::m
 if(DEFINED CATKIN_DEVEL_PREFIX)
   target_link_libraries(${CONTROLLER_NAME} PUBLIC ${catkin_LIBRARIES})
 else()
-  target_link_libraries(${CONTROLLER_NAME} PUBLIC centroidal_control_collection::CCC)
+  target_link_libraries(${CONTROLLER_NAME} PUBLIC
+    trajectory_collection::TrajColl
+    force_control_collection::ForceColl
+    centroidal_control_collection::CCC
+  )
 endif()
 
 install(TARGETS ${CONTROLLER_NAME} DESTINATION ${MC_RTC_LIBDIR} EXPORT ${TARGETS_EXPORT_NAME})

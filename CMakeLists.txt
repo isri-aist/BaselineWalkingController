@@ -26,6 +26,8 @@ if(DEFINED CATKIN_DEVEL_PREFIX)
     roscpp
     geometry_msgs
     qp_solver_collection
+    trajectory_collection
+    force_control_collection
     centroidal_control_collection
   )
 
@@ -38,6 +40,8 @@ if(DEFINED CATKIN_DEVEL_PREFIX)
     roscpp
     geometry_msgs
     qp_solver_collection
+    trajectory_collection
+    force_control_collection
     centroidal_control_collection
     DEPENDS EIGEN3
     INCLUDE_DIRS include
@@ -53,6 +57,8 @@ else()
   set(DOXYGEN_HTML_OUTPUT doxygen-html)
   set(CATKIN_ENABLE_TESTING OFF)
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+  add_project_dependency(trajectory_collection REQUIRED)
+  add_project_dependency(force_control_collection REQUIRED)
   add_project_dependency(centroidal_control_collection REQUIRED)
   set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
   set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
