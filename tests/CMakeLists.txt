@@ -18,7 +18,6 @@ set(BWC_gtest_list
   TestCubicSpline
   TestCubicHermiteSpline
   TestCubicInterpolator
-  TestWrenchDistribution
   TestSwingTraj
   )
 
