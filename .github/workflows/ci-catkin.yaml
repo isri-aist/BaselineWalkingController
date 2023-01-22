@@ -77,7 +77,6 @@ jobs:
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
           wstool init src
-          wstool update -t src isri-aist/BaselineWalkingController
           wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall -y
           wstool update -t src
       - name: Rosdep install
