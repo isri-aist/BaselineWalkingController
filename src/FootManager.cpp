@@ -11,6 +11,8 @@
 #include <mc_rtc/gui/Polygon.h>
 #include <mc_tasks/OrientationTask.h>
 
+#include <ForceColl/Contact.h>
+
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/MathUtils.h>
@@ -18,7 +20,6 @@
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 #include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
-#include <BaselineWalkingController/wrench/Contact.h>
 
 using namespace BWC;
 
@@ -505,16 +506,17 @@ std::set<Foot> FootManager::getCurrentContactFeet() const
   }
 }
 
-std::unordered_map<Foot, std::shared_ptr<Contact>> FootManager::calcCurrentContactList() const
+std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> FootManager::calcCurrentContactList() const
 {
   // Set contactList
-  std::unordered_map<Foot, std::shared_ptr<Contact>> contactList;
+  std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> contactList;
   for(const auto & foot : getCurrentContactFeet())
   {
     const auto & surface = ctl().robot().surface(surfaceName(foot));
-    contactList.emplace(foot, std::make_shared<Contact>(std::to_string(foot), config_.fricCoeff,
-                                                        calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
-                                                        targetFootPoses_.at(foot)));
+    contactList.emplace(
+        foot, std::make_shared<ForceColl::Contact>(std::to_string(foot), config_.fricCoeff,
+                                                   calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
+                                                   targetFootPoses_.at(foot)));
   }
 
   return contactList;

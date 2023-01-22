@@ -13,10 +13,14 @@
 #include <BaselineWalkingController/trajectory/CubicInterpolator.h>
 #include <BaselineWalkingController/trajectory/CubicSpline.h>
 
+namespace ForceColl
+{
+class Contact;
+}
+
 namespace BWC
 {
 class BaselineWalkingController;
-class Contact;
 class SwingTraj;
 
 /** \brief Foot manager.
@@ -251,7 +255,7 @@ public:
 
       \see FootManager::calcContactFootPoses
   */
-  std::unordered_map<Foot, std::shared_ptr<Contact>> calcCurrentContactList() const;
+  std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> calcCurrentContactList() const;
 
   /** \brief Get the support ratio of left foot.
 

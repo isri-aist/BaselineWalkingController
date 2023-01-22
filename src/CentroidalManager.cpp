@@ -6,13 +6,12 @@
 #include <mc_tasks/CoMTask.h>
 
 #include <CCC/Constants.h>
+#include <ForceColl/WrenchDistribution.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/CentroidalManager.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
-#include <BaselineWalkingController/wrench/Contact.h>
-#include <BaselineWalkingController/wrench/WrenchDistribution.h>
 
 using namespace BWC;
 
@@ -97,7 +96,7 @@ void CentroidalManager::update()
     contactList_ = ctl().footManager_->calcCurrentContactList();
     if(!wrenchDist_ || wrenchDist_->contactList_ != contactList_)
     {
-      wrenchDist_ = std::make_shared<WrenchDistribution>(contactList_, config().wrenchDistConfig);
+      wrenchDist_ = std::make_shared<ForceColl::WrenchDistribution<Foot>>(contactList_, config().wrenchDistConfig);
     }
     Eigen::Vector3d comForWrenchDist =
         (config().useActualComForWrenchDist ? ctl().realRobot().com() : ctl().comTask_->com());

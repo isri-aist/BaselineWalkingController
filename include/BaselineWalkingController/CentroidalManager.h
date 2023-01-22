@@ -10,11 +10,16 @@ namespace mc_rbdyn
 class Robot;
 }
 
+namespace ForceColl
+{
+class Contact;
+template<class PatchID>
+class WrenchDistribution;
+} // namespace ForceColl
+
 namespace BWC
 {
 class BaselineWalkingController;
-class Contact;
-class WrenchDistribution;
 
 /** \brief Centroidal manager.
 
@@ -190,9 +195,9 @@ protected:
   double controlForceZ_ = 0;
 
   //! Wrench distribution
-  std::shared_ptr<WrenchDistribution> wrenchDist_;
+  std::shared_ptr<ForceColl::WrenchDistribution<Foot>> wrenchDist_;
 
   //! Contact list
-  std::unordered_map<Foot, std::shared_ptr<Contact>> contactList_;
+  std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> contactList_;
 };
 } // namespace BWC
