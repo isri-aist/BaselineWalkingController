@@ -85,6 +85,8 @@ For more information on the technical details, please see the following papers:
 ### Dependencies
 This package depends on
 - [mc_rtc](https://jrl-umi3218.github.io/mc_rtc)
+
+This package also depends on the following packages. However, manual installation is unnecessary when this package is installed using `wstool` as described in [Controller installation](#controller-installation).
 - [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 - [ForceControlCollection](https://github.com/isri-aist/ForceControlCollection)
 - [TrajectoryCollection](https://github.com/isri-aist/TrajectoryCollection)
