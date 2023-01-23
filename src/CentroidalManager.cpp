@@ -137,6 +137,12 @@ void CentroidalManager::update()
       ctl().footTasks_.at(foot)->targetWrenchW(targetWrench);
     }
   }
+
+  // Update force visualization
+  {
+    ctl().gui()->removeCategory({ctl().name(), config().name, "ForceMarker"});
+    wrenchDist_->addToGUI(*ctl().gui(), {ctl().name(), config().name, "ForceMarker"});
+  }
 }
 
 void CentroidalManager::stop()
@@ -148,7 +154,7 @@ void CentroidalManager::stop()
 void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
 {
   gui.addElement(
-      {ctl().name(), config().name}, mc_rtc::gui::Label("method", [this]() { return config().method; }),
+      {ctl().name(), config().name, "Config"}, mc_rtc::gui::Label("method", [this]() { return config().method; }),
       mc_rtc::gui::Checkbox(
           "useActualStateForMpc", [this]() { return config().useActualStateForMpc; },
           [this]() { config().useActualStateForMpc = !config().useActualStateForMpc; }),
