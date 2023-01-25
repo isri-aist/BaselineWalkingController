@@ -1,6 +1,7 @@
 #include <sys/syscall.h>
 
 #include <mc_tasks/CoMTask.h>
+#include <mc_tasks/FirstOrderImpedanceTask.h>
 #include <mc_tasks/MetaTaskLoader.h>
 #include <mc_tasks/OrientationTask.h>
 
@@ -12,7 +13,6 @@
 #include <BaselineWalkingController/centroidal/CentroidalManagerFootGuidedControl.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerIntrinsicallyStableMpc.h>
 #include <BaselineWalkingController/centroidal/CentroidalManagerPreviewControlZmp.h>
-#include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 
 using namespace BWC;
 
@@ -47,7 +47,8 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
     for(const auto & footTaskConfig : config()("FootTaskList"))
     {
       Foot foot = strToFoot(footTaskConfig("foot"));
-      footTasks_.emplace(foot, mc_tasks::MetaTaskLoader::load<FirstOrderImpedanceTask>(solver(), footTaskConfig));
+      footTasks_.emplace(
+          foot, mc_tasks::MetaTaskLoader::load<mc_tasks::force::FirstOrderImpedanceTask>(solver(), footTaskConfig));
       footTasks_.at(foot)->name("FootTask_" + std::to_string(foot));
     }
   }

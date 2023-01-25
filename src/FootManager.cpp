@@ -9,6 +9,7 @@
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_rtc/gui/Polygon.h>
+#include <mc_tasks/FirstOrderImpedanceTask.h>
 #include <mc_tasks/OrientationTask.h>
 
 #include <ForceColl/Contact.h>
@@ -19,7 +20,6 @@
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
 #include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
-#include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 
 using namespace BWC;
 

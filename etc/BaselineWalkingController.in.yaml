@@ -88,12 +88,12 @@ BaseOrientationTask:
 FootTaskList:
   - type: firstOrderImpedance
     foot: Left
-    surface: LeftFootCenter
+    frame: LeftFootCenter
     cutoffPeriod: 0.01
     weight: 1000.0
   - type: firstOrderImpedance
     foot: Right
-    surface: RightFootCenter
+    frame: RightFootCenter
     cutoffPeriod: 0.01
     weight: 1000.0
 
@@ -276,7 +276,7 @@ OverwriteConfigList:
       "L_HIP_Y", "L_HIP_R", "L_HIP_P", "L_KNEE", "L_ANKLE_P", "L_ANKLE_R"]
 
     BaseOrientationTask:
-      body: WAIST_R_S
+      frame: WAIST_R_S
 
     FootManager:
       enableArmSwing: true
@@ -307,7 +307,7 @@ OverwriteConfigList:
       "RCY", "RCR", "RCP", "RKP", "RAP", "RAR"]
 
     BaseOrientationTask:
-      body: Chest_Link2
+      frame: Chest_Link2
 
     FootManager:
       footstepDuration: 0.9 # [sec]
@@ -350,7 +350,7 @@ OverwriteConfigList:
       "LLEG_JOINT0", "LLEG_JOINT1", "LLEG_JOINT2", "LLEG_JOINT3", "LLEG_JOINT4", "LLEG_JOINT5"]
 
     BaseOrientationTask:
-      body: CHEST_LINK1
+      frame: CHEST_LINK1
 
     FootManager:
       footstepDuration: 0.9 # [sec]

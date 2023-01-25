@@ -1,12 +1,12 @@
 #include <mc_rtc/gui/Button.h>
 #include <mc_tasks/CoMTask.h>
+#include <mc_tasks/FirstOrderImpedanceTask.h>
 #include <mc_tasks/OrientationTask.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/CentroidalManager.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/states/InitialState.h>
-#include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 
 using namespace BWC;
 

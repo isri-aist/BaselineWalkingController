@@ -6,15 +6,19 @@
 
 namespace mc_tasks
 {
-class CoMTask;
-class OrientationTask;
+struct CoMTask;
+struct OrientationTask;
+
+namespace force
+{
+struct FirstOrderImpedanceTask;
+}
 } // namespace mc_tasks
 
 namespace BWC
 {
 class FootManager;
 class CentroidalManager;
-class FirstOrderImpedanceTask;
 
 /** \brief Humanoid walking controller with various baseline methods. */
 struct BaselineWalkingController : public mc_control::fsm::Controller
@@ -70,7 +74,7 @@ public:
   std::shared_ptr<mc_tasks::OrientationTask> baseOriTask_;
 
   //! Foot tasks
-  std::unordered_map<Foot, std::shared_ptr<FirstOrderImpedanceTask>> footTasks_;
+  std::unordered_map<Foot, std::shared_ptr<mc_tasks::force::FirstOrderImpedanceTask>> footTasks_;
 
   //! Foot manager
   std::shared_ptr<FootManager> footManager_;

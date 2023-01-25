@@ -4,6 +4,7 @@
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_tasks/CoMTask.h>
+#include <mc_tasks/FirstOrderImpedanceTask.h>
 
 #include <CCC/Constants.h>
 #include <ForceColl/WrenchDistribution.h>
@@ -11,7 +12,6 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
 #include <BaselineWalkingController/CentroidalManager.h>
 #include <BaselineWalkingController/FootManager.h>
-#include <BaselineWalkingController/tasks/FirstOrderImpedanceTask.h>
 
 using namespace BWC;
 
