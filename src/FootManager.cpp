@@ -58,9 +58,9 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("touchDownForceZ", touchDownForceZ);
   if(mcRtcConfig.has("impedanceGains"))
   {
-    mcRtcConfig("impedanceGains")("singleSupport", impGains.at("singleSupport"));
-    mcRtcConfig("impedanceGains")("doubleSupport", impGains.at("doubleSupport"));
-    mcRtcConfig("impedanceGains")("swing", impGains.at("swing"));
+    mcRtcConfig("impedanceGains")("SingleSupport", impGains.at("SingleSupport"));
+    mcRtcConfig("impedanceGains")("DoubleSupport", impGains.at("DoubleSupport"));
+    mcRtcConfig("impedanceGains")("Swing", impGains.at("Swing"));
   }
   if(mcRtcConfig.has("jointAnglesForArmSwing"))
   {
@@ -154,7 +154,7 @@ void FootManager::reset()
 
   for(const auto & foot : Feet::Both)
   {
-    impGainTypes_.emplace(foot, "doubleSupport");
+    impGainTypes_.emplace(foot, "DoubleSupport");
   }
 
   requireImpGainUpdate_ = true;
@@ -925,14 +925,14 @@ void FootManager::updateFootTraj()
   const auto & contactFeet = getCurrentContactFeet();
   if(contactFeet.size() == 1)
   {
-    newImpGainTypes.emplace(*(contactFeet.cbegin()), "singleSupport");
-    newImpGainTypes.emplace(opposite(*(contactFeet.cbegin())), "swing");
+    newImpGainTypes.emplace(*(contactFeet.cbegin()), "SingleSupport");
+    newImpGainTypes.emplace(opposite(*(contactFeet.cbegin())), "Swing");
   }
   else // if(contactFeet.size() == 2)
   {
     for(const auto & foot : Feet::Both)
     {
-      newImpGainTypes.emplace(foot, "doubleSupport");
+      newImpGainTypes.emplace(foot, "DoubleSupport");
     }
   }
   for(const auto & foot : Feet::Both)

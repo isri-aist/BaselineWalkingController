@@ -90,9 +90,9 @@ public:
 
     //! Impedance gains for foot tasks
     std::unordered_map<std::string, mc_tasks::force::ImpedanceGains> impGains = {
-        {"singleSupport", mc_tasks::force::ImpedanceGains::Default()},
-        {"doubleSupport", mc_tasks::force::ImpedanceGains::Default()},
-        {"swing", mc_tasks::force::ImpedanceGains::Default()}};
+        {"SingleSupport", mc_tasks::force::ImpedanceGains::Default()},
+        {"DoubleSupport", mc_tasks::force::ImpedanceGains::Default()},
+        {"Swing", mc_tasks::force::ImpedanceGains::Default()}};
 
     //! Arm swing joint angles
     std::unordered_map<std::string, std::map<std::string, std::vector<double>>> jointAnglesForArmSwing = {
