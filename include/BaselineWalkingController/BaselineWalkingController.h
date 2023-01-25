@@ -83,7 +83,7 @@ public:
 
 protected:
   //! Controller name
-  std::string name_ = "WalkingController";
+  std::string name_ = "BWC";
 
   //! Current time [sec]
   double t_ = 0;
