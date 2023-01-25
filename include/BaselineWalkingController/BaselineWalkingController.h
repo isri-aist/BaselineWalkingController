@@ -6,12 +6,12 @@
 
 namespace mc_tasks
 {
-class CoMTask;
-class OrientationTask;
+struct CoMTask;
+struct OrientationTask;
 
 namespace force
 {
-class FirstOrderImpedanceTask;
+struct FirstOrderImpedanceTask;
 }
 } // namespace mc_tasks
 
