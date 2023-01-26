@@ -70,7 +70,7 @@ public:
     bool stopSwingTrajForTouchDownFoot = true;
 
     //! Whether to keep foot pose of touch down foot during support phase
-    bool keepSupportFootPoseForTouchDownFoot = false;
+    bool keepPoseForTouchDownFoot = false;
 
     //! Whether to enable wrench distribution for touch down foot
     bool enableWrenchDistForTouchDownFoot = true;

@@ -49,7 +49,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   mcRtcConfig("defaultSwingTrajType", defaultSwingTrajType);
   mcRtcConfig("overwriteLandingPose", overwriteLandingPose);
   mcRtcConfig("stopSwingTrajForTouchDownFoot", stopSwingTrajForTouchDownFoot);
-  mcRtcConfig("keepSupportFootPoseForTouchDownFoot", keepSupportFootPoseForTouchDownFoot);
+  mcRtcConfig("keepPoseForTouchDownFoot", keepPoseForTouchDownFoot);
   mcRtcConfig("enableWrenchDistForTouchDownFoot", enableWrenchDistForTouchDownFoot);
   mcRtcConfig("enableArmSwing", enableArmSwing);
   mcRtcConfig("fricCoeff", fricCoeff);
@@ -237,8 +237,8 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "stopSwingTrajForTouchDownFoot", [this]() { return config_.stopSwingTrajForTouchDownFoot; },
           [this]() { config_.stopSwingTrajForTouchDownFoot = !config_.stopSwingTrajForTouchDownFoot; }),
       mc_rtc::gui::Checkbox(
-          "keepSupportFootPoseForTouchDownFoot", [this]() { return config_.keepSupportFootPoseForTouchDownFoot; },
-          [this]() { config_.keepSupportFootPoseForTouchDownFoot = !config_.keepSupportFootPoseForTouchDownFoot; }),
+          "keepPoseForTouchDownFoot", [this]() { return config_.keepPoseForTouchDownFoot; },
+          [this]() { config_.keepPoseForTouchDownFoot = !config_.keepPoseForTouchDownFoot; }),
       mc_rtc::gui::Checkbox(
           "enableWrenchDistForTouchDownFoot", [this]() { return config_.enableWrenchDistForTouchDownFoot; },
           [this]() { config_.enableWrenchDistForTouchDownFoot = !config_.enableWrenchDistForTouchDownFoot; }),
@@ -873,7 +873,7 @@ void FootManager::updateFootTraj()
     if(swingFootstep_)
     {
       // Update target
-      if(!(config_.keepSupportFootPoseForTouchDownFoot && touchDown_))
+      if(!(config_.keepPoseForTouchDownFoot && touchDown_))
       {
         targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->endPose_;
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();

@@ -114,7 +114,7 @@ FootManager:
   defaultSwingTrajType: IndHorizontalVertical
   overwriteLandingPose: false
   stopSwingTrajForTouchDownFoot: true
-  keepSupportFootPoseForTouchDownFoot: false
+  keepPoseForTouchDownFoot: false
   enableWrenchDistForTouchDownFoot: true
   enableArmSwing: false
   fricCoeff: 0.5
