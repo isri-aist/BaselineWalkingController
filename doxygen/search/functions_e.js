@@ -10,8 +10,8 @@ var searchData=
   ['strtofoot_380',['strToFoot',['../namespaceBWC.html#a94ec1a2521a3cdeb52bb6dc566378f0c',1,'BWC']]],
   ['supportphase_381',['supportPhase',['../classBWC_1_1FootManager.html#acaced205a89dd3d0cb17faa493485cbb',1,'BWC::FootManager']]],
   ['surfacename_382',['surfaceName',['../classBWC_1_1FootManager.html#a9932f084d59dd79cb515fc93218bcdcf',1,'BWC::FootManager']]],
-  ['swingtraj_383',['SwingTraj',['../classBWC_1_1SwingTraj.html#a206b062ad7be4952e52e761ad8a494ca',1,'BWC::SwingTraj']]],
-  ['swingtrajcubicsplinesimple_384',['SwingTrajCubicSplineSimple',['../classBWC_1_1SwingTrajCubicSplineSimple.html#ad3d636cb481dc6171f4c5c625a094eb8',1,'BWC::SwingTrajCubicSplineSimple']]],
-  ['swingtrajindhorizontalvertical_385',['SwingTrajIndHorizontalVertical',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a10c6b3b1bd3c3ad594605ff4858a54db',1,'BWC::SwingTrajIndHorizontalVertical']]],
-  ['swingtrajvariabletaskgain_386',['SwingTrajVariableTaskGain',['../classBWC_1_1SwingTrajVariableTaskGain.html#a42578fdb64fd09d6aff29b9a86a3ed91',1,'BWC::SwingTrajVariableTaskGain']]]
+  ['swingtraj_383',['SwingTraj',['../classBWC_1_1SwingTraj.html#a986767ec1590e5ac6b71be8d7cf39197',1,'BWC::SwingTraj']]],
+  ['swingtrajcubicsplinesimple_384',['SwingTrajCubicSplineSimple',['../classBWC_1_1SwingTrajCubicSplineSimple.html#ae9c71b48bebb5e98aad9deb71cd78e47',1,'BWC::SwingTrajCubicSplineSimple']]],
+  ['swingtrajindhorizontalvertical_385',['SwingTrajIndHorizontalVertical',['../classBWC_1_1SwingTrajIndHorizontalVertical.html#aefe93d5a2a72332f4fd5ec578a178d03',1,'BWC::SwingTrajIndHorizontalVertical']]],
+  ['swingtrajvariabletaskgain_386',['SwingTrajVariableTaskGain',['../classBWC_1_1SwingTrajVariableTaskGain.html#a8b85ce6e9b87c0a680c6c26978059a98',1,'BWC::SwingTrajVariableTaskGain']]]
 ];
