@@ -18,7 +18,7 @@ inline mc_rtc::Configuration overwriteConfig(const mc_rtc::Configuration & confi
 
   if(newConfig.has("OverwriteConfigKeys") && !newConfig.has("OverwriteConfigList"))
   {
-    mc_rtc::log::error_and_throw<std::runtime_error>(
+    mc_rtc::log::error_and_throw(
         "[overwriteConfig] OverwriteConfigKeys is set but OverwriteConfigList is not defined.");
     return newConfig;
   }
@@ -40,8 +40,7 @@ inline mc_rtc::Configuration overwriteConfig(const mc_rtc::Configuration & confi
     {
       if(overwriteConfigKey != robotName)
       {
-        mc_rtc::log::error_and_throw<std::runtime_error>("[overwriteConfig] Overwrite configuration {} is not found.",
-                                                         overwriteConfigKey);
+        mc_rtc::log::error_and_throw("[overwriteConfig] Overwrite configuration {} is not found.", overwriteConfigKey);
       }
       continue;
     }
