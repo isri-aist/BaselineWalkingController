@@ -1180,7 +1180,6 @@ bool FootManager::detectTouchDown() const
   }
 
   // False if the position error does not meet the threshold
-  Foot swingFoot = (supportPhase_ == SupportPhase::LeftSupport ? Foot::Right : Foot::Left);
   if((swingTraj_->goalPose_.translation() - swingTraj_->pose(ctl().t()).translation()).norm()
      > config_.touchDownPosError)
   {
@@ -1188,6 +1187,7 @@ bool FootManager::detectTouchDown() const
   }
 
   // False if the normal force does not meet the threshold
+  Foot swingFoot = (supportPhase_ == SupportPhase::LeftSupport ? Foot::Right : Foot::Left);
   double fz = ctl().robot().surfaceWrench(surfaceName(swingFoot)).force().z();
   if(fz < config_.touchDownForceZ)
   {
