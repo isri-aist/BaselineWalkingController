@@ -921,32 +921,34 @@ void FootManager::updateFootTraj()
   }
 
   // Update impGainTypes_ and requireImpGainUpdate_
-  std::unordered_map<Foot, std::string> newImpGainTypes;
-  const auto & contactFeet = getCurrentContactFeet();
-  if(contactFeet.size() == 1)
   {
-    newImpGainTypes.emplace(*(contactFeet.cbegin()), "SingleSupport");
-    newImpGainTypes.emplace(opposite(*(contactFeet.cbegin())), "Swing");
-  }
-  else // if(contactFeet.size() == 2)
-  {
+    std::unordered_map<Foot, std::string> newImpGainTypes;
+    const auto & contactFeet = getCurrentContactFeet();
+    if(contactFeet.size() == 1)
+    {
+      newImpGainTypes.emplace(*(contactFeet.cbegin()), "SingleSupport");
+      newImpGainTypes.emplace(opposite(*(contactFeet.cbegin())), "Swing");
+    }
+    else // if(contactFeet.size() == 2)
+    {
+      for(const auto & foot : Feet::Both)
+      {
+        newImpGainTypes.emplace(foot, "DoubleSupport");
+      }
+    }
     for(const auto & foot : Feet::Both)
     {
-      newImpGainTypes.emplace(foot, "DoubleSupport");
+      if(requireImpGainUpdate_)
+      {
+        break;
+      }
+      if(impGainTypes_.at(foot) != newImpGainTypes.at(foot))
+      {
+        requireImpGainUpdate_ = true;
+      }
     }
+    impGainTypes_ = newImpGainTypes;
   }
-  for(const auto & foot : Feet::Both)
-  {
-    if(requireImpGainUpdate_)
-    {
-      break;
-    }
-    if(impGainTypes_.at(foot) != newImpGainTypes.at(foot))
-    {
-      requireImpGainUpdate_ = true;
-    }
-  }
-  impGainTypes_ = newImpGainTypes;
 
   // Set impedance gains of foot tasks
   if(requireImpGainUpdate_)
