@@ -46,38 +46,38 @@ void SwingTrajVariableTaskGain::removeConfigFromGUI(mc_rtc::gui::StateBuilder & 
 }
 
 SwingTrajVariableTaskGain::SwingTrajVariableTaskGain(const sva::PTransformd & startPose,
-                                                     const sva::PTransformd & goalPose,
+                                                     const sva::PTransformd & endPose,
                                                      double startTime,
-                                                     double goalTime,
+                                                     double endTime,
                                                      const TaskGain & taskGain,
                                                      const mc_rtc::Configuration & mcRtcConfig)
-: SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig)
+: SwingTraj(startPose, endPose, startTime, endTime, taskGain, mcRtcConfig)
 {
   config_.load(mcRtcConfig);
 
-  withdrawTime_ = (1 - config_.withdrawDurationRatio) * startTime + config_.withdrawDurationRatio * goalTime;
-  approachTime_ = config_.approachDurationRatio * startTime + (1 - config_.approachDurationRatio) * goalTime;
+  withdrawTime_ = (1 - config_.withdrawDurationRatio) * startTime + config_.withdrawDurationRatio * endTime;
+  approachTime_ = config_.approachDurationRatio * startTime + (1 - config_.approachDurationRatio) * endTime;
 
   // Vertical position
   {
     double verticalTopTime =
-        (1.0 - config_.verticalTopDurationRatio) * startTime + config_.verticalTopDurationRatio * goalTime;
+        (1.0 - config_.verticalTopDurationRatio) * startTime + config_.verticalTopDurationRatio * endTime;
     TrajColl::BoundaryConstraint<Vector1d> zeroVelBC(TrajColl::BoundaryConstraintType::Velocity, Vector1d::Zero());
 
     verticalPosFunc_ = std::make_shared<TrajColl::CubicSpline<Vector1d>>(1, zeroVelBC, zeroVelBC);
     verticalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().tail<1>()));
     verticalPosFunc_->appendPoint(std::make_pair(
-        verticalTopTime, (sva::PTransformd(config_.verticalTopOffset) * sva::interpolate(startPose, goalPose, 0.5))
+        verticalTopTime, (sva::PTransformd(config_.verticalTopOffset) * sva::interpolate(startPose, endPose, 0.5))
                              .translation()
                              .tail<1>()));
-    verticalPosFunc_->appendPoint(std::make_pair(goalTime, goalPose.translation().tail<1>()));
+    verticalPosFunc_->appendPoint(std::make_pair(endTime, endPose.translation().tail<1>()));
     verticalPosFunc_->calcCoeff();
   }
 }
 
 sva::PTransformd SwingTrajVariableTaskGain::pose(double t) const
 {
-  sva::PTransformd pose = (t <= withdrawTime_ ? startPose_ : goalPose_);
+  sva::PTransformd pose = (t <= withdrawTime_ ? startPose_ : endPose_);
   if(touchDownTime_ > 0 && t >= touchDownTime_)
   {
     t = touchDownTime_;

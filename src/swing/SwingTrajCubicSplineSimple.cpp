@@ -52,19 +52,19 @@ void SwingTrajCubicSplineSimple::removeConfigFromGUI(mc_rtc::gui::StateBuilder &
 }
 
 SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & startPose,
-                                                       const sva::PTransformd & goalPose,
+                                                       const sva::PTransformd & endPose,
                                                        double startTime,
-                                                       double goalTime,
+                                                       double endTime,
                                                        const TaskGain & taskGain,
                                                        const mc_rtc::Configuration & mcRtcConfig)
-: SwingTraj(startPose, goalPose, startTime, goalTime, taskGain, mcRtcConfig),
+: SwingTraj(startPose, endPose, startTime, endTime, taskGain, mcRtcConfig),
   posFunc_(std::make_shared<TrajColl::PiecewiseFunc<Eigen::Vector3d>>()),
   rotFunc_(std::make_shared<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>())
 {
   config_.load(mcRtcConfig);
 
-  double withdrawDuration = config_.withdrawDurationRatio * (goalTime - startTime);
-  double approachDuration = config_.approachDurationRatio * (goalTime - startTime);
+  double withdrawDuration = config_.withdrawDurationRatio * (endTime - startTime);
+  double approachDuration = config_.approachDurationRatio * (endTime - startTime);
 
   TrajColl::BoundaryConstraint<Eigen::Vector3d> zeroVelBC(TrajColl::BoundaryConstraintType::Velocity,
                                                           Eigen::Vector3d::Zero());
@@ -87,32 +87,32 @@ SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple(const sva::PTransformd & 
   // Spline to approach foot
   // Pos
   std::map<double, Eigen::Vector3d> approachPosWaypoints = {
-      {goalTime - approachDuration, (sva::PTransformd(config_.approachOffset) * goalPose).translation()},
-      {goalTime, goalPose.translation()}};
+      {endTime - approachDuration, (sva::PTransformd(config_.approachOffset) * endPose).translation()},
+      {endTime, endPose.translation()}};
   auto approachPosSpline =
       std::make_shared<TrajColl::CubicSpline<Eigen::Vector3d>>(3, zeroAccelBC, zeroVelBC, approachPosWaypoints);
   approachPosSpline->calcCoeff();
-  posFunc_->appendFunc(goalTime, approachPosSpline);
+  posFunc_->appendFunc(endTime, approachPosSpline);
   // Rot
-  rotFunc_->appendPoint(std::make_pair(goalTime - approachDuration, goalPose.rotation().transpose()));
-  rotFunc_->appendPoint(std::make_pair(goalTime, goalPose.rotation().transpose()));
+  rotFunc_->appendPoint(std::make_pair(endTime - approachDuration, endPose.rotation().transpose()));
+  rotFunc_->appendPoint(std::make_pair(endTime, endPose.rotation().transpose()));
 
   // Spline to swing foot
   // Pos
   std::map<double, Eigen::Vector3d> swingPosWaypoints = {
       *withdrawPosWaypoints.rbegin(),
-      {0.5 * (startTime + goalTime),
-       (sva::PTransformd(config_.swingOffset) * sva::interpolate(startPose, goalPose, 0.5)).translation()},
+      {0.5 * (startTime + endTime),
+       (sva::PTransformd(config_.swingOffset) * sva::interpolate(startPose, endPose, 0.5)).translation()},
       *approachPosWaypoints.begin()};
   auto swingPosSpline = std::make_shared<TrajColl::CubicSpline<Eigen::Vector3d>>(
       3,
       TrajColl::BoundaryConstraint<Eigen::Vector3d>(TrajColl::BoundaryConstraintType::Velocity,
                                                     withdrawPosSpline->derivative(startTime + withdrawDuration, 1)),
       TrajColl::BoundaryConstraint<Eigen::Vector3d>(TrajColl::BoundaryConstraintType::Velocity,
-                                                    approachPosSpline->derivative(goalTime - approachDuration, 1)),
+                                                    approachPosSpline->derivative(endTime - approachDuration, 1)),
       swingPosWaypoints);
   swingPosSpline->calcCoeff();
-  posFunc_->appendFunc(goalTime - approachDuration, swingPosSpline);
+  posFunc_->appendFunc(endTime - approachDuration, swingPosSpline);
   // Rot
   rotFunc_->calcCoeff();
 }

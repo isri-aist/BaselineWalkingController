@@ -724,11 +724,11 @@ void FootManager::updateFootTraj()
       // Set swingTraj_
       {
         const sva::PTransformd & swingStartPose = ctl().robot().surfacePose(surfaceName(swingFootstep_->foot));
-        sva::PTransformd swingGoalPose = swingFootstep_->pose;
+        sva::PTransformd swingEndPose = swingFootstep_->pose;
         if(config_.overwriteLandingPose && prevFootstep_)
         {
           sva::PTransformd swingRelPose = swingFootstep_->pose * prevFootstep_->pose.inv();
-          swingGoalPose.translation() = (swingRelPose * targetFootPoses_.at(prevFootstep_->foot)).translation();
+          swingEndPose.translation() = (swingRelPose * targetFootPoses_.at(prevFootstep_->foot)).translation();
         }
 
         std::string swingTrajType =
@@ -736,13 +736,13 @@ void FootManager::updateFootTraj()
         if(swingTrajType == "CubicSplineSimple")
         {
           swingTraj_ = std::make_shared<SwingTrajCubicSplineSimple>(
-              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
         else if(swingTrajType == "IndHorizontalVertical")
         {
           swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
-              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               config_.footTaskGain,
               calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
                                     sva::PTransformd::Identity()),
@@ -751,7 +751,7 @@ void FootManager::updateFootTraj()
         else if(swingTrajType == "VariableTaskGain")
         {
           swingTraj_ = std::make_shared<SwingTrajVariableTaskGain>(
-              swingStartPose, swingGoalPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
         else
@@ -793,10 +793,10 @@ void FootManager::updateFootTraj()
         {
           totalSize += static_cast<int>(jointAngleKV.second.size());
         }
-        sva::PTransformd startToGoalTrans = swingTraj_->goalPose_ * swingTraj_->startPose_.inv();
-        double forwardDist = startToGoalTrans.translation().x();
+        sva::PTransformd startToEndTrans = swingTraj_->endPose_ * swingTraj_->startPose_.inv();
+        double forwardDist = startToEndTrans.translation().x();
         double forwardAngle =
-            std::abs(std::atan2(startToGoalTrans.translation().y(), startToGoalTrans.translation().x()));
+            std::abs(std::atan2(startToEndTrans.translation().y(), startToEndTrans.translation().x()));
         constexpr double forwardDistThre = 0.1; // [m]
         constexpr double forwardAngleThre = mc_rtc::constants::toRad(30.0); // [rad]
         if(totalSize > 0 && forwardDist > forwardDistThre && forwardAngle < forwardAngleThre)
@@ -875,7 +875,7 @@ void FootManager::updateFootTraj()
       // Update target
       if(!(config_.keepSupportFootPoseForTouchDownFoot && touchDown_))
       {
-        targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->goalPose_;
+        targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->endPose_;
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
@@ -885,7 +885,7 @@ void FootManager::updateFootTraj()
       // Set trajStartFootPoseFuncs_
       {
         auto trajStartFootPoseFunc = std::make_shared<TrajColl::CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
-        trajStartFootPoseFunc->appendPoint(std::make_pair(ctl().t(), swingTraj_->goalPose_));
+        trajStartFootPoseFunc->appendPoint(std::make_pair(ctl().t(), swingTraj_->endPose_));
         trajStartFootPoseFunc->appendPoint(
             std::make_pair(swingFootstep_->transitEndTime, targetFootPoses_.at(swingFootstep_->foot)));
         trajStartFootPoseFunc->calcCoeff();
@@ -1069,7 +1069,7 @@ void FootManager::updateZmpTraj()
                                                                  {supportFoot, footPoses.at(supportFoot)}});
 
       // Update footPoses
-      footPoses.at(footstep.foot) = (footstep.swingStartTime <= ctl().t() ? swingTraj_->goalPose_ : footstep.pose);
+      footPoses.at(footstep.foot) = (footstep.swingStartTime <= ctl().t() ? swingTraj_->endPose_ : footstep.pose);
     }
 
     zmpFunc_->appendPoint(std::make_pair(footstep.swingEndTime, supportFootZmp));
@@ -1134,7 +1134,7 @@ void FootManager::updateVelMode()
       sva::PTransformd footstepPoseNewClamped =
           convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
       footstepQueue_.front().pose = footstepPoseNewClamped;
-      swingTraj_->goalPose_ = footstepPoseNewClamped;
+      swingTraj_->endPose_ = footstepPoseNewClamped;
     }
   }
 
@@ -1180,7 +1180,7 @@ bool FootManager::detectTouchDown() const
   }
 
   // False if the position error does not meet the threshold
-  if((swingTraj_->goalPose_.translation() - swingTraj_->pose(ctl().t()).translation()).norm()
+  if((swingTraj_->endPose_.translation() - swingTraj_->pose(ctl().t()).translation()).norm()
      > config_.touchDownPosError)
   {
     return false;

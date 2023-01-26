@@ -26,19 +26,19 @@ public:
 public:
   /** \brief Constructor.
       \param startPose start pose
-      \param goalPose pose goal pose
+      \param endPose pose end pose
       \param startTime start time
-      \param goalTime goal time
+      \param endTime end time
       \param taskGain IK task gain
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTraj(const sva::PTransformd & startPose,
-            const sva::PTransformd & goalPose,
+            const sva::PTransformd & endPose,
             double startTime,
-            double goalTime,
+            double endTime,
             const TaskGain & taskGain,
             const mc_rtc::Configuration & mcRtcConfig = {})
-  : startPose_(startPose), goalPose_(goalPose), startTime_(startTime), goalTime_(goalTime), taskGain_(taskGain)
+  : startPose_(startPose), endPose_(endPose), startTime_(startTime), endTime_(endTime), taskGain_(taskGain)
   {
     config_.load(mcRtcConfig);
   }
@@ -91,14 +91,14 @@ public:
   //! Start pose
   sva::PTransformd startPose_ = sva::PTransformd::Identity();
 
-  //! Goal pose
-  sva::PTransformd goalPose_ = sva::PTransformd::Identity();
+  //! End pose
+  sva::PTransformd endPose_ = sva::PTransformd::Identity();
 
   //! Start time [sec]
   double startTime_ = 0.0;
 
-  //! Goal time [sec]
-  double goalTime_ = 0.0;
+  //! End time [sec]
+  double endTime_ = 0.0;
 
   //! IK task gain
   TaskGain taskGain_;

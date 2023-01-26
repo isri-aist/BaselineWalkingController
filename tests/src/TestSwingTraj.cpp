@@ -10,18 +10,18 @@ template<class SwingTrajType>
 void testSwingTraj()
 {
   sva::PTransformd startPose = sva::PTransformd(sva::RotZ(-0.1), Eigen::Vector3d(0.1, -0.2, 0.0));
-  sva::PTransformd goalPose = sva::PTransformd(sva::RotZ(0.5), Eigen::Vector3d(1.1, 0.2, 0.3));
+  sva::PTransformd endPose = sva::PTransformd(sva::RotZ(0.5), Eigen::Vector3d(1.1, 0.2, 0.3));
   double startTime = 1.0;
-  double goalTime = 2.5;
+  double endTime = 2.5;
   BWC::TaskGain taskGain = BWC::TaskGain(sva::MotionVecd(Eigen::Vector6d::Constant(100)));
   std::shared_ptr<BWC::SwingTraj> swingTraj =
-      std::make_shared<SwingTrajType>(startPose, goalPose, startTime, goalTime, taskGain);
+      std::make_shared<SwingTrajType>(startPose, endPose, startTime, endTime, taskGain);
 
   const int divideNum = 100;
   for(int i = 0; i <= divideNum; i++)
   {
     double ratio = static_cast<double>(i) / divideNum;
-    double t = (1.0 - ratio) * startTime + ratio * goalTime;
+    double t = (1.0 - ratio) * startTime + ratio * endTime;
     const auto & pose = swingTraj->pose(t);
     const auto & vel = swingTraj->vel(t);
     const auto & accel = swingTraj->accel(t);
@@ -41,7 +41,7 @@ void testSwingTraj()
     }
     else if(i == divideNum)
     {
-      EXPECT_LT(sva::transformError(pose, goalPose).vector().norm(), 1e-6);
+      EXPECT_LT(sva::transformError(pose, endPose).vector().norm(), 1e-6);
     }
   }
 }

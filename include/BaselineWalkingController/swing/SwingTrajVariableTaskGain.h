@@ -73,16 +73,16 @@ public:
 public:
   /** \brief Constructor.
       \param startPose start pose
-      \param goalPose pose goal pose
+      \param endPose pose end pose
       \param startTime start time
-      \param goalTime goal time
+      \param endTime end time
       \param taskGain IK task gain
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajVariableTaskGain(const sva::PTransformd & startPose,
-                            const sva::PTransformd & goalPose,
+                            const sva::PTransformd & endPose,
                             double startTime,
-                            double goalTime,
+                            double endTime,
                             const TaskGain & taskGain,
                             const mc_rtc::Configuration & mcRtcConfig = {});
 

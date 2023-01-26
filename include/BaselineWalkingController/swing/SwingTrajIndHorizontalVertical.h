@@ -56,10 +56,10 @@ public:
     //! Duration ratio at which the tilt center ends to change
     double tiltCenterApproachDurationRatio = 0.25;
 
-    //! Threshold distance between start pose and goal pose to enable tilt [m]
+    //! Threshold distance between start pose and end pose to enable tilt [m]
     double tiltDistThre = 0.2;
 
-    //! Threshold of forward angle between start pose and goal pose to enable tilt [rad]
+    //! Threshold of forward angle between start pose and end pose to enable tilt [rad]
     double tiltForwardAngleThre = mc_rtc::constants::toRad(10);
 
     /** \brief Constructor.
@@ -98,17 +98,17 @@ public:
 public:
   /** \brief Constructor.
       \param startPose start pose
-      \param goalPose pose goal pose
+      \param endPose pose end pose
       \param startTime start time
-      \param goalTime goal time
+      \param endTime end time
       \param taskGain IK task gain
       \param localVertexList vertices of surface in local coordinates
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajIndHorizontalVertical(const sva::PTransformd & startPose,
-                                 const sva::PTransformd & goalPose,
+                                 const sva::PTransformd & endPose,
                                  double startTime,
-                                 double goalTime,
+                                 double endTime,
                                  const TaskGain & taskGain,
                                  const std::vector<Eigen::Vector3d> & localVertexList = {},
                                  const mc_rtc::Configuration & mcRtcConfig = {});
