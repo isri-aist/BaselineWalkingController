@@ -114,6 +114,8 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
 
 void FootManager::reset()
 {
+  velModeData_.reset(false);
+
   footstepQueue_.clear();
   prevFootstep_.reset();
 
@@ -145,10 +147,11 @@ void FootManager::reset()
   contactFootPosesList_.emplace(ctl().t(), targetFootPoses_);
 
   swingFootstep_ = nullptr;
+  swingTraj_.reset();
 
   baseYawFunc_->clearPoints();
 
-  velModeData_.reset(false);
+  armSwingFunc_.reset();
 
   touchDown_ = false;
 
