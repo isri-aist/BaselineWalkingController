@@ -98,42 +98,42 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
 {
   config_.load(mcRtcConfig);
 
-  double withdrawDuration = config_.withdrawDurationRatio * (endTime - startTime);
-  double approachDuration = config_.approachDurationRatio * (endTime - startTime);
+  double withdrawDuration = config_.withdrawDurationRatio * (endTime_ - startTime_);
+  double approachDuration = config_.approachDurationRatio * (endTime_ - startTime_);
 
   // Horizontal position
   {
     horizontalPosFunc_ = std::make_shared<TrajColl::CubicInterpolator<Eigen::Vector2d>>();
-    horizontalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(startTime + withdrawDuration, startPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(endTime - approachDuration, endPose.translation().head<2>()));
-    horizontalPosFunc_->appendPoint(std::make_pair(endTime, endPose.translation().head<2>()));
+    horizontalPosFunc_->appendPoint(std::make_pair(startTime_, startPose_.translation().head<2>()));
+    horizontalPosFunc_->appendPoint(std::make_pair(startTime_ + withdrawDuration, startPose_.translation().head<2>()));
+    horizontalPosFunc_->appendPoint(std::make_pair(endTime_ - approachDuration, endPose_.translation().head<2>()));
+    horizontalPosFunc_->appendPoint(std::make_pair(endTime_, endPose_.translation().head<2>()));
     horizontalPosFunc_->calcCoeff();
   }
 
   // Vertical position
   {
     double verticalTopTime =
-        (1.0 - config_.verticalTopDurationRatio) * startTime + config_.verticalTopDurationRatio * endTime;
+        (1.0 - config_.verticalTopDurationRatio) * startTime_ + config_.verticalTopDurationRatio * endTime_;
     TrajColl::BoundaryConstraint<Vector1d> zeroVelBC(TrajColl::BoundaryConstraintType::Velocity, Vector1d::Zero());
 
     verticalPosFunc_ = std::make_shared<TrajColl::CubicSpline<Vector1d>>(1, zeroVelBC, zeroVelBC);
-    verticalPosFunc_->appendPoint(std::make_pair(startTime, startPose.translation().tail<1>()));
+    verticalPosFunc_->appendPoint(std::make_pair(startTime_, startPose_.translation().tail<1>()));
     verticalPosFunc_->appendPoint(std::make_pair(
-        verticalTopTime, (sva::PTransformd(config_.verticalTopOffset) * sva::interpolate(startPose, endPose, 0.5))
+        verticalTopTime, (sva::PTransformd(config_.verticalTopOffset) * sva::interpolate(startPose_, endPose_, 0.5))
                              .translation()
                              .tail<1>()));
-    verticalPosFunc_->appendPoint(std::make_pair(endTime, endPose.translation().tail<1>()));
+    verticalPosFunc_->appendPoint(std::make_pair(endTime_, endPose_.translation().tail<1>()));
     verticalPosFunc_->calcCoeff();
   }
 
   // Rotation
   {
     rotFunc_ = std::make_shared<TrajColl::CubicInterpolator<Eigen::Matrix3d, Eigen::Vector3d>>();
-    rotFunc_->appendPoint(std::make_pair(startTime, startPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(startTime + withdrawDuration, startPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(endTime - approachDuration, endPose.rotation().transpose()));
-    rotFunc_->appendPoint(std::make_pair(endTime, endPose.rotation().transpose()));
+    rotFunc_->appendPoint(std::make_pair(startTime_, startPose_.rotation().transpose()));
+    rotFunc_->appendPoint(std::make_pair(startTime_ + withdrawDuration, startPose_.rotation().transpose()));
+    rotFunc_->appendPoint(std::make_pair(endTime_ - approachDuration, endPose_.rotation().transpose()));
+    rotFunc_->appendPoint(std::make_pair(endTime_, endPose_.rotation().transpose()));
     rotFunc_->calcCoeff();
   }
 
@@ -141,8 +141,8 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
   int enableTiltWithdraw = 0;
   int enableTiltApproach = 0;
   {
-    sva::PTransformd startToEndTrans = endPose * startPose.inv();
-    sva::PTransformd endToStartTrans = startPose * endPose.inv();
+    sva::PTransformd startToEndTrans = endPose_ * startPose_.inv();
+    sva::PTransformd endToStartTrans = startPose_ * endPose_.inv();
     if(startToEndTrans.translation().norm() > config_.tiltDistThre)
     {
       double forwardAngle = std::abs(std::atan2(startToEndTrans.translation().y(), startToEndTrans.translation().x()));
@@ -171,25 +171,25 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
 
   // Tilt angle
   {
-    double tiltAngleWithdrawDuration = config_.tiltAngleWithdrawDurationRatio * (endTime - startTime);
-    double tiltAngleApproachDuration = config_.tiltAngleApproachDurationRatio * (endTime - startTime);
+    double tiltAngleWithdrawDuration = config_.tiltAngleWithdrawDurationRatio * (endTime_ - startTime_);
+    double tiltAngleApproachDuration = config_.tiltAngleApproachDurationRatio * (endTime_ - startTime_);
     double tiltAngleWithdraw = (enableTiltWithdraw == 0 ? 0.0 : enableTiltWithdraw * config_.tiltAngleWithdraw);
     double tiltAngleApproach = (enableTiltApproach == 0 ? 0.0 : enableTiltApproach * config_.tiltAngleApproach);
 
     tiltAngleFunc_ = std::make_shared<TrajColl::CubicInterpolator<Vector1d>>();
-    tiltAngleFunc_->appendPoint(std::make_pair(startTime, (Vector1d() << 0.0).finished()));
+    tiltAngleFunc_->appendPoint(std::make_pair(startTime_, (Vector1d() << 0.0).finished()));
     tiltAngleFunc_->appendPoint(
-        std::make_pair(startTime + tiltAngleWithdrawDuration, (Vector1d() << tiltAngleWithdraw).finished()));
+        std::make_pair(startTime_ + tiltAngleWithdrawDuration, (Vector1d() << tiltAngleWithdraw).finished()));
     tiltAngleFunc_->appendPoint(
-        std::make_pair(endTime - tiltAngleApproachDuration, (Vector1d() << tiltAngleApproach).finished()));
-    tiltAngleFunc_->appendPoint(std::make_pair(endTime, (Vector1d() << 0.0).finished()));
+        std::make_pair(endTime_ - tiltAngleApproachDuration, (Vector1d() << tiltAngleApproach).finished()));
+    tiltAngleFunc_->appendPoint(std::make_pair(endTime_, (Vector1d() << 0.0).finished()));
     tiltAngleFunc_->calcCoeff();
   }
 
   // Tilt center
   {
-    double tiltCenterWithdrawDuration = config_.tiltCenterWithdrawDurationRatio * (endTime - startTime);
-    double tiltCenterApproachDuration = config_.tiltCenterApproachDurationRatio * (endTime - startTime);
+    double tiltCenterWithdrawDuration = config_.tiltCenterWithdrawDurationRatio * (endTime_ - startTime_);
+    double tiltCenterApproachDuration = config_.tiltCenterApproachDurationRatio * (endTime_ - startTime_);
 
     Eigen::Vector3d minLocalVertex = Eigen::Vector3d::Zero();
     Eigen::Vector3d maxLocalVertex = Eigen::Vector3d::Zero();
@@ -218,10 +218,10 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
     }
 
     tiltCenterFunc_ = std::make_shared<TrajColl::CubicInterpolator<sva::PTransformd, sva::MotionVecd>>();
-    tiltCenterFunc_->appendPoint(std::make_pair(startTime, tiltCenterWithdraw));
-    tiltCenterFunc_->appendPoint(std::make_pair(startTime + tiltCenterWithdrawDuration, tiltCenterWithdraw));
-    tiltCenterFunc_->appendPoint(std::make_pair(endTime - tiltCenterApproachDuration, tiltCenterApproach));
-    tiltCenterFunc_->appendPoint(std::make_pair(endTime, tiltCenterApproach));
+    tiltCenterFunc_->appendPoint(std::make_pair(startTime_, tiltCenterWithdraw));
+    tiltCenterFunc_->appendPoint(std::make_pair(startTime_ + tiltCenterWithdrawDuration, tiltCenterWithdraw));
+    tiltCenterFunc_->appendPoint(std::make_pair(endTime_ - tiltCenterApproachDuration, tiltCenterApproach));
+    tiltCenterFunc_->appendPoint(std::make_pair(endTime_, tiltCenterApproach));
     tiltCenterFunc_->calcCoeff();
   }
 }
