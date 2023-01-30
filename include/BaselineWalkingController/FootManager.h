@@ -420,7 +420,7 @@ protected:
   //! Ground Z position function
   std::shared_ptr<TrajColl::CubicInterpolator<double>> groundPosZFunc_;
 
-  //! Contact foot poses list
+  //! Map of start time and contact foot poses
   std::map<double, std::unordered_map<Foot, sva::PTransformd>> contactFootPosesList_;
 
   //! Footstep during swing
