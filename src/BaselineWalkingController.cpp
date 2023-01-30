@@ -19,8 +19,30 @@ using namespace BWC;
 BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                                                      double dt,
                                                      const mc_rtc::Configuration & _config)
-: mc_control::fsm::Controller(rm, dt, overwriteConfig(_config, rm->name))
+: mc_control::fsm::Controller(rm, dt, _config)
 {
+  // Get the robot-specific configuration
+  auto rconfig = this->config()("robots")(robot().module().name);
+  if(rconfig.empty())
+  {
+    mc_rtc::log::error_and_throw("[BaselineWalkingController] {} section is empty, please provide a configuration",
+                                 robot().module().name);
+  }
+  // Load the robot's config into the controller's configuration
+  config().load(rconfig);
+  // Load extra-overwrites
+  auto overwriteConfigList = config()("OverwriteConfigList");
+  auto overwriteConfigKeys = config()("OverwriteConfigKeys", std::vector<std::string>{});
+  for(const auto & k : overwriteConfigKeys)
+  {
+    if(!overwriteConfigList.has(k))
+    {
+      mc_rtc::log::error_and_throw(
+          "[BaselineWalkingController] {} in OverwriteConfigKeys but not in OverwriteConfigList", k);
+    }
+    config().load(overwriteConfigList(k));
+  }
+
   config()("controllerName", name_);
 
   // Setup tasks
