@@ -517,9 +517,9 @@ std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> FootManager::calcC
   {
     const auto & surface = ctl().robot().surface(surfaceName(foot));
     contactList.emplace(
-        foot, std::make_shared<ForceColl::Contact>(std::to_string(foot), config_.fricCoeff,
-                                                   calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
-                                                   targetFootPoses_.at(foot)));
+        foot, std::make_shared<ForceColl::SurfaceContact>(std::to_string(foot), config_.fricCoeff,
+                                                          calcSurfaceVertexList(surface, sva::PTransformd::Identity()),
+                                                          targetFootPoses_.at(foot)));
   }
 
   return contactList;
