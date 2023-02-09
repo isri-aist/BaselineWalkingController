@@ -118,6 +118,13 @@ public:
     return config_;
   }
 
+protected:
+  /** \brief Accessor to the configuration. */
+  inline virtual Configuration & config() override
+  {
+    return config_;
+  }
+
 public:
   //! Withdraw time
   double withdrawTime_ = 0;

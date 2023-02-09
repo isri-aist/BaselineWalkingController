@@ -111,6 +111,13 @@ public:
   }
 
 protected:
+  /** \brief Accessor to the configuration. */
+  inline virtual Configuration & config() override
+  {
+    return config_;
+  }
+
+protected:
   //! Configuration
   Configuration config_ = defaultConfig_;
 
