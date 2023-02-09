@@ -23,7 +23,7 @@ var searchData=
   ['swingfootstep_5f_187',['swingFootstep_',['../classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6',1,'BWC::FootManager']]],
   ['swingoffset_188',['swingOffset',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a03b62c4ab3ff502cf3c13b6df1feaf54',1,'BWC::SwingTrajCubicSplineSimple::Configuration']]],
   ['swingstarttime_189',['swingStartTime',['../structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b',1,'BWC::Footstep']]],
-  ['swingtraj_190',['SwingTraj',['../classBWC_1_1SwingTraj.html',1,'BWC::SwingTraj'],['../classBWC_1_1SwingTraj.html#a986767ec1590e5ac6b71be8d7cf39197',1,'BWC::SwingTraj::SwingTraj()']]],
+  ['swingtraj_190',['SwingTraj',['../classBWC_1_1SwingTraj.html',1,'BWC::SwingTraj'],['../classBWC_1_1SwingTraj.html#aaeb456f7ef4a30bda9951dbe65993b1c',1,'BWC::SwingTraj::SwingTraj()']]],
   ['swingtraj_2eh_191',['SwingTraj.h',['../SwingTraj_8h.html',1,'']]],
   ['swingtraj_5f_192',['swingTraj_',['../classBWC_1_1FootManager.html#ac15c1d805cbfee08f13ee97be9c0d129',1,'BWC::FootManager']]],
   ['swingtrajconfig_193',['swingTrajConfig',['../structBWC_1_1Footstep.html#a17d37c7d7cdfbf53c77e0a18dbd3e0e0',1,'BWC::Footstep']]],
