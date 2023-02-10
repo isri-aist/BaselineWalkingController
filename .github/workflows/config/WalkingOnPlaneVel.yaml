@@ -5,7 +5,7 @@ states:
   BWC::Initial_:
     base: BWC::Initial
     configs:
-      autoStartTime: 8.0
+      autoStartTime: 2.0
 
   BWC::ConfigWalk_:
     base: BWC::ConfigWalk
