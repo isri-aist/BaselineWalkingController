@@ -29,7 +29,7 @@ var searchData=
   ['swingtrajconfig_196',['swingTrajConfig',['../structBWC_1_1Footstep.html#a17d37c7d7cdfbf53c77e0a18dbd3e0e0',1,'BWC::Footstep']]],
   ['swingtrajcubicsplinesimple_197',['SwingTrajCubicSplineSimple',['../classBWC_1_1SwingTrajCubicSplineSimple.html',1,'BWC::SwingTrajCubicSplineSimple'],['../classBWC_1_1SwingTrajCubicSplineSimple.html#ae9c71b48bebb5e98aad9deb71cd78e47',1,'BWC::SwingTrajCubicSplineSimple::SwingTrajCubicSplineSimple()']]],
   ['swingtrajcubicsplinesimple_2eh_198',['SwingTrajCubicSplineSimple.h',['../SwingTrajCubicSplineSimple_8h.html',1,'']]],
-  ['swingtrajindhorizontalvertical_199',['SwingTrajIndHorizontalVertical',['../classBWC_1_1SwingTrajIndHorizontalVertical.html',1,'BWC::SwingTrajIndHorizontalVertical'],['../classBWC_1_1SwingTrajIndHorizontalVertical.html#aefe93d5a2a72332f4fd5ec578a178d03',1,'BWC::SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical()']]],
+  ['swingtrajindhorizontalvertical_199',['SwingTrajIndHorizontalVertical',['../classBWC_1_1SwingTrajIndHorizontalVertical.html',1,'BWC::SwingTrajIndHorizontalVertical'],['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a7414a168f278c7f00d963bd7a71537b9',1,'BWC::SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical()']]],
   ['swingtrajindhorizontalvertical_2eh_200',['SwingTrajIndHorizontalVertical.h',['../SwingTrajIndHorizontalVertical_8h.html',1,'']]],
   ['swingtrajlandingsearch_201',['SwingTrajLandingSearch',['../classBWC_1_1SwingTrajLandingSearch.html',1,'BWC::SwingTrajLandingSearch'],['../classBWC_1_1SwingTrajLandingSearch.html#a48c8010d0b832cbbd25d9c84dc3a65e1',1,'BWC::SwingTrajLandingSearch::SwingTrajLandingSearch()']]],
   ['swingtrajlandingsearch_2eh_202',['SwingTrajLandingSearch.h',['../SwingTrajLandingSearch_8h.html',1,'']]],
