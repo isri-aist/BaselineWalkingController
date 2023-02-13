@@ -900,9 +900,9 @@ void FootManager::updateFootTraj()
         }
 
         targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->endPose_;
-        targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
-        targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
       }
+      targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
+      targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
 
       footTaskGains_.at(swingFootstep_->foot) = config_.footTaskGain;
 
