@@ -3,3 +3,10 @@ CentroidalManager:
   horizonDuration: 2.0 # [sec]
   horizonDt: 0.02 # [sec]
   ddpMaxIter: 3
+  mpcWeightParam:
+    runningComPosZ: 1e3
+    runningZmp: 1e-1
+    runningForceZ: 1e-4
+    terminalComPosXy: 1.0
+    terminalComPosZ: 1e3
+    terminalComVel: 1.0

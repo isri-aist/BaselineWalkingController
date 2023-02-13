@@ -15,6 +15,15 @@ void CentroidalManagerDdpZmp::Configuration::load(const mc_rtc::Configuration & 
   mcRtcConfig("horizonDuration", horizonDuration);
   mcRtcConfig("horizonDt", horizonDt);
   mcRtcConfig("ddpMaxIter", ddpMaxIter);
+  if(mcRtcConfig.has("mpcWeightParam"))
+  {
+    mcRtcConfig("mpcWeightParam")("runningComPosZ", mpcWeightParam.running_com_pos_z);
+    mcRtcConfig("mpcWeightParam")("runningZmp", mpcWeightParam.running_zmp);
+    mcRtcConfig("mpcWeightParam")("runningForceZ", mpcWeightParam.running_force_z);
+    mcRtcConfig("mpcWeightParam")("terminalComPosXy", mpcWeightParam.terminal_com_pos_xy);
+    mcRtcConfig("mpcWeightParam")("terminalComPosZ", mpcWeightParam.terminal_com_pos_z);
+    mcRtcConfig("mpcWeightParam")("terminalComVel", mpcWeightParam.terminal_com_vel);
+  }
 }
 
 CentroidalManagerDdpZmp::CentroidalManagerDdpZmp(BaselineWalkingController * ctlPtr,
@@ -29,7 +38,8 @@ void CentroidalManagerDdpZmp::reset()
   CentroidalManager::reset();
 
   ddp_ = std::make_shared<CCC::DdpZmp>(robotMass_, config_.horizonDt,
-                                       static_cast<int>(std::floor(config_.horizonDuration / config_.horizonDt)));
+                                       static_cast<int>(std::floor(config_.horizonDuration / config_.horizonDt)),
+                                       config_.mpcWeightParam);
   ddp_->ddp_solver_->config().max_iter = config_.ddpMaxIter;
 }
 

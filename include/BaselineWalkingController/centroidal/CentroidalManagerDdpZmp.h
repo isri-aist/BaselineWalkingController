@@ -26,6 +26,9 @@ public:
     //! DDP maximum iteration
     int ddpMaxIter = 1;
 
+    //! Weight parameter of MPC objective function
+    CCC::DdpZmp::WeightParam mpcWeightParam;
+
     /** \brief Load mc_rtc configuration. */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
   };
