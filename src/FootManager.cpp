@@ -751,12 +751,12 @@ void FootManager::updateFootTraj()
         }
         else if(swingTrajType == "IndHorizontalVertical")
         {
+          swingFootstep_->swingTrajConfig.add(
+              "localVertexList", calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
+                                                       sva::PTransformd::Identity()));
           swingTraj_ = std::make_shared<SwingTrajIndHorizontalVertical>(
               swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
-              config_.footTaskGain,
-              calcSurfaceVertexList(ctl().robot().surface(surfaceName(swingFootstep_->foot)),
-                                    sva::PTransformd::Identity()),
-              swingFootstep_->swingTrajConfig);
+              config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
         else if(swingTrajType == "VariableTaskGain")
         {

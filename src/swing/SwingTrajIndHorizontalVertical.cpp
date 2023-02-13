@@ -92,7 +92,6 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
                                                                double startTime,
                                                                double endTime,
                                                                const TaskGain & taskGain,
-                                                               const std::vector<Eigen::Vector3d> & localVertexList,
                                                                const mc_rtc::Configuration & mcRtcConfig)
 : SwingTraj(startPose, endPose, startTime, endTime, taskGain, mcRtcConfig)
 {
@@ -193,10 +192,13 @@ SwingTrajIndHorizontalVertical::SwingTrajIndHorizontalVertical(const sva::PTrans
 
     Eigen::Vector3d minLocalVertex = Eigen::Vector3d::Zero();
     Eigen::Vector3d maxLocalVertex = Eigen::Vector3d::Zero();
-    for(const auto & localVertex : localVertexList)
+    if(mcRtcConfig.has("localVertexList"))
     {
-      minLocalVertex = minLocalVertex.cwiseMin(localVertex);
-      maxLocalVertex = maxLocalVertex.cwiseMax(localVertex);
+      for(const auto & localVertex : static_cast<std::vector<Eigen::Vector3d>>(mcRtcConfig("localVertexList")))
+      {
+        minLocalVertex = minLocalVertex.cwiseMin(localVertex);
+        maxLocalVertex = maxLocalVertex.cwiseMax(localVertex);
+      }
     }
     sva::PTransformd tiltCenterWithdraw = sva::PTransformd::Identity();
     if(enableTiltWithdraw == 1)

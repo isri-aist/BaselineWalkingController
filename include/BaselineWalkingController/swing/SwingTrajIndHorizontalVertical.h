@@ -102,7 +102,6 @@ public:
       \param startTime start time
       \param endTime end time
       \param taskGain IK task gain
-      \param localVertexList vertices of surface in local coordinates
       \param mcRtcConfig mc_rtc configuration
   */
   SwingTrajIndHorizontalVertical(const sva::PTransformd & startPose,
@@ -110,7 +109,6 @@ public:
                                  double startTime,
                                  double endTime,
                                  const TaskGain & taskGain,
-                                 const std::vector<Eigen::Vector3d> & localVertexList = {},
                                  const mc_rtc::Configuration & mcRtcConfig = {});
 
   /** \brief Get type of foot swing trajectory. */
