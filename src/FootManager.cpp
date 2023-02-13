@@ -892,6 +892,13 @@ void FootManager::updateFootTraj()
       // Update target
       if(!(config_.keepPoseForTouchDownFoot && touchDown_))
       {
+        if(touchDown_)
+        {
+          // Enable hold mode to prevent IK target pose from jumping
+          // https://github.com/jrl-umi3218/mc_rtc/pull/143
+          ctl().footTasks_.at(swingFootstep_->foot)->hold(true);
+        }
+
         targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->endPose_;
         targetFootVels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
         targetFootAccels_.at(swingFootstep_->foot) = sva::MotionVecd::Zero();
