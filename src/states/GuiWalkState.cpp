@@ -1,4 +1,3 @@
-#include <mc_filter/utils/clamp.h>
 #include <mc_rtc/gui/Form.h>
 
 #include <BaselineWalkingController/BaselineWalkingController.h>
