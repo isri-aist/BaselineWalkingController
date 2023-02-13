@@ -93,10 +93,11 @@ Inheritance diagram for BWC::SwingTraj:</div>
 <div class="dyncontent">
 <div class="center"><img src="classBWC_1_1SwingTraj__inherit__graph.png" border="0" usemap="#BWC_1_1SwingTraj_inherit__map" alt="Inheritance graph"/></div>
 <map name="BWC_1_1SwingTraj_inherit__map" id="BWC_1_1SwingTraj_inherit__map">
-<area shape="rect" title="Foot swing trajectory." alt="" coords="5,78,129,105"/>
+<area shape="rect" title="Foot swing trajectory." alt="" coords="5,107,129,134"/>
 <area shape="rect" href="classBWC_1_1SwingTrajCubicSplineSimple.html" title="Simple foot swing trajectory with cubic spline." alt="" coords="196,5,396,47"/>
 <area shape="rect" href="classBWC_1_1SwingTrajIndHorizontalVertical.html" title="Foot swing trajectory with independent interpolation of horizontal and vertical positions." alt="" coords="191,71,401,112"/>
-<area shape="rect" href="classBWC_1_1SwingTrajVariableTaskGain.html" title="Foot swing trajectory that makes the horizontal position converge by determining the variable IK task..." alt="" coords="177,137,415,163"/>
+<area shape="rect" href="classBWC_1_1SwingTrajLandingSearch.html" title="Foot swing trajectory, moving the foot while searching for the landing pose on the ground." alt="" coords="187,137,405,163"/>
+<area shape="rect" href="classBWC_1_1SwingTrajVariableTaskGain.html" title="Foot swing trajectory that makes the horizontal position converge by determining the variable IK task..." alt="" coords="177,187,415,214"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -123,6 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a23ff2bfb2bcebb1cfa76595bbd5866c9"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTraj.html#a23ff2bfb2bcebb1cfa76595bbd5866c9">type</a> () const =0</td></tr>
 <tr class="memdesc:a23ff2bfb2bcebb1cfa76595bbd5866c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get type of foot swing trajectory.  <a href="classBWC_1_1SwingTraj.html#a23ff2bfb2bcebb1cfa76595bbd5866c9">More...</a><br /></td></tr>
 <tr class="separator:a23ff2bfb2bcebb1cfa76595bbd5866c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4386091a974ddf2d6418170b95dfd2d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTraj.html#ad4386091a974ddf2d6418170b95dfd2d">update</a> (double)</td></tr>
+<tr class="memdesc:ad4386091a974ddf2d6418170b95dfd2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the internal state of the swing trajectory.  <a href="classBWC_1_1SwingTraj.html#ad4386091a974ddf2d6418170b95dfd2d">More...</a><br /></td></tr>
+<tr class="separator:ad4386091a974ddf2d6418170b95dfd2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8850a7fa1ab514f6cf1c472320e2961"><td class="memItemLeft" align="right" valign="top">virtual sva::PTransformd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1SwingTraj.html#aa8850a7fa1ab514f6cf1c472320e2961">pose</a> (double t) const =0</td></tr>
 <tr class="memdesc:aa8850a7fa1ab514f6cf1c472320e2961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the pose of the swing trajectory at a specified time.  <a href="classBWC_1_1SwingTraj.html#aa8850a7fa1ab514f6cf1c472320e2961">More...</a><br /></td></tr>
 <tr class="separator:aa8850a7fa1ab514f6cf1c472320e2961"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -285,7 +289,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a8c1b032825262c67f7125d962fe1265f">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a9da3f192d9a0b75c28c193308c82870d">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#ac32886e7743c31edf4691d48d96a7be3">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a8c1b032825262c67f7125d962fe1265f">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a5d9cd8ff5431f6134dc969ace961d817">BWC::SwingTrajLandingSearch</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a9da3f192d9a0b75c28c193308c82870d">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#ac32886e7743c31edf4691d48d96a7be3">BWC::SwingTrajCubicSplineSimple</a>.</p>
 
 </div>
 </div>
@@ -314,7 +318,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Const accessor to the configuration. </p>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#acb9c9c4a83b98e590ed3586514d40237">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a36726ddc54130bd346691d7ddb147612">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a4a85f23414f451f8898b3f09ff1eb101">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#acb9c9c4a83b98e590ed3586514d40237">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a36726ddc54130bd346691d7ddb147612">BWC::SwingTrajVariableTaskGain</a>, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a8c2153aa887aec4a01a4b7eba3ad2667">BWC::SwingTrajLandingSearch</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a4a85f23414f451f8898b3f09ff1eb101">BWC::SwingTrajCubicSplineSimple</a>.</p>
 
 </div>
 </div>
@@ -343,7 +347,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Accessor to the configuration. </p>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a3fc3bb1950396e0d7bff001fd7719c20">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a8ee423d3aa2ba0c5a66f3502a9f9a002">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a065e473563a65bf1f7dbeb18d2fd63f1">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a3fc3bb1950396e0d7bff001fd7719c20">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a8ee423d3aa2ba0c5a66f3502a9f9a002">BWC::SwingTrajVariableTaskGain</a>, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a2eb79dc10a2e0637bfefba51a4752074">BWC::SwingTrajLandingSearch</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a065e473563a65bf1f7dbeb18d2fd63f1">BWC::SwingTrajCubicSplineSimple</a>.</p>
 
 </div>
 </div>
@@ -379,7 +383,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#ab76ea8107588ffe3adfe80bbf81f68c1">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a7602aa95c6ae6df6f0f63893bdd3b3ed">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a69555fd376a09223df564edfd6e2ac0b">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#ab76ea8107588ffe3adfe80bbf81f68c1">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a95c40559540cb8802c9af586d3f29460">BWC::SwingTrajLandingSearch</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a7602aa95c6ae6df6f0f63893bdd3b3ed">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a69555fd376a09223df564edfd6e2ac0b">BWC::SwingTrajCubicSplineSimple</a>.</p>
 
 </div>
 </div>
@@ -417,7 +421,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#af9ff5e39fecb745b32177f8da33e371b">BWC::SwingTrajVariableTaskGain</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00067">67</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00075">75</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -453,7 +457,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00076">76</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00084">84</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -482,7 +486,45 @@ Protected Attributes</h2></td></tr>
 
 <p>Get type of foot swing trajectory. </p>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#ab079ecfb148a800f9301f51da5742bd2">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab7c79453a6e416d64f80330d374dac4d">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#ac9aa5eb2a3f6b37262d444cf4682460a">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#ab079ecfb148a800f9301f51da5742bd2">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#ab7c79453a6e416d64f80330d374dac4d">BWC::SwingTrajVariableTaskGain</a>, <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#ac9aa5eb2a3f6b37262d444cf4682460a">BWC::SwingTrajCubicSplineSimple</a>, and <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a73d89306282b05cb5bf8c36ff52ec349">BWC::SwingTrajLandingSearch</a>.</p>
+
+</div>
+</div>
+<a id="ad4386091a974ddf2d6418170b95dfd2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4386091a974ddf2d6418170b95dfd2d">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void BWC::SwingTraj::update </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the internal state of the swing trajectory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a12e5c12355a2ababa60f37072ad6158e">BWC::SwingTrajLandingSearch</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00052">52</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -518,7 +560,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a8faa26025ce20f0ee6110973c3e3c0f5">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a25bc33961c8d1e86f420beb1327f4ac1">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a0cb9ab96c15feb7c454978083e8e16b2">BWC::SwingTrajCubicSplineSimple</a>.</p>
+<p>Implemented in <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a8faa26025ce20f0ee6110973c3e3c0f5">BWC::SwingTrajIndHorizontalVertical</a>, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a72ba303d5f939db7f3fc5a84f432f11c">BWC::SwingTrajLandingSearch</a>, <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a25bc33961c8d1e86f420beb1327f4ac1">BWC::SwingTrajVariableTaskGain</a>, and <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a0cb9ab96c15feb7c454978083e8e16b2">BWC::SwingTrajCubicSplineSimple</a>.</p>
 
 </div>
 </div>
@@ -537,7 +579,7 @@ Protected Attributes</h2></td></tr>
 
 <p>End pose. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00093">93</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00101">101</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -555,7 +597,7 @@ Protected Attributes</h2></td></tr>
 
 <p>End time [sec]. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00099">99</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00107">107</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -573,7 +615,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Start pose. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00090">90</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00098">98</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -591,7 +633,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Start time [sec]. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00096">96</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00104">104</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -609,7 +651,7 @@ Protected Attributes</h2></td></tr>
 
 <p>IK task gain. </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00102">102</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00110">110</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>
@@ -635,7 +677,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Time when touch down is detected (-1 if not detected) </p>
 
-<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00106">106</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SwingTraj_8h_source.html#l00114">114</a> of file <a class="el" href="SwingTraj_8h_source.html">SwingTraj.h</a>.</p>
 
 </div>
 </div>

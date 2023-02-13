@@ -1,0 +1,4 @@
+<map id="BWC::SwingTrajLandingSearch" name="BWC::SwingTrajLandingSearch">
+<area shape="rect" id="node1" title="Foot swing trajectory, moving the foot while searching for the landing pose on the ground." alt="" coords="5,80,224,107"/>
+<area shape="rect" id="node2" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="53,5,177,32"/>
+</map>

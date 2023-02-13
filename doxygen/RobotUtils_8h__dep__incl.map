@@ -1,8 +1,9 @@
 <map id="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/RobotUtils.h" name="/home/runner/work/BaselineWalkingController/BaselineWalkingController/catkin_ws/src/isri&#45;aist/BaselineWalkingController/include/BaselineWalkingController/RobotUtils.h">
-<area shape="rect" id="node1" title=" " alt="" coords="169,5,421,105"/>
-<area shape="rect" id="node2" href="$FootManager_8h.html" title=" " alt="" coords="31,153,283,253"/>
-<area shape="rect" id="node3" href="$SwingTraj_8h.html" title=" " alt="" coords="307,153,559,253"/>
+<area shape="rect" id="node1" title=" " alt="" coords="314,5,566,105"/>
+<area shape="rect" id="node2" href="$FootManager_8h.html" title=" " alt="" coords="177,153,429,253"/>
+<area shape="rect" id="node3" href="$SwingTraj_8h.html" title=" " alt="" coords="453,153,705,253"/>
 <area shape="rect" id="node4" href="$SwingTrajCubicSplineSimple_8h.html" title=" " alt="" coords="5,301,269,401"/>
 <area shape="rect" id="node5" href="$SwingTrajIndHorizontalVertical_8h.html" title=" " alt="" coords="293,301,573,401"/>
-<area shape="rect" id="node6" href="$SwingTrajVariableTaskGain_8h.html" title=" " alt="" coords="597,301,853,401"/>
+<area shape="rect" id="node6" href="$SwingTrajLandingSearch_8h.html" title=" " alt="" coords="598,301,850,401"/>
+<area shape="rect" id="node7" href="$SwingTrajVariableTaskGain_8h.html" title=" " alt="" coords="875,301,1131,401"/>
 </map>

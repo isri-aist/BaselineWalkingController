@@ -74,10 +74,12 @@ $(function() {
 <li>approachDurationRatio
 : <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a4a033502b7c3bf3ed2cf0d1d6c9c424c">BWC::SwingTrajCubicSplineSimple::Configuration</a>
 , <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#ad666c2dc73fc8ccb5b629e2fc9bf60c5">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#a9a1d74d71d21c4e5d0673f14e85e87f9">BWC::SwingTrajLandingSearch::Configuration</a>
 , <a class="el" href="structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#aafe1c89ee18a8bfccc7b4a62388382eb">BWC::SwingTrajVariableTaskGain::Configuration</a>
 </li>
 <li>approachOffset
 : <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a3c37bb0f5e9edc1f108787bf2fdee5b6">BWC::SwingTrajCubicSplineSimple::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#abfcf0070c1db6b1d6ace5acdb9a70584">BWC::SwingTrajLandingSearch::Configuration</a>
 </li>
 <li>approachTime_
 : <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a00e9a9d9acb544d1f700ce6de5a8da45">BWC::SwingTrajVariableTaskGain</a>
@@ -129,6 +131,7 @@ $(function() {
 , <a class="el" href="classBWC_1_1FootManager_1_1VelModeData.html#a3aab2249fb423f7eb786dd7468f626dd">BWC::FootManager::VelModeData</a>
 , <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a8b489843b3fb059dcc812330b0fe1310">BWC::SwingTrajCubicSplineSimple</a>
 , <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#af5d380dd98bb44712c8263e90f75b7f5">BWC::SwingTrajIndHorizontalVertical</a>
+, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a422417c991fe60f90ddd3d53b15cfe43">BWC::SwingTrajLandingSearch</a>
 , <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#aa1bc63bf7938d4b19787034f2785feb4">BWC::SwingTrajVariableTaskGain</a>
 </li>
 <li>contactFootPosesList_
@@ -167,6 +170,7 @@ $(function() {
 <li>defaultConfig_
 : <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a0a4914df230d9dc97e6395772996375e">BWC::SwingTrajCubicSplineSimple</a>
 , <a class="el" href="classBWC_1_1SwingTrajIndHorizontalVertical.html#a5fb189b75c2cfd09f9e4092b43bb79d1">BWC::SwingTrajIndHorizontalVertical</a>
+, <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#af5607d20573eefd727ca4a8340fdf344">BWC::SwingTrajLandingSearch</a>
 , <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a14fc0721660ba57dfeffcf934906d88f">BWC::SwingTrajVariableTaskGain</a>
 </li>
 <li>defaultSwingTrajType
@@ -213,6 +217,9 @@ $(function() {
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
+<li>finalizeEndPose_
+: <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#acdedaedc878d0ddd2d51ff3bd626ffca">BWC::SwingTrajLandingSearch</a>
+</li>
 <li>firstIter_
 : <a class="el" href="classBWC_1_1CentroidalManagerIntrinsicallyStableMpc.html#a65428faa22665167988cc5f5e3371e60">BWC::CentroidalManagerIntrinsicallyStableMpc</a>
 , <a class="el" href="classBWC_1_1CentroidalManagerPreviewControlZmp.html#abb2cede617c7e555ca7d0a14dc52a2eb">BWC::CentroidalManagerPreviewControlZmp</a>
@@ -372,8 +379,14 @@ $(function() {
 <li>pose
 : <a class="el" href="structBWC_1_1Footstep.html#ab9cb2c39615d02b87c31de2d958d5541">BWC::Footstep</a>
 </li>
+<li>poseFunc_
+: <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a9527e96c4dfb9aaae83b7c71d68ebe1c">BWC::SwingTrajLandingSearch</a>
+</li>
 <li>posFunc_
 : <a class="el" href="classBWC_1_1SwingTrajCubicSplineSimple.html#a358568698592834556f612103593d7b8">BWC::SwingTrajCubicSplineSimple</a>
+</li>
+<li>preApproachDurationRatio
+: <a class="el" href="structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#a98b75a984a8a4c3d656049870970bc44">BWC::SwingTrajLandingSearch::Configuration</a>
 </li>
 <li>prevFootstep_
 : <a class="el" href="classBWC_1_1FootManager.html#a58efca782b66a22fb6ac90d427a6cec4">BWC::FootManager</a>
@@ -434,7 +447,7 @@ $(function() {
 : <a class="el" href="structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509">BWC::Footstep</a>
 </li>
 <li>swingFootstep_
-: <a class="el" href="classBWC_1_1FootManager.html#a219ebee4d0e5e3a84318b91f7ec9b3e6">BWC::FootManager</a>
+: <a class="el" href="classBWC_1_1FootManager.html#a3d705a811277b1ecd54dd0bf77f97ce2">BWC::FootManager</a>
 </li>
 <li>swingOffset
 : <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a03b62c4ab3ff502cf3c13b6df1feaf54">BWC::SwingTrajCubicSplineSimple::Configuration</a>
@@ -579,13 +592,18 @@ $(function() {
 <li>walkConfigKeys_
 : <a class="el" href="structBWC_1_1GuiWalkState.html#accbbb30e56b2f4efee64b6bd7681a084">BWC::GuiWalkState</a>
 </li>
+<li>waypointPoseList_
+: <a class="el" href="classBWC_1_1SwingTrajLandingSearch.html#a16c918f53f67a6e6527e792c89f93151">BWC::SwingTrajLandingSearch</a>
+</li>
 <li>withdrawDurationRatio
 : <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a477be3fd662113e652d15d0d1e1a9cc7">BWC::SwingTrajCubicSplineSimple::Configuration</a>
 , <a class="el" href="structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa2693d9c975220b46642535e19365976">BWC::SwingTrajIndHorizontalVertical::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#ae73d6e652aefbbd29593a8297eefe350">BWC::SwingTrajLandingSearch::Configuration</a>
 , <a class="el" href="structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#a29976425d119eb43aefbc72ca60f5ec2">BWC::SwingTrajVariableTaskGain::Configuration</a>
 </li>
 <li>withdrawOffset
 : <a class="el" href="structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a109260fa8fbeef50c7cab90c4e935797">BWC::SwingTrajCubicSplineSimple::Configuration</a>
+, <a class="el" href="structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#ac618d4e6a4f8e224c602b7b4802c2fd0">BWC::SwingTrajLandingSearch::Configuration</a>
 </li>
 <li>withdrawTime_
 : <a class="el" href="classBWC_1_1SwingTrajVariableTaskGain.html#a721e3c3ddf0720b7787cb232f78bb6d8">BWC::SwingTrajVariableTaskGain</a>
