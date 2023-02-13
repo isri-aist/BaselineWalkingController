@@ -19,6 +19,7 @@
 #include <BaselineWalkingController/MathUtils.h>
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
+#include <BaselineWalkingController/swing/SwingTrajLandingSearch.h>
 #include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 
 using namespace BWC;
@@ -109,6 +110,7 @@ FootManager::FootManager(BaselineWalkingController * ctlPtr, const mc_rtc::Confi
     SwingTrajIndHorizontalVertical::loadDefaultConfig(
         mcRtcConfig("SwingTraj")("IndHorizontalVertical", mc_rtc::Configuration{}));
     SwingTrajVariableTaskGain::loadDefaultConfig(mcRtcConfig("SwingTraj")("VariableTaskGain", mc_rtc::Configuration{}));
+    SwingTrajLandingSearch::loadDefaultConfig(mcRtcConfig("SwingTraj")("LandingSearch", mc_rtc::Configuration{}));
   }
 }
 
@@ -230,7 +232,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "zmpOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config_.zmpOffset; },
           [this](const Eigen::Vector3d & v) { config_.zmpOffset = v; }),
       mc_rtc::gui::ComboInput(
-          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskGain"},
+          "defaultSwingTrajType", {"CubicSplineSimple", "IndHorizontalVertical", "VariableTaskGain", "LandingSearch"},
           [this]() { return config_.defaultSwingTrajType; },
           [this](const std::string & v) { config_.defaultSwingTrajType = v; }),
       mc_rtc::gui::Checkbox(
@@ -321,6 +323,7 @@ void FootManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
   SwingTrajCubicSplineSimple::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
   SwingTrajVariableTaskGain::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
+  SwingTrajLandingSearch::addConfigToGUI(gui, {ctl().name(), "SwingTraj", "LandingSearch"});
 }
 
 void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -330,6 +333,7 @@ void FootManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
   SwingTrajCubicSplineSimple::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "CubicSplineSimple"});
   SwingTrajIndHorizontalVertical::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "IndHorizontalVertical"});
   SwingTrajVariableTaskGain::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "VariableTaskGain"});
+  SwingTrajLandingSearch::removeConfigFromGUI(gui, {ctl().name(), "SwingTraj", "LandingSearch"});
 }
 
 void FootManager::addToLogger(mc_rtc::Logger & logger)
@@ -714,6 +718,9 @@ void FootManager::updateFootTraj()
       {
         mc_rtc::log::error_and_throw("[FootManager] Swing footstep is not consistent.");
       }
+
+      // Synchronize with end pose changes in swing trajectory
+      swingFootstep_->pose = swingTraj_->endPose_;
     }
     else
     {
@@ -754,6 +761,12 @@ void FootManager::updateFootTraj()
         else if(swingTrajType == "VariableTaskGain")
         {
           swingTraj_ = std::make_shared<SwingTrajVariableTaskGain>(
+              swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
+              config_.footTaskGain, swingFootstep_->swingTrajConfig);
+        }
+        else if(swingTrajType == "LandingSearch")
+        {
+          swingTraj_ = std::make_shared<SwingTrajLandingSearch>(
               swingStartPose, swingEndPose, swingFootstep_->swingStartTime, swingFootstep_->swingEndTime,
               config_.footTaskGain, swingFootstep_->swingTrajConfig);
         }
@@ -864,6 +877,7 @@ void FootManager::updateFootTraj()
 
     // Update target
     {
+      swingTraj_->update(ctl().t());
       targetFootPoses_.at(swingFootstep_->foot) = swingTraj_->pose(ctl().t());
       targetFootVels_.at(swingFootstep_->foot) = swingTraj_->vel(ctl().t());
       targetFootAccels_.at(swingFootstep_->foot) = swingTraj_->accel(ctl().t());
@@ -1138,7 +1152,6 @@ void FootManager::updateVelMode()
       Eigen::Vector3d footstepTransMin = -1 * footstepTransMax;
       sva::PTransformd footstepPoseNewClamped =
           convertTo3d(mc_filter::utils::clamp(footstepTrans, footstepTransMin, footstepTransMax)) * footstepPoseOrig;
-      footstepQueue_.front().pose = footstepPoseNewClamped;
       swingTraj_->endPose_ = footstepPoseNewClamped;
     }
   }

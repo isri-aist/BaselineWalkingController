@@ -424,7 +424,7 @@ protected:
   std::map<double, std::unordered_map<Foot, sva::PTransformd>> contactFootPosesList_;
 
   //! Footstep during swing
-  const Footstep * swingFootstep_ = nullptr;
+  Footstep * swingFootstep_ = nullptr;
 
   //! Foot swing trajectory
   std::shared_ptr<SwingTraj> swingTraj_ = nullptr;

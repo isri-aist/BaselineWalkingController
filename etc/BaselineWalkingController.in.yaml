@@ -180,6 +180,12 @@ FootManager:
       approachDurationRatio: 0.25
       verticalTopDurationRatio: 0.5
       verticalTopOffset: [0, 0, 0.05] # [m]
+    LandingSearch:
+      withdrawDurationRatio: 0.2
+      withdrawOffset: [0, 0, 0.04] # [m]
+      preApproachDurationRatio: 0.25
+      approachDurationRatio: 0.2
+      approachOffset: [0, 0, 0.04] # [m]
 
 CentroidalManager:
   name: CentroidalManager

@@ -4,6 +4,7 @@
 
 #include <BaselineWalkingController/swing/SwingTrajCubicSplineSimple.h>
 #include <BaselineWalkingController/swing/SwingTrajIndHorizontalVertical.h>
+#include <BaselineWalkingController/swing/SwingTrajLandingSearch.h>
 #include <BaselineWalkingController/swing/SwingTrajVariableTaskGain.h>
 
 template<class SwingTrajType>
@@ -59,6 +60,11 @@ TEST(TestSwingTraj, SwingTrajIndHorizontalVertical)
 TEST(TestSwingTraj, SwingTrajVariableTaskGain)
 {
   testSwingTraj<BWC::SwingTrajVariableTaskGain>();
+}
+
+TEST(TestSwingTraj, SwingTrajLandingSearch)
+{
+  testSwingTraj<BWC::SwingTrajLandingSearch>();
 }
 
 int main(int argc, char ** argv)
