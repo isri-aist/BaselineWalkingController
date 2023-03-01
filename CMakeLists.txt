@@ -76,3 +76,6 @@ endif()
 if(INSTALL_DOCUMENTATION)
   add_subdirectory(doc)
 endif()
+
+set(PACKAGE_EXTRA_MACROS "set(BWC_STATES_LIBRARIES \"${MC_CONTROLLER_INSTALL_PREFIX}/baseline_walking_controller/states\")
+set(BWC_STATES_FILES \"\${BWC_STATES_LIBRARIES}/data\")")
