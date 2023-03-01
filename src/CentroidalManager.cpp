@@ -94,7 +94,8 @@ void CentroidalManager::update()
 
     // Convert ZMP to wrench and distribute
     contactList_ = ctl().footManager_->calcCurrentContactList();
-    wrenchDist_ = std::make_shared<ForceColl::WrenchDistribution<Foot>>(contactList_, config().wrenchDistConfig);
+    wrenchDist_ = std::make_shared<ForceColl::WrenchDistribution>(ForceColl::getContactVecFromMap(contactList_),
+                                                                  config().wrenchDistConfig);
     Eigen::Vector3d comForWrenchDist =
         (config().useActualComForWrenchDist ? ctl().realRobot().com() : ctl().comTask_->com());
     sva::ForceVecd controlWrench;
@@ -123,7 +124,7 @@ void CentroidalManager::update()
     ctl().comTask_->refAccel(plannedComAccel);
 
     // Set target wrench of foot tasks
-    const auto & targetWrenchList = wrenchDist_->calcWrenchList();
+    const auto & targetWrenchList = ForceColl::calcWrenchList(contactList_, wrenchDist_->resultWrenchRatio_);
     for(const auto & foot : Feet::Both)
     {
       sva::ForceVecd targetWrench = sva::ForceVecd::Zero();
@@ -218,7 +219,8 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   MC_RTC_LOG_HELPER(config().name + "_ZMP_planned", plannedZmp_);
   MC_RTC_LOG_HELPER(config().name + "_ZMP_control", controlZmp_);
   logger.addLogEntry(config().name + "_ZMP_controlWrenchDist", this, [this]() {
-    return wrenchDist_ ? calcZmp(wrenchDist_->calcWrenchList(), refZmp_.z()) : Eigen::Vector3d::Zero();
+    return wrenchDist_ ? calcZmp(ForceColl::calcWrenchList(contactList_, wrenchDist_->resultWrenchRatio_), refZmp_.z())
+                       : Eigen::Vector3d::Zero();
   });
   logger.addLogEntry(config().name + "_ZMP_measured", this, [this]() {
     std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;

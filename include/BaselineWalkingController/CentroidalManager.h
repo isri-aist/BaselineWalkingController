@@ -13,7 +13,6 @@ class Robot;
 namespace ForceColl
 {
 class Contact;
-template<class PatchID>
 class WrenchDistribution;
 } // namespace ForceColl
 
@@ -195,7 +194,7 @@ protected:
   double controlForceZ_ = 0;
 
   //! Wrench distribution
-  std::shared_ptr<ForceColl::WrenchDistribution<Foot>> wrenchDist_;
+  std::shared_ptr<ForceColl::WrenchDistribution> wrenchDist_;
 
   //! Contact list
   std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> contactList_;
