@@ -262,7 +262,7 @@ OverwriteConfigList:
           wrench:
             linear: [0, 0, 0]
             angular: [0, 0, 0]
-
+robots:
   jvrc1:
     PostureTask:
       jointWeights:
