@@ -263,6 +263,11 @@ OverwriteConfigList:
             linear: [0, 0, 0]
             angular: [0, 0, 0]
 
+    CentroidalManager:
+      useActualStateForMpc: false
+      enableZmpFeedback: false
+      useActualComForWrenchDist: false
+
 robots:
   jvrc1:
     PostureTask:
