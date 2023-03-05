@@ -121,7 +121,7 @@ void FootstepPlannerState::start(mc_control::fsm::Controller & _ctl)
             return goalFootMidpose;
           },
           [this](const std::array<double, 4> & goalFootMidpose) {
-            return std::copy(goalFootMidpose.begin(), goalFootMidpose.begin() + 3, goalFootMidpose_.begin());
+            std::copy(goalFootMidpose.begin(), goalFootMidpose.begin() + 3, goalFootMidpose_.begin());
           }),
       mc_rtc::gui::Polygon("Obstacles", {mc_rtc::gui::Color::Gray, 0.02},
                            [obstPolygonList]() { return obstPolygonList; }));
