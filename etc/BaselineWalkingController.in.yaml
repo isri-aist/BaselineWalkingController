@@ -16,10 +16,6 @@ StatesFiles:
   - "@STATES_INSTALL_PREFIX@/@PROJECT_NAME@/states/data"
 # If true, state factory will be more verbose
 VerboseStateFactory: false
-# Additional robots to load
-robots:
-  ground:
-    module: env/ground
 # General constraints, always on
 constraints:
   - type: contact
@@ -269,6 +265,11 @@ OverwriteConfigList:
       useActualComForWrenchDist: false
 
 robots:
+  # Environment models
+  ground:
+    module: env/ground
+
+  # Robot-specific configurations
   jvrc1:
     PostureTask:
       jointWeights:
