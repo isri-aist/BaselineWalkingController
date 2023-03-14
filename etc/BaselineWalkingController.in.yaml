@@ -58,9 +58,6 @@ ObserverPipelines:
   observers:
     - type: Encoder
     - type: Attitude
-      config:
-        KalmanFilter:
-          gyr_cov: 1e-6
     - type: KinematicInertial
       config:
         anchorFrame:
