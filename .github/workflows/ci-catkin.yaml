@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-20.04]
         build-type: [RelWithDebInfo, Debug]
         mc-rtc-version: [head, stable]
         footstep-planner: [with-planner]
@@ -48,7 +48,7 @@ jobs:
           if [ "${{ matrix.os }}" == "ubuntu-20.04" ]; then
             echo "ROS_DISTRO=noetic" >> $GITHUB_ENV
             echo "PYTHON_PACKAGE_PREFIX=python3" >> $GITHUB_ENV
-          else
+          else # if [ "${{ matrix.os }}" == "ubuntu-18.04" ]; then
             echo "ROS_DISTRO=melodic" >> $GITHUB_ENV
             echo "PYTHON_PACKAGE_PREFIX=python" >> $GITHUB_ENV
           fi
