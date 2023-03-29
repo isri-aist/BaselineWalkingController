@@ -1,8 +1,7 @@
 # [BaselineWalkingController](https://github.com/isri-aist/BaselineWalkingController)
 Humanoid walking controller with various baseline methods
 
-[![CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci-standalone.yaml/badge.svg)](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci-standalone.yaml)
-[![CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci-catkin.yaml/badge.svg)](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci-catkin.yaml)
+[![CI](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml/badge.svg)](https://github.com/isri-aist/BaselineWalkingController/actions/workflows/ci.yaml)
 [![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](https://isri-aist.github.io/BaselineWalkingController/)
 [![LICENSE](https://img.shields.io/github/license/isri-aist/BaselineWalkingController)](https://github.com/isri-aist/BaselineWalkingController/blob/master/LICENSE)
 [![Docker](https://img.shields.io/badge/Docker%20image-ready-blue)](https://github.com/isri-aist/BaselineWalkingController/pkgs/container/baseline_walking_controller)
