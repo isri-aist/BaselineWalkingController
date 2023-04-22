@@ -16,155 +16,304 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04]
+        catkin-build: [catkin, standalone]
         build-type: [RelWithDebInfo, Debug]
         mc-rtc-version: [head, stable]
-        footstep-planner: [with-planner]
+        compiler: [gcc]
+        mpc-method: [PreviewControlZmp]
+        mpc-framework: [OfflineMpc]
+        motion-type: [WalkingOnPlane]
         exclude:
           - build-type: Debug
             mc-rtc-version: stable
+          # Some packages have not been released onto the stable mirror yet
+          - catkin-build: standalone
+            mc-rtc-version: stable
         include:
+          # compiler
           - os: ubuntu-20.04
+            catkin-build: catkin
             build-type: RelWithDebInfo
             mc-rtc-version: head
-            footstep-planner: without-planner
+            compiler: clang # gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlane
+          # motion-type
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnStairs # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlaneVel # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: standalone # catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnStairs # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: standalone # catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlaneVel # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: standalone # catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
+          # mpc-method, mpc-framework
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: DdpZmp # PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: FootGuidedControl # PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
+            mpc-framework: OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OnlineMpc # OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: DdpZmp # PreviewControlZmp
+            mpc-framework: OnlineMpc # OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: FootGuidedControl # PreviewControlZmp
+            mpc-framework: OnlineMpc # OfflineMpc
+            motion-type: WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
+            mpc-framework: OnlineMpc # OfflineMpc
+            motion-type: WalkingOnPlane
     runs-on: ${{ matrix.os }}
+    env:
+      RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}-${{ matrix.catkin-build }}
     steps:
-      - name: Set ROS version
+      - name: Setup environment variables
         run: |
-          if [ "${{ matrix.os }}" == "ubuntu-20.04" ]; then
-            echo "ROS_DISTRO=noetic" >> $GITHUB_ENV
-            echo "PYTHON_PACKAGE_PREFIX=python3" >> $GITHUB_ENV
-          else # if [ "${{ matrix.os }}" == "ubuntu-18.04" ]; then
-            echo "ROS_DISTRO=melodic" >> $GITHUB_ENV
-            echo "PYTHON_PACKAGE_PREFIX=python" >> $GITHUB_ENV
+          set -e
+          set -x
+          if [ "${{ matrix.os }}" == "ubuntu-20.04" ] && \
+             [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
+             [ "${{ matrix.mc-rtc-version }}" == "head" ] && \
+             [ "${{ matrix.compiler }}" == "gcc" ]
+          then
+            echo "RUN_SIMULATION_STEPS=true" >> $GITHUB_ENV
+          else
+            echo "RUN_SIMULATION_STEPS=false" >> $GITHUB_ENV
           fi
-      - name: Install ROS
-        run: |
-          set -e
-          set -x
-          sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-          wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
-          sudo apt-get update -y -qq
-          sudo apt-get install -y -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep ${PYTHON_PACKAGE_PREFIX}-wstool doxygen graphviz
-      - name: Install mc_rtc
-        run: |
-          set -e
-          set -x
-          curl -1sLf 'https://dl.cloudsmith.io/public/mc-rtc/${{ matrix.mc-rtc-version }}/setup.deb.sh' | sudo -E bash
-          sudo apt install -y -qq libmc-rtc-dev mc-rtc-utils ros-${ROS_DISTRO}-mc-rtc-plugin libeigen-qld-dev
+          if [ "${{ matrix.os }}" == "ubuntu-20.04" ] && \
+             [ "${{ matrix.catkin-build }}" == "catkin" ] && \
+             [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
+             [ "${{ matrix.mc-rtc-version }}" == "head" ] && \
+             [ "${{ matrix.compiler }}" == "gcc" ] && \
+             [ "${{ matrix.motion-type }}" == "MotionSampleField" ] && \
+             [ "${{ matrix.mpc-method }}" == "PreviewControlZmp" ] && \
+             [ "${{ matrix.mpc-framework }}" == "OfflineMpc" ] && \
+             [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ] && \
+             [ "${{ github.repository_owner }}" == "isri-aist" ] && \
+             [ "${{ github.ref }}" == "refs/heads/master" ]
+          then
+            echo "UPLOAD_DOCUMENTATION=true" >> $GITHUB_ENV
+          else
+            echo "UPLOAD_DOCUMENTATION=false" >> $GITHUB_ENV
+          fi
+          if [ "${{ matrix.catkin-build }}" == "catkin" ]
+          then
+            echo "CI_DIR=${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}/.github/workflows" >> $GITHUB_ENV
+          else
+            echo "CI_DIR=${GITHUB_WORKSPACE}/.github/workflows" >> $GITHUB_ENV
+          fi
+      - name: Install dependencies
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          ubuntu: |
+            apt-mirrors:
+              mc-rtc:
+                cloudsmith: mc-rtc/${{ matrix.mc-rtc-version }}
+            apt: libmc-rtc-dev mc-rtc-utils mc-state-observation doxygen graphviz jvrc-choreonoid choreonoid libcnoid-dev
+          ros: |
+            apt: ros-base mc-rtc-plugin eigen-conversions
+      - name: Install standalone dependencies
+        if: matrix.catkin-build == 'standalone'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          compiler: ${{ matrix.compiler }}
+          build-type: ${{ matrix.build-type }}
+          ubuntu: |
+            apt: libforcecontrolcollection-dev libtrajectorycollection-dev libcentroidalcontrolcollection-dev
+      - name: Install BaselineFootstepPlanner for standalone build
+        if: matrix.catkin-build == 'standalone' && matrix.motion-type == 'WalkingWithFootstepPlanner'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          compiler: ${{ matrix.compiler }}
+          build-type: ${{ matrix.build-type }}
+          ros: |
+            apt: sbpl
+          github: |
+            - path: isri-aist/BaselineFootstepPlanner
+              ref: master
       - name: Checkout repository code
+        if: matrix.catkin-build == 'standalone'
         uses: actions/checkout@v3
         with:
           submodules: recursive
-          path: catkin_ws/src/isri-aist/BaselineWalkingController
-      - name: Download dependent repository codes
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          wstool init src
-          wstool merge -t src src/isri-aist/BaselineWalkingController/depends.rosinstall -y
-          wstool update -t src
-      - name: Rosdep install
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          set +x
-          . /opt/ros/${ROS_DISTRO}/setup.bash
-          set -x
-          sudo rosdep init
-          rosdep update
-          rosdep install -y -r --from-paths src --ignore-src
-      - name: Remove BaselineFootstepPlanner
-        if: matrix.footstep-planner == 'without-planner'
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          wstool remove -t src isri-aist/BaselineFootstepPlanner
-          rm -rf isri-aist/BaselineFootstepPlanner
+      - name: Standalone build
+        if: matrix.catkin-build == 'standalone'
+        uses: jrl-umi3218/github-actions/build-cmake-project@master
+        with:
+          compiler: ${{ matrix.compiler }}
+          build-type: ${{ matrix.build-type }}
       - name: Catkin build
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          set +x
-          . /opt/ros/${ROS_DISTRO}/setup.bash
-          set -x
-          if [ "${{ matrix.footstep-planner }}" == "with-planner" ]; then
-            catkin build baseline_footstep_planner --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-            set +x
-            . devel/setup.bash
-            set -x
-          fi
-          catkin build baseline_walking_controller --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DENABLE_QLD=ON -DINSTALL_DOCUMENTATION=ON
-      - name: Run tests
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          set +x
-          . devel/setup.bash
-          set -x
-          catkin build baseline_walking_controller --no-deps --limit-status-rate 0.1 --catkin-make-args run_tests
-          catkin_test_results --verbose --all build
+        if: matrix.catkin-build == 'catkin'
+        uses: jrl-umi3218/github-actions/build-catkin-project@master
+        with:
+          build-type: ${{ matrix.build-type }}
+          cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
       - name: Run simulation
-        # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'with-planner'
+        if: env.RUN_SIMULATION_STEPS == 'true'
         # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
         run: |
           set -e
           set -x
-          sudo apt-get install -y -qq mc-state-observation jvrc-choreonoid xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+          sudo apt-get install -y -qq xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
           set +x
-          . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
+          if [ "${{ matrix.catkin-build }}" == "catkin" ]
+          then
+            . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
+          fi
           set -x
           export DISPLAY=":1"
           Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
           sleep 10s
           fluxbox 2> /dev/null &
           mkdir -p ${HOME}/.config/mc_rtc/controllers
-          cp ${GITHUB_WORKSPACE}/catkin_ws/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          cp ${GITHUB_WORKSPACE}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/config/WalkingOnPlane.yaml ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
+          if [ "${{ matrix.catkin-build }}" == "catkin" ]
+          then
+            cp ${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+          else
+            echo "Enabled: BaselineWalkingController" > ${HOME}/.config/mc_rtc/mc_rtc.yaml
+          fi
+          python3 ${{ env.CI_DIR }}/scripts/mergeConfigs.py ${{ env.CI_DIR }}/config/${{ matrix.mpc-method }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.mpc-framework }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
           ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
-          choreonoid --start-simulation sim_mc.cnoid &
+          roscore > /dev/null 2>&1 < /dev/null &
+          ROSCORE_PID=$!
+          sleep 1s
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
+            CNOID_FILE=sim_mc.cnoid
+          else
+            CNOID_FILE=sim_mc_comanoid_staircase.cnoid
+          fi
+          choreonoid ${CNOID_FILE} --test-mode --start-simulation &
           CNOID_PID=$!
-          sleep 50s
+          if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
+            SLEEP_DURATION="70s"
+          else
+            SLEEP_DURATION="50s"
+          fi
+          sleep ${SLEEP_DURATION}
+          kill -2 ${ROSCORE_PID}
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
           sleep 1s
           kill -9 ${CNOID_PID} || true
           sleep 10s
           mkdir -p /tmp/results
-          ffmpeg -nostats -i /tmp/video.avi /tmp/results/video.mp4
-          LOG_PATH=`readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin`
-          tar czf /tmp/results/`basename ${LOG_PATH}`.tar.gz -C `dirname ${LOG_PATH}` `basename ${LOG_PATH}`
+          ffmpeg -nostats -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
+          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+          mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
+          tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
       - name: Upload simulation data
-        # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'with-planner'
+        if: env.RUN_SIMULATION_STEPS == 'true'
         uses: actions/upload-artifact@v3
         with:
-          name: BWC-ci-results
+          name: BWC-ci-results-${{ matrix.catkin-build }}
           path: /tmp/results
       - name: Check simulation results
-        # Only run for one configuration
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'with-planner'
+        if: env.RUN_SIMULATION_STEPS == 'true'
         run: |
           set -e
           set -x
-          EXPECTED_BASE_POS="1.34 -0.41 0.8"
-          python3 ${GITHUB_WORKSPACE}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` --expected-base-pos ${EXPECTED_BASE_POS}
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
+            EXPECTED_BASE_POS="1.34 -0.41 0.8"
+          elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
+            EXPECTED_BASE_POS="1.75 0.0 1.68"
+          elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
+            EXPECTED_BASE_POS="0.74 -0.53 0.8"
+          else # if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
+            EXPECTED_BASE_POS="2.5 -0.25 0.8"
+          fi
+          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+          python3 ${{ env.CI_DIR }}/scripts/checkSimulationResults.py /tmp/${LOG_FILENAME}.bin --expected-base-pos ${EXPECTED_BASE_POS}
       - name: Upload documentation
-        # Only run for one configuration and on master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.mc-rtc-version == 'head' && matrix.footstep-planner == 'with-planner' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        if: env.UPLOAD_DOCUMENTATION == 'true'
         run: |
           set -e
           set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws/src/isri-aist/BaselineWalkingController
+          cd ${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}
           git config --global user.name "Masaki Murooka"
           git config --global user.email "m-murooka@aist.go.jp"
           git remote set-url origin "https://mmurooka:${{ secrets.CI_TOKEN }}@github.com/isri-aist/BaselineWalkingController"

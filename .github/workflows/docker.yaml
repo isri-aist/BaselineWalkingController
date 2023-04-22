@@ -44,22 +44,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mpc-method: [PreviewControlZmp, DdpZmp, FootGuidedControl, IntrinsicallyStableMpc]
-        mpc-framework: [OnlineMpc, OfflineMpc]
-        motion-type: [WalkingOnPlane, WalkingOnStairs]
-        include:
-          - mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
-            motion-type: WalkingOnPlaneVel
-          - mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
-            motion-type: WalkingWithFootstepPlanner
+        mpc-method: [PreviewControlZmp]
+        mpc-framework: [OfflineMpc]
+        motion-type: [WalkingOnPlane, WalkingOnStairs, WalkingOnPlaneVel, WalkingWithFootstepPlanner]
     runs-on: ubuntu-20.04
     container:
       image: ghcr.io/${{ github.repository_owner }}/baseline_walking_controller_ci:${{ github.sha }}
     env:
       HOME: /root
-      RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}
+      RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}-docker
     steps:
       - name: Check repository
         shell: bash
@@ -93,7 +86,7 @@ jobs:
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid
           fi
-          choreonoid --start-simulation ${CNOID_FILE} &
+          choreonoid ${CNOID_FILE} --test-mode --start-simulation &
           CNOID_PID=$!
           if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
             SLEEP_DURATION="70s"
@@ -121,13 +114,6 @@ jobs:
         run: |
           set -e
           set -x
-          # Workaround to achieve allow-failure
-          if [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ] && [ "${{ matrix.mpc-framework }}" == "OnlineMpc" ]; then
-            ALLOW_FAILURE=true
-          else
-            ALLOW_FAILURE=false
-          fi
-          echo "- ALLOW_FAILURE: ${ALLOW_FAILURE}"
           if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ]; then
             EXPECTED_BASE_POS="1.34 -0.41 0.8"
           elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
@@ -137,4 +123,6 @@ jobs:
           else # if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
             EXPECTED_BASE_POS="2.5 -0.25 0.8"
           fi
-          python3 ${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows/scripts/checkSimulationResults.py /tmp/BWC-log-${RESULTS_POSTFIX}.bin --expected-base-pos ${EXPECTED_BASE_POS} || ${ALLOW_FAILURE}
+          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+          CI_DIR=${HOME}/catkin_ws/src/isri-aist/BaselineWalkingController/.github/workflows
+          python3 ${CI_DIR}/scripts/checkSimulationResults.py /tmp/${LOG_FILENAME}.bin --expected-base-pos ${EXPECTED_BASE_POS}
