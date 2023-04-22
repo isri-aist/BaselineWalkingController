@@ -45,7 +45,7 @@ jobs:
       fail-fast: false
       matrix:
         mpc-method: [PreviewControlZmp]
-        mpc-framework: [OfflineMpc]
+        mpc-framework: [OpenLoopMpc]
         motion-type: [WalkingOnPlane, WalkingOnStairs, WalkingOnPlaneVel, WalkingWithFootstepPlanner]
     runs-on: ubuntu-20.04
     container:

@@ -21,7 +21,7 @@ jobs:
         mc-rtc-version: [head, stable]
         compiler: [gcc]
         mpc-method: [PreviewControlZmp]
-        mpc-framework: [OfflineMpc]
+        mpc-framework: [OpenLoopMpc]
         motion-type: [WalkingOnPlane]
         exclude:
           - build-type: Debug
@@ -37,7 +37,7 @@ jobs:
             mc-rtc-version: head
             compiler: clang # gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           # motion-type
           - os: ubuntu-20.04
@@ -46,7 +46,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnStairs # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -54,7 +54,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -62,7 +62,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
@@ -70,7 +70,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnStairs # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
@@ -78,7 +78,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
@@ -86,7 +86,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
           # mpc-method, mpc-framework
           - os: ubuntu-20.04
@@ -95,7 +95,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: DdpZmp # PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -103,7 +103,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: FootGuidedControl # PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -111,7 +111,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
-            mpc-framework: OfflineMpc
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -119,7 +119,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
-            mpc-framework: OnlineMpc # OfflineMpc
+            mpc-framework: ClosedLoopMpc # OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -127,7 +127,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: DdpZmp # PreviewControlZmp
-            mpc-framework: OnlineMpc # OfflineMpc
+            mpc-framework: ClosedLoopMpc # OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -135,7 +135,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: FootGuidedControl # PreviewControlZmp
-            mpc-framework: OnlineMpc # OfflineMpc
+            mpc-framework: ClosedLoopMpc # OpenLoopMpc
             motion-type: WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -143,7 +143,7 @@ jobs:
             mc-rtc-version: head
             compiler: gcc
             mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
-            mpc-framework: OnlineMpc # OfflineMpc
+            mpc-framework: ClosedLoopMpc # OpenLoopMpc
             motion-type: WalkingOnPlane
     runs-on: ${{ matrix.os }}
     env:
@@ -169,7 +169,7 @@ jobs:
              [ "${{ matrix.compiler }}" == "gcc" ] && \
              [ "${{ matrix.motion-type }}" == "MotionSampleField" ] && \
              [ "${{ matrix.mpc-method }}" == "PreviewControlZmp" ] && \
-             [ "${{ matrix.mpc-framework }}" == "OfflineMpc" ] && \
+             [ "${{ matrix.mpc-framework }}" == "OpenLoopMpc" ] && \
              [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ] && \
              [ "${{ github.repository_owner }}" == "isri-aist" ] && \
              [ "${{ github.ref }}" == "refs/heads/master" ]
@@ -230,6 +230,7 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
+          catkin-packages: "${{ env.BASELINE_FOOTSTEP_PLANNER }} baseline_walking_controller"
       - name: Run simulation
         if: env.RUN_SIMULATION_STEPS == 'true'
         # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
