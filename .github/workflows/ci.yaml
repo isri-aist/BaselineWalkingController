@@ -32,7 +32,7 @@ jobs:
         include:
           # compiler
           - os: ubuntu-20.04
-            catkin-build: catkin
+            catkin-build: standalone # catkin
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: clang # gcc
@@ -213,7 +213,7 @@ jobs:
           github: |
             - path: isri-aist/BaselineFootstepPlanner
               ref: master
-      - name: Checkout repository code
+      - name: Checkout repository code for standalone build
         if: matrix.catkin-build == 'standalone'
         uses: actions/checkout@v3
         with:
@@ -230,7 +230,17 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
-          catkin-packages: "${{ env.BASELINE_FOOTSTEP_PLANNER }} baseline_walking_controller"
+      - name: Catkin build again to ensure footstep planner found
+        if: matrix.catkin-build == 'catkin' && matrix.motion-type == 'WalkingWithFootstepPlanner'
+        run: |
+          set -e
+          set -x
+          cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
+          . devel/setup.bash
+          set -x
+          catkin build baseline_walking_controller --no-deps --force-cmake --limit-status-rate 0.1 --cmake-args -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} --catkin-make-args all run_tests
+          catkin_test_results --verbose --all build
       - name: Run simulation
         if: env.RUN_SIMULATION_STEPS == 'true'
         # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
