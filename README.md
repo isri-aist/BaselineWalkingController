@@ -72,6 +72,7 @@ This controller is a simple combination of the following existing typical elemen
 
 For more information on the technical details, please see the following papers:
 - Papers listed in [CentroidalControlCollection](https://github.com/isri-aist/CentroidalControlCollection)
+- Papers listed in [ForceControlCollection](https://github.com/isri-aist/ForceControlCollection)
 - S Kajita, et al. Biped walking stabilization based on linear inverted pendulum tracking. IROS, 2010.
 - S Caron, et al. Stair climbing stabilization of the HRP-4 humanoid robot using whole-body admittance control. ICRA, 2019.
 
