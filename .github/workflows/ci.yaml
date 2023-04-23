@@ -167,7 +167,6 @@ jobs:
              [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
              [ "${{ matrix.mc-rtc-version }}" == "head" ] && \
              [ "${{ matrix.compiler }}" == "gcc" ] && \
-             [ "${{ matrix.motion-type }}" == "MotionSampleField" ] && \
              [ "${{ matrix.mpc-method }}" == "PreviewControlZmp" ] && \
              [ "${{ matrix.mpc-framework }}" == "OpenLoopMpc" ] && \
              [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ] && \
