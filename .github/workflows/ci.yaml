@@ -183,6 +183,12 @@ jobs:
           else
             echo "CI_DIR=${GITHUB_WORKSPACE}/.github/workflows" >> $GITHUB_ENV
           fi
+          if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]
+          then
+            echo "BASELINE_FOOTSTEP_PLANNER=baseline_footstep_planner" >> $GITHUB_ENV
+          else
+            echo "BASELINE_FOOTSTEP_PLANNER=" >> $GITHUB_ENV
+          fi
       - name: Install dependencies
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
@@ -229,6 +235,8 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
+          build-packages: "baseline_walking_controller ${{ env.BASELINE_FOOTSTEP_PLANNER }}"
+          test-packages: baseline_walking_controller
       - name: Catkin build again to ensure footstep planner found
         if: matrix.catkin-build == 'catkin' && matrix.motion-type == 'WalkingWithFootstepPlanner'
         run: |
