@@ -235,6 +235,7 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
+          catkin-test-args: --no-deps
           build-packages: "baseline_walking_controller ${{ env.BASELINE_FOOTSTEP_PLANNER }}"
           test-packages: baseline_walking_controller
       - name: Catkin build again to ensure footstep planner found
