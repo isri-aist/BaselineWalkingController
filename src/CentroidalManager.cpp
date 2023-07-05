@@ -1,8 +1,10 @@
 #include <RBDyn/Momentum.h>
 
+#include <mc_rtc/gui/Button.h>
 #include <mc_rtc/gui/Checkbox.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
+#include <mc_rtc/gui/plot.h>
 #include <mc_tasks/CoMTask.h>
 #include <mc_tasks/FirstOrderImpedanceTask.h>
 
@@ -136,6 +138,31 @@ void CentroidalManager::update()
     }
   }
 
+  // Calculate ZMP for log
+  {
+    std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
+    for(const auto & foot : ctl().footManager_->getCurrentContactFeet())
+    {
+      const auto & surfaceName = ctl().footManager_->surfaceName(foot);
+      const auto & sensorName = ctl().robot().indirectSurfaceForceSensor(surfaceName).name();
+      const auto & sensor = ctl().robot().forceSensor(sensorName);
+      const auto & sensorWrench = sensor.worldWrenchWithoutGravity(ctl().robot());
+      sensorWrenchList.emplace(foot, sensorWrench);
+    }
+    measuredZMP_ = calcZmp(sensorWrenchList, refZmp_.z());
+
+    supportRegion_[0].setConstant(std::numeric_limits<double>::max());
+    supportRegion_[1].setConstant(std::numeric_limits<double>::lowest());
+    for(const auto & contactKV : contactList_)
+    {
+      for(const auto & vertexWithRidge : contactKV.second->vertexWithRidgeList_)
+      {
+        supportRegion_[0] = supportRegion_[0].cwiseMin(vertexWithRidge.vertex.head<2>());
+        supportRegion_[1] = supportRegion_[1].cwiseMax(vertexWithRidge.vertex.head<2>());
+      }
+    }
+  }
+
   // Update force visualization
   {
     ctl().gui()->removeCategory({ctl().name(), config().name, "ForceMarker"});
@@ -184,6 +211,65 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::ArrayInput(
           "actualComOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config().actualComOffset; },
           [this](const Eigen::Vector3d & v) { config().actualComOffset = v; }));
+
+  gui.addElement(
+      {ctl().name(), config().name, "Plot"}, mc_rtc::gui::ElementsStacking::Horizontal,
+      mc_rtc::gui::Button(
+          "Plot CoM-ZMP-X",
+          [this, &gui]() {
+            using namespace mc_rtc::gui;
+            gui.addPlot(
+                "CoM-ZMP-X", plot::X("t", [this]() { return ctl().t(); }),
+                plot::Y(
+                    "CoM_planned", [this]() { return ctl().comTask_->com().x(); }, Color::Blue, plot::Style::Dotted),
+                plot::Y(
+                    "CoM_controlRobot", [this]() { return ctl().robot().com().x(); }, Color::Green,
+                    plot::Style::Dotted),
+                plot::Y(
+                    "CoM_realRobot", [this]() { return actualCom().x(); }, Color::Red, plot::Style::Dotted),
+                plot::Y(
+                    "ZMP_ref", [this]() { return refZmp_.x(); }, Color::Blue),
+                plot::Y(
+                    "ZMP_planned", [this]() { return plannedZmp_.x(); }, Color::Green),
+                plot::Y(
+                    "ZMP_control", [this]() { return controlZmp_.x(); }, Color::Magenta),
+                plot::Y(
+                    "ZMP_measured", [this]() { return measuredZMP_.x(); }, Color::Red),
+                plot::Y(
+                    "SupportRegion_min", [this]() { return supportRegion_[0].x(); }, Color::Black),
+                plot::Y(
+                    "SupportRegion_max", [this]() { return supportRegion_[1].x(); }, Color::Black));
+          }),
+      mc_rtc::gui::Button("Stop CoM-ZMP-X", [&gui]() { gui.removePlot("CoM-ZMP-X"); }));
+  gui.addElement(
+      {ctl().name(), config().name, "Plot"}, mc_rtc::gui::ElementsStacking::Horizontal,
+      mc_rtc::gui::Button(
+          "Plot CoM-ZMP-Y",
+          [this, &gui]() {
+            using namespace mc_rtc::gui;
+            gui.addPlot(
+                "CoM-ZMP-Y", plot::X("t", [this]() { return ctl().t(); }),
+                plot::Y(
+                    "CoM_planned", [this]() { return ctl().comTask_->com().y(); }, Color::Blue, plot::Style::Dotted),
+                plot::Y(
+                    "CoM_controlRobot", [this]() { return ctl().robot().com().y(); }, Color::Green,
+                    plot::Style::Dotted),
+                plot::Y(
+                    "CoM_realRobot", [this]() { return actualCom().y(); }, Color::Red, plot::Style::Dotted),
+                plot::Y(
+                    "ZMP_ref", [this]() { return refZmp_.y(); }, Color::Blue),
+                plot::Y(
+                    "ZMP_planned", [this]() { return plannedZmp_.y(); }, Color::Green),
+                plot::Y(
+                    "ZMP_control", [this]() { return controlZmp_.y(); }, Color::Magenta),
+                plot::Y(
+                    "ZMP_measured", [this]() { return measuredZMP_.y(); }, Color::Red),
+                plot::Y(
+                    "SupportRegion_min", [this]() { return supportRegion_[0].y(); }, Color::Black),
+                plot::Y(
+                    "SupportRegion_max", [this]() { return supportRegion_[1].y(); }, Color::Black));
+          }),
+      mc_rtc::gui::Button("Stop CoM-ZMP-Y", [&gui]() { gui.removePlot("CoM-ZMP-Y"); }));
 }
 
 void CentroidalManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -226,40 +312,9 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
     return wrenchDist_ ? calcZmp(ForceColl::calcWrenchList(contactList_, wrenchDist_->resultWrenchRatio_), refZmp_.z())
                        : Eigen::Vector3d::Zero();
   });
-  logger.addLogEntry(config().name + "_ZMP_measured", this, [this]() {
-    std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
-    for(const auto & foot : ctl().footManager_->getCurrentContactFeet())
-    {
-      const auto & surfaceName = ctl().footManager_->surfaceName(foot);
-      const auto & sensorName = ctl().robot().indirectSurfaceForceSensor(surfaceName).name();
-      const auto & sensor = ctl().robot().forceSensor(sensorName);
-      const auto & sensorWrench = sensor.worldWrenchWithoutGravity(ctl().robot());
-      sensorWrenchList.emplace(foot, sensorWrench);
-    }
-    return calcZmp(sensorWrenchList, refZmp_.z());
-  });
-  logger.addLogEntry(config().name + "_ZMP_SupportRegion_min", this, [this]() {
-    Eigen::Vector2d minPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::max());
-    for(const auto & contactKV : contactList_)
-    {
-      for(const auto & vertexWithRidge : contactKV.second->vertexWithRidgeList_)
-      {
-        minPos = minPos.cwiseMin(vertexWithRidge.vertex.head<2>());
-      }
-    }
-    return minPos;
-  });
-  logger.addLogEntry(config().name + "_ZMP_SupportRegion_max", this, [this]() {
-    Eigen::Vector2d maxPos = Eigen::Vector2d::Constant(std::numeric_limits<double>::lowest());
-    for(const auto & contactKV : contactList_)
-    {
-      for(const auto & vertexWithRidge : contactKV.second->vertexWithRidgeList_)
-      {
-        maxPos = maxPos.cwiseMax(vertexWithRidge.vertex.head<2>());
-      }
-    }
-    return maxPos;
-  });
+  MC_RTC_LOG_HELPER(config().name + "_ZMP_measured", measuredZMP_);
+  logger.addLogEntry(config().name + "_ZMP_SupportRegion_min", this, [this]() { return supportRegion_[0]; });
+  logger.addLogEntry(config().name + "_ZMP_SupportRegion_max", this, [this]() { return supportRegion_[1]; });
 
   logger.addLogEntry(config().name + "_CentroidalMomentum_controlRobot", this, [this]() {
     return rbd::computeCentroidalMomentum(ctl().robot().mb(), ctl().robot().mbc(), ctl().robot().com());

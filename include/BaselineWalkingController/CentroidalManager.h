@@ -199,6 +199,12 @@ protected:
   //! Force Z with feedback control
   double controlForceZ_ = 0;
 
+  //! Measured ZMP
+  Eigen::Vector3d measuredZMP_ = Eigen::Vector3d::Zero();
+
+  //! Support region (min, max)
+  std::array<Eigen::Vector2d, 2> supportRegion_ = {Eigen::Vector2d::Zero(), Eigen::Vector2d::Zero()};
+
   //! Wrench distribution
   std::shared_ptr<ForceColl::WrenchDistribution> wrenchDist_;
 
