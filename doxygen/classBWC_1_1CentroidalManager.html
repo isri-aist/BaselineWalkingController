@@ -169,6 +169,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a7de19c431164bdebed4143d264f38ab9"><td class="memItemLeft" align="right" valign="top">sva::PTransformd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a7de19c431164bdebed4143d264f38ab9">calcAnchorFrame</a> (const mc_rbdyn::Robot &amp;robot) const</td></tr>
 <tr class="memdesc:a7de19c431164bdebed4143d264f38ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate anchor frame.  <a href="classBWC_1_1CentroidalManager.html#a7de19c431164bdebed4143d264f38ab9">More...</a><br /></td></tr>
 <tr class="separator:a7de19c431164bdebed4143d264f38ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d5c075fb659255ca0bfc9bd0e6a0a3"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a46d5c075fb659255ca0bfc9bd0e6a0a3">actualCom</a> () const</td></tr>
+<tr class="memdesc:a46d5c075fb659255ca0bfc9bd0e6a0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get actual CoM.  <a href="classBWC_1_1CentroidalManager.html#a46d5c075fb659255ca0bfc9bd0e6a0a3">More...</a><br /></td></tr>
+<tr class="separator:a46d5c075fb659255ca0bfc9bd0e6a0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9327e8982d8aa10645c90a1f7f7698c9"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a9327e8982d8aa10645c90a1f7f7698c9">calcZmp</a> (const std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::ForceVecd &gt; &amp;wrenchList, double zmpPlaneHeight=0, const Eigen::Vector3d &amp;zmpPlaneNormal=Eigen::Vector3d::UnitZ()) const</td></tr>
 <tr class="memdesc:a9327e8982d8aa10645c90a1f7f7698c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate ZMP from wrench list.  <a href="classBWC_1_1CentroidalManager.html#a9327e8982d8aa10645c90a1f7f7698c9">More...</a><br /></td></tr>
 <tr class="separator:a9327e8982d8aa10645c90a1f7f7698c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -256,6 +259,33 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a46d5c075fb659255ca0bfc9bd0e6a0a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46d5c075fb659255ca0bfc9bd0e6a0a3">&#9670;&nbsp;</a></span>actualCom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::Vector3d BWC::CentroidalManager::actualCom </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get actual CoM. </p>
+
+</div>
+</div>
 <a id="a8b402e35268d453d57ea38475e946dd9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b402e35268d453d57ea38475e946dd9">&#9670;&nbsp;</a></span>addToGUI()</h2>
 
@@ -511,7 +541,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00131">131</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00134">134</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -540,7 +570,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Const accessor to the controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00125">125</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00128">128</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -787,7 +817,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Contact list. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00200">200</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00206">206</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -813,7 +843,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Force Z with feedback control. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00194">194</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00200">200</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -839,7 +869,7 @@ Protected Attributes</h2></td></tr>
 
 <p>ZMP with feedback control. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00191">191</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00197">197</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -865,7 +895,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Pointer to controller. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00170">170</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00176">176</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -891,7 +921,7 @@ Protected Attributes</h2></td></tr>
 
 <p>CoM used as the initial state of MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00176">176</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00182">182</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -917,7 +947,7 @@ Protected Attributes</h2></td></tr>
 
 <p>CoM velocity used as the initial state of MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00179">179</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00185">185</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -943,7 +973,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Force Z planned by MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00188">188</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00194">194</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -969,7 +999,7 @@ Protected Attributes</h2></td></tr>
 
 <p>ZMP planned by MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00185">185</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00191">191</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -995,7 +1025,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Reference ZMP. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00182">182</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00188">188</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -1021,7 +1051,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Robot mass [kg]. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00173">173</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00179">179</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1077,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Wrench distribution. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00197">197</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00203">203</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
