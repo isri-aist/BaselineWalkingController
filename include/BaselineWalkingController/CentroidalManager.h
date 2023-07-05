@@ -70,6 +70,9 @@ public:
     //! Whether to use actual CoM for wrench distribution
     bool useActualComForWrenchDist = true;
 
+    //! Actual CoM offset
+    Eigen::Vector3d actualComOffset = Eigen::Vector3d::Zero();
+
     //! Configuration for wrench distribution
     mc_rtc::Configuration wrenchDistConfig;
 
@@ -149,6 +152,9 @@ protected:
       \param robot robot
    */
   sva::PTransformd calcAnchorFrame(const mc_rbdyn::Robot & robot) const;
+
+  /** \brief Get actual CoM. */
+  Eigen::Vector3d actualCom() const;
 
   /** \brief Calculate ZMP from wrench list.
       \param wrenchList wrench list

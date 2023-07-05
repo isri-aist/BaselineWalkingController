@@ -192,6 +192,7 @@ CentroidalManager:
   refComZ: 0.825 # [m]
   useTargetPoseForControlRobotAnchorFrame: true
   useActualComForWrenchDist: false
+  actualComOffset: [0.0, 0.0, 0.0]
   wrenchDistConfig:
     wrenchWeight:
       linear: [1.0, 1.0, 1.0]

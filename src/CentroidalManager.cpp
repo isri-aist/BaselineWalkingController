@@ -29,6 +29,7 @@ void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcC
   mcRtcConfig("refComZ", refComZ);
   mcRtcConfig("useTargetPoseForControlRobotAnchorFrame", useTargetPoseForControlRobotAnchorFrame);
   mcRtcConfig("useActualComForWrenchDist", useActualComForWrenchDist);
+  mcRtcConfig("actualComOffset", actualComOffset);
   mcRtcConfig("wrenchDistConfig", wrenchDistConfig);
 }
 
@@ -48,7 +49,7 @@ void CentroidalManager::update()
   // Set MPC state
   if(config().useActualStateForMpc)
   {
-    mpcCom_ = ctl().realRobot().com();
+    mpcCom_ = actualCom();
     mpcComVel_ = ctl().realRobot().comVelocity();
   }
   else
@@ -77,7 +78,7 @@ void CentroidalManager::update()
     {
       double omega = std::sqrt(plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z())));
       Eigen::Vector3d plannedDcm = ctl().comTask_->com() + ctl().comTask_->refVel() / omega;
-      Eigen::Vector3d actualDcm = ctl().realRobot().com() + ctl().realRobot().comVelocity() / omega;
+      Eigen::Vector3d actualDcm = actualCom() + ctl().realRobot().comVelocity() / omega;
       controlZmp_.head<2>() += config().dcmGainP * (actualDcm - plannedDcm).head<2>();
     }
 
@@ -85,7 +86,7 @@ void CentroidalManager::update()
     if(config().enableComZFeedback)
     {
       double plannedComZ = ctl().comTask_->com().z();
-      double actualComZ = ctl().realRobot().com().z();
+      double actualComZ = actualCom().z();
       double plannedComVelZ = ctl().comTask_->refVel().z();
       double actualComVelZ = ctl().realRobot().comVelocity().z();
       controlForceZ_ -=
@@ -96,8 +97,7 @@ void CentroidalManager::update()
     contactList_ = ctl().footManager_->calcCurrentContactList();
     wrenchDist_ = std::make_shared<ForceColl::WrenchDistribution>(ForceColl::getContactVecFromMap(contactList_),
                                                                   config().wrenchDistConfig);
-    Eigen::Vector3d comForWrenchDist =
-        (config().useActualComForWrenchDist ? ctl().realRobot().com() : ctl().comTask_->com());
+    Eigen::Vector3d comForWrenchDist = (config().useActualComForWrenchDist ? actualCom() : ctl().comTask_->com());
     sva::ForceVecd controlWrench;
     controlWrench.force() << controlForceZ_ / (comForWrenchDist.z() - refZmp_.z())
                                  * (comForWrenchDist.head<2>() - controlZmp_.head<2>()),
@@ -180,7 +180,10 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           }),
       mc_rtc::gui::Checkbox(
           "useActualComForWrenchDist", [this]() { return config().useActualComForWrenchDist; },
-          [this]() { config().useActualComForWrenchDist = !config().useActualComForWrenchDist; }));
+          [this]() { config().useActualComForWrenchDist = !config().useActualComForWrenchDist; }),
+      mc_rtc::gui::ArrayInput(
+          "actualComOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config().actualComOffset; },
+          [this](const Eigen::Vector3d & v) { config().actualComOffset = v; }));
 }
 
 void CentroidalManager::removeFromGUI(mc_rtc::gui::StateBuilder & gui)
@@ -206,11 +209,12 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
                      [this]() { return config().useTargetPoseForControlRobotAnchorFrame; });
   logger.addLogEntry(config().name + "_Config_useActualComForWrenchDist", this,
                      [this]() { return config().useActualComForWrenchDist; });
+  logger.addLogEntry(config().name + "_Config_actualComOffset", this, [this]() { return config().actualComOffset; });
 
   MC_RTC_LOG_HELPER(config().name + "_CoM_MPC", mpcCom_);
   logger.addLogEntry(config().name + "_CoM_planned", this, [this]() { return ctl().comTask_->com(); });
   logger.addLogEntry(config().name + "_CoM_controlRobot", this, [this]() { return ctl().robot().com(); });
-  logger.addLogEntry(config().name + "_CoM_realRobot", this, [this]() { return ctl().realRobot().com(); });
+  logger.addLogEntry(config().name + "_CoM_realRobot", this, [this]() { return actualCom(); });
 
   MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
   MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
@@ -292,6 +296,11 @@ sva::PTransformd CentroidalManager::calcAnchorFrame(const mc_rbdyn::Robot & robo
     return sva::interpolate(robot.surfacePose(ctl().footManager_->surfaceName(Foot::Right)),
                             robot.surfacePose(ctl().footManager_->surfaceName(Foot::Left)), leftFootSupportRatio);
   }
+}
+
+Eigen::Vector3d CentroidalManager::actualCom() const
+{
+  return ctl().realRobot().com() + config().actualComOffset;
 }
 
 Eigen::Vector3d CentroidalManager::calcZmp(const std::unordered_map<Foot, sva::ForceVecd> & wrenchList,
