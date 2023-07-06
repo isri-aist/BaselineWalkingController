@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['baselinewalkingcontroller_274',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC']]]
+  ['baselinewalkingcontroller_276',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC']]]
 ];

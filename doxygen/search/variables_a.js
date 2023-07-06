@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keepposefortouchdownfoot_474',['keepPoseForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a4584f6734197886dacce188dc9aaebca',1,'BWC::FootManager::Configuration']]]
+  ['keepposefortouchdownfoot_476',['keepPoseForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a4584f6734197886dacce188dc9aaebca',1,'BWC::FootManager::Configuration']]]
 ];
