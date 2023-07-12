@@ -17,7 +17,8 @@ using namespace BWC;
 
 BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                                                      double dt,
-                                                     const mc_rtc::Configuration & _config)
+                                                     const mc_rtc::Configuration & _config,
+                                                     bool allowEmptyManager)
 : mc_control::fsm::Controller(rm, dt, _config)
 {
   // Get the robot-specific configuration
@@ -109,8 +110,11 @@ BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm
     }
     else
     {
-      mc_rtc::log::error_and_throw("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.",
-                                   centroidalManagerMethod);
+      if(!allowEmptyManager)
+      {
+        mc_rtc::log::error_and_throw("[BaselineWalkingController] Invalid centroidalManagerMethod: {}.",
+                                     centroidalManagerMethod);
+      }
     }
   }
   else

@@ -24,8 +24,16 @@ class CentroidalManager;
 struct BaselineWalkingController : public mc_control::fsm::Controller
 {
 public:
-  /** \brief Constructor. */
-  BaselineWalkingController(mc_rbdyn::RobotModulePtr rm, double dt, const mc_rtc::Configuration & _config);
+  /** \brief Constructor.
+      \param rm robot module
+      \param dt control timestep
+      \param _config controller configuration
+      \param allowEmptyManager whether to allow the managers to be empty (assuming initialized in the parent class)
+   */
+  BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
+                            double dt,
+                            const mc_rtc::Configuration & _config,
+                            bool allowEmptyManager = false);
 
   /** \brief Reset a controller.
 
