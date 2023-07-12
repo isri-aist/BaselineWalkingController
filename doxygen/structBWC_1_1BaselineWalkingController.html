@@ -107,9 +107,9 @@ Collaboration diagram for BWC::BaselineWalkingController:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad655bcfb4621ad3b6fd0f701191eccff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff">BaselineWalkingController</a> (mc_rbdyn::RobotModulePtr rm, double <a class="el" href="structBWC_1_1BaselineWalkingController.html#a02dcf69e2f1e45dc05f86510a244bb5c">dt</a>, const mc_rtc::Configuration &amp;_config)</td></tr>
-<tr class="memdesc:ad655bcfb4621ad3b6fd0f701191eccff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff">More...</a><br /></td></tr>
-<tr class="separator:ad655bcfb4621ad3b6fd0f701191eccff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45da300dbd61f942b5d022b10bc9d6b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1BaselineWalkingController.html#a45da300dbd61f942b5d022b10bc9d6b2">BaselineWalkingController</a> (mc_rbdyn::RobotModulePtr rm, double <a class="el" href="structBWC_1_1BaselineWalkingController.html#a02dcf69e2f1e45dc05f86510a244bb5c">dt</a>, const mc_rtc::Configuration &amp;_config, bool allowEmptyManager=false)</td></tr>
+<tr class="memdesc:a45da300dbd61f942b5d022b10bc9d6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="structBWC_1_1BaselineWalkingController.html#a45da300dbd61f942b5d022b10bc9d6b2">More...</a><br /></td></tr>
+<tr class="separator:a45da300dbd61f942b5d022b10bc9d6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9719b4c7cc1a09ded47e6e7cda71f19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1BaselineWalkingController.html#ae9719b4c7cc1a09ded47e6e7cda71f19">reset</a> (const mc_control::ControllerResetData &amp;resetData) override</td></tr>
 <tr class="memdesc:ae9719b4c7cc1a09ded47e6e7cda71f19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset a controller.  <a href="structBWC_1_1BaselineWalkingController.html#ae9719b4c7cc1a09ded47e6e7cda71f19">More...</a><br /></td></tr>
 <tr class="separator:ae9719b4c7cc1a09ded47e6e7cda71f19"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +167,8 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00024">24</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad655bcfb4621ad3b6fd0f701191eccff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad655bcfb4621ad3b6fd0f701191eccff">&#9670;&nbsp;</a></span>BaselineWalkingController()</h2>
+<a id="a45da300dbd61f942b5d022b10bc9d6b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45da300dbd61f942b5d022b10bc9d6b2">&#9670;&nbsp;</a></span>BaselineWalkingController()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -189,7 +189,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const mc_rtc::Configuration &amp;&#160;</td>
-          <td class="paramname"><em>_config</em>&#160;</td>
+          <td class="paramname"><em>_config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>allowEmptyManager</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -200,6 +206,15 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rm</td><td>robot module </td></tr>
+    <tr><td class="paramname">dt</td><td>control timestep </td></tr>
+    <tr><td class="paramname">_config</td><td>controller configuration </td></tr>
+    <tr><td class="paramname">allowEmptyManager</td><td>whether to allow the managers to be empty (assuming initialized in the parent class) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -229,7 +244,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get timestep. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00061">61</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00069">69</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -258,7 +273,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get controller name. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00049">49</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00057">57</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -391,7 +406,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get current time. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00055">55</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00063">63</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -410,7 +425,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Base link orientation task. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00074">74</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00082">82</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -428,7 +443,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Centroidal manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00083">83</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00091">91</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -446,7 +461,7 @@ Protected Attributes</h2></td></tr>
 
 <p>CoM task. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00071">71</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00079">79</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -464,7 +479,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether to enable manager update. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00086">86</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00094">94</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -482,7 +497,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Foot manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00080">80</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00088">88</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -500,7 +515,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Foot tasks. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00077">77</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00085">85</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -526,7 +541,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Controller name. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00090">90</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00098">98</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>
@@ -552,7 +567,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Current time [sec]. </p>
 
-<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00093">93</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="BaselineWalkingController_8h_source.html#l00101">101</a> of file <a class="el" href="BaselineWalkingController_8h_source.html">BaselineWalkingController.h</a>.</p>
 
 </div>
 </div>

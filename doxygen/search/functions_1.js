@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['baselinewalkingcontroller_336',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff',1,'BWC::BaselineWalkingController']]]
+  ['baselinewalkingcontroller_336',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html#a45da300dbd61f942b5d022b10bc9d6b2',1,'BWC::BaselineWalkingController']]]
 ];

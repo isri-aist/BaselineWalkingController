@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['baselinewalkingcontroller_11',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC::BaselineWalkingController'],['../structBWC_1_1BaselineWalkingController.html#ad655bcfb4621ad3b6fd0f701191eccff',1,'BWC::BaselineWalkingController::BaselineWalkingController()']]],
+  ['baselinewalkingcontroller_11',['BaselineWalkingController',['../structBWC_1_1BaselineWalkingController.html',1,'BWC::BaselineWalkingController'],['../structBWC_1_1BaselineWalkingController.html#a45da300dbd61f942b5d022b10bc9d6b2',1,'BWC::BaselineWalkingController::BaselineWalkingController()']]],
   ['baselinewalkingcontroller_2eh_12',['BaselineWalkingController.h',['../BaselineWalkingController_8h.html',1,'']]],
   ['baseoritask_5f_13',['baseOriTask_',['../structBWC_1_1BaselineWalkingController.html#a1e58a285ee82020809f0bcfa2de09957',1,'BWC::BaselineWalkingController']]],
   ['baseoritaskstiffness_5f_14',['baseOriTaskStiffness_',['../structBWC_1_1InitialState.html#af77ef0e68b0fb94f51a0b45ec12fba43',1,'BWC::InitialState']]],
