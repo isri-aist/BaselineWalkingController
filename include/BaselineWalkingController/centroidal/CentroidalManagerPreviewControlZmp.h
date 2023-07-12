@@ -11,7 +11,7 @@ namespace BWC
     Centroidal manager calculates the centroidal targets from the specified reference ZMP trajectory and sensor
    measurements.
 */
-class CentroidalManagerPreviewControlZmp : public CentroidalManager
+class CentroidalManagerPreviewControlZmp : virtual public CentroidalManager
 {
 public:
   /** \brief Configuration. */
