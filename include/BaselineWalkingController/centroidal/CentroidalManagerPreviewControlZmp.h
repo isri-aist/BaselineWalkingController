@@ -67,7 +67,7 @@ protected:
   }
 
   /** \brief Calculate reference data of MPC. */
-  Eigen::Vector2d calcRefData(double t) const;
+  virtual Eigen::Vector2d calcRefData(double t) const;
 
 protected:
   //! Configuration
