@@ -3,6 +3,8 @@
 #include <mc_rtc/gui/StateBuilder.h>
 #include <mc_rtc/log/Logger.h>
 
+#include <TrajColl/CubicInterpolator.h>
+
 #include <BaselineWalkingController/FootTypes.h>
 
 namespace mc_rbdyn
@@ -120,6 +122,14 @@ public:
   /** \brief Remove entries from the logger. */
   virtual void removeFromLogger(mc_rtc::Logger & logger);
 
+  /** \brief Set reference CoM Z position.
+      \param refComZ reference CoM Z position
+      \param startTime time to start interpolation
+      \param interpDuration duration to interpolate
+      \return whether refComZ is set correctly
+  */
+  bool setRefComZ(double refComZ, double startTime, double interpDuration);
+
   /** \brief Set anchor frame. */
   void setAnchorFrame();
 
@@ -148,6 +158,12 @@ protected:
   /** \brief Whether to assume that CoM Z is constant. */
   virtual bool isConstantComZ() const = 0;
 
+  /** \brief Calculate reference CoM Z position.
+      \param t time
+      \param derivOrder derivative order (0 for original value, 1 for velocity)
+  */
+  double calcRefComZ(double t, int derivOrder = 0) const;
+
   /** \brief Calculate anchor frame.
       \param robot robot
    */
@@ -172,6 +188,9 @@ protected:
   virtual Eigen::Vector3d calcPlannedComAccel() const;
 
 protected:
+  //! Maximum time of interpolation endpoint
+  const double interpMaxTime_ = 1e10;
+
   //! Pointer to controller
   BaselineWalkingController * ctlPtr_ = nullptr;
 
@@ -210,5 +229,8 @@ protected:
 
   //! Contact list
   std::unordered_map<Foot, std::shared_ptr<ForceColl::Contact>> contactList_;
+
+  //! Interpolation function of reference CoM Z position
+  std::shared_ptr<TrajColl::CubicInterpolator<double>> refComZFunc_;
 };
 } // namespace BWC

@@ -63,3 +63,10 @@ states:
         - footMidpose:
             translation: [1.34305922386, -0.409195670883, 0.0]
             rotation: [0.0, 0.0, -0.558996938995747]
+      refComZList:
+        - refComZ: 0.725
+          startTime: 8.0
+          interpDuration: 1.0
+        - refComZ: 0.825
+          startTime: 12.0
+          interpDuration: 1.0

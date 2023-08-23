@@ -9,6 +9,8 @@ using namespace BWC;
 void CentroidalManagerFootGuidedControl::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
   CentroidalManager::Configuration::load(mcRtcConfig);
+
+  mcRtcConfig("reinitForRefComZ", reinitForRefComZ);
 }
 
 CentroidalManagerFootGuidedControl::CentroidalManagerFootGuidedControl(BaselineWalkingController * ctlPtr,
@@ -23,6 +25,7 @@ void CentroidalManagerFootGuidedControl::reset()
   CentroidalManager::reset();
 
   footGuided_ = std::make_shared<CCC::FootGuidedControl>(config_.refComZ);
+  lastRefComZ_ = config_.refComZ;
 }
 
 void CentroidalManagerFootGuidedControl::addToLogger(mc_rtc::Logger & logger)
@@ -30,14 +33,24 @@ void CentroidalManagerFootGuidedControl::addToLogger(mc_rtc::Logger & logger)
   CentroidalManager::addToLogger(logger);
 
   logger.addLogEntry(config_.name + "_FootGuided_capturePoint", this, [this]() -> Eigen::Vector2d {
-    return mpcCom_.head<2>() + std::sqrt(config_.refComZ / CCC::constants::g) * mpcComVel_.head<2>();
+    return mpcCom_.head<2>() + std::sqrt(lastRefComZ_ / CCC::constants::g) * mpcComVel_.head<2>();
   });
 }
 
 void CentroidalManagerFootGuidedControl::runMpc()
 {
+  double refComZ = calcRefComZ(ctl().t());
+  if(refComZ != lastRefComZ_)
+  {
+    if(config_.reinitForRefComZ)
+    {
+      footGuided_ = std::make_shared<CCC::FootGuidedControl>(refComZ);
+    }
+    lastRefComZ_ = refComZ;
+  }
+
   CCC::FootGuidedControl::InitialParam initialParam =
-      mpcCom_.head<2>() + std::sqrt(config_.refComZ / CCC::constants::g) * mpcComVel_.head<2>();
+      mpcCom_.head<2>() + std::sqrt(refComZ / CCC::constants::g) * mpcComVel_.head<2>();
   CCC::FootGuidedControl::RefData refData = calcRefData();
 
   Eigen::Vector2d plannedData = footGuided_->planOnce(refData, initialParam, ctl().t());
