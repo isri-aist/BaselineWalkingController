@@ -14,6 +14,7 @@ void CentroidalManagerPreviewControlZmp::Configuration::load(const mc_rtc::Confi
 
   mcRtcConfig("horizonDuration", horizonDuration);
   mcRtcConfig("horizonDt", horizonDt);
+  mcRtcConfig("reinitForRefComZ", reinitForRefComZ);
 }
 
 CentroidalManagerPreviewControlZmp::CentroidalManagerPreviewControlZmp(BaselineWalkingController * ctlPtr,
@@ -28,12 +29,22 @@ void CentroidalManagerPreviewControlZmp::reset()
   CentroidalManager::reset();
 
   pc_ = std::make_shared<CCC::PreviewControlZmp>(config_.refComZ, config_.horizonDuration, config_.horizonDt);
-
+  lastRefComZ_ = config_.refComZ;
   firstIter_ = true;
 }
 
 void CentroidalManagerPreviewControlZmp::runMpc()
 {
+  double refComZ = calcRefComZ(ctl().t());
+  if(refComZ != lastRefComZ_)
+  {
+    if(config_.reinitForRefComZ)
+    {
+      pc_ = std::make_shared<CCC::PreviewControlZmp>(refComZ, config_.horizonDuration, config_.horizonDt);
+    }
+    lastRefComZ_ = refComZ;
+  }
+
   CCC::PreviewControlZmp::InitialParam initialParam;
   initialParam.pos = mpcCom_.head<2>();
   initialParam.vel = mpcComVel_.head<2>();
@@ -44,7 +55,7 @@ void CentroidalManagerPreviewControlZmp::runMpc()
   else
   {
     // Since the actual CoM acceleration cannot be obtained, the CoM acceleration is always calculated from LIPM dynamics
-    initialParam.acc = CCC::constants::g / config_.refComZ * (mpcCom_ - plannedZmp_).head<2>();
+    initialParam.acc = CCC::constants::g / refComZ * (mpcCom_ - plannedZmp_).head<2>();
   }
 
   Eigen::Vector2d plannedData =

@@ -1,4 +1,5 @@
 #include <BaselineWalkingController/BaselineWalkingController.h>
+#include <BaselineWalkingController/CentroidalManager.h>
 #include <BaselineWalkingController/FootManager.h>
 #include <BaselineWalkingController/states/ConfigWalkState.h>
 
@@ -37,6 +38,17 @@ void ConfigWalkState::start(mc_control::fsm::Controller & _ctl)
     ctl().footManager_->startVelMode();
     ctl().footManager_->setRelativeVel(config_("configs")("velocityMode")("velocity"));
     velModeEndTime_ = ctl().t() + static_cast<double>(config_("configs")("velocityMode")("duration"));
+  }
+
+  // Set reference CoM Z position
+  if(config_.has("configs") && config_("configs").has("refComZList"))
+  {
+    for(const auto & refComZConfig : config_("configs")("refComZList"))
+    {
+      ctl().centroidalManager_->setRefComZ(refComZConfig("refComZ"),
+                                           ctl().t() + static_cast<double>(refComZConfig("startTime")),
+                                           refComZConfig("interpDuration"));
+    }
   }
 
   output("OK");

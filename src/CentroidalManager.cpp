@@ -37,13 +37,18 @@ void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcC
 
 CentroidalManager::CentroidalManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & // mcRtcConfig
                                      )
-: ctlPtr_(ctlPtr)
+: ctlPtr_(ctlPtr), refComZFunc_(std::make_shared<TrajColl::CubicInterpolator<double>>())
 {
 }
 
 void CentroidalManager::reset()
 {
   robotMass_ = ctl().robot().mass();
+
+  refComZFunc_->clearPoints();
+  refComZFunc_->appendPoint(std::make_pair(ctl().t(), config().refComZ));
+  refComZFunc_->appendPoint(std::make_pair(interpMaxTime_, config().refComZ));
+  refComZFunc_->calcCoeff();
 }
 
 void CentroidalManager::update()
@@ -117,9 +122,9 @@ void CentroidalManager::update()
     Eigen::Vector3d nextPlannedComVel = mpcComVel_ + ctl().dt() * plannedComAccel;
     if(isConstantComZ())
     {
-      nextPlannedCom.z() = config().refComZ + ctl().footManager_->calcRefGroundPosZ(ctl().t());
-      nextPlannedComVel.z() = ctl().footManager_->calcRefGroundPosZ(ctl().t(), 1);
-      plannedComAccel.z() = ctl().footManager_->calcRefGroundPosZ(ctl().t(), 2);
+      nextPlannedCom.z() = calcRefComZ(ctl().t()) + ctl().footManager_->calcRefGroundPosZ(ctl().t());
+      nextPlannedComVel.z() = calcRefComZ(ctl().t(), 1) + ctl().footManager_->calcRefGroundPosZ(ctl().t(), 1);
+      plannedComAccel.z() = calcRefComZ(ctl().t(), 2) + ctl().footManager_->calcRefGroundPosZ(ctl().t(), 2);
     }
     ctl().comTask_->com(nextPlannedCom);
     ctl().comTask_->refVel(nextPlannedComVel);
@@ -197,8 +202,6 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
           "comZGainP", [this]() { return config().comZGainP; }, [this](double v) { config().comZGainP = v; }),
       mc_rtc::gui::NumberInput(
           "comZGainD", [this]() { return config().comZGainD; }, [this](double v) { config().comZGainD = v; }),
-      mc_rtc::gui::NumberInput(
-          "refComZ", [this]() { return config().refComZ; }, [this](double v) { config().refComZ = v; }),
       mc_rtc::gui::Checkbox(
           "useTargetPoseForControlRobotAnchorFrame",
           [this]() { return config().useTargetPoseForControlRobotAnchorFrame; },
@@ -326,6 +329,30 @@ void CentroidalManager::removeFromLogger(mc_rtc::Logger & logger)
   logger.removeLogEntries(this);
 }
 
+bool CentroidalManager::setRefComZ(double refComZ, double startTime, double interpDuration)
+{
+  if(startTime < ctl().t())
+  {
+    mc_rtc::log::warning("[CentroidalManager] Ignore reference CoM Z position with past time: {} < {}", startTime,
+                         ctl().t());
+    return false;
+  }
+  auto it = std::next(refComZFunc_->points().rbegin());
+  if(startTime < it->first)
+  {
+    mc_rtc::log::warning("[CentroidalManager] Ignore reference CoM Z position with time before the existing "
+                         "interpolation points: {} < {}",
+                         startTime, it->first);
+    return false;
+  }
+
+  refComZFunc_->appendPoint(std::make_pair(startTime, it->second));
+  refComZFunc_->appendPoint(std::make_pair(startTime + interpDuration, refComZ));
+  refComZFunc_->calcCoeff();
+
+  return true;
+}
+
 void CentroidalManager::setAnchorFrame()
 {
   std::string anchorName = "KinematicAnchorFrame::" + ctl().robot().name();
@@ -334,6 +361,18 @@ void CentroidalManager::setAnchorFrame()
     ctl().datastore().remove(anchorName);
   }
   ctl().datastore().make_call(anchorName, [this](const mc_rbdyn::Robot & robot) { return calcAnchorFrame(robot); });
+}
+
+double CentroidalManager::calcRefComZ(double t, int derivOrder) const
+{
+  if(derivOrder == 0)
+  {
+    return (*refComZFunc_)(t);
+  }
+  else
+  {
+    return refComZFunc_->derivative(t, derivOrder);
+  }
 }
 
 sva::PTransformd CentroidalManager::calcAnchorFrame(const mc_rbdyn::Robot & robot) const

@@ -17,6 +17,9 @@ public:
   /** \brief Configuration. */
   struct Configuration : public CentroidalManager::Configuration
   {
+    //! Whether to reinitialize MPC when reference CoM Z position is updated
+    bool reinitForRefComZ = true;
+
     /** \brief Load mc_rtc configuration. */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
   };
@@ -72,5 +75,8 @@ protected:
 
   //! Foot-guided control
   std::shared_ptr<CCC::FootGuidedControl> footGuided_;
+
+  //! Reference CoM Z position of the previous control step
+  double lastRefComZ_ = 0;
 };
 } // namespace BWC

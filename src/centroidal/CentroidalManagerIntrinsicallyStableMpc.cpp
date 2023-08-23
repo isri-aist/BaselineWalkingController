@@ -19,6 +19,7 @@ void CentroidalManagerIntrinsicallyStableMpc::Configuration::load(const mc_rtc::
   {
     qpSolverType = QpSolverCollection::strToQpSolverType(mcRtcConfig("qpSolverType"));
   }
+  mcRtcConfig("reinitForRefComZ", reinitForRefComZ);
 }
 
 CentroidalManagerIntrinsicallyStableMpc::CentroidalManagerIntrinsicallyStableMpc(
@@ -35,7 +36,7 @@ void CentroidalManagerIntrinsicallyStableMpc::reset()
 
   mpc_ = std::make_shared<CCC::IntrinsicallyStableMpc>(config_.refComZ, config_.horizonDuration, config_.horizonDt,
                                                        config_.qpSolverType);
-
+  lastRefComZ_ = config_.refComZ;
   firstIter_ = true;
 }
 
@@ -51,9 +52,19 @@ void CentroidalManagerIntrinsicallyStableMpc::addToLogger(mc_rtc::Logger & logge
 
 void CentroidalManagerIntrinsicallyStableMpc::runMpc()
 {
+  double refComZ = calcRefComZ(ctl().t());
+  if(refComZ != lastRefComZ_)
+  {
+    if(config_.reinitForRefComZ)
+    {
+      mpc_ = std::make_shared<CCC::IntrinsicallyStableMpc>(refComZ, config_.horizonDuration, config_.horizonDt,
+                                                           config_.qpSolverType);
+    }
+    lastRefComZ_ = refComZ;
+  }
+
   CCC::IntrinsicallyStableMpc::InitialParam initialParam;
-  initialParam.capture_point =
-      mpcCom_.head<2>() + std::sqrt(config_.refComZ / CCC::constants::g) * mpcComVel_.head<2>();
+  initialParam.capture_point = mpcCom_.head<2>() + std::sqrt(refComZ / CCC::constants::g) * mpcComVel_.head<2>();
   if(firstIter_)
   {
     initialParam.planned_zmp = mpcCom_.head<2>();

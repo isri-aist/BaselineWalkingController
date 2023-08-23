@@ -204,6 +204,7 @@ CentroidalManager:
   method: PreviewControlZmp
   horizonDuration: 2.0 # [sec]
   horizonDt: 0.005 # [sec]
+  reinitForRefComZ: true
 
   # # DdpZmp
   # method: DdpZmp
@@ -213,11 +214,13 @@ CentroidalManager:
 
   # # FootGuidedControl
   # method: FootGuidedControl
+  # reinitForRefComZ: true
 
   # # IntrinsicallyStableMpc
   # method: IntrinsicallyStableMpc
   # horizonDuration: 2.0 # [sec]
   # horizonDt: 0.02 # [sec]
+  # reinitForRefComZ: true
 
 
 # OverwriteConfigKeys: [NoSensors]

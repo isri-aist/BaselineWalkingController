@@ -26,6 +26,9 @@ public:
     //! QP solver type
     QpSolverCollection::QpSolverType qpSolverType = QpSolverCollection::QpSolverType::Any;
 
+    //! Whether to reinitialize MPC when reference CoM Z position is updated
+    bool reinitForRefComZ = true;
+
     /** \brief Load mc_rtc configuration. */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig) override;
   };
@@ -84,5 +87,8 @@ protected:
 
   //! Whether it is the first iteration
   bool firstIter_ = true;
+
+  //! Reference CoM Z position of the previous control step
+  double lastRefComZ_ = 0;
 };
 } // namespace BWC
