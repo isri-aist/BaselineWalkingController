@@ -1,16 +1,11 @@
 var searchData=
 [
-  ['startpose_5f_506',['startPose_',['../classBWC_1_1SwingTraj.html#a5acf2228712f2208df583f56f35ce774',1,'BWC::SwingTraj']]],
-  ['starttime_5f_507',['startTime_',['../classBWC_1_1SwingTraj.html#ae66ce9e19daab7deb547695f3f0fd673',1,'BWC::SwingTraj']]],
-  ['stiffness_508',['stiffness',['../structBWC_1_1TaskGain.html#a7d407f3c876c9324e8a4192a2d31bb5b',1,'BWC::TaskGain']]],
-  ['stiffnessratiofunc_5f_509',['stiffnessRatioFunc_',['../structBWC_1_1InitialState.html#a60fcd7f57cd43d73eac10489ca515182',1,'BWC::InitialState']]],
-  ['stopswingtrajfortouchdownfoot_510',['stopSwingTrajForTouchDownFoot',['../structBWC_1_1FootManager_1_1Configuration.html#a766816f5e71d2ed51fb4b57988fb4a7c',1,'BWC::FootManager::Configuration']]],
-  ['supportphase_5f_511',['supportPhase_',['../classBWC_1_1FootManager.html#ae8d06322d26fd419451d0d493641131f',1,'BWC::FootManager']]],
-  ['supportregion_5f_512',['supportRegion_',['../classBWC_1_1CentroidalManager.html#aa404a49de5f6973e9c20906c4a8c63f7',1,'BWC::CentroidalManager']]],
-  ['swingendtime_513',['swingEndTime',['../structBWC_1_1Footstep.html#a751495e3accc00ad0df619cb36717509',1,'BWC::Footstep']]],
-  ['swingfootstep_5f_514',['swingFootstep_',['../classBWC_1_1FootManager.html#a3d705a811277b1ecd54dd0bf77f97ce2',1,'BWC::FootManager']]],
-  ['swingoffset_515',['swingOffset',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a03b62c4ab3ff502cf3c13b6df1feaf54',1,'BWC::SwingTrajCubicSplineSimple::Configuration']]],
-  ['swingstarttime_516',['swingStartTime',['../structBWC_1_1Footstep.html#a27aba68bad58a57995ed7612589aa23b',1,'BWC::Footstep']]],
-  ['swingtraj_5f_517',['swingTraj_',['../classBWC_1_1FootManager.html#ac15c1d805cbfee08f13ee97be9c0d129',1,'BWC::FootManager']]],
-  ['swingtrajconfig_518',['swingTrajConfig',['../structBWC_1_1Footstep.html#a17d37c7d7cdfbf53c77e0a18dbd3e0e0',1,'BWC::Footstep']]]
+  ['refcomz_510',['refComZ',['../structBWC_1_1CentroidalManager_1_1Configuration.html#a7cd2c2d2bca99f7b679da4900501cbcd',1,'BWC::CentroidalManager::Configuration']]],
+  ['refcomzfunc_5f_511',['refComZFunc_',['../classBWC_1_1CentroidalManager.html#af1427f04efb79a9ed87f575adad10167',1,'BWC::CentroidalManager']]],
+  ['refzmp_5f_512',['refZmp_',['../classBWC_1_1CentroidalManager.html#a28c2e717ae3c5b4200630fbbae32b6c9',1,'BWC::CentroidalManager']]],
+  ['reinitforrefcomz_513',['reinitForRefComZ',['../structBWC_1_1CentroidalManagerFootGuidedControl_1_1Configuration.html#a0b5ce2406967e030b5e2ec72c8c38f38',1,'BWC::CentroidalManagerFootGuidedControl::Configuration::reinitForRefComZ()'],['../structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html#af6d4f3e8a093f2f57c52d83efe74ffa7',1,'BWC::CentroidalManagerIntrinsicallyStableMpc::Configuration::reinitForRefComZ()'],['../structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html#a502bb7d9dd9966d0ff0e039c0e72f96c',1,'BWC::CentroidalManagerPreviewControlZmp::Configuration::reinitForRefComZ()']]],
+  ['requireimpgainupdate_5f_514',['requireImpGainUpdate_',['../classBWC_1_1FootManager.html#a8342fb81cf38899ff7bd58b7232e579e',1,'BWC::FootManager']]],
+  ['robotmass_5f_515',['robotMass_',['../classBWC_1_1CentroidalManager.html#a73798dded16013c2186d63a5b4591033',1,'BWC::CentroidalManager']]],
+  ['rotfunc_5f_516',['rotFunc_',['../classBWC_1_1SwingTrajCubicSplineSimple.html#aa2406dd4b0ff6126ed4ea5f813e0c495',1,'BWC::SwingTrajCubicSplineSimple::rotFunc_()'],['../classBWC_1_1SwingTrajIndHorizontalVertical.html#a9728cd9fb9a934e0729ddfd756777535',1,'BWC::SwingTrajIndHorizontalVertical::rotFunc_()']]],
+  ['running_5f_517',['running_',['../structBWC_1_1FootstepPlannerState.html#ae5fdf5d556dc87e0428286f06e24b721',1,'BWC::FootstepPlannerState']]]
 ];
