@@ -158,3 +158,8 @@ $ choreonoid sim_mc.cnoid --start-simulation
 $ source ~/ros/ws_bwc/devel/setup.bash
 $ roslaunch baseline_walking_controller display.launch
 ```
+
+## Controllers for motions beyond walking
+The following controllers are based on or developed with the same philosophy as BaselineWalkingController.
+- Loco-manipulation: [LocomanipController](https://github.com/isri-aist/LocomanipController)
+- Multi-contact motion: [MultiContactController](https://github.com/isri-aist/MultiContactController)
