@@ -97,6 +97,9 @@ $(function() {
 <div class="line">$ sudo apt-get update</div>
 <div class="line">$ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin</div>
 </div><!-- fragment --></li>
+</ol>
+<p>To enable GPUs in Docker (i.e., enable the <code>--gpus</code> option in the <code>docker</code> command), install <code>nvidia-docker2</code>. See <a href="https://www.ibm.com/docs/en/maximo-vi/continuous-delivery?topic=planning-installing-docker-nvidia-docker2">here</a> for details.</p>
+<ol type="1">
 <li>By executing the following commands, the window of the dynamics simulator Choreonoid will open and the robot will walk. Close the Choreonoid window to exit. <div class="fragment"><div class="line">$ docker pull ghcr.io/isri-aist/baseline_walking_controller:latest</div>
 <div class="line">$ xhost +local:</div>
 </div><!-- fragment --></li>
