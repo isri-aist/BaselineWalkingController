@@ -33,6 +33,9 @@ $ sudo apt-get update
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
+To enable GPUs in Docker (i.e., enable the `--gpus` option in the `docker` command), install `nvidia-docker2`.
+See [here](https://www.ibm.com/docs/en/maximo-vi/continuous-delivery?topic=planning-installing-docker-nvidia-docker2) for details.
+
 2. By executing the following commands, the window of the dynamics simulator Choreonoid will open and the robot will walk.
 Close the Choreonoid window to exit.
 ```bash
