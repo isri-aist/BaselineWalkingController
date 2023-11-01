@@ -316,9 +316,12 @@ public:
   /** \brief Send footstep sequence to walk to the relative target pose.
       \param targetTrans relative target pose of foot midpose (x [m], y [m], theta [rad])
       \param lastFootstepNum number of last footstep
+      \param waypointTransList waypoint pose list of foot midpose relative to current pose (x [m], y [m], theta [rad])
       \return whether footstep is successfully sent
    */
-  bool walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum = 0);
+  bool walkToRelativePose(const Eigen::Vector3d & targetTrans,
+                          int lastFootstepNum = 0,
+                          const std::vector<Eigen::Vector3d> & waypointTransList = {});
 
   /** \brief Start velocity mode.
       \return whether it is successfully started

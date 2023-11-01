@@ -587,7 +587,9 @@ Eigen::Vector3d FootManager::calcZmpWithOffset(const std::unordered_map<Foot, sv
   }
 }
 
-bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum)
+bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans,
+                                     int lastFootstepNum,
+                                     const std::vector<Eigen::Vector3d> & waypointTransList)
 {
   if(footstepQueue_.size() > 0)
   {
@@ -608,22 +610,28 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
   // transformation in the world frame.
   const sva::PTransformd & initialFootMidpose =
       projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
-  const sva::PTransformd & goalFootMidpose = convertTo3d(targetTrans) * initialFootMidpose;
 
-  Foot foot = targetTrans.y() >= 0 ? Foot::Left : Foot::Right;
+  Foot foot = (waypointTransList.empty() ? targetTrans.y() : waypointTransList[0].y()) >= 0 ? Foot::Left : Foot::Right;
   sva::PTransformd footMidpose = initialFootMidpose;
   double startTime = ctl().t() + 1.0;
 
-  while(convertTo2d(goalFootMidpose * footMidpose.inv()).norm() > 1e-6)
+  for(size_t i = 0; i < waypointTransList.size() + 1; i++)
   {
-    Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * footMidpose.inv());
-    footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
+    const Eigen::Vector3d & goalTrans = (i == waypointTransList.size() ? targetTrans : waypointTransList[i]);
+    const sva::PTransformd & goalFootMidpose = convertTo3d(goalTrans) * initialFootMidpose;
+    double thre = (i == waypointTransList.size() ? 1e-6 : 1e-2);
 
-    const auto & footstep = makeFootstep(foot, footMidpose, startTime);
-    appendFootstep(footstep);
+    while(convertTo2d(goalFootMidpose * footMidpose.inv()).norm() > thre)
+    {
+      Eigen::Vector3d deltaTrans = convertTo2d(goalFootMidpose * footMidpose.inv());
+      footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
 
-    foot = opposite(foot);
-    startTime = footstep.transitEndTime;
+      const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+      appendFootstep(footstep);
+
+      foot = opposite(foot);
+      startTime = footstep.transitEndTime;
+    }
   }
 
   for(int i = 0; i < lastFootstepNum + 1; i++)
