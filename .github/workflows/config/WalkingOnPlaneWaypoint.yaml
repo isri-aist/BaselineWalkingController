@@ -1,0 +1,17 @@
+transitions:
+  - [BWC::Initial_, OK, BWC::ConfigWalk_, Auto]
+
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 2.0
+
+  BWC::ConfigWalk_:
+    base: BWC::ConfigWalk
+    configs:
+      footMidpose:
+        target: [0.8, 0.6, 45.0]
+        waypointList:
+          - [0.5, 0.0, 0.0]
+          - [0.5, 0.3, 0.0]

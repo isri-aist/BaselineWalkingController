@@ -55,6 +55,14 @@ jobs:
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
+            motion-type: WalkingOnPlaneWaypoint # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: catkin
@@ -72,6 +80,14 @@ jobs:
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnStairs # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: standalone # catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OpenLoopMpc
+            motion-type: WalkingOnPlaneWaypoint # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
             build-type: RelWithDebInfo
@@ -281,7 +297,7 @@ jobs:
           roscore > /dev/null 2>&1 < /dev/null &
           ROSCORE_PID=$!
           sleep 1s
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
             CNOID_FILE=sim_mc.cnoid
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid
@@ -320,6 +336,8 @@ jobs:
             EXPECTED_BASE_POS="1.34 -0.41 0.8"
           elif [ "${{ matrix.motion-type }}" == "WalkingOnStairs" ]; then
             EXPECTED_BASE_POS="1.75 0.0 1.68"
+          elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" ]; then
+            EXPECTED_BASE_POS="0.82 0.57 0.8"
           elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
             EXPECTED_BASE_POS="0.74 -0.53 0.8"
           else # if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
