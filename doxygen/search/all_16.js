@@ -1,7 +1,7 @@
 var searchData=
 [
   ['walkconfigkeys_5f_270',['walkConfigKeys_',['../structBWC_1_1GuiWalkState.html#accbbb30e56b2f4efee64b6bd7681a084',1,'BWC::GuiWalkState']]],
-  ['walktorelativepose_271',['walkToRelativePose',['../classBWC_1_1FootManager.html#a8e8c43e5af453c16a6f04738aec9c1fb',1,'BWC::FootManager']]],
+  ['walktorelativepose_271',['walkToRelativePose',['../classBWC_1_1FootManager.html#a11fdb3eeb8784a4e0d4f62288cf00e1b',1,'BWC::FootManager']]],
   ['waypointposelist_5f_272',['waypointPoseList_',['../classBWC_1_1SwingTrajLandingSearch.html#a16c918f53f67a6e6527e792c89f93151',1,'BWC::SwingTrajLandingSearch']]],
   ['withdrawdurationratio_273',['withdrawDurationRatio',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a477be3fd662113e652d15d0d1e1a9cc7',1,'BWC::SwingTrajCubicSplineSimple::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajIndHorizontalVertical_1_1Configuration.html#aa2693d9c975220b46642535e19365976',1,'BWC::SwingTrajIndHorizontalVertical::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#ae73d6e652aefbbd29593a8297eefe350',1,'BWC::SwingTrajLandingSearch::Configuration::withdrawDurationRatio()'],['../structBWC_1_1SwingTrajVariableTaskGain_1_1Configuration.html#a29976425d119eb43aefbc72ca60f5ec2',1,'BWC::SwingTrajVariableTaskGain::Configuration::withdrawDurationRatio()']]],
   ['withdrawoffset_274',['withdrawOffset',['../structBWC_1_1SwingTrajCubicSplineSimple_1_1Configuration.html#a109260fa8fbeef50c7cab90c4e935797',1,'BWC::SwingTrajCubicSplineSimple::Configuration::withdrawOffset()'],['../structBWC_1_1SwingTrajLandingSearch_1_1Configuration.html#ac618d4e6a4f8e224c602b7b4802c2fd0',1,'BWC::SwingTrajLandingSearch::Configuration::withdrawOffset()']]],
