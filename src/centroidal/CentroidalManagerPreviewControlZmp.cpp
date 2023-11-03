@@ -36,7 +36,8 @@ void CentroidalManagerPreviewControlZmp::reset()
 void CentroidalManagerPreviewControlZmp::runMpc()
 {
   double refComZ = calcRefComZ(ctl().t());
-  if(refComZ != lastRefComZ_)
+  constexpr double threRefComZ = 1e-3; // [m]
+  if(std::abs(refComZ - lastRefComZ_) > threRefComZ)
   {
     if(config_.reinitForRefComZ)
     {
