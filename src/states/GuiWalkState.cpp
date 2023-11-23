@@ -12,6 +12,7 @@ void GuiWalkState::start(mc_control::fsm::Controller & _ctl)
 
   // Setup GUI
   ctl().gui()->addElement({ctl().name(), "GuiWalk"},
+                          mc_rtc::gui::Button("StopWalking", [this]() { ctl().footManager_->clearFootstepQueue(); }),
                           mc_rtc::gui::Form(
                               "Walk",
                               [this](const mc_rtc::Configuration & config) {

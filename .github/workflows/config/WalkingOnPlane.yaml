@@ -1,5 +1,5 @@
 transitions:
-  - [BWC::Initial_, OK, BWC::ConfigWalk_, Auto]
+  - [BWC::Initial_, OK, BWC::Main_, Auto]
 
 states:
   BWC::Initial_:
@@ -70,3 +70,7 @@ states:
         - refComZ: 0.825
           startTime: 12.0
           interpDuration: 1.0
+
+  BWC::Main_:
+    base: Parallel
+    states: [BWC::GuiWalk_, BWC::ConfigWalk_]

@@ -434,6 +434,26 @@ bool FootManager::appendFootstep(const Footstep & newFootstep)
   return true;
 }
 
+void FootManager::clearFootstepQueue()
+{
+  if(footstepQueue_.empty())
+  {
+    return;
+  }
+
+  if(swingFootstep_ == &(footstepQueue_.front()))
+  {
+    if(footstepQueue_.size() >= 2)
+    {
+      footstepQueue_.erase(footstepQueue_.begin() + 1, footstepQueue_.end());
+    }
+  }
+  else
+  {
+    footstepQueue_.clear();
+  }
+}
+
 Eigen::Vector3d FootManager::clampDeltaTrans(const Eigen::Vector3d & deltaTrans, const Foot & foot)
 {
   Eigen::Vector3d deltaTransMax = config_.deltaTransLimit;

@@ -217,6 +217,9 @@ public:
   */
   bool appendFootstep(const Footstep & newFootstep);
 
+  /** \brief Clear footstep queue (with retaining footstep during swing). */
+  void clearFootstepQueue();
+
   /** \brief Calculate reference ZMP.
       \param t time
       \param derivOrder derivative order (0 for original value, 1 for velocity)
