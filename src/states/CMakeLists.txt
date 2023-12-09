@@ -14,6 +14,10 @@ add_fsm_state(TeleopState TeleopState.cpp)
 target_link_libraries(TeleopState PUBLIC
   ${CONTROLLER_NAME})
 
+add_fsm_state(StepState StepState.cpp)
+target_link_libraries(StepState PUBLIC
+  ${CONTROLLER_NAME})
+
 find_package(baseline_footstep_planner QUIET)
 if(${baseline_footstep_planner_FOUND})
   message("-- Build FootstepPlannerState as baseline_footstep_planner found")

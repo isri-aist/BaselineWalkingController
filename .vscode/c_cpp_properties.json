@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/BaselineWalkingController/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/CentroidalControlCollection/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/ForceControlCollection/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/NMPC/nmpc_ddp/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/QpSolverCollection/include/**",
+        "/home/irsl/mc_rtc_ws/src/isri-aist/TrajectoryCollection/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
