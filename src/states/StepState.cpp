@@ -12,28 +12,39 @@ void StepState::start(mc_control::fsm::Controller & _ctl)
   State::start(_ctl);
   // Setup GUI
   ctl().gui()->addElement({ctl().name(), "Step by Step"},
-                          mc_rtc::gui::Button("StartStepState", [this]() { ctl().footManager_->startVelMode(); }));
+                          mc_rtc::gui::Button("StartStepState", [this]() { ctl().footManager_->startStepMode(); }));
+                          // mc_rtc::gui::Button("StartStepState", [this]() { ctl().footManager_->startVelMode(); }));
   output("OK");
 }
 
 bool StepState::run(mc_control::fsm::Controller &)
 {
   // Update GUI
-  bool stepMode = ctl().footManager_->velModeEnabled();
+  bool stepMode = ctl().footManager_->stepModeEnabled();
+  int stepCount = ctl().footManager_->stepCount();
   if(stepMode && ctl().gui()->hasElement({ctl().name(), "Step by Step"}, "StartStepState"))
   {
     ctl().gui()->addElement({ctl().name(), "Step by Step"},
-                            mc_rtc::gui::Button("NextStatus", [this]() { ctl().footManager_->endVelMode(); }));
+                            mc_rtc::gui::Button("NextStatus", [this]() { ctl().footManager_->nextStepMode(); }));
     ctl().gui()->addElement({ctl().name(), "Step by Step"},
-                            mc_rtc::gui::Button("PreviousStatus", [this]() { ctl().footManager_->endVelMode(); }));
+                            mc_rtc::gui::Button("Stamp", [this]() { ctl().footManager_->stampStepMode(); }));
     ctl().gui()->removeElement({ctl().name(), "Step by Step"}, "StartStepState");
   }
-//   else if(!stepMode && ctl().gui()->hasElement({ctl().name(), "Step by Step"}, "EndTeleop"))
-//   {
-//     ctl().gui()->addElement({ctl().name(), "Step by Step"},
-//                             mc_rtc::gui::Button("StartTeleop", [this]() { ctl().footManager_->startVelMode(); }));
-//     ctl().gui()->removeElement({ctl().name(), "Step by Step"}, "EndTeleop");
-//   }
+
+  if(stepMode && stepCount > 0 && 
+    ctl().gui()->hasElement({ctl().name(), "Step by Step"}, "NextStatus") && 
+    !ctl().gui() -> hasElement({ctl().name(), "Step by Step"}, "PreviousStatus"))
+  {
+    ctl().gui()->addElement({ctl().name(), "Step by Step"},
+                        mc_rtc::gui::Button("PreviousStatus", [this]() { ctl().footManager_->previousStepMode(); }));
+  }
+
+  if(stepMode && stepCount == 0 && 
+    ctl().gui()->hasElement({ctl().name(), "Step by Step"}, "NextStatus") && 
+    ctl().gui() -> hasElement({ctl().name(), "Step by Step"}, "PreviousStatus"))
+  {
+    ctl().gui()->removeElement({ctl().name(), "Step by Step"},"PreviousStatus");
+  }
 
   return false;
 }

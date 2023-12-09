@@ -2,6 +2,7 @@
 
 #include <deque>
 #include <unordered_map>
+#include <optional>
 
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/StateBuilder.h>
@@ -185,6 +186,15 @@ public:
 
     //! Whether the step mode is enabled
     bool enabled_ = false;
+
+    //! Whether the step counter
+    int stepCounter_ = 0;
+
+    //! Previous footstep
+    std::optional<Foot> prevFoot_;
+
+    //! Previous footstep pose list
+    std::vector<sva::PTransformd> prevFootstep_;
 
     //! Relative target step of foot midpose in the step mode (x [m/s], y [m/s], theta [rad/s])
     Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
@@ -378,6 +388,21 @@ public:
    */
   bool startVelMode();
 
+  /** \brief Stamp step mode.
+      \return whether it is successfully stamp stepped
+  */
+  bool stampStepMode();
+  
+  /** \brief Next step mode.
+      \return whether it is successfully next stepped
+  */
+  bool nextStepMode();
+  
+  /** \brief Previous step mode.
+      \return whether it is successfully previous stepped
+   */
+  bool previousStepMode();
+  
   /** \brief End velocity mode.
       \return whether it is successfully ended
    */
@@ -395,6 +420,12 @@ public:
   inline bool stepModeEnabled() const
   {
     return stepModeData_.enabled_;
+  }
+
+  /** \brief Whether the step counter. */
+  inline bool stepCount() const
+  {
+    return stepModeData_.stepCounter_;
   }
 
   /** \brief Whether the velocity mode is enabled. */

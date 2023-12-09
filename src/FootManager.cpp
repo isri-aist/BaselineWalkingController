@@ -71,6 +71,27 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
 }
 
+void FootManager::StepModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
+{
+  // if(mcRtcConfig.has("footstepQueueSize"))
+  // {
+  //   footstepQueueSize = mcRtcConfig("footstepQueueSize");
+  //   if(footstepQueueSize < 3)
+  //   {
+  //     footstepQueueSize = 3;
+  //     mc_rtc::log::warning("[FootManager::VelModeData] footstepQueueSize must be at least 3.");
+  //   }
+  // }
+  // mcRtcConfig("enableOnlineFootstepUpdate", enableOnlineFootstepUpdate);
+}
+
+void FootManager::StepModeData::reset(bool enabled)
+{
+  enabled_ = enabled;
+  // targetVel_.setZero();
+}
+
+
 void FootManager::VelModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
   if(mcRtcConfig.has("footstepQueueSize"))
@@ -644,20 +665,15 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
 
 bool FootManager::startStepMode()
 {
+  std::cout << "startStepMode" << std::endl;
   if(stepModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is already in step mode, but startStepMode is called.");
     return false;
   }
 
-  if(footstepQueue_.size() > 0)
-  {
-    mc_rtc::log::error("[FootManager] startVelMode is available only when the footstep queue is empty: {}",
-                       footstepQueue_.size());
-    return false;
-  }
-
   stepModeData_.reset(true);
+  return true;
 }
 
 bool FootManager::startVelMode()
@@ -691,6 +707,84 @@ bool FootManager::startVelMode()
     startTime = footstep.transitEndTime;
   }
 
+  return true;
+}
+
+bool FootManager::stampStepMode(){
+  if(!stepModeData_.enabled_)
+  {
+    mc_rtc::log::warning("[FootManager] It is not in step mode, but nextSteplMode is called.");
+    return false;
+  }
+
+  // Add footsteps to queue for walking in place
+  Foot foot = stepModeData_.prevFoot_.has_value() ? opposite(stepModeData_.prevFoot_.value()) : Foot::Left;
+  const sva::PTransformd & footMidpose =
+  projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+  double startTime = ctl().t() + 1.0;
+  const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+  appendFootstep(footstep);
+  stepModeData_.prevFoot_ = foot;
+
+  return true;
+}
+
+bool FootManager::nextStepMode(){
+  if(!stepModeData_.enabled_)
+  {
+    mc_rtc::log::warning("[FootManager] It is not in step mode, but nextSteplMode is called.");
+    return false;
+  }
+
+  auto convertTo2d = [](const sva::PTransformd & pose) ->   Eigen::Vector3d {
+    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
+  };
+
+  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+  };
+
+  // Add footsteps to queue for walking in place
+  Foot foot = (stepModeData_.stepCounter_ == 0) ? Foot::Left : (stepModeData_.stepCounter_ % 2 == 0) ? Foot::Left : Foot::Right;
+
+  Eigen::Vector3d deltaTrans = config_.footstepDuration * Eigen::Vector3d(1.0, 0.0, 0.0);
+
+  const sva::PTransformd & initialFootMidpose =
+  projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+  sva::PTransformd footMidpose = initialFootMidpose;
+  stepModeData_.prevFootstep_.push_back(footMidpose);
+
+  footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
+  
+  double startTime = ctl().t() + 1.0;
+  const auto & footstep = makeFootstep(foot, footMidpose, startTime);
+  
+  appendFootstep(footstep);
+  stepModeData_.prevFoot_ = foot;
+  stepModeData_.stepCounter_++;
+
+  return true;
+}
+
+bool FootManager::previousStepMode(){
+  if(!stepModeData_.enabled_)
+  {
+    mc_rtc::log::warning("[FootManager] It is not in step mode, but previousSteplMode is called.");
+    return false;
+  }
+
+  if(stepModeData_.stepCounter_ == 0){
+    return false;
+  }
+
+  Foot foot = stepModeData_.prevFoot_.value();
+  double startTime = ctl().t() + 1.0;
+  const auto & footstep = makeFootstep(foot, stepModeData_.prevFootstep_.back(), startTime);
+  stepModeData_.prevFootstep_.pop_back();
+  appendFootstep(footstep);
+  stepModeData_.prevFoot_ = opposite(foot);
+  stepModeData_.stepCounter_--;
+ 
   return true;
 }
 
@@ -1139,7 +1233,12 @@ void FootManager::updateZmpTraj()
 }
 
 void FootManager::updateStepMode(){
-  
+  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
+    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
+  };
+  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
+    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
+  };
 }
 
 void FootManager::updateVelMode()
