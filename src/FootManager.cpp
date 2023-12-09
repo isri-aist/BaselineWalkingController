@@ -179,7 +179,11 @@ void FootManager::update()
 {
   updateFootTraj();
   updateZmpTraj();
-  if(velModeData_.enabled_)
+  if(stepModeData_.enabled_)
+  {
+    updateStepMode();
+  }
+  else if(velModeData_.enabled_)
   {
     updateVelMode();
   }
@@ -636,6 +640,24 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
   }
 
   return true;
+}
+
+bool FootManager::startStepMode()
+{
+  if(stepModeData_.enabled_)
+  {
+    mc_rtc::log::warning("[FootManager] It is already in step mode, but startStepMode is called.");
+    return false;
+  }
+
+  if(footstepQueue_.size() > 0)
+  {
+    mc_rtc::log::error("[FootManager] startVelMode is available only when the footstep queue is empty: {}",
+                       footstepQueue_.size());
+    return false;
+  }
+
+  stepModeData_.reset(true);
 }
 
 bool FootManager::startVelMode()
@@ -1114,6 +1136,10 @@ void FootManager::updateZmpTraj()
 
   zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
+}
+
+void FootManager::updateStepMode(){
+  
 }
 
 void FootManager::updateVelMode()

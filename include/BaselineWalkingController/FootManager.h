@@ -148,6 +148,48 @@ public:
     Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
   };
 
+  /** \brief Step mode data.
+
+    In the Step mode, the robot move to next process at the trigger.
+  */
+  class StepModeData
+  {
+  public:
+    /** \brief Configuration. */
+    struct Configuration
+    {
+      //! Queue size of footsteps to be sent in the step mode (must be at least 3)
+      int footstepQueueSize = 3;
+
+      //! Whether to enable online footstep update during swing in the step mode
+      bool enableOnlineFootstepUpdate = true;
+
+      /** \brief Load mc_rtc configuration.
+          \param mcRtcConfig mc_rtc configuration
+      */
+      void load(const mc_rtc::Configuration & mcRtcConfig);
+    };
+
+  public:
+    /** \brief Constructor. */
+    StepModeData() {}
+
+    /** \brief Reset.
+        \param enabled whether the step mode is enabled
+     */
+    void reset(bool enabled);
+
+  public:
+    //! Configuration
+    Configuration config_;
+
+    //! Whether the step mode is enabled
+    bool enabled_ = false;
+
+    //! Relative target step of foot midpose in the step mode (x [m/s], y [m/s], theta [rad/s])
+    Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
+  };
+
 public:
   /** \brief Constructor.
       \param ctlPtr pointer to controller
@@ -179,7 +221,13 @@ public:
     return config_;
   }
 
-  /** \brief Const accessor to the velocity mode data. */
+  /** \brief Const accessor to the step mode data. */
+  inline const StepModeData & stepModeData() const noexcept
+  {
+    return stepModeData_;
+  }
+
+    /** \brief Const accessor to the velocity mode data. */
   inline const VelModeData & velModeData() const noexcept
   {
     return velModeData_;
@@ -320,6 +368,11 @@ public:
    */
   bool walkToRelativePose(const Eigen::Vector3d & targetTrans, int lastFootstepNum = 0);
 
+  /** \brief step by step mode.
+      \return whether it is successfully started
+   */
+  bool startStepMode();
+
   /** \brief Start velocity mode.
       \return whether it is successfully started
    */
@@ -336,6 +389,12 @@ public:
   inline void setRelativeVel(const Eigen::Vector3d & targetVel)
   {
     velModeData_.targetVel_ = targetVel;
+  }
+
+  /** \brief Whether the step mode is enabled. */
+  inline bool stepModeEnabled() const
+  {
+    return stepModeData_.enabled_;
   }
 
   /** \brief Whether the velocity mode is enabled. */
@@ -363,6 +422,9 @@ protected:
   /** \brief Update ZMP trajectory. */
   virtual void updateZmpTraj();
 
+  /** \brief Update footstep sequence for the step mode. */
+  void updateStepMode();
+
   /** \brief Update footstep sequence for the velocity mode. */
   void updateVelMode();
 
@@ -379,6 +441,9 @@ protected:
 protected:
   //! Configuration
   Configuration config_;
+
+  //! Step mode data
+  StepModeData stepModeData_;
 
   //! Velocity mode data
   VelModeData velModeData_;
