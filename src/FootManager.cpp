@@ -665,7 +665,6 @@ bool FootManager::walkToRelativePose(const Eigen::Vector3d & targetTrans, int la
 
 bool FootManager::startStepMode()
 {
-  std::cout << "startStepMode" << std::endl;
   if(stepModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is already in step mode, but startStepMode is called.");
@@ -777,14 +776,26 @@ bool FootManager::previousStepMode(){
     return false;
   }
 
+  std::cout << "stepCounter: " << stepModeData_.stepCounter_ 
+            << " prevFoot: " << (stepModeData_.prevFoot_.value() == Foot::Left ? "Left" : "Right") 
+            << " prevFootstep: " << stepModeData_.prevFootstep_.back().translation().transpose() << std::endl;
+
   Foot foot = stepModeData_.prevFoot_.value();
   double startTime = ctl().t() + 1.0;
-  const auto & footstep = makeFootstep(foot, stepModeData_.prevFootstep_.back(), startTime);
-  stepModeData_.prevFootstep_.pop_back();
+
+  if(stepModeData_.stepCounter_ <= 2){
+    stepModeData_.prevFootstep_.at(stepModeData_.stepCounter_ - 1).translation().x() = 0.0;
+  }
+
+  const auto & footstep = makeFootstep(foot, stepModeData_.prevFootstep_.at(stepModeData_.stepCounter_ - 1), startTime);
   appendFootstep(footstep);
   stepModeData_.prevFoot_ = opposite(foot);
-  stepModeData_.stepCounter_--;
- 
+  stepModeData_.stepCounter_--; 
+
+  if(stepModeData_.stepCounter_ == 0){
+    stepModeData_.prevFootstep_.clear();
+  }
+
   return true;
 }
 
