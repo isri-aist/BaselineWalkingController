@@ -159,12 +159,6 @@ public:
     /** \brief Configuration. */
     struct Configuration
     {
-      //! Queue size of footsteps to be sent in the step mode (must be at least 3)
-      int footstepQueueSize = 3;
-
-      //! Whether to enable online footstep update during swing in the step mode
-      bool enableOnlineFootstepUpdate = true;
-
       /** \brief Load mc_rtc configuration.
           \param mcRtcConfig mc_rtc configuration
       */
@@ -452,9 +446,6 @@ protected:
 
   /** \brief Update ZMP trajectory. */
   virtual void updateZmpTraj();
-
-  /** \brief Update footstep sequence for the step mode. */
-  void updateStepMode();
 
   /** \brief Update footstep sequence for the velocity mode. */
   void updateVelMode();

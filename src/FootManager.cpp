@@ -73,16 +73,7 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 
 void FootManager::StepModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
-  // if(mcRtcConfig.has("footstepQueueSize"))
-  // {
-  //   footstepQueueSize = mcRtcConfig("footstepQueueSize");
-  //   if(footstepQueueSize < 3)
-  //   {
-  //     footstepQueueSize = 3;
-  //     mc_rtc::log::warning("[FootManager::VelModeData] footstepQueueSize must be at least 3.");
-  //   }
-  // }
-  // mcRtcConfig("enableOnlineFootstepUpdate", enableOnlineFootstepUpdate);
+
 }
 
 void FootManager::StepModeData::reset(bool enabled)
@@ -200,11 +191,8 @@ void FootManager::update()
 {
   updateFootTraj();
   updateZmpTraj();
-  if(stepModeData_.enabled_)
-  {
-    updateStepMode();
-  }
-  else if(velModeData_.enabled_)
+  
+  if(velModeData_.enabled_)
   {
     updateVelMode();
   }
@@ -735,10 +723,6 @@ bool FootManager::nextStepMode(){
     return false;
   }
 
-  auto convertTo2d = [](const sva::PTransformd & pose) ->   Eigen::Vector3d {
-    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
-  };
-
   auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
     return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
   };
@@ -775,10 +759,6 @@ bool FootManager::previousStepMode(){
   if(stepModeData_.stepCounter_ == 0){
     return false;
   }
-
-  std::cout << "stepCounter: " << stepModeData_.stepCounter_ 
-            << " prevFoot: " << (stepModeData_.prevFoot_.value() == Foot::Left ? "Left" : "Right") 
-            << " prevFootstep: " << stepModeData_.prevFootstep_.back().translation().transpose() << std::endl;
 
   Foot foot = stepModeData_.prevFoot_.value();
   double startTime = ctl().t() + 1.0;
@@ -1241,15 +1221,6 @@ void FootManager::updateZmpTraj()
 
   zmpFunc_->calcCoeff();
   groundPosZFunc_->calcCoeff();
-}
-
-void FootManager::updateStepMode(){
-  auto convertTo2d = [](const sva::PTransformd & pose) -> Eigen::Vector3d {
-    return Eigen::Vector3d(pose.translation().x(), pose.translation().y(), mc_rbdyn::rpyFromMat(pose.rotation()).z());
-  };
-  auto convertTo3d = [](const Eigen::Vector3d & trans) -> sva::PTransformd {
-    return sva::PTransformd(sva::RotZ(trans.z()), Eigen::Vector3d(trans.x(), trans.y(), 0));
-  };
 }
 
 void FootManager::updateVelMode()
