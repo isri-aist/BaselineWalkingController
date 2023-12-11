@@ -1,8 +1,8 @@
 #pragma once
 
 #include <deque>
-#include <unordered_map>
 #include <optional>
+#include <unordered_map>
 
 #include <mc_rtc/constants.h>
 #include <mc_rtc/gui/StateBuilder.h>
@@ -231,7 +231,7 @@ public:
     return stepModeData_;
   }
 
-    /** \brief Const accessor to the velocity mode data. */
+  /** \brief Const accessor to the velocity mode data. */
   inline const VelModeData & velModeData() const noexcept
   {
     return velModeData_;
@@ -386,17 +386,17 @@ public:
       \return whether it is successfully stamp stepped
   */
   bool stampStepMode();
-  
+
   /** \brief Next step mode.
       \return whether it is successfully next stepped
   */
   bool nextStepMode();
-  
+
   /** \brief Previous step mode.
       \return whether it is successfully previous stepped
    */
   bool previousStepMode();
-  
+
   /** \brief End velocity mode.
       \return whether it is successfully ended
    */

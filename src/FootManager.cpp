@@ -71,17 +71,13 @@ void FootManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
   }
 }
 
-void FootManager::StepModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
-{
-
-}
+void FootManager::StepModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig) {}
 
 void FootManager::StepModeData::reset(bool enabled)
 {
   enabled_ = enabled;
   // targetVel_.setZero();
 }
-
 
 void FootManager::VelModeData::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
@@ -191,7 +187,7 @@ void FootManager::update()
 {
   updateFootTraj();
   updateZmpTraj();
-  
+
   if(velModeData_.enabled_)
   {
     updateVelMode();
@@ -697,7 +693,8 @@ bool FootManager::startVelMode()
   return true;
 }
 
-bool FootManager::stampStepMode(){
+bool FootManager::stampStepMode()
+{
   if(!stepModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is not in step mode, but nextSteplMode is called.");
@@ -707,7 +704,7 @@ bool FootManager::stampStepMode(){
   // Add footsteps to queue for walking in place
   Foot foot = stepModeData_.prevFoot_.has_value() ? opposite(stepModeData_.prevFoot_.value()) : Foot::Left;
   const sva::PTransformd & footMidpose =
-  projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+      projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
   double startTime = ctl().t() + 1.0;
   const auto & footstep = makeFootstep(foot, footMidpose, startTime);
   appendFootstep(footstep);
@@ -716,7 +713,8 @@ bool FootManager::stampStepMode(){
   return true;
 }
 
-bool FootManager::nextStepMode(){
+bool FootManager::nextStepMode()
+{
   if(!stepModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is not in step mode, but nextSteplMode is called.");
@@ -728,20 +726,21 @@ bool FootManager::nextStepMode(){
   };
 
   // Add footsteps to queue for walking in place
-  Foot foot = (stepModeData_.stepCounter_ == 0) ? Foot::Left : (stepModeData_.stepCounter_ % 2 == 0) ? Foot::Left : Foot::Right;
+  Foot foot =
+      (stepModeData_.stepCounter_ == 0) ? Foot::Left : (stepModeData_.stepCounter_ % 2 == 0) ? Foot::Left : Foot::Right;
 
   Eigen::Vector3d deltaTrans = config_.footstepDuration * Eigen::Vector3d(1.0, 0.0, 0.0);
 
   const sva::PTransformd & initialFootMidpose =
-  projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
+      projGround(sva::interpolate(targetFootPoses_.at(Foot::Left), targetFootPoses_.at(Foot::Right), 0.5));
   sva::PTransformd footMidpose = initialFootMidpose;
   stepModeData_.prevFootstep_.push_back(footMidpose);
 
   footMidpose = convertTo3d(clampDeltaTrans(deltaTrans, foot)) * footMidpose;
-  
+
   double startTime = ctl().t() + 1.0;
   const auto & footstep = makeFootstep(foot, footMidpose, startTime);
-  
+
   appendFootstep(footstep);
   stepModeData_.prevFoot_ = foot;
   stepModeData_.stepCounter_++;
@@ -749,30 +748,34 @@ bool FootManager::nextStepMode(){
   return true;
 }
 
-bool FootManager::previousStepMode(){
+bool FootManager::previousStepMode()
+{
   if(!stepModeData_.enabled_)
   {
     mc_rtc::log::warning("[FootManager] It is not in step mode, but previousSteplMode is called.");
     return false;
   }
 
-  if(stepModeData_.stepCounter_ == 0){
+  if(stepModeData_.stepCounter_ == 0)
+  {
     return false;
   }
 
   Foot foot = stepModeData_.prevFoot_.value();
   double startTime = ctl().t() + 1.0;
 
-  if(stepModeData_.stepCounter_ <= 2){
+  if(stepModeData_.stepCounter_ <= 2)
+  {
     stepModeData_.prevFootstep_.at(stepModeData_.stepCounter_ - 1).translation().x() = 0.0;
   }
 
   const auto & footstep = makeFootstep(foot, stepModeData_.prevFootstep_.at(stepModeData_.stepCounter_ - 1), startTime);
   appendFootstep(footstep);
   stepModeData_.prevFoot_ = opposite(foot);
-  stepModeData_.stepCounter_--; 
+  stepModeData_.stepCounter_--;
 
-  if(stepModeData_.stepCounter_ == 0){
+  if(stepModeData_.stepCounter_ == 0)
+  {
     stepModeData_.prevFootstep_.clear();
   }
 
