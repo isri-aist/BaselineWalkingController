@@ -22,6 +22,5 @@ public:
   void teardown(mc_control::fsm::Controller & ctl) override;
 
 protected:
-
 };
 } // namespace BWC
