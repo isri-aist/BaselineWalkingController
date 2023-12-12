@@ -1,6 +1,7 @@
 #pragma once
 
 #include <deque>
+#include <optional>
 #include <unordered_map>
 
 #include <mc_rtc/constants.h>
@@ -148,6 +149,51 @@ public:
     Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
   };
 
+  /** \brief Step mode data.
+
+    In the Step mode, the robot move to next process at the trigger.
+  */
+  class StepModeData
+  {
+  public:
+    /** \brief Configuration. */
+    struct Configuration
+    {
+      /** \brief Load mc_rtc configuration.
+          \param mcRtcConfig mc_rtc configuration
+      */
+      void load(const mc_rtc::Configuration & mcRtcConfig);
+    };
+
+  public:
+    /** \brief Constructor. */
+    StepModeData() {}
+
+    /** \brief Reset.
+        \param enabled whether the step mode is enabled
+     */
+    void reset(bool enabled);
+
+  public:
+    //! Configuration
+    Configuration config_;
+
+    //! Whether the step mode is enabled
+    bool enabled_ = false;
+
+    //! Whether the step counter
+    int stepCounter_ = 0;
+
+    //! Previous footstep
+    std::optional<Foot> prevFoot_;
+
+    //! Previous footstep pose list
+    std::vector<sva::PTransformd> prevFootstep_;
+
+    //! Relative target step of foot midpose in the step mode (x [m/s], y [m/s], theta [rad/s])
+    Eigen::Vector3d targetVel_ = Eigen::Vector3d::Zero();
+  };
+
 public:
   /** \brief Constructor.
       \param ctlPtr pointer to controller
@@ -177,6 +223,12 @@ public:
   inline const Configuration & config() const noexcept
   {
     return config_;
+  }
+
+  /** \brief Const accessor to the step mode data. */
+  inline const StepModeData & stepModeData() const noexcept
+  {
+    return stepModeData_;
   }
 
   /** \brief Const accessor to the velocity mode data. */
@@ -326,10 +378,30 @@ public:
                           int lastFootstepNum = 0,
                           const std::vector<Eigen::Vector3d> & waypointTransList = {});
 
+  /** \brief step by step mode.
+      \return whether it is successfully started
+   */
+  bool startStepMode();
+
   /** \brief Start velocity mode.
       \return whether it is successfully started
    */
   bool startVelMode();
+
+  /** \brief Stamp step mode.
+      \return whether it is successfully stamp stepped
+  */
+  bool stampStepMode();
+
+  /** \brief Next step mode.
+      \return whether it is successfully next stepped
+  */
+  bool nextStepMode();
+
+  /** \brief Previous step mode.
+      \return whether it is successfully previous stepped
+   */
+  bool previousStepMode();
 
   /** \brief End velocity mode.
       \return whether it is successfully ended
@@ -342,6 +414,18 @@ public:
   inline void setRelativeVel(const Eigen::Vector3d & targetVel)
   {
     velModeData_.targetVel_ = targetVel;
+  }
+
+  /** \brief Whether the step mode is enabled. */
+  inline bool stepModeEnabled() const
+  {
+    return stepModeData_.enabled_;
+  }
+
+  /** \brief Whether the step counter. */
+  inline bool stepCount() const
+  {
+    return stepModeData_.stepCounter_;
   }
 
   /** \brief Whether the velocity mode is enabled. */
@@ -385,6 +469,9 @@ protected:
 protected:
   //! Configuration
   Configuration config_;
+
+  //! Step mode data
+  StepModeData stepModeData_;
 
   //! Velocity mode data
   VelModeData velModeData_;
