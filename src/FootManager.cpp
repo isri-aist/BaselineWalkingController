@@ -121,6 +121,11 @@ void FootManager::reset()
   footstepQueue_.clear();
   prevFootstep_.reset();
 
+  targetFootPoses_.clear();
+  targetFootVels_.clear();
+  targetFootAccels_.clear();
+  footTaskGains_.clear();
+  trajStartFootPoseFuncs_.clear();
   for(const auto & foot : Feet::Both)
   {
     targetFootPoses_.emplace(foot, ctl().robot().surfacePose(surfaceName(foot)));
