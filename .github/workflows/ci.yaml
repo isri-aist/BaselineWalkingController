@@ -71,6 +71,14 @@ jobs:
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
+            motion-type: WalkingOnPlaneRos # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OpenLoopMpc
             motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
@@ -96,6 +104,14 @@ jobs:
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
+          - os: ubuntu-20.04
+            catkin-build: standalone # catkin
+            build-type: RelWithDebInfo
+            mc-rtc-version: head
+            compiler: gcc
+            mpc-method: PreviewControlZmp
+            mpc-framework: OpenLoopMpc
+            motion-type: WalkingOnPlaneRos # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
             build-type: RelWithDebInfo
@@ -297,13 +313,18 @@ jobs:
           roscore > /dev/null 2>&1 < /dev/null &
           ROSCORE_PID=$!
           sleep 1s
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
             CNOID_FILE=sim_mc.cnoid
           else
             CNOID_FILE=sim_mc_comanoid_staircase.cnoid
           fi
           choreonoid ${CNOID_FILE} --test-mode --start-simulation &
           CNOID_PID=$!
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+              rostopic pub /goal_pose geometry_msgs/PoseStamped --file ${{ env.CI_DIR }}/ros/poseMsgWalkingOnPlaneRos.yaml --rate 10 --latch &
+              ROSTOPIC_PID=$!
+              python3 ${{ env.CI_DIR }}/scripts/clientWalkingOnPlaneRos.py &
+          fi
           if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
             SLEEP_DURATION="70s"
           else
@@ -313,6 +334,9 @@ jobs:
           kill -2 ${ROSCORE_PID}
           kill -2 ${CNOID_PID}
           kill -2 ${FFMPEG_PID}
+          if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+              kill -2 ${ROSTOPIC_PID}
+          fi
           sleep 1s
           kill -9 ${CNOID_PID} || true
           sleep 10s
@@ -340,6 +364,8 @@ jobs:
             EXPECTED_BASE_POS="0.82 0.57 0.8"
           elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" ]; then
             EXPECTED_BASE_POS="0.74 -0.53 0.8"
+          elif [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+            EXPECTED_BASE_POS="1.03 0.68 0.8"
           else # if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
             EXPECTED_BASE_POS="2.5 -0.25 0.8"
           fi
