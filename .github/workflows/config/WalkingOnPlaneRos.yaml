@@ -1,0 +1,14 @@
+transitions:
+  - [BWC::Initial_, OK, BWC::RosWalk_, Auto]
+
+states:
+  BWC::Initial_:
+    base: BWC::Initial
+    configs:
+      autoStartTime: 2.0
+
+  BWC::RosWalk_:
+    base: BWC::RosWalk
+    configs:
+      poseTopicName: /goal_pose
+      goalOffset: [-0.5, 0.0, 0.0]

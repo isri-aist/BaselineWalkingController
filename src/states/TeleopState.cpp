@@ -14,7 +14,7 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   // Skip if ROS is not initialized
   if(!mc_rtc::ROSBridge::get_node_handle())
   {
-    mc_rtc::log::warning("[TeleopState] ROS is not initialized.");
+    mc_rtc::log::error("[TeleopState] ROS is not initialized.");
     output("OK");
     return;
   }
