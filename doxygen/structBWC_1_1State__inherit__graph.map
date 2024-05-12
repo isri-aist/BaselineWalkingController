@@ -1,9 +1,10 @@
 <map id="BWC::State" name="BWC::State">
-<area shape="rect" id="node1" title="FSM State with utility functions." alt="" coords="223,107,317,133"/>
+<area shape="rect" id="node1" title="FSM State with utility functions." alt="" coords="223,132,317,159"/>
 <area shape="rect" id="node3" href="$structBWC_1_1ConfigWalkState.html" title="FSM state to send footstep from configuration." alt="" coords="380,5,551,32"/>
 <area shape="rect" id="node4" href="$structBWC_1_1FootstepPlannerState.html" title="FSM state to walk with footstep planner." alt="" coords="365,56,565,83"/>
 <area shape="rect" id="node5" href="$structBWC_1_1GuiWalkState.html" title="FSM state to send footstep from GUI." alt="" coords="390,107,541,133"/>
 <area shape="rect" id="node6" href="$structBWC_1_1InitialState.html" title="FSM state to initialize." alt="" coords="399,157,531,184"/>
-<area shape="rect" id="node7" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="397,208,534,235"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,107,175,133"/>
+<area shape="rect" id="node7" href="$structBWC_1_1RosWalkState.html" title="FSM state to send footstep via ROS topic." alt="" coords="389,208,541,235"/>
+<area shape="rect" id="node8" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="397,259,534,285"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,132,175,159"/>
 </map>

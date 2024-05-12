@@ -1,0 +1,7 @@
+<map id="BWC::RosWalkState" name="BWC::RosWalkState">
+<area shape="rect" id="node1" title="FSM state to send footstep via ROS topic." alt="" coords="35,247,187,273"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="64,171,159,197"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,81,175,108"/>
+<area shape="rect" id="node4" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="199,81,434,108"/>
+<area shape="rect" id="node5" title=" " alt="" coords="217,5,416,32"/>
+</map>
