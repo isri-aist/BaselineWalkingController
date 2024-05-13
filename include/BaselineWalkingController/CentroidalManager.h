@@ -3,6 +3,8 @@
 #include <mc_rtc/gui/StateBuilder.h>
 #include <mc_rtc/log/Logger.h>
 
+#include <state-observation/dynamics-estimators/lipm-dcm-estimator.hpp>
+
 #include <TrajColl/CubicInterpolator.h>
 
 #include <BaselineWalkingController/FootTypes.h>
@@ -30,6 +32,39 @@ class BaselineWalkingController;
 class CentroidalManager
 {
 public:
+  /** \brief Configuration for DCM estimator. */
+  struct DcmEstimatorConfiguration
+  {
+    //! Whether to enable DCM estimator
+    bool enableDcmEstimator = false;
+
+    //! DCM correction mode ("Bias", "Filter", or "None")
+    std::string dcmCorrectionMode = "Bias";
+
+    //! The standard deviation of the DCM bias drift [m/s]
+    double biasDriftPerSecondStd = stateObservation::LipmDcmEstimator::defaultBiasDriftSecond;
+
+    //! The standard deviation of the DCM estimation error, NOT including the DCM bias [m]
+    double dcmMeasureErrorStd = stateObservation::LipmDcmEstimator::defaultDcmErrorStd;
+
+    //! The standard deviaiton of the ZMP estimation error [m]
+    double zmpMeasureErrorStd = stateObservation::LipmDcmEstimator::defaultZmpErrorStd;
+
+    //! The largest accepted absolute value of the DCM bias in local frame [m] (negative value for no limit)
+    Eigen::Vector2d biasLimit = Eigen::Vector2d::Constant(0.03);
+
+    //! The uncertainty in the DCM initial value [m]
+    Eigen::Vector2d initDcmUncertainty =
+        Eigen::Vector2d::Constant(stateObservation::LipmDcmEstimator::defaultDCMUncertainty);
+
+    //! The uncertainty in the DCM bias initial value [m]
+    Eigen::Vector2d initBiasUncertainty =
+        Eigen::Vector2d::Constant(stateObservation::LipmDcmEstimator::defaultBiasUncertainty);
+
+    /** \brief Load mc_rtc configuration. */
+    virtual void load(const mc_rtc::Configuration & mcRtcConfig);
+  };
+
   /** \brief Configuration. */
   struct Configuration
   {
@@ -72,11 +107,14 @@ public:
     //! Whether to use actual CoM for wrench distribution
     bool useActualComForWrenchDist = true;
 
-    //! Actual CoM offset
+    //! Actual CoM offset in world frame [m]
     Eigen::Vector3d actualComOffset = Eigen::Vector3d::Zero();
 
     //! Configuration for wrench distribution
     mc_rtc::Configuration wrenchDistConfig;
+
+    //! Configuration for DCM estimator
+    DcmEstimatorConfiguration dcmEstimatorConfig;
 
     /** \brief Load mc_rtc configuration. */
     virtual void load(const mc_rtc::Configuration & mcRtcConfig);
@@ -232,5 +270,11 @@ protected:
 
   //! Interpolation function of reference CoM Z position
   std::shared_ptr<TrajColl::CubicInterpolator<double>> refComZFunc_;
+
+  //! DCM estimator
+  std::shared_ptr<stateObservation::LipmDcmEstimator> dcmEstimator_;
+
+  //! Whether to require to reset DCM estimator
+  bool requireDcmEstimatorReset_ = true;
 };
 } // namespace BWC

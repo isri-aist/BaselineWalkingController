@@ -2,6 +2,7 @@
 
 #include <mc_rtc/gui/Button.h>
 #include <mc_rtc/gui/Checkbox.h>
+#include <mc_rtc/gui/ComboInput.h>
 #include <mc_rtc/gui/Label.h>
 #include <mc_rtc/gui/NumberInput.h>
 #include <mc_rtc/gui/plot.h>
@@ -16,6 +17,24 @@
 #include <BaselineWalkingController/FootManager.h>
 
 using namespace BWC;
+
+void CentroidalManager::DcmEstimatorConfiguration::load(const mc_rtc::Configuration & mcRtcConfig)
+{
+  mcRtcConfig("enableDcmEstimator", enableDcmEstimator);
+  mcRtcConfig("dcmCorrectionMode", dcmCorrectionMode);
+  const std::vector<std::string> dcmCorrectionModeList = {"Bias", "Filter", "None"};
+  if(std::find(dcmCorrectionModeList.begin(), dcmCorrectionModeList.end(), dcmCorrectionMode)
+     == dcmCorrectionModeList.end())
+  {
+    mc_rtc::log::error_and_throw("[CentroidalManager] Invalid dcmCorrectionMode: {}", dcmCorrectionMode);
+  }
+  mcRtcConfig("biasDriftPerSecondStd", biasDriftPerSecondStd);
+  mcRtcConfig("dcmMeasureErrorStd", dcmMeasureErrorStd);
+  mcRtcConfig("zmpMeasureErrorStd", zmpMeasureErrorStd);
+  mcRtcConfig("biasLimit", biasLimit);
+  mcRtcConfig("initDcmUncertainty", initDcmUncertainty);
+  mcRtcConfig("initBiasUncertainty", initBiasUncertainty);
+}
 
 void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcConfig)
 {
@@ -33,6 +52,7 @@ void CentroidalManager::Configuration::load(const mc_rtc::Configuration & mcRtcC
   mcRtcConfig("useActualComForWrenchDist", useActualComForWrenchDist);
   mcRtcConfig("actualComOffset", actualComOffset);
   mcRtcConfig("wrenchDistConfig", wrenchDistConfig);
+  dcmEstimatorConfig.load(mcRtcConfig("dcmEstimator", mc_rtc::Configuration()));
 }
 
 CentroidalManager::CentroidalManager(BaselineWalkingController * ctlPtr, const mc_rtc::Configuration & // mcRtcConfig
@@ -49,6 +69,15 @@ void CentroidalManager::reset()
   refComZFunc_->appendPoint(std::make_pair(ctl().t(), config().refComZ));
   refComZFunc_->appendPoint(std::make_pair(interpMaxTime_, config().refComZ));
   refComZFunc_->calcCoeff();
+
+  const DcmEstimatorConfiguration & dcmEstimatorConfig = config().dcmEstimatorConfig;
+  double nominalOmega = std::sqrt(mc_rtc::constants::GRAVITY / config().refComZ);
+  dcmEstimator_ = std::make_shared<stateObservation::LipmDcmEstimator>(
+      ctl().dt(), nominalOmega, dcmEstimatorConfig.biasDriftPerSecondStd, dcmEstimatorConfig.dcmMeasureErrorStd,
+      dcmEstimatorConfig.zmpMeasureErrorStd, dcmEstimatorConfig.biasLimit, Eigen::Vector2d::Zero(),
+      Eigen::Vector2d::Zero(), Eigen::Vector2d::Zero(), dcmEstimatorConfig.initDcmUncertainty,
+      dcmEstimatorConfig.initBiasUncertainty);
+  requireDcmEstimatorReset_ = true;
 }
 
 void CentroidalManager::update()
@@ -70,6 +99,20 @@ void CentroidalManager::update()
   // Run MPC
   runMpc();
 
+  // Calculate measured ZMP
+  {
+    std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
+    for(const auto & foot : ctl().footManager_->getCurrentContactFeet())
+    {
+      const auto & surfaceName = ctl().footManager_->surfaceName(foot);
+      const auto & sensorName = ctl().robot().indirectSurfaceForceSensor(surfaceName).name();
+      const auto & sensor = ctl().robot().forceSensor(sensorName);
+      const auto & sensorWrench = sensor.worldWrenchWithoutGravity(ctl().robot());
+      sensorWrenchList.emplace(foot, sensorWrench);
+    }
+    measuredZMP_ = calcZmp(sensorWrenchList, refZmp_.z());
+  }
+
   // Calculate target wrench
   {
     controlZmp_ = plannedZmp_;
@@ -86,7 +129,48 @@ void CentroidalManager::update()
       double omega = std::sqrt(plannedForceZ_ / (robotMass_ * (mpcCom_.z() - refZmp_.z())));
       Eigen::Vector3d plannedDcm = ctl().comTask_->com() + ctl().comTask_->refVel() / omega;
       Eigen::Vector3d actualDcm = actualCom() + ctl().realRobot().comVelocity() / omega;
-      controlZmp_.head<2>() += config().dcmGainP * (actualDcm - plannedDcm).head<2>();
+      Eigen::Vector3d dcmError = actualDcm - plannedDcm;
+
+      // Estimate and compensate for DCM bias
+      if(config().dcmEstimatorConfig.enableDcmEstimator)
+      {
+        if(omega != dcmEstimator_->getLipmNaturalFrequency())
+        {
+          dcmEstimator_->setLipmNaturalFrequency(omega);
+        }
+
+        const Eigen::Matrix3d & baseOrientation = ctl().robot().posW().rotation().transpose();
+        if(requireDcmEstimatorReset_)
+        {
+          dcmEstimator_->resetWithMeasurements(actualDcm.head<2>(), measuredZMP_.head<2>(), baseOrientation, true);
+          requireDcmEstimatorReset_ = false;
+        }
+        else
+        {
+          dcmEstimator_->setInputs(actualDcm.head<2>(), measuredZMP_.head<2>(), baseOrientation);
+        }
+
+        dcmEstimator_->update();
+
+        if(config().dcmEstimatorConfig.dcmCorrectionMode == "Bias")
+        {
+          dcmError.head<2>() -= dcmEstimator_->getBias();
+        }
+        else if(config().dcmEstimatorConfig.dcmCorrectionMode == "Filter")
+        {
+          dcmError.head<2>() = dcmEstimator_->getUnbiasedDCM();
+        }
+        // else if(config().dcmEstimatorConfig.dcmCorrectionMode == "None")
+        // {
+        // }
+      }
+      else
+      {
+        requireDcmEstimatorReset_ = true;
+        dcmEstimator_->setBias(Eigen::Vector2d::Zero());
+      }
+
+      controlZmp_.head<2>() += config().dcmGainP * dcmError.head<2>();
     }
 
     // Apply ForceZ feedback
@@ -143,19 +227,8 @@ void CentroidalManager::update()
     }
   }
 
-  // Calculate ZMP for log
+  // Calculate support region for log
   {
-    std::unordered_map<Foot, sva::ForceVecd> sensorWrenchList;
-    for(const auto & foot : ctl().footManager_->getCurrentContactFeet())
-    {
-      const auto & surfaceName = ctl().footManager_->surfaceName(foot);
-      const auto & sensorName = ctl().robot().indirectSurfaceForceSensor(surfaceName).name();
-      const auto & sensor = ctl().robot().forceSensor(sensorName);
-      const auto & sensorWrench = sensor.worldWrenchWithoutGravity(ctl().robot());
-      sensorWrenchList.emplace(foot, sensorWrench);
-    }
-    measuredZMP_ = calcZmp(sensorWrenchList, refZmp_.z());
-
     supportRegion_[0].setConstant(std::numeric_limits<double>::max());
     supportRegion_[1].setConstant(std::numeric_limits<double>::lowest());
     for(const auto & contactKV : contactList_)
@@ -214,6 +287,44 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
       mc_rtc::gui::ArrayInput(
           "actualComOffset", {"x", "y", "z"}, [this]() -> const Eigen::Vector3d & { return config().actualComOffset; },
           [this](const Eigen::Vector3d & v) { config().actualComOffset = v; }));
+
+  gui.addElement({ctl().name(), config().name, "DcmEstimator"},
+                 mc_rtc::gui::Checkbox(
+                     "enableDcmEstimator", [this]() { return config().dcmEstimatorConfig.enableDcmEstimator; },
+                     [this]() {
+                       config().dcmEstimatorConfig.enableDcmEstimator = !config().dcmEstimatorConfig.enableDcmEstimator;
+                     }),
+                 mc_rtc::gui::ComboInput(
+                     "dcmCorrectionMode", {"Bias", "Filter", "None"},
+                     [this]() -> const std::string & { return config().dcmEstimatorConfig.dcmCorrectionMode; },
+                     [this](const std::string & v) { config().dcmEstimatorConfig.dcmCorrectionMode = v; }),
+                 mc_rtc::gui::NumberInput(
+                     "biasDriftPerSecondStd", [this]() { return config().dcmEstimatorConfig.biasDriftPerSecondStd; },
+                     [this](double v) {
+                       config().dcmEstimatorConfig.biasDriftPerSecondStd = v;
+                       dcmEstimator_->setBiasDriftPerSecond(v);
+                     }),
+                 mc_rtc::gui::NumberInput(
+                     "dcmMeasureErrorStd", [this]() { return config().dcmEstimatorConfig.dcmMeasureErrorStd; },
+                     [this](double v) {
+                       config().dcmEstimatorConfig.dcmMeasureErrorStd = v;
+                       dcmEstimator_->setDcmMeasureErrorStd(v);
+                     }),
+                 mc_rtc::gui::NumberInput(
+                     "zmpMeasureErrorStd", [this]() { return config().dcmEstimatorConfig.zmpMeasureErrorStd; },
+                     [this](double v) {
+                       config().dcmEstimatorConfig.zmpMeasureErrorStd = v;
+                       dcmEstimator_->setZmpMeasureErrorStd(v);
+                     }),
+                 mc_rtc::gui::ArrayInput(
+                     "biasLimit", {"local X", "local Y"},
+                     [this]() -> const Eigen::Vector2d & { return config().dcmEstimatorConfig.biasLimit; },
+                     [this](const Eigen::Vector2d & v) {
+                       config().dcmEstimatorConfig.biasLimit = v;
+                       dcmEstimator_->setBiasLimit(v);
+                     }),
+                 mc_rtc::gui::ArrayLabel("estimatedLocalBias", {"local X", "local Y"},
+                                         [this]() { return dcmEstimator_->getLocalBias(); }));
 
   gui.addElement(
       {ctl().name(), config().name, "Plot"}, mc_rtc::gui::ElementsStacking::Horizontal,
@@ -304,6 +415,8 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   logger.addLogEntry(config().name + "_CoM_planned", this, [this]() { return ctl().comTask_->com(); });
   logger.addLogEntry(config().name + "_CoM_controlRobot", this, [this]() { return ctl().robot().com(); });
   logger.addLogEntry(config().name + "_CoM_realRobot", this, [this]() { return actualCom(); });
+  logger.addLogEntry(config().name + "_CoM_realRobotUnbiased", this,
+                     [this]() -> Eigen::Vector2d { return actualCom().head<2>() - dcmEstimator_->getBias(); });
 
   MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
   MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
@@ -322,6 +435,13 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   logger.addLogEntry(config().name + "_CentroidalMomentum_controlRobot", this, [this]() {
     return rbd::computeCentroidalMomentum(ctl().robot().mb(), ctl().robot().mbc(), ctl().robot().com());
   });
+
+  logger.addLogEntry(config().name + "_DcmEstimator_enableDcmEstimator", this,
+                     [this]() { return config().dcmEstimatorConfig.enableDcmEstimator; });
+  logger.addLogEntry(config().name + "_DcmEstimator_dcmCorrectionMode", this,
+                     [this]() { return config().dcmEstimatorConfig.dcmCorrectionMode; });
+  logger.addLogEntry(config().name + "_DcmEstimator_localBias", this,
+                     [this]() { return dcmEstimator_->getLocalBias(); });
 }
 
 void CentroidalManager::removeFromLogger(mc_rtc::Logger & logger)
