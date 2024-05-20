@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['roswalkstate_307',['RosWalkState',['../structBWC_1_1RosWalkState.html',1,'BWC']]]
+  ['initialstate_320',['InitialState',['../structBWC_1_1InitialState.html',1,'BWC']]]
 ];

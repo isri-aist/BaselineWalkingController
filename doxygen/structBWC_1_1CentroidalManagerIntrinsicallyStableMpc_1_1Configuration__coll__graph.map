@@ -1,4 +1,5 @@
 <map id="BWC::CentroidalManagerIntrinsicallyStableMpc::Configuration" name="BWC::CentroidalManagerIntrinsicallyStableMpc::Configuration">
-<area shape="rect" id="node1" title="Configuration." alt="" coords="5,95,267,136"/>
-<area shape="rect" id="node2" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="43,5,229,47"/>
+<area shape="rect" id="node1" title="Configuration." alt="" coords="5,200,267,241"/>
+<area shape="rect" id="node2" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="43,109,229,151"/>
+<area shape="rect" id="node3" href="$structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html" title="Configuration for DCM estimator." alt="" coords="31,5,241,47"/>
 </map>

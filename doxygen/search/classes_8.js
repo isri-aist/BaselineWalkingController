@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['velmodedata_316',['VelModeData',['../classBWC_1_1FootManager_1_1VelModeData.html',1,'BWC::FootManager']]]
+  ['taskgain_328',['TaskGain',['../structBWC_1_1TaskGain.html',1,'BWC']]],
+  ['teleopstate_329',['TeleopState',['../structBWC_1_1TeleopState.html',1,'BWC']]]
 ];

@@ -101,12 +101,13 @@ Collaboration diagram for BWC::CentroidalManagerIntrinsicallyStableMpc:</div>
 <div class="dyncontent">
 <div class="center"><img src="classBWC_1_1CentroidalManagerIntrinsicallyStableMpc__coll__graph.png" border="0" usemap="#BWC_1_1CentroidalManagerIntrinsicallyStableMpc_coll__map" alt="Collaboration graph"/></div>
 <map name="BWC_1_1CentroidalManagerIntrinsicallyStableMpc_coll__map" id="BWC_1_1CentroidalManagerIntrinsicallyStableMpc_coll__map">
-<area shape="rect" title="Centroidal manager with intrinsically stable MPC." alt="" coords="943,29,1204,70"/>
-<area shape="rect" href="classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="619,7,805,33"/>
-<area shape="rect" href="structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="253,7,488,33"/>
-<area shape="rect" title=" " alt="" coords="5,7,204,33"/>
-<area shape="rect" href="structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html" title="Configuration." alt="" coords="581,58,843,99"/>
-<area shape="rect" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="278,58,463,99"/>
+<area shape="rect" title="Centroidal manager with intrinsically stable MPC." alt="" coords="1091,29,1352,70"/>
+<area shape="rect" href="classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="767,7,953,33"/>
+<area shape="rect" href="structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="401,7,636,33"/>
+<area shape="rect" title=" " alt="" coords="11,7,210,33"/>
+<area shape="rect" href="structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html" title="Configuration." alt="" coords="729,58,991,99"/>
+<area shape="rect" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="426,58,611,99"/>
+<area shape="rect" href="structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html" title="Configuration for DCM estimator." alt="" coords="5,58,216,99"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -186,6 +187,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a46d5c075fb659255ca0bfc9bd0e6a0a3 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a46d5c075fb659255ca0bfc9bd0e6a0a3">actualCom</a> () const</td></tr>
 <tr class="memdesc:a46d5c075fb659255ca0bfc9bd0e6a0a3 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get actual CoM.  <a href="classBWC_1_1CentroidalManager.html#a46d5c075fb659255ca0bfc9bd0e6a0a3">More...</a><br /></td></tr>
 <tr class="separator:a46d5c075fb659255ca0bfc9bd0e6a0a3 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d3d6dea82f63300cc10b136239765ea inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a7d3d6dea82f63300cc10b136239765ea">actualComUnbiased</a> () const</td></tr>
+<tr class="memdesc:a7d3d6dea82f63300cc10b136239765ea inherit pro_methods_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get actual unbiased CoM.  <a href="classBWC_1_1CentroidalManager.html#a7d3d6dea82f63300cc10b136239765ea">More...</a><br /></td></tr>
+<tr class="separator:a7d3d6dea82f63300cc10b136239765ea inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9327e8982d8aa10645c90a1f7f7698c9 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#a9327e8982d8aa10645c90a1f7f7698c9">calcZmp</a> (const std::unordered_map&lt; <a class="el" href="namespaceBWC.html#a162f2376799a8c471d7d68a528d23190">Foot</a>, sva::ForceVecd &gt; &amp;wrenchList, double zmpPlaneHeight=0, const Eigen::Vector3d &amp;zmpPlaneNormal=Eigen::Vector3d::UnitZ()) const</td></tr>
 <tr class="memdesc:a9327e8982d8aa10645c90a1f7f7698c9 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate ZMP from wrench list.  <a href="classBWC_1_1CentroidalManager.html#a9327e8982d8aa10645c90a1f7f7698c9">More...</a><br /></td></tr>
 <tr class="separator:a9327e8982d8aa10645c90a1f7f7698c9 inherit pro_methods_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -253,6 +257,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:af1427f04efb79a9ed87f575adad10167 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; TrajColl::CubicInterpolator&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#af1427f04efb79a9ed87f575adad10167">refComZFunc_</a></td></tr>
 <tr class="memdesc:af1427f04efb79a9ed87f575adad10167 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpolation function of reference CoM Z position.  <a href="classBWC_1_1CentroidalManager.html#af1427f04efb79a9ed87f575adad10167">More...</a><br /></td></tr>
 <tr class="separator:af1427f04efb79a9ed87f575adad10167 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae62970cb9dc236392d72d6ed649800b0 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; stateObservation::LipmDcmEstimator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#ae62970cb9dc236392d72d6ed649800b0">dcmEstimator_</a></td></tr>
+<tr class="memdesc:ae62970cb9dc236392d72d6ed649800b0 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">DCM estimator.  <a href="classBWC_1_1CentroidalManager.html#ae62970cb9dc236392d72d6ed649800b0">More...</a><br /></td></tr>
+<tr class="separator:ae62970cb9dc236392d72d6ed649800b0 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c3f66618a0444fcb4163ff6ae16866 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBWC_1_1CentroidalManager.html#af4c3f66618a0444fcb4163ff6ae16866">requireDcmEstimatorReset_</a> = true</td></tr>
+<tr class="memdesc:af4c3f66618a0444fcb4163ff6ae16866 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to require to reset DCM estimator.  <a href="classBWC_1_1CentroidalManager.html#af4c3f66618a0444fcb4163ff6ae16866">More...</a><br /></td></tr>
+<tr class="separator:af4c3f66618a0444fcb4163ff6ae16866 inherit pro_attribs_classBWC_1_1CentroidalManager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Centroidal manager with intrinsically stable MPC. </p>

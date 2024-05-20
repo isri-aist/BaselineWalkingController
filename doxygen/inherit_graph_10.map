@@ -1,7 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classBWC_1_1SwingTraj.html" title="Foot swing trajectory." alt="" coords="5,107,129,134"/>
-<area shape="rect" id="node2" href="$classBWC_1_1SwingTrajCubicSplineSimple.html" title="Simple foot swing trajectory with cubic spline." alt="" coords="196,5,396,47"/>
-<area shape="rect" id="node3" href="$classBWC_1_1SwingTrajIndHorizontalVertical.html" title="Foot swing trajectory with independent interpolation of horizontal and vertical positions." alt="" coords="191,71,401,112"/>
-<area shape="rect" id="node4" href="$classBWC_1_1SwingTrajLandingSearch.html" title="Foot swing trajectory, moving the foot while searching for the landing pose on the ground." alt="" coords="187,137,405,163"/>
-<area shape="rect" id="node5" href="$classBWC_1_1SwingTrajVariableTaskGain.html" title="Foot swing trajectory that makes the horizontal position converge by determining the variable IK task..." alt="" coords="177,187,415,214"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,61,159"/>
+<area shape="rect" id="node2" href="$structBWC_1_1State.html" title="FSM State with utility functions." alt="" coords="109,132,204,159"/>
+<area shape="rect" id="node3" href="$structBWC_1_1ConfigWalkState.html" title="FSM state to send footstep from configuration." alt="" coords="267,5,437,32"/>
+<area shape="rect" id="node4" href="$structBWC_1_1FootstepPlannerState.html" title="FSM state to walk with footstep planner." alt="" coords="252,56,452,83"/>
+<area shape="rect" id="node5" href="$structBWC_1_1GuiWalkState.html" title="FSM state to send footstep from GUI." alt="" coords="277,107,427,133"/>
+<area shape="rect" id="node6" href="$structBWC_1_1InitialState.html" title="FSM state to initialize." alt="" coords="286,157,418,184"/>
+<area shape="rect" id="node7" href="$structBWC_1_1RosWalkState.html" title="FSM state to send footstep via ROS topic." alt="" coords="276,208,428,235"/>
+<area shape="rect" id="node8" href="$structBWC_1_1TeleopState.html" title="FSM state to walk with teleoperation." alt="" coords="283,259,421,285"/>
 </map>

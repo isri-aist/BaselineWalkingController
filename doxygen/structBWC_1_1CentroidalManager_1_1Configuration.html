@@ -97,6 +97,15 @@ Inheritance diagram for BWC::CentroidalManager::Configuration:</div>
 <area shape="rect" href="structBWC_1_1CentroidalManagerPreviewControlZmp_1_1Configuration.html" title="Configuration." alt="" coords="251,201,488,243"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for BWC::CentroidalManager::Configuration:</div>
+<div class="dyncontent">
+<div class="center"><img src="structBWC_1_1CentroidalManager_1_1Configuration__coll__graph.png" border="0" usemap="#BWC_1_1CentroidalManager_1_1Configuration_coll__map" alt="Collaboration graph"/></div>
+<map name="BWC_1_1CentroidalManager_1_1Configuration_coll__map" id="BWC_1_1CentroidalManager_1_1Configuration_coll__map">
+<area shape="rect" title="Configuration." alt="" coords="18,109,203,151"/>
+<area shape="rect" href="structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html" title="Configuration for DCM estimator." alt="" coords="5,5,216,47"/>
+</map>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -139,20 +148,23 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac25ebbf1dc63283667166fc14b31c316"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316">useTargetPoseForControlRobotAnchorFrame</a> = true</td></tr>
 <tr class="memdesc:ac25ebbf1dc63283667166fc14b31c316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use target surface pose for anchor frame of control robot.  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#ac25ebbf1dc63283667166fc14b31c316">More...</a><br /></td></tr>
 <tr class="separator:ac25ebbf1dc63283667166fc14b31c316"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab69950e6163f7e54eb570ca9d931d5eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb">useActualComForWrenchDist</a> = true</td></tr>
+<tr class="memitem:ab69950e6163f7e54eb570ca9d931d5eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb">useActualComForWrenchDist</a> = false</td></tr>
 <tr class="memdesc:ab69950e6163f7e54eb570ca9d931d5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use actual CoM for wrench distribution.  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#ab69950e6163f7e54eb570ca9d931d5eb">More...</a><br /></td></tr>
 <tr class="separator:ab69950e6163f7e54eb570ca9d931d5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af29cd1e826eb88a764885c741a8ac57c"><td class="memItemLeft" align="right" valign="top">Eigen::Vector3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#af29cd1e826eb88a764885c741a8ac57c">actualComOffset</a> = Eigen::Vector3d::Zero()</td></tr>
-<tr class="memdesc:af29cd1e826eb88a764885c741a8ac57c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual CoM offset.  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#af29cd1e826eb88a764885c741a8ac57c">More...</a><br /></td></tr>
+<tr class="memdesc:af29cd1e826eb88a764885c741a8ac57c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actual CoM offset in world frame [m].  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#af29cd1e826eb88a764885c741a8ac57c">More...</a><br /></td></tr>
 <tr class="separator:af29cd1e826eb88a764885c741a8ac57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d0c8eb8d7fc3f40b2e26fb0dc9952fc"><td class="memItemLeft" align="right" valign="top">mc_rtc::Configuration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc">wrenchDistConfig</a></td></tr>
 <tr class="memdesc:a9d0c8eb8d7fc3f40b2e26fb0dc9952fc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration.">Configuration</a> for wrench distribution.  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#a9d0c8eb8d7fc3f40b2e26fb0dc9952fc">More...</a><br /></td></tr>
 <tr class="separator:a9d0c8eb8d7fc3f40b2e26fb0dc9952fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaafb9f9fe9cd856f1fcbb05c735d922"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html">DcmEstimatorConfiguration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html#afaafb9f9fe9cd856f1fcbb05c735d922">dcmEstimatorConfig</a></td></tr>
+<tr class="memdesc:afaafb9f9fe9cd856f1fcbb05c735d922"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration.">Configuration</a> for DCM estimator.  <a href="structBWC_1_1CentroidalManager_1_1Configuration.html#afaafb9f9fe9cd856f1fcbb05c735d922">More...</a><br /></td></tr>
+<tr class="separator:afaafb9f9fe9cd856f1fcbb05c735d922"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration.">Configuration</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00034">34</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00069">69</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa4a7e0d4aa616f1a64d78860515b6058"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4a7e0d4aa616f1a64d78860515b6058">&#9670;&nbsp;</a></span>load()</h2>
@@ -197,9 +209,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Actual CoM offset. </p>
+<p>Actual CoM offset in world frame [m]. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00076">76</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00111">111</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -217,7 +229,7 @@ Public Attributes</h2></td></tr>
 
 <p>Feedback derivative gain of CoM Z. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00064">64</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00099">99</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +247,25 @@ Public Attributes</h2></td></tr>
 
 <p>Feedback proportional gain of CoM Z. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00061">61</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00096">96</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+
+</div>
+</div>
+<a id="afaafb9f9fe9cd856f1fcbb05c735d922"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaafb9f9fe9cd856f1fcbb05c735d922">&#9670;&nbsp;</a></span>dcmEstimatorConfig</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html">DcmEstimatorConfiguration</a> BWC::CentroidalManager::Configuration::dcmEstimatorConfig</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration.">Configuration</a> for DCM estimator. </p>
+
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00117">117</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -254,7 +284,7 @@ Public Attributes</h2></td></tr>
 <p>Feedback gain of DCM. </p>
 <p>It must be greater than 1 to be stable. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00055">55</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00090">90</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -272,7 +302,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to enable CoM Z feedback. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00049">49</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00084">84</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +320,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to enable DCM feedback. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00046">46</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00081">81</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -308,7 +338,7 @@ Public Attributes</h2></td></tr>
 
 <p>Method. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00040">40</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00075">75</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -326,7 +356,7 @@ Public Attributes</h2></td></tr>
 
 <p>Name. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00037">37</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00072">72</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -344,7 +374,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reference CoM Z position [m]. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00067">67</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00102">102</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -355,14 +385,14 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool BWC::CentroidalManager::Configuration::useActualComForWrenchDist = true</td>
+          <td class="memname">bool BWC::CentroidalManager::Configuration::useActualComForWrenchDist = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Whether to use actual CoM for wrench distribution. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00073">73</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00108">108</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -380,7 +410,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to use actual state for MPC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00043">43</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00078">78</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -398,7 +428,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether to use target surface pose for anchor frame of control robot. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00070">70</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00105">105</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -416,7 +446,7 @@ Public Attributes</h2></td></tr>
 
 <p><a class="el" href="structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration.">Configuration</a> for wrench distribution. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00079">79</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00114">114</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>
@@ -434,7 +464,7 @@ Public Attributes</h2></td></tr>
 
 <p>Feedforward gain of ZMP velocity. </p>
 
-<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00058">58</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="CentroidalManager_8h_source.html#l00093">93</a> of file <a class="el" href="CentroidalManager_8h_source.html">CentroidalManager.h</a>.</p>
 
 </div>
 </div>

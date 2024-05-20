@@ -1,4 +1,5 @@
 <map id="BWC::CentroidalManagerFootGuidedControl::Configuration" name="BWC::CentroidalManagerFootGuidedControl::Configuration">
-<area shape="rect" id="node1" title="Configuration." alt="" coords="5,95,219,136"/>
-<area shape="rect" id="node2" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="19,5,205,47"/>
+<area shape="rect" id="node1" title="Configuration." alt="" coords="5,200,219,241"/>
+<area shape="rect" id="node2" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="19,109,205,151"/>
+<area shape="rect" id="node3" href="$structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html" title="Configuration for DCM estimator." alt="" coords="7,5,217,47"/>
 </map>

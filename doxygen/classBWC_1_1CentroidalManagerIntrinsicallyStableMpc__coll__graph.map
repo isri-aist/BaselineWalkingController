@@ -1,8 +1,9 @@
 <map id="BWC::CentroidalManagerIntrinsicallyStableMpc" name="BWC::CentroidalManagerIntrinsicallyStableMpc">
-<area shape="rect" id="node1" title="Centroidal manager with intrinsically stable MPC." alt="" coords="943,29,1204,70"/>
-<area shape="rect" id="node2" href="$classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="619,7,805,33"/>
-<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="253,7,488,33"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,7,204,33"/>
-<area shape="rect" id="node5" href="$structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html" title="Configuration." alt="" coords="581,58,843,99"/>
-<area shape="rect" id="node6" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="278,58,463,99"/>
+<area shape="rect" id="node1" title="Centroidal manager with intrinsically stable MPC." alt="" coords="1091,29,1352,70"/>
+<area shape="rect" id="node2" href="$classBWC_1_1CentroidalManager.html" title="Centroidal manager." alt="" coords="767,7,953,33"/>
+<area shape="rect" id="node3" href="$structBWC_1_1BaselineWalkingController.html" title="Humanoid walking controller with various baseline methods." alt="" coords="401,7,636,33"/>
+<area shape="rect" id="node4" title=" " alt="" coords="11,7,210,33"/>
+<area shape="rect" id="node5" href="$structBWC_1_1CentroidalManagerIntrinsicallyStableMpc_1_1Configuration.html" title="Configuration." alt="" coords="729,58,991,99"/>
+<area shape="rect" id="node6" href="$structBWC_1_1CentroidalManager_1_1Configuration.html" title="Configuration." alt="" coords="426,58,611,99"/>
+<area shape="rect" id="node7" href="$structBWC_1_1CentroidalManager_1_1DcmEstimatorConfiguration.html" title="Configuration for DCM estimator." alt="" coords="5,58,216,99"/>
 </map>
