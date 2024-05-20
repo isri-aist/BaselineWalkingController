@@ -199,6 +199,15 @@ CentroidalManager:
       angular: [1.0, 1.0, 1.0]
     regularWeight: 1e-8
     ridgeForceMinMax: [3, 1000] # [N]
+  dcmEstimator:
+    enableDcmEstimator: false
+    dcmCorrectionMode: Bias # "Bias", "Filter", or "None"
+    biasDriftPerSecondStd: 0.002
+    dcmMeasureErrorStd: 0.01
+    zmpMeasureErrorStd: 0.005
+    biasLimit: [0.03, 0.03]
+    initDcmUncertainty: [0.01, 0.01]
+    initBiasUncertainty: [0.01, 0.01]
 
   # PreviewControlZmp
   method: PreviewControlZmp
