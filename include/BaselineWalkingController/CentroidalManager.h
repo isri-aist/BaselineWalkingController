@@ -105,7 +105,7 @@ public:
     bool useTargetPoseForControlRobotAnchorFrame = true;
 
     //! Whether to use actual CoM for wrench distribution
-    bool useActualComForWrenchDist = true;
+    bool useActualComForWrenchDist = false;
 
     //! Actual CoM offset in world frame [m]
     Eigen::Vector3d actualComOffset = Eigen::Vector3d::Zero();
