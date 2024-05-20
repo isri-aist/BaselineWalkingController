@@ -210,6 +210,9 @@ protected:
   /** \brief Get actual CoM. */
   Eigen::Vector3d actualCom() const;
 
+  /** \brief Get actual unbiased CoM. */
+  Eigen::Vector3d actualComUnbiased() const;
+
   /** \brief Calculate ZMP from wrench list.
       \param wrenchList wrench list
       \param zmpPlaneHeight height of ZMP plane

@@ -188,7 +188,8 @@ void CentroidalManager::update()
     contactList_ = ctl().footManager_->calcCurrentContactList();
     wrenchDist_ = std::make_shared<ForceColl::WrenchDistribution>(ForceColl::getContactVecFromMap(contactList_),
                                                                   config().wrenchDistConfig);
-    Eigen::Vector3d comForWrenchDist = (config().useActualComForWrenchDist ? actualCom() : ctl().comTask_->com());
+    Eigen::Vector3d comForWrenchDist =
+        (config().useActualComForWrenchDist ? actualComUnbiased() : ctl().comTask_->com());
     sva::ForceVecd controlWrench;
     controlWrench.force() << controlForceZ_ / (comForWrenchDist.z() - refZmp_.z())
                                  * (comForWrenchDist.head<2>() - controlZmp_.head<2>()),
@@ -342,6 +343,9 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                 plot::Y(
                     "CoM_realRobot", [this]() { return actualCom().x(); }, Color::Red, plot::Style::Dotted),
                 plot::Y(
+                    "CoM_realRobotUnbiased", [this]() { return actualComUnbiased().x(); },
+                    mc_rtc::gui::Color(1.0, 0.5, 0.0), plot::Style::Dotted),
+                plot::Y(
                     "ZMP_ref", [this]() { return refZmp_.x(); }, Color::Blue),
                 plot::Y(
                     "ZMP_planned", [this]() { return plannedZmp_.x(); }, Color::Green),
@@ -370,6 +374,9 @@ void CentroidalManager::addToGUI(mc_rtc::gui::StateBuilder & gui)
                     plot::Style::Dotted),
                 plot::Y(
                     "CoM_realRobot", [this]() { return actualCom().y(); }, Color::Red, plot::Style::Dotted),
+                plot::Y(
+                    "CoM_realRobotUnbiased", [this]() { return actualComUnbiased().y(); },
+                    mc_rtc::gui::Color(1.0, 0.5, 0.0), plot::Style::Dotted),
                 plot::Y(
                     "ZMP_ref", [this]() { return refZmp_.y(); }, Color::Blue),
                 plot::Y(
@@ -415,8 +422,7 @@ void CentroidalManager::addToLogger(mc_rtc::Logger & logger)
   logger.addLogEntry(config().name + "_CoM_planned", this, [this]() { return ctl().comTask_->com(); });
   logger.addLogEntry(config().name + "_CoM_controlRobot", this, [this]() { return ctl().robot().com(); });
   logger.addLogEntry(config().name + "_CoM_realRobot", this, [this]() { return actualCom(); });
-  logger.addLogEntry(config().name + "_CoM_realRobotUnbiased", this,
-                     [this]() -> Eigen::Vector2d { return actualCom().head<2>() - dcmEstimator_->getBias(); });
+  logger.addLogEntry(config().name + "_CoM_realRobotUnbiased", this, [this]() { return actualComUnbiased(); });
 
   MC_RTC_LOG_HELPER(config().name + "_forceZ_planned", plannedForceZ_);
   MC_RTC_LOG_HELPER(config().name + "_forceZ_control", controlForceZ_);
@@ -515,6 +521,13 @@ sva::PTransformd CentroidalManager::calcAnchorFrame(const mc_rbdyn::Robot & robo
 Eigen::Vector3d CentroidalManager::actualCom() const
 {
   return ctl().realRobot().com() + config().actualComOffset;
+}
+
+Eigen::Vector3d CentroidalManager::actualComUnbiased() const
+{
+  Eigen::Vector3d com = actualCom();
+  com.head<2>() -= dcmEstimator_->getBias();
+  return com;
 }
 
 Eigen::Vector3d CentroidalManager::calcZmp(const std::unordered_map<Foot, sva::ForceVecd> & wrenchList,
