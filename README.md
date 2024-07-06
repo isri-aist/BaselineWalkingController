@@ -162,6 +162,9 @@ $ source ~/ros/ws_bwc/devel/setup.bash
 $ roslaunch baseline_walking_controller display.launch
 ```
 
+## Documents
+[BaselineWalkingController Tips](https://www.dropbox.com/scl/fi/vpn4hvbh1v037aubm4jjo/BaselineWalkingController-Tips.docx?rlkey=4t7fvb45tmvmlb23awb3ke5eo&st=fryrxj6w&dl=0): a collection of tips for BaselineWalkingController users
+
 ## Controllers for motions beyond walking
 The following controllers are based on or developed with the same philosophy as BaselineWalkingController.
 - Loco-manipulation: [LocomanipController](https://github.com/isri-aist/LocomanipController)
