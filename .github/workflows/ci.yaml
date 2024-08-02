@@ -104,14 +104,15 @@ jobs:
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone # catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlaneRos # WalkingOnPlane
+          # Skip ROS-based states because standalone build does not assume the existence of ROS.
+          # - os: ubuntu-20.04
+          #   catkin-build: standalone # catkin
+          #   build-type: RelWithDebInfo
+          #   mc-rtc-version: head
+          #   compiler: gcc
+          #   mpc-method: PreviewControlZmp
+          #   mpc-framework: OpenLoopMpc
+          #   motion-type: WalkingOnPlaneRos # WalkingOnPlane
           - os: ubuntu-20.04
             catkin-build: standalone # catkin
             build-type: RelWithDebInfo
