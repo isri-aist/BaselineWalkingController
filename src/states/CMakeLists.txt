@@ -10,13 +10,15 @@ add_fsm_state(GuiWalkState GuiWalkState.cpp)
 target_link_libraries(GuiWalkState PUBLIC
   ${CONTROLLER_NAME})
 
-add_fsm_state(RosWalkState RosWalkState.cpp)
-target_link_libraries(RosWalkState PUBLIC
-  ${CONTROLLER_NAME})
+if(DEFINED CATKIN_DEVEL_PREFIX)
+  add_fsm_state(RosWalkState RosWalkState.cpp)
+  target_link_libraries(RosWalkState PUBLIC
+    ${CONTROLLER_NAME})
 
-add_fsm_state(TeleopState TeleopState.cpp)
-target_link_libraries(TeleopState PUBLIC
-  ${CONTROLLER_NAME})
+  add_fsm_state(TeleopState TeleopState.cpp)
+  target_link_libraries(TeleopState PUBLIC
+    ${CONTROLLER_NAME})
+endif()
 
 find_package(baseline_footstep_planner QUIET)
 if(${baseline_footstep_planner_FOUND})
