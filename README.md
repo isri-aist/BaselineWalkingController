@@ -142,6 +142,13 @@ $ mkdir -p ~/.config/mc_rtc/controllers
 $ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.config/mc_rtc/mc_rtc.yaml
 ```
 
+5. Setup motion configuration file (optional)
+```bash
+$ roscd baseline_walking_controller
+$ cd .github/workflows
+$ python ./scripts/mergeConfigs.py ./config/PreviewControlZmp.yaml ./config/OpenLoopMpc.yaml ./config/WalkingOnPlane.yaml > ~/.config/mc_rtc/controllers/BaselineWalkingController.yaml
+```
+
 ### Simulator installation
 ```bash
 $ sudo apt-get install mc-state-observation jvrc-choreonoid
