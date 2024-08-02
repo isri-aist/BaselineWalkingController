@@ -180,6 +180,10 @@ $(function() {
 <li>Setup controller <div class="fragment"><div class="line">$ mkdir -p ~/.config/mc_rtc/controllers</div>
 <div class="line">$ cp ~/ros/ws_bwc/src/isri-aist/BaselineWalkingController/etc/mc_rtc.yaml ~/.config/mc_rtc/mc_rtc.yaml</div>
 </div><!-- fragment --></li>
+<li>Setup motion configuration file (optional) <div class="fragment"><div class="line">$ roscd baseline_walking_controller</div>
+<div class="line">$ cd .github/workflows</div>
+<div class="line">$ python ./scripts/mergeConfigs.py ./config/PreviewControlZmp.yaml ./config/OpenLoopMpc.yaml ./config/WalkingOnPlane.yaml &gt; ~/.config/mc_rtc/controllers/BaselineWalkingController.yaml</div>
+</div><!-- fragment --></li>
 </ol>
 <h2>Simulator installation</h2>
 <div class="fragment"><div class="line">$ sudo apt-get install mc-state-observation jvrc-choreonoid</div>
