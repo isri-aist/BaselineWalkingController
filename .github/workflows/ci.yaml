@@ -307,7 +307,7 @@ jobs:
             echo "Enabled: BaselineWalkingController" > ${HOME}/.config/mc_rtc/mc_rtc.yaml
           fi
           python3 ${{ env.CI_DIR }}/scripts/mergeConfigs.py ${{ env.CI_DIR }}/config/${{ matrix.mpc-method }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.mpc-framework }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
-          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec huffyuv /tmp/video.avi > /dev/null 2>&1 < /dev/null &
+          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec libx264 -pix_fmt yuv420p /tmp/video.mp4 > /dev/null 2>&1 < /dev/null &
           FFMPEG_PID=$!
           cd /usr/share/hrpsys/samples/JVRC1
           ./clear-omninames.sh
@@ -342,7 +342,7 @@ jobs:
           kill -9 ${CNOID_PID} || true
           sleep 10s
           mkdir -p /tmp/results
-          ffmpeg -nostats -i /tmp/video.avi /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
+          ffmpeg -nostats -i /tmp/video.mp4 /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
           LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
           mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
           tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
