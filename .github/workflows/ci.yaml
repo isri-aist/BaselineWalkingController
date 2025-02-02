@@ -350,7 +350,7 @@ jobs:
         if: env.RUN_SIMULATION_STEPS == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: BWC-ci-results-${{ matrix.catkin-build }}
+          name: BWC-ci-results-${RESULTS_POSTFIX}
           path: /tmp/results
       - name: Check simulation results
         if: env.RUN_SIMULATION_STEPS == 'true'
