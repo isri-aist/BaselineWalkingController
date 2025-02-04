@@ -107,7 +107,7 @@ jobs:
       - name: Upload simulation data
         uses: actions/upload-artifact@v4
         with:
-          name: BWC-docker-results-${env.RESULTS_POSTFIX}
+          name: BWC-docker-results-${{ env.RESULTS_POSTFIX }}
           path: /tmp/results
       - name: Check simulation results
         shell: bash
