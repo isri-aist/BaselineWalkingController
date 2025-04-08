@@ -10,74 +10,62 @@ set(CMAKE_CXX_STANDARD 17)
 set(PROJECT_USE_CMAKE_EXPORT TRUE)
 set(CXX_DISABLE_WERROR ON)
 set(CMAKE_COLOR_DIAGNOSTICS ON)
-option(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
 
-include(cmake/base.cmake)
-project(baseline_walking_controller LANGUAGES CXX)
+option(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
+option(USE_ROS2 "Use ROS2" OFF)
+
+project(baseline_walking_controller)
 
 # mc_rtc
-add_project_dependency(mc_rtc REQUIRED)
+find_package(mc_rtc REQUIRED)
 if(NOT TARGET mc_rtc::mc_rtc_ros)
   message(FATAL_ERROR "mc_rtc ROS plugin is required for this controller")
 endif()
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  set(DOXYGEN_HTML_OUTPUT html)
-  find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    geometry_msgs
-    trajectory_collection
-    force_control_collection
-    centroidal_control_collection
-  )
+if(USE_ROS2)
+  set(AMENT_CMAKE_UNINSTALL_TARGET OFF)
+  find_package(ament_cmake REQUIRED)
+  find_package(rclcpp REQUIRED)
+  find_package(geometry_msgs REQUIRED)
+  find_package(trajectory_collection REQUIRED)
+  find_package(force_control_collection REQUIRED)
+  find_package(centroidal_control_collection REQUIRED)
+
+  find_package(qp_solver_collection REQUIRED)
+  find_package(nmpc_ddp REQUIRED)
 
   # Eigen
   find_package(Eigen3 REQUIRED)
-  include_directories(${EIGEN3_INCLUDE_DIR})
 
-  catkin_package(
-    CATKIN_DEPENDS
-    roscpp
-    geometry_msgs
-    trajectory_collection
-    force_control_collection
-    centroidal_control_collection
-    DEPENDS EIGEN3
-    INCLUDE_DIRS include
-    LIBRARIES BaselineWalkingController
-  )
-
-  include_directories(include ${catkin_INCLUDE_DIRS})
-  link_directories(${catkin_LIBRARY_DIRS})
-  set(CONFIG_OUT "${CATKIN_DEVEL_PREFIX}/lib/mc_controller/etc/BaselineWalkingController.yaml")
+  set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
   set(CONFIG_DIR_STANDALONE "${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/BaselineWalkingController")
-  set(CONFIG_DIR_CATKIN "${CATKIN_DEVEL_PREFIX}/lib/mc_controller/BaselineWalkingController")
+  set(CONFIG_DIR_CATKIN "${INSTALL_PREFIX_PATH}/lib/mc_controller/BaselineWalkingController")
   if(EXISTS "${CONFIG_DIR_STANDALONE}" AND IS_DIRECTORY "${CONFIG_DIR_STANDALONE}")
     execute_process(COMMAND cmake -E create_symlink
       "${CONFIG_DIR_STANDALONE}" "${CONFIG_DIR_CATKIN}"
     )
   endif()
   configure_file(etc/mc_rtc.in.yaml ${PROJECT_SOURCE_DIR}/etc/mc_rtc.yaml @ONLY)
-  set(STATES_INSTALL_PREFIX ${CATKIN_DEVEL_PREFIX}/lib)
+  set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
 else()
-  set(DOXYGEN_HTML_OUTPUT doxygen-html)
-  set(CATKIN_ENABLE_TESTING OFF)
+  set(BUILD_TESTING OFF)
+
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
-  add_project_dependency(trajectory_collection REQUIRED)
-  add_project_dependency(force_control_collection REQUIRED)
-  add_project_dependency(centroidal_control_collection REQUIRED)
+  find_package(trajectory_collection REQUIRED)
+  find_package(force_control_collection REQUIRED)
+  find_package(centroidal_control_collection REQUIRED)
   set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
   set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
 endif()
 
-configure_file(etc/BaselineWalkingController.in.yaml "${CONFIG_OUT}" @ONLY)
+configure_file(${PROJECT_SOURCE_DIR}/etc/BaselineWalkingController.in.yaml "${CONFIG_OUT}" @ONLY)
 install(FILES ${CONFIG_OUT} DESTINATION ${MC_RTC_LIBDIR}/mc_controller/etc/)
 
 add_subdirectory(src)
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/BaselineWalkingController DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/BaselineWalkingController DESTINATION include)
 
-if(BUILD_TESTING OR CATKIN_ENABLE_TESTING)
+if(BUILD_TESTING)
   add_subdirectory(tests)
 endif()
 
@@ -87,3 +75,10 @@ endif()
 
 set(PACKAGE_EXTRA_MACROS "set(BWC_STATES_LIBRARIES \"${MC_CONTROLLER_INSTALL_PREFIX}/baseline_walking_controller/states\")
 set(BWC_STATES_FILES \"\${BWC_STATES_LIBRARIES}/data\")")
+
+if(USE_ROS2)
+  install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
+  ament_export_dependencies(rosidl_default_runtime)
+  ament_export_targets()
+  ament_package()
+endif()

@@ -10,7 +10,7 @@ add_fsm_state(GuiWalkState GuiWalkState.cpp)
 target_link_libraries(GuiWalkState PUBLIC
   ${CONTROLLER_NAME})
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
+if(USE_ROS2)
   add_fsm_state(RosWalkState RosWalkState.cpp)
   target_link_libraries(RosWalkState PUBLIC
     ${CONTROLLER_NAME})
@@ -25,7 +25,7 @@ if(${baseline_footstep_planner_FOUND})
   message("-- Build FootstepPlannerState as baseline_footstep_planner found")
   add_project_dependency(baseline_footstep_planner REQUIRED)
   add_fsm_state(FootstepPlannerState FootstepPlannerState.cpp)
-  if(DEFINED CATKIN_DEVEL_PREFIX)
+  if(USE_ROS2)
     target_include_directories(FootstepPlannerState PUBLIC
       ${baseline_footstep_planner_INCLUDE_DIRS})
     target_link_directories(FootstepPlannerState PUBLIC

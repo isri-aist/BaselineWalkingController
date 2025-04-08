@@ -32,10 +32,13 @@ void TeleopState::start(mc_control::fsm::Controller & _ctl)
   }
 
   // Setup ROS
-  nh_ = std::make_unique<ros::NodeHandle>();
+  rclcpp::NodeOptions node_options;
+  nh_ = rclcpp::Node::make_shared("teleop_state", node_options);
   // Use a dedicated queue so as not to call callbacks of other modules
-  nh_->setCallbackQueue(&callbackQueue_);
-  twistSub_ = nh_->subscribe<geometry_msgs::Twist>(twistTopicName, 1, &TeleopState::twistCallback, this);
+  twistSub_ = nh_->create_subscription<geometry_msgs::msg::Twist>(twistTopicName, 1, std::bind(&TeleopState::twistCallback, this, std::placeholders::_1));
+
+  executor_ = std::make_shared<rclcpp::executors::SingleThreadedExecutor>();
+  executor_->add_node(nh_);
 
   // Setup GUI
   ctl().gui()->addElement({ctl().name(), "Teleop"},
@@ -63,7 +66,7 @@ bool TeleopState::run(mc_control::fsm::Controller &)
   }
 
   // Call ROS callback
-  callbackQueue_.callAvailable(ros::WallDuration());
+  executor_->spin_once(std::chrono::seconds(0));
 
   // Update GUI
   bool velMode = ctl().footManager_->velModeEnabled();
@@ -95,7 +98,7 @@ void TeleopState::teardown(mc_control::fsm::Controller &)
   ctl().gui()->removeCategory({ctl().name(), "Teleop"});
 }
 
-void TeleopState::twistCallback(const geometry_msgs::Twist::ConstPtr & twistMsg)
+void TeleopState::twistCallback(const geometry_msgs::msg::Twist::ConstSharedPtr & twistMsg)
 {
   targetVel_ = velScale_.cwiseProduct(Eigen::Vector3d(twistMsg->linear.x, twistMsg->linear.y, twistMsg->angular.z));
 }

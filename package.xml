@@ -1,4 +1,4 @@
-<package format="2">
+<package format="3">
   <name>baseline_walking_controller</name>
   <version>0.1.0</version>
   <description>
@@ -10,9 +10,9 @@
   <url>http://ros.org/wiki/baseline_walking_controller</url>
   <author>Masaki Murooka</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>roscpp</depend>
+  <depend>rclcpp</depend>
   <depend>geometry_msgs</depend>
   <depend>trajectory_collection</depend>
   <depend>force_control_collection</depend>
@@ -21,7 +21,11 @@
   <build_depend>eigen</build_depend>
 
   <exec_depend>rviz</exec_depend>
-  <exec_depend>rospy</exec_depend>
+  <exec_depend>rclpy</exec_depend>
 
   <doc_depend>doxygen</doc_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

@@ -1,5 +1,5 @@
 Panels:
-  - Class: rviz/Displays
+  - Class: rviz_common/Displays
     Help Height: 0
     Name: Displays
     Property Tree Widget:
@@ -8,21 +8,21 @@ Panels:
         - /Surface1/Namespaces1
       Splitter Ratio: 0.4228571355342865
     Tree Height: 441
-  - Class: rviz/Selection
+  - Class: rviz_common/Selection
     Name: Selection
-  - Class: rviz/Tool Properties
+  - Class: rviz_common/Tool Properties
     Expanded:
       - /2D Pose Estimate1
       - /2D Nav Goal1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5899999737739563
-  - Class: rviz/Views
+  - Class: rviz_common/Views
     Expanded:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz/Time
+  - Class: rviz_common/Time
     Name: Time
     SyncMode: 0
     SyncSource: ""
@@ -36,7 +36,7 @@ Visualization Manager:
   Class: ""
   Displays:
     - Alpha: 1
-      Class: rviz/Axes
+      Class: rviz_default_plugins/Axes
       Enabled: false
       Length: 0.20000000298023224
       Name: Axes
@@ -46,7 +46,7 @@ Visualization Manager:
       Value: false
     - Alpha: 0.5
       Cell Size: 1
-      Class: rviz/Grid
+      Class: rviz_default_plugins/Grid
       Color: 0; 0; 0
       Enabled: true
       Line Style:
@@ -63,7 +63,7 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 0.5
-      Class: rviz/RobotModel
+      Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Enabled: true
       Links:
@@ -348,13 +348,13 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
       Name: ControlRobotModel
-      Robot Description: /control/robot_description
+      Description Topic: /control/robot_description
       TF Prefix: control
       Update Interval: 0
       Value: true
       Visual Enabled: true
     - Alpha: 1
-      Class: rviz/RobotModel
+      Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Enabled: true
       Links:
@@ -639,13 +639,13 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
       Name: RealRobotModel
-      Robot Description: /real/robot_description
+      Description Topic: /real/robot_description
       TF Prefix: real
       Update Interval: 0
       Value: true
       Visual Enabled: true
     - Alpha: 1
-      Class: rviz/RobotModel
+      Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Enabled: false
       Links:
@@ -655,29 +655,33 @@ Visualization Manager:
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
       Name: EnvironmentModel
-      Robot Description: control/env_1/robot_description
+      Description Topic: control/env_1/robot_description
       TF Prefix: /control/env_1
       Update Interval: 0
       Value: false
       Visual Enabled: true
-    - Class: rviz/InteractiveMarkers
+    - Class: rviz_default_plugins/InteractiveMarkers
       Enable Transparency: true
       Enabled: true
-      Name: mc_rtc GUI interactive markers
+      Interactive Markers Namespace: /mc_rtc_rviz_interactive_markers
+      Name: InteractiveMarkers
       Show Axes: false
       Show Descriptions: true
       Show Visual Aids: false
-      Update Topic: /mc_rtc_rviz_interactive_markers/update
       Value: true
-    - Class: rviz/MarkerArray
+    - Class: rviz_default_plugins/MarkerArray
       Enabled: true
-      Marker Topic: /mc_rtc_rviz
-      Name: mc_rtc GUI markers
+      Name: MarkerArray
       Namespaces:
         {}
-      Queue Size: 100
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /mc_rtc_rviz
       Value: true
-    - Class: rviz/TF
+    - Class: rviz_default_plugins/TF
       Enabled: false
       Frame Timeout: 1000
       Frames:
@@ -692,7 +696,7 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Class: rviz/MarkerArray
+    - Class: rviz_default_plugins/MarkerArray
       Enabled: false
       Marker Topic: /surfaces
       Name: Surface
@@ -708,26 +712,26 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz/Interact
+    - Class: rviz_default_plugins/Interact
       Hide Inactive Objects: true
-    - Class: rviz/MoveCamera
-    - Class: rviz/Select
-    - Class: rviz/FocusCamera
-    - Class: rviz/Measure
-    - Class: rviz/SetInitialPose
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/SetInitialPose
       Theta std deviation: 0.2617993950843811
       Topic: /initialpose
       X std deviation: 0.5
       Y std deviation: 0.5
-    - Class: rviz/SetGoal
+    - Class: rviz_default_plugins/SetGoal
       Topic: /move_base_simple/goal
-    - Class: rviz/PublishPoint
+    - Class: rviz_default_plugins/PublishPoint
       Single click: true
       Topic: /clicked_point
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
+      Class: rviz_default_plugins/Orbit
       Distance: 3.5782644748687744
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549

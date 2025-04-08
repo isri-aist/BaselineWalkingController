@@ -166,7 +166,7 @@ $ ./clear-omninames.sh
 $ choreonoid sim_mc.cnoid --start-simulation
 # Terminal 3
 $ source ~/ros/ws_bwc/devel/setup.bash
-$ roslaunch baseline_walking_controller display.launch
+$ ros2 launch baseline_walking_controller display.launch.py
 ```
 
 ## Documents

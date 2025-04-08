@@ -17,10 +17,21 @@ add_library(${CONTROLLER_NAME} SHARED
   swing/SwingTrajLandingSearch.cpp
   State.cpp
   )
+
+target_include_directories(${CONTROLLER_NAME} PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 target_link_libraries(${CONTROLLER_NAME} PUBLIC mc_rtc::mc_control_fsm mc_rtc::mc_rtc_ros)
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  target_link_libraries(${CONTROLLER_NAME} PUBLIC ${catkin_LIBRARIES})
+if(USE_ROS2)
+  target_link_libraries(${CONTROLLER_NAME} PUBLIC 
+    rclcpp::rclcpp 
+    trajectory_collection::TrajColl
+    force_control_collection::ForceColl
+    centroidal_control_collection::CCC
+  )
 else()
   target_link_libraries(${CONTROLLER_NAME} PUBLIC
     trajectory_collection::TrajColl
