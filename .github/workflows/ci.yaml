@@ -18,7 +18,7 @@ jobs:
         os: [ubuntu-22.04]
         catkin-build: [standalone]
         build-type: [RelWithDebInfo, Debug]
-        mc-rtc-version: [head]
+        mc-rtc-version: [stable]
         compiler: [gcc]
         mpc-method: [PreviewControlZmp]
         mpc-framework: [OpenLoopMpc]
