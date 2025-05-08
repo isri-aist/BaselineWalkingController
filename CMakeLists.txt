@@ -14,6 +14,7 @@ set(CMAKE_COLOR_DIAGNOSTICS ON)
 option(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
 option(USE_ROS2 "Use ROS2" OFF)
 
+include(cmake/base.cmake)
 project(baseline_walking_controller)
 
 # mc_rtc
@@ -22,15 +23,15 @@ if(NOT TARGET mc_rtc::mc_rtc_ros)
   message(FATAL_ERROR "mc_rtc ROS plugin is required for this controller")
 endif()
 
+find_package(trajectory_collection REQUIRED)
+find_package(force_control_collection REQUIRED)
+find_package(centroidal_control_collection REQUIRED)
+
 if(USE_ROS2)
-  set(AMENT_CMAKE_UNINSTALL_TARGET OFF)
   find_package(ament_cmake REQUIRED)
   find_package(rclcpp REQUIRED)
   find_package(geometry_msgs REQUIRED)
-  find_package(trajectory_collection REQUIRED)
-  find_package(force_control_collection REQUIRED)
-  find_package(centroidal_control_collection REQUIRED)
-
+  
   find_package(qp_solver_collection REQUIRED)
   find_package(nmpc_ddp REQUIRED)
 
@@ -51,9 +52,6 @@ else()
   set(BUILD_TESTING OFF)
 
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
-  find_package(trajectory_collection REQUIRED)
-  find_package(force_control_collection REQUIRED)
-  find_package(centroidal_control_collection REQUIRED)
   set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
   set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
 endif()
@@ -79,6 +77,6 @@ set(BWC_STATES_FILES \"\${BWC_STATES_LIBRARIES}/data\")")
 if(USE_ROS2)
   install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
   ament_export_dependencies(rosidl_default_runtime)
-  ament_export_targets()
+  ament_export_targets(${CONTROLLER_NAME})
   ament_package()
 endif()
