@@ -4,19 +4,12 @@ include(GoogleTest)
 # No effect in CMake < 3.18
 set(CMAKE_GTEST_DISCOVER_TESTS_DISCOVERY_MODE PRE_TEST)
 
-if(NOT USE_ROS2)
-  function(add_BWC_test NAME)
-    add_executable(${NAME} src/${NAME}.cpp)
-    target_link_libraries(${NAME} PUBLIC GTest::gtest BaselineWalkingController mc_rtc::mc_rtc_utils)
-    gtest_discover_tests(${NAME})
-  endfunction()
-else()
-  find_package(ament_cmake_gtest REQUIRED)
-  function(add_BWC_test NAME)
-    ament_add_gtest(${NAME} src/${NAME}.cpp)
-    target_link_libraries(${NAME} BaselineWalkingController mc_rtc::mc_rtc_utils)
-  endfunction()
-endif()
+function(add_BWC_test NAME)
+  add_executable(${NAME} src/${NAME}.cpp)
+  target_link_libraries(${NAME} PUBLIC GTest::gtest BaselineWalkingController mc_rtc::mc_rtc_utils)
+  gtest_discover_tests(${NAME})
+endfunction()
+
 
 set(BWC_gtest_list
   TestSwingTraj
