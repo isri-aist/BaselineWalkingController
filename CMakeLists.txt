@@ -23,9 +23,9 @@ if(NOT TARGET mc_rtc::mc_rtc_ros)
   message(FATAL_ERROR "mc_rtc ROS plugin is required for this controller")
 endif()
 
-find_package(trajectory_collection REQUIRED)
-find_package(force_control_collection REQUIRED)
-find_package(centroidal_control_collection REQUIRED)
+add_project_dependency(trajectory_collection REQUIRED)
+add_project_dependency(force_control_collection REQUIRED)
+add_project_dependency(centroidal_control_collection REQUIRED)
 
 if(USE_ROS2)
   find_package(ament_cmake REQUIRED)
