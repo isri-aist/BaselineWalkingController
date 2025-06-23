@@ -1,5 +1,8 @@
 *~
 *.pyc
+build
+compile_commands.json
+.cache/
 
 GPATH
 GRTAGS

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <mc_control/api.h>
 #include <mc_control/fsm/Controller.h>
 
 #include <BaselineWalkingController/FootTypes.h>
@@ -21,7 +22,7 @@ class FootManager;
 class CentroidalManager;
 
 /** \brief Humanoid walking controller with various baseline methods. */
-struct BaselineWalkingController : public mc_control::fsm::Controller
+struct MC_CONTROL_DLLAPI BaselineWalkingController : public mc_control::fsm::Controller
 {
 public:
   /** \brief Constructor.
