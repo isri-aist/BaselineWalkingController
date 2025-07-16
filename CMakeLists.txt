@@ -29,33 +29,14 @@ add_project_dependency(centroidal_control_collection REQUIRED)
 
 if(USE_ROS2)
   find_package(ament_cmake REQUIRED)
-  find_package(rclcpp REQUIRED)
-  find_package(geometry_msgs REQUIRED)
-  
-  find_package(qp_solver_collection REQUIRED)
-  find_package(nmpc_ddp REQUIRED)
-
-  # Eigen
-  find_package(Eigen3 REQUIRED)
-
-  set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
-  set(CONFIG_DIR_STANDALONE "${MC_CONTROLLER_RUNTIME_INSTALL_PREFIX}/BaselineWalkingController")
-  set(CONFIG_DIR_CATKIN "${INSTALL_PREFIX_PATH}/lib/mc_controller/BaselineWalkingController")
-  if(EXISTS "${CONFIG_DIR_STANDALONE}" AND IS_DIRECTORY "${CONFIG_DIR_STANDALONE}")
-    execute_process(COMMAND cmake -E create_symlink
-      "${CONFIG_DIR_STANDALONE}" "${CONFIG_DIR_CATKIN}"
-    )
-  endif()
   configure_file(etc/mc_rtc.in.yaml ${PROJECT_SOURCE_DIR}/etc/mc_rtc.yaml @ONLY)
-  set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
 else()
   set(BUILD_TESTING OFF)
-
-  option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
-  set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
-  set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
 endif()
 
+set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
+
+set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
 configure_file(${PROJECT_SOURCE_DIR}/etc/BaselineWalkingController.in.yaml "${CONFIG_OUT}" @ONLY)
 install(FILES ${CONFIG_OUT} DESTINATION ${MC_RTC_LIBDIR}/mc_controller/etc/)
 

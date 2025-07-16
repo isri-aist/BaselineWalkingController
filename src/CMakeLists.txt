@@ -25,20 +25,11 @@ target_include_directories(${CONTROLLER_NAME} PUBLIC
 
 target_link_libraries(${CONTROLLER_NAME} PUBLIC mc_rtc::mc_control_fsm mc_rtc::mc_rtc_ros)
 
-if(USE_ROS2)
-  target_link_libraries(${CONTROLLER_NAME} PUBLIC 
-    rclcpp::rclcpp 
-    trajectory_collection::TrajColl
-    force_control_collection::ForceColl
-    centroidal_control_collection::CCC
-  )
-else()
-  target_link_libraries(${CONTROLLER_NAME} PUBLIC
-    trajectory_collection::TrajColl
-    force_control_collection::ForceColl
-    centroidal_control_collection::CCC
-  )
-endif()
+target_link_libraries(${CONTROLLER_NAME} PUBLIC 
+  trajectory_collection::TrajColl
+  force_control_collection::ForceColl
+  centroidal_control_collection::CCC
+)
 
 install(TARGETS ${CONTROLLER_NAME} DESTINATION ${MC_RTC_LIBDIR} EXPORT ${TARGETS_EXPORT_NAME})
 

@@ -25,19 +25,11 @@ if(${baseline_footstep_planner_FOUND})
   message("-- Build FootstepPlannerState as baseline_footstep_planner found")
   find_package(baseline_footstep_planner REQUIRED)
   add_fsm_state(FootstepPlannerState FootstepPlannerState.cpp)
-  if(USE_ROS2)
-    target_include_directories(FootstepPlannerState PUBLIC
-      ${baseline_footstep_planner_INCLUDE_DIRS})
-    target_link_directories(FootstepPlannerState PUBLIC
-      ${baseline_footstep_planner_LIBRARY_DIRS})
-    target_link_libraries(FootstepPlannerState PUBLIC
-      ${baseline_footstep_planner_LIBRARIES}
-      ${CONTROLLER_NAME})
-  else()
-    target_link_libraries(FootstepPlannerState PUBLIC baseline_footstep_planner::BaselineFootstepPlanner ${CONTROLLER_NAME})
-  endif()
-  file(WRITE "${PROJECT_BINARY_DIR}/generated/FootstepPlannerConfig.cmake" "set(baseline_walking_controller_FootstepPlanner_FOUND TRUE)")
-  install(FILES "${PROJECT_BINARY_DIR}/generated/FootstepPlannerConfig.cmake" DESTINATION "${CONFIG_INSTALL_DIR}")
+
+  target_link_libraries(FootstepPlannerState PUBLIC baseline_footstep_planner::BaselineFootstepPlanner ${CONTROLLER_NAME})
+  
+  # file(WRITE "${PROJECT_BINARY_DIR}/generated/FootstepPlannerConfig.cmake" "set(baseline_walking_controller_FootstepPlanner_FOUND TRUE)")
+  # install(FILES "${PROJECT_BINARY_DIR}/generated/FootstepPlannerConfig.cmake" DESTINATION "${CONFIG_INSTALL_DIR}")
 else()
   message(STATUS "Not build FootstepPlannerState as baseline_footstep_planner not found")
 endif()
