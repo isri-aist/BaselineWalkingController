@@ -8,8 +8,8 @@
     local-name: isri-aist/ForceControlCollection
     uri: https://github.com/isri-aist/ForceControlCollection
 - git:
-    local-name: isri-aist/NMPC
-    uri: https://github.com/isri-aist/NMPC
+    local-name: chuoru/NMPC
+    uri: https://github.com/chuoru/NMPC
 - git:
     local-name: isri-aist/QpSolverCollection
     uri: https://github.com/isri-aist/QpSolverCollection

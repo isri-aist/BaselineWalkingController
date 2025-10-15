@@ -1,4 +1,4 @@
-name: CI of BaselineWalkingController
+name: Colcon-CI of BaselineWalkingController
 
 on:
   push:
@@ -15,23 +15,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
-        catkin-build: [catkin, standalone]
+        os: [ubuntu-22.04]
+        catkin-build: [standalone]
         build-type: [RelWithDebInfo, Debug]
-        mc-rtc-version: [head, stable]
+        mc-rtc-version: [stable]
         compiler: [gcc]
         mpc-method: [PreviewControlZmp]
         mpc-framework: [OpenLoopMpc]
         motion-type: [WalkingOnPlane]
-        exclude:
-          - build-type: Debug
-            mc-rtc-version: stable
-          # Some packages have not been released onto the stable mirror yet
-          - catkin-build: standalone
-            mc-rtc-version: stable
         include:
           # compiler
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             catkin-build: standalone # catkin
             build-type: RelWithDebInfo
             mc-rtc-version: head
@@ -40,144 +34,38 @@ jobs:
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           # motion-type
-          - os: ubuntu-20.04
-            catkin-build: catkin
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnStairs # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneWaypoint # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlaneRos # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone # catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnStairs # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone # catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlaneWaypoint # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone # catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlaneVel # WalkingOnPlane
-          # Skip ROS-based states because standalone build does not assume the existence of ROS.
-          # - os: ubuntu-20.04
-          #   catkin-build: standalone # catkin
-          #   build-type: RelWithDebInfo
-          #   mc-rtc-version: head
-          #   compiler: gcc
-          #   mpc-method: PreviewControlZmp
-          #   mpc-framework: OpenLoopMpc
-          #   motion-type: WalkingOnPlaneRos # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone # catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingWithFootstepPlanner # WalkingOnPlane
-          # mpc-method, mpc-framework
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: DdpZmp # PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: FootGuidedControl # PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
-            mpc-framework: OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: PreviewControlZmp
-            mpc-framework: ClosedLoopMpc # OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: DdpZmp # PreviewControlZmp
-            mpc-framework: ClosedLoopMpc # OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: FootGuidedControl # PreviewControlZmp
-            mpc-framework: ClosedLoopMpc # OpenLoopMpc
-            motion-type: WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: catkin
-            build-type: RelWithDebInfo
-            mc-rtc-version: head
-            compiler: gcc
-            mpc-method: IntrinsicallyStableMpc # PreviewControlZmp
-            mpc-framework: ClosedLoopMpc # OpenLoopMpc
-            motion-type: WalkingOnPlane
     runs-on: ${{ matrix.os }}
     env:
       RESULTS_POSTFIX: ${{ matrix.mpc-method }}-${{ matrix.mpc-framework }}-${{ matrix.motion-type }}-${{ matrix.catkin-build }}
@@ -186,7 +74,7 @@ jobs:
         run: |
           set -e
           set -x
-          if [ "${{ matrix.os }}" == "ubuntu-20.04" ] && \
+          if [ "${{ matrix.os }}" == "ubuntu-22.04" ] && \
              [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
              [ "${{ matrix.mc-rtc-version }}" == "head" ] && \
              [ "${{ matrix.compiler }}" == "gcc" ]
@@ -195,33 +83,16 @@ jobs:
           else
             echo "RUN_SIMULATION_STEPS=false" >> $GITHUB_ENV
           fi
-          if [ "${{ matrix.os }}" == "ubuntu-20.04" ] && \
-             [ "${{ matrix.catkin-build }}" == "catkin" ] && \
-             [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
-             [ "${{ matrix.mc-rtc-version }}" == "head" ] && \
-             [ "${{ matrix.compiler }}" == "gcc" ] && \
-             [ "${{ matrix.mpc-method }}" == "PreviewControlZmp" ] && \
-             [ "${{ matrix.mpc-framework }}" == "OpenLoopMpc" ] && \
-             [ "${{ matrix.motion-type }}" == "WalkingOnPlane" ] && \
-             [ "${{ github.repository_owner }}" == "isri-aist" ] && \
-             [ "${{ github.ref }}" == "refs/heads/master" ]
-          then
-            echo "UPLOAD_DOCUMENTATION=true" >> $GITHUB_ENV
-          else
-            echo "UPLOAD_DOCUMENTATION=false" >> $GITHUB_ENV
-          fi
-          if [ "${{ matrix.catkin-build }}" == "catkin" ]
-          then
-            echo "CI_DIR=${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}/.github/workflows" >> $GITHUB_ENV
-          else
-            echo "CI_DIR=${GITHUB_WORKSPACE}/.github/workflows" >> $GITHUB_ENV
-          fi
+
+          echo "CI_DIR=${GITHUB_WORKSPACE}/.github/workflows" >> $GITHUB_ENV
+
           if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]
           then
             echo "BASELINE_FOOTSTEP_PLANNER=baseline_footstep_planner" >> $GITHUB_ENV
           else
             echo "BASELINE_FOOTSTEP_PLANNER=" >> $GITHUB_ENV
           fi
+
       - name: Install dependencies
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
@@ -229,9 +100,10 @@ jobs:
             apt-mirrors:
               mc-rtc:
                 cloudsmith: mc-rtc/${{ matrix.mc-rtc-version }}
-            apt: libmc-rtc-dev mc-rtc-utils mc-state-observation doxygen graphviz jvrc-choreonoid choreonoid libcnoid-dev
+            apt: libmc-rtc-dev mc-rtc-utils mc-state-observation doxygen graphviz
           ros: |
             apt: ros-base mc-rtc-plugin eigen-conversions
+
       - name: Install standalone dependencies
         if: matrix.catkin-build == 'standalone'
         uses: jrl-umi3218/github-actions/install-dependencies@master
@@ -240,6 +112,7 @@ jobs:
           build-type: ${{ matrix.build-type }}
           ubuntu: |
             apt: libforcecontrolcollection-dev libtrajectorycollection-dev libcentroidalcontrolcollection-dev
+
       - name: Install BaselineFootstepPlanner for standalone build
         if: matrix.catkin-build == 'standalone' && matrix.motion-type == 'WalkingWithFootstepPlanner'
         uses: jrl-umi3218/github-actions/install-dependencies@master
@@ -251,107 +124,92 @@ jobs:
           github: |
             - path: isri-aist/BaselineFootstepPlanner
               ref: master
+
       - name: Checkout repository code for standalone build
         if: matrix.catkin-build == 'standalone'
         uses: actions/checkout@v3
         with:
           submodules: recursive
+
       - name: Standalone build
         if: matrix.catkin-build == 'standalone'
         uses: jrl-umi3218/github-actions/build-cmake-project@master
         with:
           compiler: ${{ matrix.compiler }}
           build-type: ${{ matrix.build-type }}
-      - name: Catkin build
-        if: matrix.catkin-build == 'catkin'
-        uses: jrl-umi3218/github-actions/build-catkin-project@master
-        with:
-          build-type: ${{ matrix.build-type }}
-          cmake-args: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DENABLE_QLD=ON
-          catkin-test-args: --no-deps
-          build-packages: "baseline_walking_controller ${{ env.BASELINE_FOOTSTEP_PLANNER }}"
-          test-packages: baseline_walking_controller
-      - name: Catkin build again to ensure footstep planner found
-        if: matrix.catkin-build == 'catkin' && matrix.motion-type == 'WalkingWithFootstepPlanner'
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws
-          set +x
-          . devel/setup.bash
-          set -x
-          catkin build baseline_walking_controller --no-deps --force-cmake --limit-status-rate 0.1 --cmake-args -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} --catkin-make-args all run_tests
-          catkin_test_results --verbose --all build
-      - name: Run simulation
-        if: env.RUN_SIMULATION_STEPS == 'true'
-        # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
-        run: |
-          set -e
-          set -x
-          sudo apt-get install -y -qq xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
-          set +x
-          if [ "${{ matrix.catkin-build }}" == "catkin" ]
-          then
-            . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
-          fi
-          set -x
-          export DISPLAY=":1"
-          Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
-          sleep 10s
-          fluxbox 2> /dev/null &
-          mkdir -p ${HOME}/.config/mc_rtc/controllers
-          if [ "${{ matrix.catkin-build }}" == "catkin" ]
-          then
-            cp ${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
-          else
-            echo "Enabled: BaselineWalkingController" > ${HOME}/.config/mc_rtc/mc_rtc.yaml
-          fi
-          python3 ${{ env.CI_DIR }}/scripts/mergeConfigs.py ${{ env.CI_DIR }}/config/${{ matrix.mpc-method }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.mpc-framework }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
-          ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec libx264 -pix_fmt yuv420p /tmp/video.mp4 > /dev/null 2>&1 < /dev/null &
-          FFMPEG_PID=$!
-          cd /usr/share/hrpsys/samples/JVRC1
-          ./clear-omninames.sh
-          roscore > /dev/null 2>&1 < /dev/null &
-          ROSCORE_PID=$!
-          sleep 1s
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
-            CNOID_FILE=sim_mc.cnoid
-          else
-            CNOID_FILE=sim_mc_comanoid_staircase.cnoid
-          fi
-          choreonoid ${CNOID_FILE} --test-mode --start-simulation &
-          CNOID_PID=$!
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
-              rostopic pub /goal_pose geometry_msgs/PoseStamped --file ${{ env.CI_DIR }}/ros/poseMsgWalkingOnPlaneRos.yaml --rate 10 --latch &
-              ROSTOPIC_PID=$!
-              python3 ${{ env.CI_DIR }}/scripts/clientWalkingOnPlaneRos.py &
-          fi
-          if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
-            SLEEP_DURATION="70s"
-          else
-            SLEEP_DURATION="50s"
-          fi
-          sleep ${SLEEP_DURATION}
-          kill -2 ${ROSCORE_PID}
-          kill -2 ${CNOID_PID}
-          kill -2 ${FFMPEG_PID}
-          if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
-              kill -2 ${ROSTOPIC_PID}
-          fi
-          sleep 1s
-          kill -9 ${CNOID_PID} || true
-          sleep 10s
-          mkdir -p /tmp/results
-          ffmpeg -nostats -i /tmp/video.mp4 /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
-          LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
-          mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
-          tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
+
+      # - name: Run simulation
+      #   if: env.RUN_SIMULATION_STEPS == 'true'
+      #   # https://github.com/jrl-umi3218/lipm_walking_controller/blob/b564d655388ae6a6725c504e5c74a62192e58c7c/.github/workflows/build.yml#L64-L92
+      #   run: |
+      #     set -e
+      #     set -x
+      #     sudo apt-get install -y -qq xvfb ffmpeg mesa-utils fluxbox xserver-xorg xserver-xorg-core xserver-xorg-video-all libwayland-egl1-mesa
+      #     set +x
+      #     if [ "${{ matrix.catkin-build }}" == "catkin" ]
+      #     then
+      #       . ${GITHUB_WORKSPACE}/catkin_ws/devel/setup.bash
+      #     fi
+      #     set -x
+      #     export DISPLAY=":1"
+      #     Xvfb ${DISPLAY} -screen 0 1920x1080x24 &
+      #     sleep 10s
+      #     fluxbox 2> /dev/null &
+      #     mkdir -p ${HOME}/.config/mc_rtc/controllers
+      #     if [ "${{ matrix.catkin-build }}" == "catkin" ]
+      #     then
+      #       cp ${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}/etc/mc_rtc.yaml ${HOME}/.config/mc_rtc
+      #     else
+      #       echo "Enabled: BaselineWalkingController" > ${HOME}/.config/mc_rtc/mc_rtc.yaml
+      #     fi
+      #     python3 ${{ env.CI_DIR }}/scripts/mergeConfigs.py ${{ env.CI_DIR }}/config/${{ matrix.mpc-method }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.mpc-framework }}.yaml ${{ env.CI_DIR }}/config/${{ matrix.motion-type }}.yaml > ${HOME}/.config/mc_rtc/controllers/BaselineWalkingController.yaml
+      #     ffmpeg -y -f x11grab -s 1920x1080 -r 30 -i ${DISPLAY} -qscale 0 -vcodec libx264 -pix_fmt yuv420p /tmp/video.mp4 > /dev/null 2>&1 < /dev/null &
+      #     FFMPEG_PID=$!
+      #     cd /usr/share/hrpsys/samples/JVRC1
+      #     ./clear-omninames.sh
+      #     roscore > /dev/null 2>&1 < /dev/null &
+      #     ROSCORE_PID=$!
+      #     sleep 1s
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnPlane" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneWaypoint" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneVel" -o "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+      #       CNOID_FILE=sim_mc.cnoid
+      #     else
+      #       CNOID_FILE=sim_mc_comanoid_staircase.cnoid
+      #     fi
+      #     choreonoid ${CNOID_FILE} --test-mode --start-simulation &
+      #     CNOID_PID=$!
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+      #         rostopic pub /goal_pose geometry_msgs/PoseStamped --file ${{ env.CI_DIR }}/ros/poseMsgWalkingOnPlaneRos.yaml --rate 10 --latch &
+      #         ROSTOPIC_PID=$!
+      #         python3 ${{ env.CI_DIR }}/scripts/clientWalkingOnPlaneRos.py &
+      #     fi
+      #     if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]; then
+      #       SLEEP_DURATION="70s"
+      #     else
+      #       SLEEP_DURATION="50s"
+      #     fi
+      #     sleep ${SLEEP_DURATION}
+      #     kill -2 ${ROSCORE_PID}
+      #     kill -2 ${CNOID_PID}
+      #     kill -2 ${FFMPEG_PID}
+      #     if [ "${{ matrix.motion-type }}" == "WalkingOnPlaneRos" ]; then
+      #         kill -2 ${ROSTOPIC_PID}
+      #     fi
+      #     sleep 1s
+      #     kill -9 ${CNOID_PID} || true
+      #     sleep 10s
+      #     mkdir -p /tmp/results
+      #     ffmpeg -nostats -i /tmp/video.mp4 /tmp/results/BWC-video-${RESULTS_POSTFIX}.mp4
+      #     LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
+      #     mv `readlink -f /tmp/mc-control-BaselineWalkingController-latest.bin` /tmp/${LOG_FILENAME}.bin
+      #     tar czf /tmp/results/${LOG_FILENAME}.tar.gz -C /tmp ${LOG_FILENAME}.bin
+
       - name: Upload simulation data
         if: env.RUN_SIMULATION_STEPS == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: BWC-ci-results-${{ env.RESULTS_POSTFIX }}
           path: /tmp/results
+
       - name: Check simulation results
         if: env.RUN_SIMULATION_STEPS == 'true'
         run: |
@@ -372,26 +230,3 @@ jobs:
           fi
           LOG_FILENAME=BWC-log-${RESULTS_POSTFIX}
           python3 ${{ env.CI_DIR }}/scripts/checkSimulationResults.py /tmp/${LOG_FILENAME}.bin --expected-base-pos ${EXPECTED_BASE_POS}
-      - name: Upload documentation
-        if: env.UPLOAD_DOCUMENTATION == 'true'
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws/src/${{ github.repository }}
-          git config --global user.name "Masaki Murooka"
-          git config --global user.email "m-murooka@aist.go.jp"
-          git remote set-url origin "https://mmurooka:${{ secrets.CI_TOKEN }}@github.com/isri-aist/BaselineWalkingController"
-          git fetch --depth=1 origin gh-pages:gh-pages
-          git clean -dfx
-          rm -rf cmake/
-          git checkout --quiet gh-pages
-          rm -rf doxygen/
-          cp -r ${GITHUB_WORKSPACE}/catkin_ws/build/baseline_walking_controller/doc/html/ doxygen
-          git add doxygen
-          git_status=`git status -s`
-          if test -n "$git_status"; then
-            git commit --quiet -m "Update Doxygen HTML files from commit ${{ github.sha }}"
-            git push origin gh-pages
-          else
-            echo "Github pages documentation is already up-to-date."
-          fi
