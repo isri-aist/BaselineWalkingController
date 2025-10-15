@@ -25,7 +25,7 @@ jobs:
         motion-type: [WalkingOnPlane]
         include:
           # compiler
-          - os: ubuntu-20.04
+          - os: ubuntu-22.04
             catkin-build: standalone # catkin
             build-type: RelWithDebInfo
             mc-rtc-version: head
@@ -34,32 +34,32 @@ jobs:
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlane
           # motion-type
-          - os: ubuntu-20.04
-            catkin-build: standalone 
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnStairs # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone 
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneWaypoint # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone 
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
             mpc-method: PreviewControlZmp
             mpc-framework: OpenLoopMpc
             motion-type: WalkingOnPlaneVel # WalkingOnPlane
-          - os: ubuntu-20.04
-            catkin-build: standalone 
+          - os: ubuntu-22.04
+            catkin-build: standalone
             build-type: RelWithDebInfo
             mc-rtc-version: head
             compiler: gcc
@@ -83,9 +83,9 @@ jobs:
           else
             echo "RUN_SIMULATION_STEPS=false" >> $GITHUB_ENV
           fi
-          
+
           echo "CI_DIR=${GITHUB_WORKSPACE}/.github/workflows" >> $GITHUB_ENV
-          
+
           if [ "${{ matrix.motion-type }}" == "WalkingWithFootstepPlanner" ]
           then
             echo "BASELINE_FOOTSTEP_PLANNER=baseline_footstep_planner" >> $GITHUB_ENV
