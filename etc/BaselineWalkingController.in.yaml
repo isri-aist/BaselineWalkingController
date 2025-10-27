@@ -42,9 +42,12 @@ states:
     configs:
       twistTopicName: /cmd_vel
 
-  BWC::Main_:
-    base: Parallel
-    states: [BWC::GuiWalk_, BWC::Teleop_]
+  BWC::ROSWalk_:
+    base: BWC::RosWalk
+    configs:
+      poseTopicName: /goal_pose
+
+  @MAIN_STATE@
 
 # Transitions map
 transitions:

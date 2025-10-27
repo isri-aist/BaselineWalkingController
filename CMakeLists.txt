@@ -59,6 +59,9 @@ if(DEFINED CATKIN_DEVEL_PREFIX)
   endif()
   configure_file(etc/mc_rtc.in.yaml ${PROJECT_SOURCE_DIR}/etc/mc_rtc.yaml @ONLY)
   set(STATES_INSTALL_PREFIX ${CATKIN_DEVEL_PREFIX}/lib)
+  set(MAIN_STATE
+      "BWC::Main_:\n    base: Parallel\n    states: [BWC::GuiWalk_, BWC::Teleop_, BWC::ROSWalk_]"
+  )
 else()
   set(DOXYGEN_HTML_OUTPUT doxygen-html)
   set(CATKIN_ENABLE_TESTING OFF)
@@ -68,6 +71,7 @@ else()
   add_project_dependency(centroidal_control_collection REQUIRED)
   set(CONFIG_OUT "${CMAKE_CURRENT_BINARY_DIR}/etc/BaselineWalkingController.yaml")
   set(STATES_INSTALL_PREFIX ${MC_CONTROLLER_INSTALL_PREFIX})
+  set(MAIN_STATE "BWC::Main_:\n    base: Parallel\n    states: [BWC::GuiWalk_]")
 endif()
 
 configure_file(etc/BaselineWalkingController.in.yaml "${CONFIG_OUT}" @ONLY)
