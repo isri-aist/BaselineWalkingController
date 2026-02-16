@@ -34,7 +34,8 @@ public:
   BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                             double dt,
                             const mc_rtc::Configuration & _config,
-                            bool allowEmptyManager = false);
+                            bool allowEmptyManager = false,
+                            mc_control::ControllerParameters params = {});
 
   /** \brief Reset a controller.
 

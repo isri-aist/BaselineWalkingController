@@ -18,8 +18,9 @@ using namespace BWC;
 BaselineWalkingController::BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                                                      double dt,
                                                      const mc_rtc::Configuration & _config,
-                                                     bool allowEmptyManager)
-: mc_control::fsm::Controller(rm, dt, _config)
+                                                     bool allowEmptyManager,
+                                                     mc_control::ControllerParameters params)
+: mc_control::fsm::Controller(rm, dt, _config, params)
 {
   // Get the robot-specific configuration
   auto rconfig = config()("robots")(robot().module().name);
