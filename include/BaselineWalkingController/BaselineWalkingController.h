@@ -29,13 +29,15 @@ public:
       \param rm robot module
       \param dt control timestep
       \param _config controller configuration
+      \param params Additional controller parameters 
       \param allowEmptyManager whether to allow the managers to be empty (assuming initialized in the parent class)
+
    */
   BaselineWalkingController(mc_rbdyn::RobotModulePtr rm,
                             double dt,
                             const mc_rtc::Configuration & _config,
-                            bool allowEmptyManager = false,
-                            mc_control::ControllerParameters params = {});
+                            mc_control::ControllerParameters params = {}, 
+                            bool allowEmptyManager = false);
 
   /** \brief Reset a controller.
 
